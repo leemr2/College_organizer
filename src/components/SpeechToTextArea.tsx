@@ -297,7 +297,7 @@ export const SpeechToTextArea = forwardRef<
                 : "text-dark-blue dark:text-slate-100"
             } ${
               isLoading ? "opacity-50" : ""
-            } hide-scrollbar transition-height m-0 flex-1 resize-none border-0 bg-transparent px-3 py-2 transition-colors focus:outline-none focus:ring-0 focus-visible:ring-0`}
+            } hide-scrollbar transition-height m-0 flex-1 resize-none border-0 bg-transparent px-3 py-2 transition-colors focus:outline-none focus:ring-0 focus-visible:ring-0 relative z-20`}
             value={value}
             onChange={handleTextareaChange}
             onKeyDown={(e) => {
@@ -313,8 +313,10 @@ export const SpeechToTextArea = forwardRef<
             rows={1}
             style={{
               minHeight: waveformActive ? textareaHeight : minHeight,
+              pointerEvents: isRecording || isTranscribing ? "none" : "auto",
             }}
-            disabled={waveformActive}
+            disabled={isRecording || isTranscribing}
+            readOnly={false}
           />
           <div className="hide-scrollbar mr-2 mt-auto flex flex-row space-x-4">
             <button
@@ -372,7 +374,7 @@ export const SpeechToTextArea = forwardRef<
             )}
           </div>
           {waveformActive && (
-            <div className="absolute left-1/2 top-5 flex -translate-x-1/2 transform justify-center">
+            <div className="absolute left-1/2 top-5 flex -translate-x-1/2 transform justify-center pointer-events-none z-10">
               <div className="flex">
                 {heights.map((height, index) => {
                   const centerIndex = heights.length / 2;

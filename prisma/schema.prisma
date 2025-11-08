@@ -22,6 +22,7 @@ model User {
   isAdmin        Boolean   @default(false)
   accounts       Account[]
   sessions       Session[]
+  student        Student?
 }
 
 model Account {
@@ -68,4 +69,101 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+// Phase 1: Scout Models
+
+model Student {
+  id                String              @id @default(cuid())
+  userId            String              @unique
+  name              String
+  email             String              @unique
+  year              String? // freshman, sophomore, junior, senior
+  biggestChallenge  String? // From onboarding
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  onboardingComplete Boolean           @default(false)
+
+  // Relations
+  user              User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tasks             Task[]
+  conversations    Conversation[]
+  preferences      StudentPreferences?
+  classSchedules   ClassSchedule[]
+
+  @@index([userId])
+}
+
+enum TaskComplexity {
+  simple
+  medium
+  complex
+}
+
+model Task {
+  id                   String    @id @default(cuid())
+  studentId            String
+  description          String
+  complexity           TaskComplexity
+  category             String? // exam, assignment, life, etc.
+  dueDate              DateTime?
+  clarificationComplete Boolean  @default(false)
+  clarificationData    Json? // Stores Q&A responses
+  completed            Boolean   @default(false)
+  completedAt          DateTime?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  // Relations
+  student              Student          @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+  @@index([dueDate])
+}
+
+model Conversation {
+  id          String    @id @default(cuid())
+  studentId   String
+  messages    Json // Array of {role, content, timestamp}
+  context     Json? // Relevant context for the conversation
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  student     Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+  @@index([createdAt])
+}
+
+model StudentPreferences {
+  id                     String   @id @default(cuid())
+  studentId              String   @unique
+  peakEnergyTimes        Json? // Array of time ranges
+  preferredBreakLength   Int      @default(10) // minutes
+  morningPerson          Boolean?
+  studyAloneVsGroup      String? // alone, groups, mix
+  studyEnvironmentPrefs  Json?
+  effectiveStudyPatterns Json? // Learned patterns
+  notificationSettings   Json?
+  updatedAt              DateTime @updatedAt
+
+  student                Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+}
+
+model ClassSchedule {
+  id          String    @id @default(cuid())
+  studentId   String
+  courseName  String
+  courseCode  String?
+  professor   String?
+  meetingTimes Json // Array of {day, startTime, endTime}
+  semester    String
+  syllabus    String? // URL or file path
+  exams       Json? // Array of DateTime
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  student     Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
 }

@@ -28,15 +28,25 @@ const getQueryClient = () => {
 
 export const api = createTRPCReact<AppRouter>();
 
-// create persistent WebSocket connection
+// WebSocket client for subscriptions (disabled for Phase 1)
+// To enable: set NEXT_PUBLIC_ENABLE_TRPC_WS=true in .env.local
+// and ensure a WebSocket server is running on port 3001
 const wsClient =
-  typeof window !== "undefined"
-    ? createWSClient({
-        url:
-          process.env.NODE_ENV === "development"
-            ? "ws://localhost:3001"
-            : `wss://${window.location.host}`,
-      })
+  typeof window !== "undefined" &&
+  process.env.NEXT_PUBLIC_ENABLE_TRPC_WS === "true"
+    ? (() => {
+        try {
+          return createWSClient({
+            url:
+              process.env.NODE_ENV === "development"
+                ? "ws://localhost:3001"
+                : `wss://${window.location.host}`,
+          });
+        } catch (error) {
+          console.warn("Failed to create WebSocket client:", error);
+          return undefined;
+        }
+      })()
     : undefined;
 
 export function TRPCReactProvider(props: { children: React.ReactNode }) {
@@ -50,22 +60,34 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
             process.env.NODE_ENV === "development" ||
             (op.direction === "down" && op.result instanceof Error),
         }),
-        splitLink({
-          condition: (op) => !!wsClient && op.type === "subscription",
-          true: wsLink({
-            client: wsClient!,
-            transformer: SuperJSON,
-          }),
-          false: unstable_httpBatchStreamLink({
-            transformer: SuperJSON,
-            url: getBaseUrl() + "/api/trpc",
-            headers: () => {
-              const headers = new Headers();
-              headers.set("x-trpc-source", "nextjs-react");
-              return headers;
-            },
-          }),
-        }),
+        // Only use splitLink with WebSocket if wsClient is available
+        // Otherwise, just use HTTP for all operations
+        wsClient
+          ? splitLink({
+              condition: (op) => op.type === "subscription",
+              true: wsLink({
+                client: wsClient,
+                transformer: SuperJSON,
+              }),
+              false: unstable_httpBatchStreamLink({
+                transformer: SuperJSON,
+                url: getBaseUrl() + "/api/trpc",
+                headers: () => {
+                  const headers = new Headers();
+                  headers.set("x-trpc-source", "nextjs-react");
+                  return headers;
+                },
+              }),
+            })
+          : unstable_httpBatchStreamLink({
+              transformer: SuperJSON,
+              url: getBaseUrl() + "/api/trpc",
+              headers: () => {
+                const headers = new Headers();
+                headers.set("x-trpc-source", "nextjs-react");
+                return headers;
+              },
+            }),
       ],
     }),
   );

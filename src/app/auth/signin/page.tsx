@@ -2,20 +2,46 @@
 
 import React, { Suspense } from "react";
 import { signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
-import { ArrowLeft, Mail } from "lucide-react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { ArrowLeft, Mail, Lock } from "lucide-react";
 import Link from "next/link";
+
+const isDev = process.env.NODE_ENV !== "production";
 
 function SignInContent() {
   const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
+  const [useCredentials, setUseCredentials] = React.useState(isDev);
   const searchParams = useSearchParams();
+  const router = useRouter();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    await signIn("email", { email, callbackUrl });
+    try {
+      if (useCredentials) {
+        const result = await signIn("credentials", {
+          email,
+          password,
+          callbackUrl,
+          redirect: false,
+        });
+        if (result?.error) {
+          alert("Invalid email or password");
+          setIsLoading(false);
+        } else if (result?.ok) {
+          router.push(callbackUrl);
+          router.refresh();
+        }
+      } else {
+        await signIn("email", { email, callbackUrl });
+      }
+    } catch (error) {
+      console.error("Sign in error:", error);
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -36,11 +62,42 @@ function SignInContent() {
             </span>
           </h1>
           <p className="mt-3 text-neutral-600 dark:text-neutral-300">
-            Enter your email to sign in or create an account
+            {useCredentials
+              ? "Sign in with email and password (Dev Mode)"
+              : "Enter your email to sign in or create an account"}
           </p>
         </div>
 
         <div className="rounded-2xl bg-white dark:bg-neutral-800/50 p-8 shadow-xl">
+          {isDev && (
+            <div className="mb-6 flex gap-2 rounded-lg bg-neutral-100 dark:bg-neutral-700/50 p-1">
+              <button
+                type="button"
+                onClick={() => setUseCredentials(true)}
+                className={`flex-1 rounded-md px-4 py-2 text-sm font-medium transition-colors ${
+                  useCredentials
+                    ? "bg-white dark:bg-neutral-600 text-neutral-900 dark:text-white shadow-sm"
+                    : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200"
+                }`}
+              >
+                <Lock className="mr-2 inline h-4 w-4" />
+                Password (Dev)
+              </button>
+              <button
+                type="button"
+                onClick={() => setUseCredentials(false)}
+                className={`flex-1 rounded-md px-4 py-2 text-sm font-medium transition-colors ${
+                  !useCredentials
+                    ? "bg-white dark:bg-neutral-600 text-neutral-900 dark:text-white shadow-sm"
+                    : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200"
+                }`}
+              >
+                <Mail className="mr-2 inline h-4 w-4" />
+                Email Link
+              </button>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label
@@ -64,13 +121,49 @@ function SignInContent() {
               </div>
             </div>
 
+            {useCredentials && (
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+                >
+                  Password
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autoComplete="current-password"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="block w-full rounded-lg border border-neutral-300 dark:border-neutral-600 px-4 py-3 text-neutral-900 dark:text-white placeholder-neutral-500 dark:placeholder-neutral-400 shadow-sm dark:bg-neutral-800 focus:border-brandBlue-500 dark:focus:border-brandBlue-400 focus:ring-brandBlue-500 dark:focus:ring-brandBlue-400"
+                    placeholder="Enter your password"
+                  />
+                </div>
+                <p className="mt-2 text-xs text-neutral-500 dark:text-neutral-400">
+                  💡 Dev mode: First-time login will create your account automatically
+                </p>
+              </div>
+            )}
+
             <button
               type="submit"
               disabled={isLoading}
               className="group relative flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-brandBlue-500 to-brandBlue-600 px-4 py-3 text-white shadow-lg shadow-brandBlue-500/20 transition-all hover:from-brandBlue-600 hover:to-brandBlue-700 hover:shadow-xl hover:shadow-brandBlue-500/30 focus:outline-none focus:ring-2 focus:ring-brandBlue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <Mail className="h-5 w-5" />
-              {isLoading ? "Sending link..." : "Sign in with Email"}
+              {useCredentials ? (
+                <>
+                  <Lock className="h-5 w-5" />
+                  {isLoading ? "Signing in..." : "Sign in"}
+                </>
+              ) : (
+                <>
+                  <Mail className="h-5 w-5" />
+                  {isLoading ? "Sending link..." : "Sign in with Email"}
+                </>
+              )}
             </button>
           </form>
 

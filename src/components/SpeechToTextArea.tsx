@@ -179,15 +179,30 @@ export const SpeechToTextArea = forwardRef<
         });
 
         if (!response.ok) {
-          toast.error("Transcription failed.");
+          // Try to get error message from response
+          let errorMessage = "Transcription failed";
+          try {
+            const errorData = await response.json();
+            errorMessage = errorData.error || errorMessage;
+          } catch {
+            // If response isn't JSON, use status text
+            errorMessage = response.statusText || errorMessage;
+          }
+          toast.error(errorMessage);
+          console.error("Transcription failed:", errorMessage);
           return null;
         }
 
         const data = await response.json();
+        if (!data.text) {
+          toast.error("No transcription text received");
+          return null;
+        }
         return data.text.trim();
-      } catch (error) {
+      } catch (error: any) {
         console.error("Transcription error:", error);
-        toast.error("An error occurred during transcription.");
+        const errorMessage = error?.message || "An error occurred during transcription";
+        toast.error(errorMessage);
         return null;
       } finally {
         setIsTranscribing(false);

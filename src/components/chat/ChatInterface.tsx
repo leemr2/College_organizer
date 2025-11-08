@@ -106,7 +106,7 @@ export function ChatInterface() {
       </div>
 
       {/* Message List */}
-      <div className="flex-1 overflow-hidden">
+      <div className="flex-1 overflow-y-auto">
         <MessageList messages={messages} isLoading={isLoading} />
       </div>
 

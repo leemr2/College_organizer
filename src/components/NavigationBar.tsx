@@ -2,17 +2,23 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MessageSquare, CheckSquare, LayoutDashboard, LogOut } from "lucide-react";
-import { signOut } from "next-auth/react";
+import { MessageSquare, CheckSquare, LayoutDashboard, LogOut, Shield } from "lucide-react";
+import { signOut, useSession } from "next-auth/react";
 
 export function NavigationBar() {
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   const navItems = [
     { href: "/chat", label: "Chat", icon: MessageSquare },
     { href: "/tasks", label: "Tasks", icon: CheckSquare },
     { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   ];
+
+  // Add admin link if user is admin
+  if (session?.user?.isAdmin || session?.user?.role === "admin") {
+    navItems.push({ href: "/admin", label: "Admin", icon: Shield });
+  }
 
   return (
     <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">

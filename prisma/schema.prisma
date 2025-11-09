@@ -63,6 +63,20 @@ model Allowlist {
   createdAt DateTime @default(now())
 }
 
+model AccessRequest {
+  id          String    @id @default(cuid())
+  email       String    @unique
+  status      String    @default("pending") // pending, approved, rejected
+  requestedAt DateTime  @default(now())
+  approvedAt  DateTime?
+  rejectedAt  DateTime?
+  approvedBy  String?   // Admin user ID
+  notes       String?   // Admin notes
+
+  @@index([status])
+  @@index([requestedAt])
+}
+
 model VerificationToken {
   identifier String
   token      String   @unique

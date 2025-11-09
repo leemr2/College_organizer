@@ -164,10 +164,9 @@ export const authOptions: NextAuthOptions = {
           return true;
         }
 
-        /*
-        // Enable this to restrict sign-ins to certain domains or allowlist
-        const domainCheck = ALLOWED_DOMAINS.some((d) => email.endsWith(d));
-        if (!domainCheck) {
+        // Check if email is on allowlist (required for production)
+        // Skip allowlist check in development mode
+        if (process.env.NODE_ENV === "production") {
           const inAllowlist = await prisma.allowlist.findUnique({
             where: { email },
           });
@@ -176,7 +175,6 @@ export const authOptions: NextAuthOptions = {
             return false;
           }
         }
-        */
 
         return true;
       } catch (error) {

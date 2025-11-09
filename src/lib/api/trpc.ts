@@ -107,25 +107,32 @@ export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
   });
 });
 
-// /**
-//  * Protected (authenticated) procedure
-//  *
-//  * If you want a query or mutation to ONLY be accessible to logged in admins, use this. It verifies
-//  * the session is valid and guarantees `ctx.session.user` has admin privileges.
-//  *
-//  * @see https://trpc.io/docs/procedures
-//  */
-// export const adminProcedure = t.procedure.use(({ ctx, next }) => {
-//   if (!ctx.session?.user?.isAdmin) {
-//     throw new TRPCError({
-//       code: "UNAUTHORIZED",
-//       message: "Admin privileges required",
-//     });
-//   }
+/**
+ * Admin (authenticated admin only) procedure
+ *
+ * If you want a query or mutation to ONLY be accessible to logged in admins, use this. It verifies
+ * the session is valid and guarantees `ctx.session.user` has admin privileges.
+ *
+ * @see https://trpc.io/docs/procedures
+ */
+export const adminProcedure = t.procedure.use(({ ctx, next }) => {
+  if (!ctx.session?.user) {
+    throw new TRPCError({
+      code: "UNAUTHORIZED",
+      message: "Session or user information is missing",
+    });
+  }
 
-//   return next({
-//     ctx: {
-//       session: { ...ctx.session, user: ctx.session.user },
-//     },
-//   });
-// });
+  if (!ctx.session.user.isAdmin && ctx.session.user.role !== UserRole.admin) {
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: "Admin privileges required",
+    });
+  }
+
+  return next({
+    ctx: {
+      session: { ...ctx.session, user: ctx.session.user },
+    },
+  });
+});

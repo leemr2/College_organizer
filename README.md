@@ -28,13 +28,14 @@ The product's core innovation is its **tool discovery and optimization engine** 
 - Context-aware responses based on student profile
 - Task clarification through intelligent questioning
 - Persistent conversation history
+- **Task-specific chat threads**: Each task has its own dedicated conversation thread where students can ask questions, get help, or discuss details about that specific task. Conversations are context-aware and include task details (description, complexity, due date) in the AI's context.
 
 ### 📋 Task Management
 - Task creation and tracking
 - Complexity classification (simple, medium, complex)
 - Due date management
 - Completion tracking
-- Task-specific conversations
+- **Task-specific conversations**: Chat directly within each task to get help, ask clarifying questions, or discuss task details. Each task maintains its own conversation history separate from daily planning chats.
 
 ### 👤 Student Profiles & Onboarding
 - Personalized onboarding flow

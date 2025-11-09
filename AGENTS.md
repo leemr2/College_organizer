@@ -37,3 +37,14 @@
 
 - Stories in `src/stories/`, `.stories.tsx` extension. One per component, name matched.
 - Use autodocs, include variants and sizes, test interactivity with actions. Use relative imports from component directory.
+
+## Documentation
+
+- **BEFORE making changes**: Review relevant documentation to understand existing patterns, requirements, and architecture. See `.cursorrules` "Documentation Maintenance" for quick reference.
+- **AFTER making changes**: Update relevant documentation files to keep them synchronized. See `CLAUDE.md` "Documentation Maintenance" section for comprehensive guidelines, checklists, and examples.
+- Documentation files serve different purposes:
+  - `README.md`: Public-facing features and getting started
+  - `CLAUDE.md`: Technical implementation details and patterns
+  - `AGENTS.md`: Quick reference (this file)
+  - `.cursorrules`: Cursor-specific rules
+- Always verify documentation is complete and accurate after changes.

@@ -82,6 +82,22 @@ Additional
 - Reusable logic in `src/lib/utils/shared.ts` or `src/lib/utils/server.ts`.
 - Use `tsx` scripts for migrations.
 
+Documentation Maintenance
+
+- BEFORE making changes: Review relevant documentation to understand existing patterns, requirements, and architecture.
+  - New Features: Review PRD-Kiras-Scout.md, CLAUDE.md (similar features), README.md (current features)
+  - API Changes: Review CLAUDE.md (tRPC patterns), AGENTS.md (backend conventions)
+  - Schema Changes: Review CLAUDE.md (Domain Models), existing migrations
+  - Component Changes: Review CLAUDE.md (Component Guidelines), existing similar components
+  - AI Integration: Review CLAUDE.md (AI Integration section), existing AI implementations
+- AFTER making changes: Update relevant documentation files to keep them synchronized.
+  - New Feature: Update README.md (Current Features), CLAUDE.md (Architecture/Flow Patterns)
+  - API Changes: Update CLAUDE.md (tRPC routers section, API patterns)
+  - Schema Changes: Update CLAUDE.md (Domain Models), README.md (Database Schema if significant)
+  - Component Changes: Update CLAUDE.md (Component Guidelines) if patterns change
+  - AI Integration: Update CLAUDE.md (AI Integration), README.md (AI Integration)
+- For detailed documentation maintenance guidelines, see CLAUDE.md "Documentation Maintenance" section.
+
 IMPORTANT:
 
 - After all changes are made, ALWAYS build the project with `npm run build`. Ignore warnings, fix errors.

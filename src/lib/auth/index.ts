@@ -172,6 +172,7 @@ export const authOptions: NextAuthOptions = {
           });
 
           if (!inAllowlist) {
+            console.error(`[NextAuth] Access denied: ${email} is not on allowlist`);
             return false;
           }
         }

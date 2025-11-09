@@ -126,8 +126,10 @@ Copy `.env.example` to `.env` and configure:
 
 ```bash
 # Database (Supabase)
-DATABASE_URL="postgresql://user:password@host:5432/database?pgbouncer=true"
-DIRECT_URL="postgresql://user:password@host:5432/database"
+# IMPORTANT: Use Session Pooler (port 5432) for Prisma/NextAuth
+# Transaction Pooler (port 6543) doesn't support prepared statements
+DATABASE_URL="postgresql://user:password@host:5432/database?sslmode=require"
+DIRECT_URL="postgresql://user:password@host:5432/database?sslmode=require"
 
 # Authentication
 NEXTAUTH_SECRET="generate-with-openssl-rand-base64-32"
@@ -146,6 +148,18 @@ RESEND_API_KEY="..." # For email notifications
 ```
 
 3. **Database Setup**
+
+**Windows Users - DNS Resolution Fix:**
+If you encounter connection errors (`P1001: Can't reach database server`), set Node.js to prefer IPv4:
+```powershell
+# Set permanently (recommended)
+[System.Environment]::SetEnvironmentVariable("NODE_OPTIONS", "--dns-result-order=ipv4first", "User")
+
+# Or for current session only
+$env:NODE_OPTIONS="--dns-result-order=ipv4first"
+```
+Restart your terminal after setting permanently.
+
 ```bash
 # Generate Prisma client
 npx prisma generate
@@ -2342,9 +2356,24 @@ vercel link
 ```
 
 2. **Configure Environment Variables**
+
+**IMPORTANT: Database Connection for Prisma/NextAuth**
+
+For applications using Prisma with NextAuth (database sessions), you **must** use **Session Pooler** (port 5432), NOT Transaction Pooler (port 6543).
+
+Transaction Pooler doesn't support prepared statements, which Prisma requires.
+
+**Setup:**
+1. Go to Supabase Dashboard → Settings → Database → Connection string
+2. Select **"Session Pooler"** (port 5432)
+3. Copy the connection string
+4. Add `?sslmode=require` if not present
+5. Set this as `DATABASE_URL` in Vercel environment variables
+
 ```bash
 # Add production env vars
-vercel env add DATABASE_URL
+vercel env add DATABASE_URL  # Use Session Pooler (port 5432)
+vercel env add DIRECT_URL    # Use Session Pooler (port 5432) for migrations
 vercel env add NEXTAUTH_SECRET
 # ... add all required vars
 ```

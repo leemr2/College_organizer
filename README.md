@@ -1,149 +1,285 @@
-College Student organizer and assistant
+# Scout - AI-Powered Daily Assistant for College Students
 
-# 🚀 Next.js Modern Stack Template
-
-A Next.js template that combines commonly used tools and libraries for building full-stack web applications. This stack is specifically designed to be optimized for AI coding assistants like Cursor.
+**Scout** is an AI-powered daily assistant designed specifically for college students. Unlike traditional task managers, Scout acts as a personalized coach that helps students discover the right tools, optimize their study strategies, and build effective routines through conversational guidance and intelligent recommendations.
 
 ## 🎯 Overview
 
-This template includes [Next.js 14](https://nextjs.org/) with the App Router, [Supabase](https://supabase.com) for the database, [Resend](https://resend.com) for transactional emails, and optional integrations with various AI providers and AWS services.
+Scout combines conversational AI with intelligent task management to help college students:
+- **Capture tasks** naturally through voice or text input
+- **Get organized** with intelligent clarification and context gathering
+- **Discover tools** that can help them work smarter, not harder
+- **Stay on schedule** with AI-optimized time blocking and proactive check-ins
+- **Learn and improve** as the system adapts to each student's unique patterns
 
-## ✨ Features
+The product's core innovation is its **tool discovery and optimization engine** - Scout doesn't just track what needs to be done, it actively researches, suggests, and teaches students about digital tools, study techniques, and campus resources.
 
-### 🏗️ Core Architecture
+> 📖 For detailed product requirements and feature specifications, see [PRD-Kiras-Scout.md](./PRD-Kiras-Scout.md)
+
+## ✨ Current Features (Phase 1 MVP)
+
+### 🗣️ Daily Check-In & Task Capture
+- Voice-to-text input using Web Speech API
+- Natural language task extraction
+- Daily planning conversations
+- Task-specific chat threads
+
+### 💬 Intelligent Conversation System
+- AI-powered daily check-ins
+- Context-aware responses based on student profile
+- Task clarification through intelligent questioning
+- Persistent conversation history
+
+### 📋 Task Management
+- Task creation and tracking
+- Complexity classification (simple, medium, complex)
+- Due date management
+- Completion tracking
+- Task-specific conversations
+
+### 👤 Student Profiles & Onboarding
+- Personalized onboarding flow
+- Student preferences (energy times, study style, etc.)
+- Class schedule management
+- Profile customization
+
+### 📊 Dashboard
+- Daily overview and statistics
+- Today's tasks view
+- Quick navigation to chat and tasks
+
+## 🏗️ Technical Architecture
+
+### Core Stack
 
 - [**Next.js 14**](https://nextjs.org/) - React framework with App Router
 - [**TypeScript**](https://www.typescriptlang.org/) - Type safety throughout
 - [**tRPC**](https://trpc.io/) - End-to-end type-safe APIs
 - [**Prisma**](https://www.prisma.io/) - Database ORM and schema management
 - [**NextAuth.js**](https://next-auth.js.org/) - Authentication with Prisma adapter
-- [**Supabase**](https://supabase.com) - Postgres database with realtime and auth
+- [**PostgreSQL**](https://www.postgresql.org/) - Database (via Supabase or other provider)
 
 ### 🎨 UI & Styling
 
 - [**Tailwind CSS**](https://tailwindcss.com/) - Utility-first CSS framework
 - [**Framer Motion**](https://www.framer.com/motion/) - Animation library
 - [**Lucide Icons**](https://lucide.dev/) - Icon set
-- Dark mode with Tailwind CSS
+- Dark mode support with Tailwind CSS
+
+### 🤖 AI Integration
+
+- [**OpenAI GPT-4**](https://openai.com) - Primary conversational interface
+- [**Anthropic Claude**](https://anthropic.com) - Research and analysis (planned)
+- Web Speech API - Voice-to-text transcription
+- Custom AI client abstraction for easy provider switching
 
 ### 🛠️ Development Tools
 
 - [**Storybook**](https://storybook.js.org/) - Component development environment
-- [**Geist Font**](https://vercel.com/font) - Typography by Vercel
-
-### 🤖 AI & Background Jobs
-
-- Multiple AI integrations available:
-  - [OpenAI](https://openai.com) - GPT-4 and o-series models
-  - [Anthropic](https://anthropic.com) - Sonnet-3.5
-  - [Perplexity](https://perplexity.ai) - Web search models
-  - [Groq](https://groq.com) - Fast inference
 - [**Inngest**](https://www.inngest.com/) - Background jobs and scheduled tasks
+- [**react-toastify**](https://fkhadra.github.io/react-toastify/) - Toast notifications
 
 ### 🔧 Infrastructure & Services
 
-- [**Resend**](https://resend.com) - Email delivery
-- [**AWS S3**](https://aws.amazon.com/s3/) - File storage
-- [**Supabase**](https://supabase.com) - Primary database
-  (Note that I don't directly use the supabase client in this template, so you can switch out supabase with other database providers via the DATABASE_URL and DIRECT_URL environment variables.)
+- [**Vercel**](https://vercel.com) - Hosting and deployment
+- [**Supabase**](https://supabase.com) - PostgreSQL database (or any PostgreSQL provider)
+- [**Resend**](https://resend.com) - Email delivery (optional)
+- [**AWS S3**](https://aws.amazon.com/s3/) - File storage (optional)
 
-### 🔔 Additional Features
-
-- [**react-toastify**](https://fkhadra.github.io/react-toastify/) - Toast notifications
-- Utility functions for common operations
-- TypeScript and ESLint configuration included
-
-### 🤖 Agent Features
-
-- [**Agent Helpers**](./agent-helpers) - A folder for agent-specific files and tools.
-- [**Agent Instructions**](./agent-helpers/README.md) - Instructions for the agent.
-- [**Agent Tasks**](./agent-helpers/tasks.md) - A checklist of tasks for the agent to complete.
-- [**Agent Scratchpad**](./agent-helpers/scratchpad.md) - A place for the agent to write down its thoughts and ideas.
-- [**Agent Logs**](./agent-helpers/logs) - A place for the agent to write down its logs.
-
-> **ℹ️ Add these lines to your `.gitignore` to avoid agent-helper conflicts (copy & paste):**
-
-```.gitignore
-# agent-helpers
-agent-helpers/logs
-agent-helpers/sample-code
-agent-helpers/scratchpad.md
-```
-
-
+> **Note**: The database can be any PostgreSQL provider. While Supabase is recommended, you can use any provider via the `DATABASE_URL` and `DIRECT_URL` environment variables.
 
 ## 🚀 Getting Started
 
-1. Install dependencies:
+### Prerequisites
 
+- Node.js 18+ and npm
+- PostgreSQL database (Supabase recommended)
+- OpenAI API key (for AI features)
+
+### Installation
+
+1. **Clone the repository**:
+```bash
+git clone <repository-url>
+cd College_organizer
+```
+
+2. **Install dependencies**:
 ```bash
 npm install
 ```
 
-3. Copy `.env.example` to `.env` and configure your environment variables
-4. Set up your database:
+3. **Set up environment variables**:
+```bash
+cp .env.example .env
+```
 
+Configure the following required variables in `.env`:
+```bash
+# Database
+DATABASE_URL="postgresql://..."
+DIRECT_URL="postgresql://..."
+
+# Authentication
+NEXTAUTH_SECRET="..." # Generate with: openssl rand -base64 32
+NEXTAUTH_URL="http://localhost:3000"
+
+# AI Provider
+OPENAI_API_KEY="sk-..."
+
+# Optional
+ANTHROPIC_API_KEY="sk-ant-..." # For future research features
+INNGEST_EVENT_KEY="..."
+INNGEST_SIGNING_KEY="..."
+```
+
+4. **Set up the database**:
 ```bash
 npx prisma migrate dev
 ```
 
-5. Start the development server:
-
+5. **Start the development server**:
 ```bash
 npm run dev
 ```
 
-Visit [http://localhost:3000](http://localhost:3000) to see your app.
+Visit [http://localhost:3000](http://localhost:3000) to see Scout.
+
+### First-Time Setup
+
+1. Sign up for an account at `/auth/signin`
+2. Complete the onboarding flow:
+   - Personal information (name, year)
+   - Class schedule (optional)
+   - Study preferences
+3. Start your first daily check-in conversation!
 
 ## 📁 Project Structure
 
-- `app/` - Next.js app router pages and API routes
-- `src/`
-  - `components/` - UI components
-  - `lib/` - Utilities and configurations
-    - `api/` - tRPC routers
-    - `utils/` - Shared utilities
-  - `stories/` - Storybook files
-- `prisma/` - Database schema
+```
+├── app/                    # Next.js app router pages and API routes
+│   ├── api/               # API routes (auth, tRPC, Inngest, etc.)
+│   ├── auth/              # Authentication pages
+│   ├── chat/              # Chat interface page
+│   ├── dashboard/         # Dashboard page
+│   ├── onboarding/        # Onboarding flow
+│   └── tasks/             # Tasks management page
+├── src/
+│   ├── components/        # React components
+│   │   ├── chat/         # Chat interface components
+│   │   ├── dashboard/    # Dashboard components
+│   │   ├── onboarding/   # Onboarding flow components
+│   │   └── tasks/        # Task management components
+│   ├── lib/
+│   │   ├── ai/           # AI integration (conversational, research)
+│   │   ├── api/          # tRPC routers
+│   │   │   └── routers/  # chatRouter, taskRouter, studentRouter
+│   │   ├── auth/         # NextAuth configuration
+│   │   ├── trpc/         # tRPC client/server setup
+│   │   └── utils/        # Shared utilities
+│   └── stories/          # Storybook component stories
+├── prisma/
+│   ├── schema.prisma     # Database schema
+│   └── migrations/       # Database migrations
+└── agent-helpers/        # AI agent tools and documentation
+```
+
+## 🗄️ Database Schema
+
+Key models:
+- **Student** - User profiles and preferences
+- **Task** - Tasks with complexity and clarification data
+- **Conversation** - Chat history (daily planning and task-specific)
+- **ClassSchedule** - Course information
+- **StudentPreferences** - Study preferences and patterns
+
+See `prisma/schema.prisma` for the complete schema.
 
 ## 🚀 Deployment
 
-This template is optimized for deployment on [Vercel](https://vercel.com).
+### Vercel Deployment
 
-### Database Setup
+This application is optimized for deployment on [Vercel](https://vercel.com).
 
-1. Create a new Supabase project at [supabase.com](https://supabase.com)
-2. Get your database connection strings from Supabase:
-   - Project Settings → Database
-   - Copy both the URI (for `DATABASE_URL`) and Direct Connection (for `DIRECT_URL`)
+1. **Database Setup**:
+   - Create a PostgreSQL database (Supabase recommended)
+   - Get connection strings: `DATABASE_URL` and `DIRECT_URL`
 
-### Vercel Setup
+2. **Vercel Setup**:
+   - Push your code to GitHub
+   - Go to [vercel.com/new](https://vercel.com/new)
+   - Import your repository
+   - Configure environment variables (see Installation section)
+   - Deploy!
 
-1. Push your code to GitHub
-2. Go to [vercel.com/new](https://vercel.com/new)
-3. Import your repository
-4. Configure the following environment variables:
-   - `DATABASE_URL` - Your Supabase database URL
-   - `DIRECT_URL` - Your Supabase direct connection URL
-   - `NEXTAUTH_SECRET` - Generate with `openssl rand -base64 32`
-   - `NEXTAUTH_URL` - Your production URL (e.g., https://your-app.vercel.app)
-   - Add any other variables from `.env.example` that you're using
-5. Deploy!
+3. **Post-Deployment**:
+   ```bash
+   npx vercel env pull .env.production.local
+   npx prisma migrate deploy
+   ```
 
-### Post-Deployment
+4. **Custom Domain** (optional):
+   - Go to project settings → Domains
+   - Add your domain and configure DNS
 
-1. Run database migrations in the Vercel deployment:
+## 🛣️ Development Roadmap
 
-```bash
-npx vercel env pull .env.production.local  # Pull production env vars
-npx prisma migrate deploy                  # Deploy migrations to production
-```
+Based on the PRD, Scout is being developed in phases:
 
-2. Set up your custom domain in Vercel (optional):
-   - Go to your project settings
-   - Navigate to Domains
-   - Add your domain and follow the DNS configuration instructions
+### ✅ Phase 1: MVP Core (Current)
+- User authentication and onboarding
+- Daily check-in chat interface
+- Voice-to-text input
+- Task capture and storage
+- Basic clarification questions
+- Simple task list view
+
+### 🔄 Phase 2: Intelligence Layer (Next)
+- Tool research integration (Claude + web search)
+- Tool database and recommendation engine
+- Advanced clarification questions
+- Memory system basics
+- Effectiveness tracking
+- Enhanced dashboard
+
+### 📅 Phase 3: Scheduling & Proactive (Planned)
+- Intelligent time block generation
+- Schedule optimization algorithm
+- Visual calendar/timeline view
+- Proactive check-ins during study blocks
+- End of day review
+- Pattern recognition
+
+### 🎯 Phase 4: Learning & Optimization (Future)
+- Advanced effectiveness tracking
+- Pattern recognition and insights
+- Progressive tool feature disclosure
+- Study strategy optimization
+- Personalized time estimates
+
+See [PRD-Kiras-Scout.md](./PRD-Kiras-Scout.md) for detailed feature specifications.
+
+## 🤖 Agent Helpers
+
+This project includes agent-specific tools and documentation:
+
+- [**Agent Helpers**](./agent-helpers) - Folder for agent-specific files and tools
+- [**Agent Instructions**](./agent-helpers/README.md) - Instructions for AI coding assistants
+- [**Agent Tasks**](./agent-helpers/tasks) - Task checklists
+- [**Agent Scratchpad**](./agent-helpers/scratchpad.md) - Agent notes and ideas
+
+> **ℹ️ Add these lines to your `.gitignore` to avoid agent-helper conflicts:**
+>
+> ```.gitignore
+> # agent-helpers
+> agent-helpers/logs
+> agent-helpers/sample-code
+> agent-helpers/scratchpad.md
+> ```
 
 ## 📝 License
 
 MIT License
+
+---
+
+**Built with ❤️ for college students who want to work smarter, not harder.**

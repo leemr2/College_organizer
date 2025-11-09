@@ -12,13 +12,28 @@ interface Message {
   timestamp?: string | Date;
 }
 
-export function ChatInterface() {
+interface ChatInterfaceProps {
+  conversationType?: "daily_planning" | "task_specific";
+  taskId?: string;
+}
+
+export function ChatInterface({ conversationType = "daily_planning", taskId }: ChatInterfaceProps = {} as ChatInterfaceProps) {
   const [conversationId, setConversationId] = useState<string | undefined>();
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Get or create current conversation
-  const { data: conversation } = api.chat.getCurrent.useQuery();
+  // Get or create conversation based on type
+  const { data: dailyConversation } = api.chat.getDailyConversation.useQuery(
+    undefined,
+    { enabled: conversationType === "daily_planning" }
+  );
+
+  const { data: taskConversation } = api.chat.getTaskConversation.useQuery(
+    { taskId: taskId! },
+    { enabled: conversationType === "task_specific" && !!taskId }
+  );
+
+  const conversation = conversationType === "daily_planning" ? dailyConversation : taskConversation;
 
   useEffect(() => {
     if (conversation) {
@@ -35,7 +50,26 @@ export function ChatInterface() {
     }
   }, [conversation]);
 
-  const sendMessage = api.chat.sendMessage.useMutation({
+  const sendDailyMessage = api.chat.sendDailyMessage.useMutation({
+    onSuccess: (data) => {
+      setConversationId(data.conversationId);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: data.message,
+          timestamp: new Date(),
+        },
+      ]);
+      setIsLoading(false);
+    },
+    onError: (error) => {
+      toast.error("Failed to send message: " + error.message);
+      setIsLoading(false);
+    },
+  });
+
+  const sendTaskMessage = api.chat.sendTaskMessage.useMutation({
     onSuccess: (data) => {
       setConversationId(data.conversationId);
       setMessages((prev) => [
@@ -79,14 +113,24 @@ export function ChatInterface() {
     setIsLoading(true);
 
     try {
-      // Try to extract tasks from the message (non-blocking)
-      extractTasks.mutate({ text });
+      // Only extract tasks in daily planning mode
+      if (conversationType === "daily_planning") {
+        extractTasks.mutate({ text });
+      }
 
       // Send to backend for chat response
-      await sendMessage.mutateAsync({
-        message: text,
-        conversationId,
-      });
+      if (conversationType === "task_specific" && taskId) {
+        await sendTaskMessage.mutateAsync({
+          message: text,
+          taskId,
+          conversationId,
+        });
+      } else {
+        await sendDailyMessage.mutateAsync({
+          message: text,
+          conversationId,
+        });
+      }
     } catch (error) {
       // Error handling is done in mutation onError
       console.error("Error sending message:", error);
@@ -101,7 +145,9 @@ export function ChatInterface() {
           Scout
         </h1>
         <p className="text-sm text-gray-600 dark:text-gray-400">
-          Your AI study assistant
+          {conversationType === "daily_planning"
+            ? "Daily Planning - What do you want to accomplish today?"
+            : "Task Help - How can I assist you?"}
         </p>
       </div>
 

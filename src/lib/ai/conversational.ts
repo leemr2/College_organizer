@@ -10,6 +10,15 @@ export type StudentContext = {
   preferences?: any;
   recentTasks?: any[];
   recentConversations?: any[];
+  conversationType?: "daily_planning" | "task_specific";
+  task?: {
+    id: string;
+    description: string;
+    complexity: string;
+    category?: string | null;
+    dueDate?: Date | null;
+    completed: boolean;
+  };
 };
 
 export class ConversationalAI {
@@ -107,7 +116,7 @@ Return JSON:
   }
 
   private buildSystemPrompt(context: StudentContext): string {
-    return `You are Scout, a friendly AI assistant helping ${context.name}, a college student.
+    const basePrompt = `You are Scout, a friendly AI assistant helping ${context.name}, a college student.
 
 Your role:
 - Help organize tasks and study plans
@@ -119,6 +128,34 @@ Your role:
 ${context.preferences ? `Student preferences: ${JSON.stringify(context.preferences)}` : ""}
 
 Be natural, supportive, and focused on helping them work smarter.`;
+
+    // Add context-specific instructions
+    if (context.conversationType === "daily_planning") {
+      return `${basePrompt}
+
+Current context: Daily Planning Session
+- Focus on helping ${context.name} plan their day
+- Extract tasks from their natural language input
+- Ask clarifying questions about tasks they mention
+- Help prioritize and organize their day
+- Be encouraging about what they want to accomplish today`;
+    } else if (context.conversationType === "task_specific" && context.task) {
+      return `${basePrompt}
+
+Current context: Task-Specific Help
+- You're helping ${context.name} with a specific task: "${context.task.description}"
+- Task details:
+  - Complexity: ${context.task.complexity}
+  - Category: ${context.task.category || "general"}
+  - Due date: ${context.task.dueDate ? new Date(context.task.dueDate).toLocaleDateString() : "not set"}
+  - Status: ${context.task.completed ? "completed" : "in progress"}
+- Focus on providing specific help, clarification, and guidance for THIS task
+- Suggest tools, techniques, or strategies relevant to this specific task
+- Ask questions to understand what they need help with
+- Be encouraging and solution-oriented`;
+    }
+
+    return basePrompt;
   }
 }
 

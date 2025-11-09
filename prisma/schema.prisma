@@ -100,6 +100,11 @@ enum TaskComplexity {
   complex
 }
 
+enum ConversationType {
+  daily_planning
+  task_specific
+}
+
 model Task {
   id                   String    @id @default(cuid())
   studentId            String
@@ -116,22 +121,30 @@ model Task {
 
   // Relations
   student              Student          @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  conversations        Conversation[]   // Task-specific chat threads
 
   @@index([studentId])
   @@index([dueDate])
 }
 
 model Conversation {
-  id          String    @id @default(cuid())
-  studentId   String
-  messages    Json // Array of {role, content, timestamp}
-  context     Json? // Relevant context for the conversation
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id                   String            @id @default(cuid())
+  studentId            String
+  conversationType     ConversationType  @default(daily_planning)
+  taskId               String?           // Links to specific task for task_specific type
+  dailyConversationDate DateTime?        // Date for daily planning conversations
+  messages             Json              // Array of {role, content, timestamp}
+  context              Json?             // Relevant context for the conversation
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
 
-  student     Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  student              Student           @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  task                 Task?             @relation(fields: [taskId], references: [id], onDelete: Cascade)
 
   @@index([studentId])
+  @@index([taskId])
+  @@index([dailyConversationDate])
+  @@index([conversationType])
   @@index([createdAt])
 }
 

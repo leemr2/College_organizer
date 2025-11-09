@@ -3,6 +3,7 @@
 import { CheckCircle2, Circle, Clock } from "lucide-react";
 import { format } from "date-fns";
 import { TaskCompletion } from "./TaskCompletion";
+import { TaskChat } from "./TaskChat";
 
 interface TaskCardProps {
   task: {
@@ -72,6 +73,13 @@ export function TaskCard({ task, onComplete }: TaskCardProps) {
       {!task.completed && (
         <div className="mt-4">
           <TaskCompletion taskId={task.id} onComplete={onComplete} />
+        </div>
+      )}
+
+      {/* Task-specific chat */}
+      {!task.completed && (
+        <div className="mt-4">
+          <TaskChat taskId={task.id} taskDescription={task.description} />
         </div>
       )}
     </div>

@@ -2,6 +2,10 @@ import { redirect } from "next/navigation";
 import { getServerAuthSession } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { NavigationBar } from "@/components/NavigationBar";
+import { DailyGreeting } from "@/components/dashboard/DailyGreeting";
+import { DailyPlanningButton } from "@/components/dashboard/DailyPlanningButton";
+import { TodayStats } from "@/components/dashboard/TodayStats";
+import ClientProvider from "@/components/ClientProvider";
 
 export const dynamic = "force-dynamic";
 
@@ -15,7 +19,7 @@ export default async function DashboardPage() {
   // Check if student exists and onboarding is complete
   const student = await prisma.student.findUnique({
     where: { userId: session.user.id },
-    select: { onboardingComplete: true },
+    select: { onboardingComplete: true, name: true },
   });
 
   if (!student) {
@@ -29,21 +33,39 @@ export default async function DashboardPage() {
   return (
     <>
       <NavigationBar />
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-        <div className="max-w-6xl mx-auto p-6">
-          <div className="mb-6">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-              Dashboard
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400 mt-2">
-              Your daily overview (coming soon)
-            </p>
-          </div>
-          <div className="text-center py-12 text-gray-500 dark:text-gray-400">
-            <p>Dashboard features will be available in Phase 3</p>
+      <ClientProvider>
+        <div className="min-h-screen bg-gradient-to-b from-white to-neutral-50 dark:from-neutral-900 dark:to-neutral-950">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+            {/* Daily Greeting */}
+            <DailyGreeting name={student.name || session.user.name || "there"} />
+
+            {/* Today's Stats */}
+            <TodayStats />
+
+            {/* Daily Planning Button */}
+            <div className="flex justify-center pt-8">
+              <DailyPlanningButton />
+            </div>
+
+            {/* Pro Tip */}
+            <div className="mt-12 rounded-xl bg-gradient-to-r from-brandBlue-50 to-brandBlue-100 dark:from-brandBlue-900/20 dark:to-brandBlue-800/20 p-6 border border-brandBlue-200 dark:border-brandBlue-700">
+              <div className="flex items-start gap-4">
+                <div className="w-6 h-6 text-brandBlue-600 dark:text-brandBlue-400 flex-shrink-0 mt-0.5">
+                  💡
+                </div>
+                <div>
+                  <h4 className="font-semibold text-brandBlue-900 dark:text-brandBlue-100 mb-1">
+                    Pro Tip
+                  </h4>
+                  <p className="text-sm text-brandBlue-700 dark:text-brandBlue-300">
+                    Click the button above to start planning your day with Scout. Just tell me what you want to accomplish and I'll help you organize it!
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </ClientProvider>
     </>
   );
 }

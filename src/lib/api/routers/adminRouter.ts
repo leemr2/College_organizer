@@ -2,6 +2,7 @@ import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { createTRPCRouter, adminProcedure, publicProcedure } from "../trpc";
 import { prisma } from "@/lib/db";
+import { sendAccessApprovedEmail } from "@/lib/email/sendEmail";
 
 export const adminRouter = createTRPCRouter({
   // Public endpoint: Request access
@@ -24,7 +25,7 @@ export const adminRouter = createTRPCRouter({
         });
       }
 
-      // Check if there's already a pending request
+      // Check if there's already an access request
       const existingRequest = await prisma.accessRequest.findUnique({
         where: { email: input.email },
       });
@@ -36,8 +37,8 @@ export const adminRouter = createTRPCRouter({
             message: "Access request already pending",
           });
         }
-        // If rejected, allow re-requesting
-        if (existingRequest.status === "rejected") {
+        // If rejected or approved (but removed from allowlist), allow re-requesting
+        if (existingRequest.status === "rejected" || existingRequest.status === "approved") {
           return await prisma.accessRequest.update({
             where: { email: input.email },
             data: {
@@ -124,6 +125,13 @@ export const adminRouter = createTRPCRouter({
         },
         update: {},
       });
+
+      // Send approval email (don't fail if email fails)
+      try {
+        await sendAccessApprovedEmail(request.email);
+      } catch (error) {
+        // Continue even if email fails
+      }
 
       return { success: true };
     }),

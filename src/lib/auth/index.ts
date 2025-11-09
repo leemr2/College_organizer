@@ -200,7 +200,7 @@ export const authOptions: NextAuthOptions = {
                 name: dbUser.name ?? token.name as string,
                 role: dbUser.role ?? (token.role as UserRole),
                 login: dbUser.login,
-                isAdmin: dbUser.isAdmin,
+                isAdmin: dbUser.isAdmin ?? (token.isAdmin as boolean),
               },
             };
           }
@@ -233,6 +233,7 @@ export const authOptions: NextAuthOptions = {
         token.email = user.email;
         token.name = user.name;
         token.role = user.role;
+        token.isAdmin = user.isAdmin;
       }
       return token;
     },

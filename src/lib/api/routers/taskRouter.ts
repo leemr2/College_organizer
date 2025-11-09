@@ -98,32 +98,43 @@ export const taskRouter = createTRPCRouter({
   listByDate: protectedProcedure
     .input(z.object({ date: z.date() }))
     .query(async ({ input, ctx }) => {
-      const student = await prisma.student.findUnique({
-        where: { userId: ctx.session.user.id },
-      });
+      try {
+        const student = await prisma.student.findUnique({
+          where: { userId: ctx.session.user.id },
+        });
 
-      if (!student) throw new Error("Student not found");
+        if (!student) throw new Error("Student not found");
 
-      const startOfDay = new Date(input.date);
-      startOfDay.setHours(0, 0, 0, 0);
+        const startOfDay = new Date(input.date);
+        startOfDay.setHours(0, 0, 0, 0);
 
-      const endOfDay = new Date(input.date);
-      endOfDay.setHours(23, 59, 59, 999);
+        const endOfDay = new Date(input.date);
+        endOfDay.setHours(23, 59, 59, 999);
 
-      const tasks = await prisma.task.findMany({
-        where: {
-          studentId: student.id,
-          OR: [
-            { dueDate: { gte: startOfDay, lte: endOfDay } },
-            {
-              createdAt: { gte: startOfDay, lte: endOfDay },
-            },
-          ],
-        },
-        orderBy: { dueDate: "asc" },
-      });
+        const tasks = await prisma.task.findMany({
+          where: {
+            studentId: student.id,
+            OR: [
+              { dueDate: { gte: startOfDay, lte: endOfDay } },
+              {
+                createdAt: { gte: startOfDay, lte: endOfDay },
+              },
+            ],
+          },
+          orderBy: { dueDate: "asc" },
+        });
 
-      return tasks;
+        return tasks;
+      } catch (error) {
+        console.error("Error in task.listByDate:", error);
+        // If it's a database connection error, provide a helpful message
+        if (error instanceof Error && error.message.includes("connect")) {
+          throw new Error(
+            "Database connection failed. Please check your DATABASE_URL and DIRECT_URL environment variables."
+          );
+        }
+        throw error;
+      }
     }),
 
   // Mark task as complete

@@ -4,6 +4,7 @@ import { prisma } from "@/lib/db";
 import { NavigationBar } from "@/components/NavigationBar";
 import { DailyGreeting } from "@/components/dashboard/DailyGreeting";
 import { DailyPlanningButton } from "@/components/dashboard/DailyPlanningButton";
+import { TasksButton } from "@/components/dashboard/TasksButton";
 import { TodayStats } from "@/components/dashboard/TodayStats";
 import ClientProvider from "@/components/ClientProvider";
 
@@ -42,9 +43,10 @@ export default async function DashboardPage() {
             {/* Today's Stats */}
             <TodayStats />
 
-            {/* Daily Planning Button */}
-            <div className="flex justify-center pt-8">
+            {/* Daily Planning and Tasks Buttons */}
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-8">
               <DailyPlanningButton />
+              <TasksButton />
             </div>
 
             {/* Pro Tip */}

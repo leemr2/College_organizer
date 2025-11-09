@@ -11,6 +11,7 @@ export type StudentContext = {
   recentTasks?: any[];
   recentConversations?: any[];
   conversationType?: "daily_planning" | "task_specific";
+  currentTime?: Date; // Current time for time-aware scheduling
   task?: {
     id: string;
     description: string;
@@ -79,8 +80,20 @@ Return only a JSON array of questions: ["question 1", "question 2", ...]`;
   /**
    * Extract tasks from natural language
    */
-  async extractTasks(text: string): Promise<any[]> {
+  async extractTasks(text: string, currentTime?: Date): Promise<any[]> {
+    const now = currentTime || new Date();
+    const timeOfDay = this.getTimeOfDay(now);
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    const timeString = `${String(currentHour).padStart(2, '0')}:${String(currentMinute).padStart(2, '0')}`;
+    
     const prompt = `Extract individual tasks from: "${text}"
+
+IMPORTANT: Current time is ${timeString} (${timeOfDay}). When suggesting times for tasks, consider:
+- If it's morning (before 12pm), tasks can be scheduled for today morning, afternoon, or evening
+- If it's afternoon (12pm-5pm), tasks should be scheduled for today afternoon or evening
+- If it's evening (after 5pm), tasks should be scheduled for today evening or tomorrow
+- Never schedule tasks in the past
 
 Return JSON:
 {
@@ -115,7 +128,24 @@ Return JSON:
     }
   }
 
+  /**
+   * Get time of day description (morning, afternoon, evening)
+   */
+  private getTimeOfDay(date: Date): string {
+    const hour = date.getHours();
+    if (hour < 12) return "morning";
+    if (hour < 17) return "afternoon";
+    return "evening";
+  }
+
   private buildSystemPrompt(context: StudentContext): string {
+    const now = context.currentTime || new Date();
+    const timeOfDay = this.getTimeOfDay(now);
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    const timeString = `${String(currentHour).padStart(2, '0')}:${String(currentMinute).padStart(2, '0')}`;
+    const dateString = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    
     const basePrompt = `You are Scout, a friendly AI assistant helping ${context.name}, a college student.
 
 Your role:
@@ -134,11 +164,18 @@ Be natural, supportive, and focused on helping them work smarter.`;
       return `${basePrompt}
 
 Current context: Daily Planning Session
+- Current date and time: ${dateString} at ${timeString} (${timeOfDay})
 - Focus on helping ${context.name} plan their day
 - Extract tasks from their natural language input
 - Ask clarifying questions about tasks they mention
 - Help prioritize and organize their day
-- Be encouraging about what they want to accomplish today`;
+- Be encouraging about what they want to accomplish today
+- IMPORTANT: When suggesting times for tasks, be time-aware:
+  * It is currently ${timeString} (${timeOfDay})
+  * If it's morning (before 12pm), suggest times for today morning, afternoon, or evening
+  * If it's afternoon (12pm-5pm), suggest times for today afternoon or evening
+  * If it's evening (after 5pm), suggest times for today evening or tomorrow
+  * Never suggest times in the past`;
     } else if (context.conversationType === "task_specific" && context.task) {
       return `${basePrompt}
 

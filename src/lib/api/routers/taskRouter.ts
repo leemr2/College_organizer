@@ -14,8 +14,9 @@ export const taskRouter = createTRPCRouter({
 
       if (!student) throw new Error("Student not found");
 
-      // Use ConversationalAI to extract tasks
-      const tasks = await conversationalAI.extractTasks(input.text);
+      // Use ConversationalAI to extract tasks with current time for time-aware scheduling
+      const currentTime = new Date();
+      const tasks = await conversationalAI.extractTasks(input.text, currentTime);
 
       // Create tasks in database
       const createdTasks = await prisma.$transaction(

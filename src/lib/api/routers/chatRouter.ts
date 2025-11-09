@@ -4,6 +4,12 @@ import { prisma } from "@/lib/db";
 import { conversationalAI } from "@/lib/ai/conversational";
 import { getTodayStart, getTodayEnd } from "@/lib/utils/dailyDetection";
 
+// ConversationType enum values
+const ConversationType = {
+  daily_planning: "daily_planning" as const,
+  task_specific: "task_specific" as const,
+} as const;
+
 export const chatRouter = createTRPCRouter({
   // Get or create today's daily planning conversation
   getDailyConversation: protectedProcedure.query(async ({ ctx }) => {
@@ -20,7 +26,7 @@ export const chatRouter = createTRPCRouter({
     let conversation = await prisma.conversation.findFirst({
       where: {
         studentId: student.id,
-        conversationType: "daily_planning",
+        conversationType: ConversationType.daily_planning,
         dailyConversationDate: {
           gte: todayStart,
           lte: todayEnd,
@@ -34,7 +40,7 @@ export const chatRouter = createTRPCRouter({
       conversation = await prisma.conversation.create({
         data: {
           studentId: student.id,
-          conversationType: "daily_planning",
+          conversationType: ConversationType.daily_planning,
           dailyConversationDate: new Date(),
           messages: [],
         },
@@ -67,7 +73,7 @@ export const chatRouter = createTRPCRouter({
       let conversation = await prisma.conversation.findFirst({
         where: {
           studentId: student.id,
-          conversationType: "task_specific",
+          conversationType: ConversationType.task_specific,
           taskId: input.taskId,
         },
         orderBy: { createdAt: "desc" },
@@ -78,7 +84,7 @@ export const chatRouter = createTRPCRouter({
         conversation = await prisma.conversation.create({
           data: {
             studentId: student.id,
-            conversationType: "task_specific",
+            conversationType: ConversationType.task_specific,
             taskId: input.taskId,
             messages: [],
           },
@@ -121,7 +127,7 @@ export const chatRouter = createTRPCRouter({
         conversation = await prisma.conversation.findFirst({
           where: {
             studentId: student.id,
-            conversationType: "daily_planning",
+            conversationType: ConversationType.daily_planning,
             dailyConversationDate: {
               gte: todayStart,
               lte: todayEnd,
@@ -133,7 +139,7 @@ export const chatRouter = createTRPCRouter({
           conversation = await prisma.conversation.create({
             data: {
               studentId: student.id,
-              conversationType: "daily_planning",
+              conversationType: ConversationType.daily_planning,
               dailyConversationDate: new Date(),
               messages: [],
             },
@@ -164,6 +170,7 @@ export const chatRouter = createTRPCRouter({
       });
 
       // Build context for daily planning
+      const currentTime = new Date();
       const context = {
         name: student.name,
         preferences: student.preferences,
@@ -173,6 +180,7 @@ export const chatRouter = createTRPCRouter({
           completed: t.completed,
         })),
         conversationType: "daily_planning" as const,
+        currentTime, // Pass current time for time-aware scheduling
       };
 
       // Generate response using ConversationalAI
@@ -242,7 +250,7 @@ export const chatRouter = createTRPCRouter({
         conversation = await prisma.conversation.findFirst({
           where: {
             studentId: student.id,
-            conversationType: "task_specific",
+            conversationType: ConversationType.task_specific,
             taskId: input.taskId,
           },
         });
@@ -251,7 +259,7 @@ export const chatRouter = createTRPCRouter({
           conversation = await prisma.conversation.create({
             data: {
               studentId: student.id,
-              conversationType: "task_specific",
+              conversationType: ConversationType.task_specific,
               taskId: input.taskId,
               messages: [],
             },
@@ -279,7 +287,7 @@ export const chatRouter = createTRPCRouter({
           dueDate: task.dueDate,
           completed: task.completed,
         },
-        conversationType: "task_specific" as const,
+        conversationType: ConversationType.task_specific,
       };
 
       // Generate response using ConversationalAI
@@ -344,7 +352,7 @@ export const chatRouter = createTRPCRouter({
         conversation = await prisma.conversation.findFirst({
           where: {
             studentId: student.id,
-            conversationType: "daily_planning",
+            conversationType: ConversationType.daily_planning,
             dailyConversationDate: {
               gte: todayStart,
               lte: todayEnd,
@@ -356,7 +364,7 @@ export const chatRouter = createTRPCRouter({
           conversation = await prisma.conversation.create({
             data: {
               studentId: student.id,
-              conversationType: "daily_planning",
+              conversationType: ConversationType.daily_planning,
               dailyConversationDate: new Date(),
               messages: [],
             },
@@ -387,6 +395,7 @@ export const chatRouter = createTRPCRouter({
       });
 
       // Build context for daily planning
+      const currentTime = new Date();
       const context = {
         name: student.name,
         preferences: student.preferences,
@@ -396,6 +405,7 @@ export const chatRouter = createTRPCRouter({
           completed: t.completed,
         })),
         conversationType: "daily_planning" as const,
+        currentTime, // Pass current time for time-aware scheduling
       };
 
       // Generate response using ConversationalAI
@@ -481,7 +491,7 @@ export const chatRouter = createTRPCRouter({
     let conversation = await prisma.conversation.findFirst({
       where: {
         studentId: student.id,
-        conversationType: "daily_planning",
+        conversationType: ConversationType.daily_planning,
         dailyConversationDate: {
           gte: todayStart,
           lte: todayEnd,
@@ -495,7 +505,7 @@ export const chatRouter = createTRPCRouter({
       conversation = await prisma.conversation.create({
         data: {
           studentId: student.id,
-          conversationType: "daily_planning",
+          conversationType: ConversationType.daily_planning,
           dailyConversationDate: new Date(),
           messages: [],
         },

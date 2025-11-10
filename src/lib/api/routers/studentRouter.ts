@@ -90,6 +90,7 @@ export const studentRouter = createTRPCRouter({
         morningPerson: z.boolean().optional(),
         studyAloneVsGroup: z.string().optional(),
         notificationSettings: z.any().optional(),
+        timezone: z.string().optional(),
       })
     )
     .mutation(async ({ input, ctx }) => {

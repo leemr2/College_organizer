@@ -148,6 +148,7 @@ model StudentPreferences {
   studyEnvironmentPrefs  Json?
   effectiveStudyPatterns Json?
   notificationSettings   Json?
+  timezone               String?
   updatedAt              DateTime @updatedAt
   student                Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
 }

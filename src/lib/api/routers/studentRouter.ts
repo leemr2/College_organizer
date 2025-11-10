@@ -120,5 +120,187 @@ export const studentRouter = createTRPCRouter({
 
     return student;
   }),
+
+  // Update student profile
+  updateProfile: protectedProcedure
+    .input(
+      z.object({
+        name: z.string().min(1).optional(),
+        year: z.string().optional(),
+        biggestChallenge: z.string().optional(),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      const student = await prisma.student.findUnique({
+        where: { userId: ctx.session.user.id },
+      });
+
+      if (!student) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Student not found",
+        });
+      }
+
+      const updatedStudent = await prisma.student.update({
+        where: { userId: ctx.session.user.id },
+        data: {
+          ...(input.name !== undefined && { name: input.name }),
+          ...(input.year !== undefined && { year: input.year }),
+          ...(input.biggestChallenge !== undefined && {
+            biggestChallenge: input.biggestChallenge,
+          }),
+        },
+      });
+
+      return updatedStudent;
+    }),
+
+  // Create class schedule
+  createClassSchedule: protectedProcedure
+    .input(
+      z.object({
+        courseName: z.string().min(1),
+        courseCode: z.string().optional(),
+        professor: z.string().optional(),
+        meetingTimes: z.array(
+          z.object({
+            day: z.string(),
+            startTime: z.string(),
+            endTime: z.string(),
+          })
+        ),
+        semester: z.string(),
+        syllabus: z.string().optional(),
+        exams: z.array(z.string()).optional(),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      const student = await prisma.student.findUnique({
+        where: { userId: ctx.session.user.id },
+      });
+
+      if (!student) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Student not found",
+        });
+      }
+
+      const classSchedule = await prisma.classSchedule.create({
+        data: {
+          studentId: student.id,
+          courseName: input.courseName,
+          courseCode: input.courseCode,
+          professor: input.professor,
+          meetingTimes: input.meetingTimes,
+          semester: input.semester,
+          syllabus: input.syllabus,
+          exams: input.exams,
+        },
+      });
+
+      return classSchedule;
+    }),
+
+  // Update class schedule
+  updateClassSchedule: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        courseName: z.string().min(1).optional(),
+        courseCode: z.string().optional(),
+        professor: z.string().optional(),
+        meetingTimes: z
+          .array(
+            z.object({
+              day: z.string(),
+              startTime: z.string(),
+              endTime: z.string(),
+            })
+          )
+          .optional(),
+        semester: z.string().optional(),
+        syllabus: z.string().optional(),
+        exams: z.array(z.string()).optional(),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      const student = await prisma.student.findUnique({
+        where: { userId: ctx.session.user.id },
+        include: { classSchedules: true },
+      });
+
+      if (!student) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Student not found",
+        });
+      }
+
+      // Verify the class schedule belongs to this student
+      const classSchedule = student.classSchedules.find(
+        (cs) => cs.id === input.id
+      );
+
+      if (!classSchedule) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Class schedule not found",
+        });
+      }
+
+      const updated = await prisma.classSchedule.update({
+        where: { id: input.id },
+        data: {
+          ...(input.courseName !== undefined && { courseName: input.courseName }),
+          ...(input.courseCode !== undefined && { courseCode: input.courseCode }),
+          ...(input.professor !== undefined && { professor: input.professor }),
+          ...(input.meetingTimes !== undefined && {
+            meetingTimes: input.meetingTimes,
+          }),
+          ...(input.semester !== undefined && { semester: input.semester }),
+          ...(input.syllabus !== undefined && { syllabus: input.syllabus }),
+          ...(input.exams !== undefined && { exams: input.exams }),
+        },
+      });
+
+      return updated;
+    }),
+
+  // Delete class schedule
+  deleteClassSchedule: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      const student = await prisma.student.findUnique({
+        where: { userId: ctx.session.user.id },
+        include: { classSchedules: true },
+      });
+
+      if (!student) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Student not found",
+        });
+      }
+
+      // Verify the class schedule belongs to this student
+      const classSchedule = student.classSchedules.find(
+        (cs) => cs.id === input.id
+      );
+
+      if (!classSchedule) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Class schedule not found",
+        });
+      }
+
+      await prisma.classSchedule.delete({
+        where: { id: input.id },
+      });
+
+      return { success: true };
+    }),
 });
 

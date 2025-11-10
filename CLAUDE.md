@@ -69,6 +69,7 @@ npm run build-storybook  # Build Storybook for deployment
 **Student**: User profiles with onboarding status, preferences, and class schedules
 - Relations: tasks, conversations, preferences, classSchedules
 - Onboarding flow: `src/app/onboarding/` with multi-step form
+- Profile updates: `/profile` page allows updating name, year, biggestChallenge, class schedules, and preferences after onboarding
 
 **Task**: Tasks with complexity classification (simple/medium/complex)
 - `clarificationData` (JSON): Stores Q&A responses from AI clarification
@@ -84,6 +85,13 @@ npm run build-storybook  # Build Storybook for deployment
 **StudentPreferences**: Study preferences and patterns
 - `peakEnergyTimes`, `preferredBreakLength`, `morningPerson`, `studyAloneVsGroup`
 - `effectiveStudyPatterns`: Learned patterns from AI analysis
+- Editable via profile settings page
+
+**ClassSchedule**: Course schedules with recurring meeting times
+- `courseName`, `courseCode`, `professor`, `semester` (e.g., "Fall 2024")
+- `meetingTimes` (JSON): Array of `{day, startTime, endTime}` objects
+- Supports multiple meeting times per class (e.g., MWF classes)
+- Editable via profile settings with visual week calendar
 
 ### AI Chat Flow Pattern
 
@@ -138,6 +146,7 @@ const aiResponse = await generateChatCompletion(
 - Notifications: `react-toastify` - `toast.success()`, `toast.error()`, `toast.info()`
 - Forms: Controlled components with Zod validation
 - Loading states: Server components handle initial load, client components manage interactions
+- Calendar components: Reusable `WeekCalendar` (M-Sunday, 6am-10pm) and `TimeBlockEditor` for Phase 3 scheduling integration
 
 ### Client Component Triggers
 Add `"use client"` when using:
@@ -157,11 +166,14 @@ src/
 │   ├── chat/              # Daily check-in chat interface
 │   ├── dashboard/         # Student dashboard
 │   ├── onboarding/        # Multi-step onboarding flow
+│   ├── profile/           # Profile settings and updates
 │   └── tasks/             # Task management pages
 ├── components/            # React components by feature
+│   ├── calendar/         # Calendar components (WeekCalendar, TimeBlockEditor, TimeBlock)
 │   ├── chat/             # Chat interface components
 │   ├── dashboard/        # Dashboard components
 │   ├── onboarding/       # Onboarding flow components
+│   ├── profile/          # Profile editing components
 │   ├── tasks/            # Task management components
 │   └── ui/               # Shared UI primitives
 ├── lib/
@@ -169,12 +181,15 @@ src/
 │   │   └── conversational.ts  # ConversationalAI class
 │   ├── api/              # tRPC setup
 │   │   ├── routers/      # tRPC routers (chat, task, student)
+│   │   │   └── studentRouter.ts  # Profile updates, class schedule CRUD
 │   │   ├── root.ts       # Router composition
 │   │   └── trpc.ts       # tRPC config
 │   ├── auth/             # NextAuth configuration
 │   ├── trpc/             # tRPC client setup
+│   ├── types/            # TypeScript type definitions
+│   │   └── calendar.ts   # Calendar and time block types
 │   ├── utils/            # Shared utilities
-│   │   ├── shared.ts     # Client-side utilities
+│   │   ├── shared.ts     # Client-side utilities (time formatting, date helpers)
 │   │   └── server.ts     # Server-side utilities
 │   ├── aiClient.ts       # AI provider facade
 │   └── db.ts             # Prisma client
@@ -250,6 +265,40 @@ When creating tasks, the AI classifies complexity and generates clarifying quest
 - System prompt includes time awareness, preferences, and recent context
 - Voice input supported via Web Speech API
 
+### Profile Update System & Calendar Components
+
+**Profile Update Flow**:
+- Route: `/profile` (protected, requires onboarding completion)
+- Components: `ProfileEditor` (tabbed container), `PersonalInfoEditor`, `ClassScheduleEditor`, `PreferencesEditor`
+- API: `studentRouter.updateProfile`, `studentRouter.createClassSchedule`, `studentRouter.updateClassSchedule`, `studentRouter.deleteClassSchedule`
+
+**Calendar Components Architecture** (Phase 3 Ready):
+- **`WeekCalendar`**: M-Sunday week view displaying 6am-10pm time range
+  - Accepts `TimeBlock[]` array for display
+  - Supports click handlers for editing blocks
+  - Position calculation relative to 6am start (16-hour window)
+  - Reusable for both ClassSchedule and future ScheduleBlock types
+  
+- **`TimeBlockEditor`**: Modal editor for recurring time blocks
+  - Supports multiple day selection (MWF patterns)
+  - Mode: "class" (with course fields) or "general" (for future ScheduleBlocks)
+  - Semester dropdown: Fall, Winter, Spring, Summer (works for semester/quarter systems)
+  - Returns normalized `MeetingTime[]` array
+
+- **`TimeBlock`**: Display component with type badges
+  - Color-coded by type (class, work, lab, commitment, task, break)
+  - Shows title, course code, time range
+
+- **Types**: `src/lib/types/calendar.ts`
+  - `TimeBlock`, `TimeBlockType`, `MeetingTime`, `CalendarEvent`
+  - Designed to support both ClassSchedule (semester-long) and ScheduleBlock (daily tasks)
+
+**Phase 3 Integration Notes**:
+- Calendar components are designed to accept both ClassSchedule and ScheduleBlock data
+- `WeekCalendarView` component exists in dashboard for future integration
+- When ScheduleBlock model is added, same calendar components can be used
+- TimeBlockEditor can be extended for task scheduling without major refactoring
+
 ## Storybook Development
 
 Stories should include:
@@ -306,6 +355,7 @@ Each documentation file serves a specific purpose:
    - "Type-Safe API Layer" section (tRPC patterns)
    - Existing router implementations in `src/lib/api/routers/`
    - "AI Chat Flow Pattern" (if conversational)
+   - `studentRouter.ts` has examples of profile update and class schedule CRUD operations
 2. Review `AGENTS.md` "Backend" section for conventions
 3. Check existing procedures for naming conventions and error handling patterns
 
@@ -432,6 +482,9 @@ Completed features:
 - ✅ Task list view with completion tracking
 - ✅ Student profiles and preferences
 - ✅ Task-specific chat conversations
+- ✅ Profile update system: Users can update name, year, biggestChallenge, class schedules, and preferences after onboarding
+- ✅ Calendar components: WeekCalendar (M-Sunday, 6am-10pm) and TimeBlockEditor for managing recurring class schedules
+- ✅ Class schedule management: Full CRUD operations with visual week calendar view
 
 Next phase (Phase 2 - Intelligence Layer):
 - Tool research integration (Claude + web search)
@@ -439,3 +492,8 @@ Next phase (Phase 2 - Intelligence Layer):
 - Advanced clarification questions
 - Memory system for pattern recognition
 - Effectiveness tracking
+
+Phase 3 preparation:
+- Calendar components designed for ScheduleBlock integration
+- WeekCalendarView component ready for dashboard integration
+- TimeBlockEditor supports both ClassSchedule and future ScheduleBlock types

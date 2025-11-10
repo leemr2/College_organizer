@@ -40,13 +40,17 @@ The product's core innovation is its **tool discovery and optimization engine** 
 ### 👤 Student Profiles & Onboarding
 - Personalized onboarding flow
 - Student preferences (energy times, study style, etc.)
-- Class schedule management
-- Profile customization
+- Class schedule management with visual week calendar (M-Sunday, 6am-10pm)
+- Profile customization and updates after onboarding
+- Edit personal info (name, year, biggest challenge)
+- Manage class schedules (add, edit, delete with recurring patterns)
+- Update study preferences
 
 ### 📊 Dashboard
 - Daily overview and statistics
 - Today's tasks view
 - Quick navigation to chat and tasks
+- Week calendar view (ready for Phase 3 scheduling integration)
 
 ## 🏗️ Technical Architecture
 
@@ -166,14 +170,18 @@ Visit [http://localhost:3000](http://localhost:3000) to see Scout.
 │   └── tasks/             # Tasks management page
 ├── src/
 │   ├── components/        # React components
+│   │   ├── calendar/    # Calendar components (WeekCalendar, TimeBlockEditor)
 │   │   ├── chat/         # Chat interface components
 │   │   ├── dashboard/    # Dashboard components
 │   │   ├── onboarding/   # Onboarding flow components
+│   │   ├── profile/      # Profile editing components
 │   │   └── tasks/        # Task management components
 │   ├── lib/
 │   │   ├── ai/           # AI integration (conversational, research)
 │   │   ├── api/          # tRPC routers
-│   │   │   └── routers/  # chatRouter, taskRouter, studentRouter
+│   │   │   └── routers/  # chatRouter, taskRouter, studentRouter (with profile/class schedule CRUD)
+│   │   ├── types/        # TypeScript type definitions
+│   │   │   └── calendar.ts  # Calendar and time block types
 │   │   ├── auth/         # NextAuth configuration
 │   │   ├── trpc/         # tRPC client/server setup
 │   │   └── utils/        # Shared utilities
@@ -187,11 +195,11 @@ Visit [http://localhost:3000](http://localhost:3000) to see Scout.
 ## 🗄️ Database Schema
 
 Key models:
-- **Student** - User profiles and preferences
+- **Student** - User profiles and preferences (editable via `/profile`)
 - **Task** - Tasks with complexity and clarification data
 - **Conversation** - Chat history (daily planning and task-specific)
-- **ClassSchedule** - Course information
-- **StudentPreferences** - Study preferences and patterns
+- **ClassSchedule** - Course information with recurring meeting times (editable via profile)
+- **StudentPreferences** - Study preferences and patterns (editable via profile)
 
 See `prisma/schema.prisma` for the complete schema.
 
@@ -233,6 +241,8 @@ Based on the PRD, Scout is being developed in phases:
 - Task capture and storage
 - Basic clarification questions
 - Simple task list view
+- Profile update system with visual calendar for class schedules
+- Week calendar components (ready for Phase 3 scheduling)
 
 ### 🔄 Phase 2: Intelligence Layer (Next)
 - Tool research integration (Claude + web search)
@@ -245,10 +255,11 @@ Based on the PRD, Scout is being developed in phases:
 ### 📅 Phase 3: Scheduling & Proactive (Planned)
 - Intelligent time block generation
 - Schedule optimization algorithm
-- Visual calendar/timeline view
+- Visual calendar/timeline view (calendar components already built)
 - Proactive check-ins during study blocks
 - End of day review
 - Pattern recognition
+- **Note**: Calendar components (`WeekCalendar`, `TimeBlockEditor`) are already implemented and ready for ScheduleBlock integration
 
 ### 🎯 Phase 4: Learning & Optimization (Future)
 - Advanced effectiveness tracking

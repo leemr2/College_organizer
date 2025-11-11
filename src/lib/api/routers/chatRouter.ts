@@ -2,7 +2,6 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { prisma } from "@/lib/db";
 import { conversationalAI } from "@/lib/ai/conversational";
-import { getTodayStart, getTodayEnd } from "@/lib/utils/dailyDetection";
 import { getUserTimezone, getTodayStartInTimezone, getTodayEndInTimezone } from "@/lib/utils/timezone";
 import { Message, StudentContext, TaskSummary } from "@/lib/types";
 import type { Prisma } from "@prisma/client";
@@ -189,12 +188,15 @@ export const chatRouter = createTRPCRouter({
   getDailyConversation: protectedProcedure.query(async ({ ctx }) => {
     const student = await prisma.student.findUnique({
       where: { userId: ctx.session.user.id },
+      include: { preferences: true },
     });
 
     if (!student) throw new Error("Student not found");
 
-    const todayStart = getTodayStart();
-    const todayEnd = getTodayEnd();
+    // Get user's timezone from preferences for timezone-aware date queries
+    const timezone = getUserTimezone(student.preferences);
+    const todayStart = getTodayStartInTimezone(timezone);
+    const todayEnd = getTodayEndInTimezone(timezone);
 
     // Check if daily conversation exists for today
     let conversation = await prisma.conversation.findFirst({
@@ -396,13 +398,15 @@ export const chatRouter = createTRPCRouter({
   getCurrent: protectedProcedure.query(async ({ ctx }) => {
     const student = await prisma.student.findUnique({
       where: { userId: ctx.session.user.id },
+      include: { preferences: true },
     });
 
     if (!student) throw new Error("Student not found");
 
-    // Default to today's daily planning conversation
-    const todayStart = getTodayStart();
-    const todayEnd = getTodayEnd();
+    // Get user's timezone from preferences for timezone-aware date queries
+    const timezone = getUserTimezone(student.preferences);
+    const todayStart = getTodayStartInTimezone(timezone);
+    const todayEnd = getTodayEndInTimezone(timezone);
 
     // Check if daily conversation exists for today
     let conversation = await prisma.conversation.findFirst({

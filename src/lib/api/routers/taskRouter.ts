@@ -21,7 +21,7 @@ export const taskRouter = createTRPCRouter({
 
       // Create tasks in database
       const createdTasks = await prisma.$transaction(
-        tasks.map((task: any) =>
+        tasks.map((task: { description: string; category: string; complexity: "simple" | "medium" | "complex" }) =>
           prisma.task.create({
             data: {
               studentId: student.id,
@@ -62,6 +62,7 @@ export const taskRouter = createTRPCRouter({
         recentTasks: recentTasks.map((t) => ({
           description: t.description,
           category: t.category,
+          completed: t.completed,
         })),
       };
 

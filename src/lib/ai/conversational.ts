@@ -1,26 +1,5 @@
 import { generateChatCompletion, parseJsonResponse, AI_MODELS } from "../aiClient";
-
-export type Message = {
-  role: "user" | "assistant" | "system";
-  content: string;
-};
-
-export type StudentContext = {
-  name: string;
-  preferences?: any;
-  recentTasks?: any[];
-  recentConversations?: any[];
-  conversationType?: "daily_planning" | "task_specific";
-  currentTime?: Date; // Current time for time-aware scheduling
-  task?: {
-    id: string;
-    description: string;
-    complexity: string;
-    category?: string | null;
-    dueDate?: Date | null;
-    completed: boolean;
-  };
-};
+import { Message, StudentContext, TaskSummary, StudentPreferences } from "../types";
 
 export class ConversationalAI {
   /**

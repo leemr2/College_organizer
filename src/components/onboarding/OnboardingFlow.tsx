@@ -8,14 +8,7 @@ import { ClassScheduleStep } from "./ClassScheduleStep";
 import { PreferencesStep } from "./PreferencesStep";
 import { api } from "@/lib/trpc/react";
 import { toast } from "react-toastify";
-
-type OnboardingData = {
-  name?: string;
-  year?: string;
-  biggestChallenge?: string;
-  classSchedules?: any[];
-  preferences?: any;
-};
+import { OnboardingData } from "@/lib/types";
 
 export function OnboardingFlow() {
   const router = useRouter();
@@ -99,7 +92,20 @@ export function OnboardingFlow() {
     />,
     <PreferencesStep
       key="preferences"
-      onNext={(prefData) => handleNext({ preferences: prefData })}
+      onNext={(prefData) => {
+        // Map studyAloneVsGroup values to match type definition
+        const mappedPrefs = {
+          ...prefData,
+          studyAloneVsGroup: prefData.studyAloneVsGroup
+            ? (prefData.studyAloneVsGroup === "groups"
+                ? "group"
+                : prefData.studyAloneVsGroup === "mix"
+                ? "flexible"
+                : prefData.studyAloneVsGroup)
+            : undefined,
+        } as Partial<OnboardingData["preferences"]>;
+        handleNext({ preferences: mappedPrefs });
+      }}
       onBack={handleBack}
     />,
   ];

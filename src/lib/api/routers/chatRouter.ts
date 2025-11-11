@@ -162,15 +162,7 @@ async function processMessage(params: ProcessMessageParams) {
     timestamp: m.timestamp,
   }));
 
-  // Note: conversationalAI.chat expects Message[] but currently the Message type in conversational.ts
-  // doesn't include timestamp. We'll update that in Phase 2B. For now, map to the expected format.
-  const response = await conversationalAI.chat(
-    chatMessages.map((m) => ({
-      role: m.role,
-      content: m.content,
-    })),
-    context
-  );
+  const response = await conversationalAI.chat(chatMessages, context);
 
   // Add assistant message
   messages.push({

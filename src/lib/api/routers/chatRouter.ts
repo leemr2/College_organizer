@@ -3,6 +3,7 @@ import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { prisma } from "@/lib/db";
 import { conversationalAI } from "@/lib/ai/conversational";
 import { getTodayStart, getTodayEnd } from "@/lib/utils/dailyDetection";
+import { getUserTimezone, getTodayStartInTimezone, getTodayEndInTimezone } from "@/lib/utils/timezone";
 import { Message, MessageArray, StudentContext, TaskSummary } from "@/lib/types";
 
 // ConversationType enum values
@@ -45,8 +46,10 @@ async function processMessage(params: ProcessMessageParams) {
 
   if (!conversation) {
     if (conversationType === "daily_planning") {
-      const todayStart = getTodayStart();
-      const todayEnd = getTodayEnd();
+      // Get user's timezone from preferences for timezone-aware date queries
+      const timezone = getUserTimezone(student.preferences);
+      const todayStart = getTodayStartInTimezone(timezone);
+      const todayEnd = getTodayEndInTimezone(timezone);
 
       conversation = await prisma.conversation.findFirst({
         where: {
@@ -103,8 +106,11 @@ async function processMessage(params: ProcessMessageParams) {
   const currentTime = new Date();
 
   if (conversationType === "daily_planning") {
-    const todayStart = getTodayStart();
-    const todayEnd = getTodayEnd();
+    // Get user's timezone from preferences for timezone-aware date queries
+    const timezone = getUserTimezone(student.preferences);
+    const todayStart = getTodayStartInTimezone(timezone);
+    const todayEnd = getTodayEndInTimezone(timezone);
+    
     const todayTasks = await prisma.task.findMany({
       where: {
         studentId,

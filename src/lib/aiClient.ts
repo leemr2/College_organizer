@@ -135,7 +135,7 @@ export async function generateGeminiWebResponse(
   const modelId = AI_MODELS[model];
   const geminiModel = genAI.getGenerativeModel({
     model: modelId,
-    // @ts-ignore
+    // @ts-expect-error - Gemini SDK types don't include googleSearch tool definition yet
     tools: ground ? [{ googleSearch: {} }] : undefined,
   });
 
@@ -162,11 +162,11 @@ export async function generateGeminiWebResponse(
   };
 }
 
-export function parseJsonResponse(response: string): any {
+export function parseJsonResponse(response: string): unknown {
   // First try parsing the response directly
   try {
     return JSON.parse(response);
-  } catch (e) {
+  } catch {
     // If direct parsing fails, look for code blocks
     const codeBlockRegex = /```(?:json|[^\n]*\n)?([\s\S]*?)```/;
     const match = response.match(codeBlockRegex);
@@ -174,7 +174,7 @@ export function parseJsonResponse(response: string): any {
     if (match && match[1]) {
       try {
         return JSON.parse(match[1].trim());
-      } catch (innerError) {
+      } catch {
         throw new Error("Failed to parse JSON from code block");
       }
     }

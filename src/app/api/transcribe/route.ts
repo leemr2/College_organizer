@@ -40,29 +40,32 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json({ text: transcription.text });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Transcription error:", error);
-    
+
+    // Type-safe error handling
+    const err = error as { message?: string; error?: { message?: string }; status?: number };
+
     // Provide more detailed error messages
     let errorMessage = "Transcription failed";
-    if (error?.message) {
-      errorMessage = error.message;
-    } else if (error?.error?.message) {
-      errorMessage = error.error.message;
+    if (err?.message) {
+      errorMessage = err.message;
+    } else if (err?.error?.message) {
+      errorMessage = err.error.message;
     }
 
     // Handle specific OpenAI API errors
-    if (error?.status === 401) {
+    if (err?.status === 401) {
       errorMessage = "Invalid OpenAI API key";
-    } else if (error?.status === 429) {
+    } else if (err?.status === 429) {
       errorMessage = "Rate limit exceeded. Please try again later.";
-    } else if (error?.status === 413) {
+    } else if (err?.status === 413) {
       errorMessage = "Audio file is too large. Please record a shorter message.";
     }
 
     return NextResponse.json(
       { error: errorMessage },
-      { status: error?.status || 500 },
+      { status: err?.status || 500 },
     );
   }
 }

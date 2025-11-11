@@ -39,7 +39,7 @@ export function TaskClarification({
         taskId,
         responses,
       });
-    } catch (error) {
+    } catch {
       // Error handled in mutation
     }
   };

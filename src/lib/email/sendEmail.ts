@@ -26,7 +26,7 @@ export async function sendAccessApprovedEmail(to: string) {
       subject: "Your Scout Access Has Been Approved! 🎉",
       react: createElement(AccessApprovedEmail, { email: to }),
     });
-  } catch (error) {
+  } catch {
     // Don't throw - we don't want to fail the approval if email fails
   }
 }

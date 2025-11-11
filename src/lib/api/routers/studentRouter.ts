@@ -1,7 +1,9 @@
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
+import { Prisma } from "@prisma/client";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { prisma } from "@/lib/db";
+import { NotificationSettings } from "@/lib/types";
 
 export const studentRouter = createTRPCRouter({
   // Create student profile during onboarding
@@ -52,9 +54,10 @@ export const studentRouter = createTRPCRouter({
           },
         });
         return student;
-      } catch (error: any) {
+      } catch (error: unknown) {
         // Handle unique constraint violations
-        if (error.code === "P2002") {
+        const prismaError = error as { code?: string; message?: string };
+        if (prismaError.code === "P2002") {
           throw new TRPCError({
             code: "CONFLICT",
             message: "A student profile with this email already exists",
@@ -63,7 +66,7 @@ export const studentRouter = createTRPCRouter({
         // Re-throw other errors
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
-          message: error.message || "Failed to create student profile",
+          message: prismaError.message || "Failed to create student profile",
         });
       }
     }),
@@ -89,7 +92,7 @@ export const studentRouter = createTRPCRouter({
         preferredBreakLength: z.number().optional(),
         morningPerson: z.boolean().optional(),
         studyAloneVsGroup: z.string().optional(),
-        notificationSettings: z.any().optional(),
+        notificationSettings: z.custom<NotificationSettings>().optional(),
         timezone: z.string().optional(),
       })
     )
@@ -100,12 +103,20 @@ export const studentRouter = createTRPCRouter({
 
       if (!student) throw new Error("Student not found");
 
+      // Prepare input with proper type casting for JSON fields
+      const updateData = {
+        ...input,
+        notificationSettings: input.notificationSettings
+          ? (input.notificationSettings as unknown as Prisma.InputJsonValue)
+          : undefined,
+      };
+
       const preferences = await prisma.studentPreferences.upsert({
         where: { studentId: student.id },
-        update: input,
+        update: updateData,
         create: {
           studentId: student.id,
-          ...input,
+          ...updateData,
         },
       });
 

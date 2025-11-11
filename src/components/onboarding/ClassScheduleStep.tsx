@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Plus, X } from "lucide-react";
+import { ClassScheduleData } from "@/lib/types";
 
 interface ClassScheduleStepProps {
-  onNext: (data: { classSchedules: any[] }) => void;
+  onNext: (data: { classSchedules: ClassScheduleData[] }) => void;
   onBack: () => void;
   onSkip: () => void;
 }

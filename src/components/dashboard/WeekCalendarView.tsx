@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import { WeekCalendar } from "@/components/calendar/WeekCalendar";
-import { TimeBlock } from "@/lib/types/calendar";
+import { TimeBlock, MeetingTime } from "@/lib/types/calendar";
 import { api } from "@/lib/trpc/react";
 
 /**
@@ -20,7 +20,7 @@ export function WeekCalendarView() {
       id: schedule.id,
       title: schedule.courseName,
       type: "class" as const,
-      meetingTimes: (schedule.meetingTimes as any[]) || [],
+      meetingTimes: (schedule.meetingTimes as unknown as MeetingTime[]) || [],
       courseCode: schedule.courseCode || undefined,
       professor: schedule.professor || undefined,
       semester: schedule.semester,

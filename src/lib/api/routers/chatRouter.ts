@@ -2,7 +2,9 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { prisma } from "@/lib/db";
 import { conversationalAI } from "@/lib/ai/conversational";
-import { getTodayStart, getTodayEnd } from "@/lib/utils/dailyDetection";
+import { getUserTimezone, getTodayStartInTimezone, getTodayEndInTimezone } from "@/lib/utils/timezone";
+import { Message, StudentContext, TaskSummary } from "@/lib/types";
+import type { Prisma } from "@prisma/client";
 
 // ConversationType enum values
 const ConversationType = {
@@ -10,17 +12,191 @@ const ConversationType = {
   task_specific: "task_specific" as const,
 } as const;
 
+// ============================================
+// SHARED MESSAGE PROCESSING
+// ============================================
+
+interface ProcessMessageParams {
+  studentId: string;
+  userId: string;
+  message: string;
+  conversationType: "daily_planning" | "task_specific";
+  taskId?: string;
+  conversationId?: string;
+}
+
+async function processMessage(params: ProcessMessageParams) {
+  const { studentId, userId, message, conversationType, taskId, conversationId } = params;
+
+  // Get student with preferences
+  const student = await prisma.student.findUnique({
+    where: { userId },
+    include: { preferences: true },
+  });
+
+  if (!student) throw new Error("Student not found");
+
+  // Get or create conversation
+  let conversation;
+  if (conversationId) {
+    conversation = await prisma.conversation.findUnique({
+      where: { id: conversationId },
+    });
+  }
+
+  if (!conversation) {
+    if (conversationType === "daily_planning") {
+      // Get user's timezone from preferences for timezone-aware date queries
+      const timezone = getUserTimezone(student.preferences);
+      const todayStart = getTodayStartInTimezone(timezone);
+      const todayEnd = getTodayEndInTimezone(timezone);
+
+      conversation = await prisma.conversation.findFirst({
+        where: {
+          studentId,
+          conversationType: ConversationType.daily_planning,
+          dailyConversationDate: { gte: todayStart, lte: todayEnd },
+        },
+      });
+
+      if (!conversation) {
+        conversation = await prisma.conversation.create({
+          data: {
+            studentId,
+            conversationType: ConversationType.daily_planning,
+            dailyConversationDate: new Date(),
+            messages: [],
+          },
+        });
+      }
+    } else if (conversationType === "task_specific" && taskId) {
+      conversation = await prisma.conversation.findFirst({
+        where: {
+          studentId,
+          conversationType: ConversationType.task_specific,
+          taskId,
+        },
+      });
+
+      if (!conversation) {
+        conversation = await prisma.conversation.create({
+          data: {
+            studentId,
+            conversationType: ConversationType.task_specific,
+            taskId,
+            messages: [],
+          },
+        });
+      }
+    } else {
+      throw new Error("Invalid conversation configuration");
+    }
+  }
+
+  // Add user message to history
+  const messages = ((conversation.messages as unknown) as Message[]) || [];
+  messages.push({
+    role: "user",
+    content: message,
+    timestamp: new Date().toISOString(),
+  });
+
+  // Build context based on conversation type
+  let context: StudentContext;
+  const currentTime = new Date();
+
+  if (conversationType === "daily_planning") {
+    // Get user's timezone from preferences for timezone-aware date queries
+    const timezone = getUserTimezone(student.preferences);
+    const todayStart = getTodayStartInTimezone(timezone);
+    const todayEnd = getTodayEndInTimezone(timezone);
+    
+    const todayTasks = await prisma.task.findMany({
+      where: {
+        studentId,
+        createdAt: { gte: todayStart, lte: todayEnd },
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    context = {
+      name: student.name,
+      preferences: (student.preferences as unknown) as StudentContext["preferences"],
+      recentTasks: todayTasks.map((t): TaskSummary => ({
+        description: t.description,
+        category: t.category,
+        completed: t.completed,
+      })),
+      conversationType: "daily_planning",
+      currentTime,
+    };
+  } else {
+    // task_specific context
+    const task = await prisma.task.findUnique({
+      where: { id: taskId },
+    });
+
+    if (!task || task.studentId !== studentId) {
+      throw new Error("Task not found");
+    }
+
+    context = {
+      name: student.name,
+      preferences: (student.preferences as unknown) as StudentContext["preferences"],
+      task: {
+        id: task.id,
+        description: task.description,
+        complexity: task.complexity,
+        category: task.category,
+        dueDate: task.dueDate,
+        completed: task.completed,
+      },
+      conversationType: "task_specific",
+    };
+  }
+
+  // Generate AI response
+  const chatMessages = messages.map((m): Message => ({
+    role: m.role,
+    content: m.content,
+    timestamp: m.timestamp,
+  }));
+
+  const response = await conversationalAI.chat(chatMessages, context);
+
+  // Add assistant message
+  messages.push({
+    role: "assistant",
+    content: response,
+    timestamp: new Date().toISOString(),
+  });
+
+  // Save conversation
+  await prisma.conversation.update({
+    where: { id: conversation.id },
+    data: { messages: messages as unknown as Prisma.JsonArray },
+  });
+
+  return {
+    conversationId: conversation.id,
+    message: response,
+  };
+}
+
 export const chatRouter = createTRPCRouter({
   // Get or create today's daily planning conversation
   getDailyConversation: protectedProcedure.query(async ({ ctx }) => {
     const student = await prisma.student.findUnique({
       where: { userId: ctx.session.user.id },
+      include: { preferences: true },
     });
 
     if (!student) throw new Error("Student not found");
 
-    const todayStart = getTodayStart();
-    const todayEnd = getTodayEnd();
+    // Get user's timezone from preferences for timezone-aware date queries
+    const timezone = getUserTimezone(student.preferences);
+    const todayStart = getTodayStartInTimezone(timezone);
+    const todayEnd = getTodayEndInTimezone(timezone);
 
     // Check if daily conversation exists for today
     let conversation = await prisma.conversation.findFirst({
@@ -105,109 +281,17 @@ export const chatRouter = createTRPCRouter({
     .mutation(async ({ input, ctx }) => {
       const student = await prisma.student.findUnique({
         where: { userId: ctx.session.user.id },
-        include: {
-          preferences: true,
-        },
       });
 
       if (!student) throw new Error("Student not found");
 
-      // Get or create daily conversation
-      let conversation;
-      if (input.conversationId) {
-        conversation = await prisma.conversation.findUnique({
-          where: { id: input.conversationId },
-        });
-      }
-
-      if (!conversation) {
-        const todayStart = getTodayStart();
-        const todayEnd = getTodayEnd();
-
-        conversation = await prisma.conversation.findFirst({
-          where: {
-            studentId: student.id,
-            conversationType: ConversationType.daily_planning,
-            dailyConversationDate: {
-              gte: todayStart,
-              lte: todayEnd,
-            },
-          },
-        });
-
-        if (!conversation) {
-          conversation = await prisma.conversation.create({
-            data: {
-              studentId: student.id,
-              conversationType: ConversationType.daily_planning,
-              dailyConversationDate: new Date(),
-              messages: [],
-            },
-          });
-        }
-      }
-
-      // Add user message to history
-      const messages = (conversation.messages as any[]) || [];
-      messages.push({
-        role: "user",
-        content: input.message,
-        timestamp: new Date().toISOString(),
+      return processMessage({
+        studentId: student.id,
+        userId: ctx.session.user.id,
+        message: input.message,
+        conversationType: "daily_planning",
+        conversationId: input.conversationId,
       });
-
-      // Get today's tasks for context
-      const todayStart = getTodayStart();
-      const todayEnd = getTodayEnd();
-      const todayTasks = await prisma.task.findMany({
-        where: {
-          studentId: student.id,
-          createdAt: {
-            gte: todayStart,
-            lte: todayEnd,
-          },
-        },
-        orderBy: { createdAt: "desc" },
-      });
-
-      // Build context for daily planning
-      const currentTime = new Date();
-      const context = {
-        name: student.name,
-        preferences: student.preferences,
-        recentTasks: todayTasks.map((t) => ({
-          description: t.description,
-          category: t.category,
-          completed: t.completed,
-        })),
-        conversationType: "daily_planning" as const,
-        currentTime, // Pass current time for time-aware scheduling
-      };
-
-      // Generate response using ConversationalAI
-      const chatMessages = messages.map((m) => ({
-        role: m.role,
-        content: m.content,
-      }));
-
-      const response = await conversationalAI.chat(chatMessages, context);
-
-      // Add assistant message
-      messages.push({
-        role: "assistant",
-        content: response,
-        timestamp: new Date().toISOString(),
-      });
-
-      // Save conversation
-      await prisma.conversation.update({
-        where: { id: conversation.id },
-        data: { messages },
-      });
-
-      return {
-        conversationId: conversation.id,
-        message: response,
-      };
     }),
 
   // Send message in task-specific context
@@ -222,9 +306,6 @@ export const chatRouter = createTRPCRouter({
     .mutation(async ({ input, ctx }) => {
       const student = await prisma.student.findUnique({
         where: { userId: ctx.session.user.id },
-        include: {
-          preferences: true,
-        },
       });
 
       if (!student) throw new Error("Student not found");
@@ -238,83 +319,14 @@ export const chatRouter = createTRPCRouter({
         throw new Error("Task not found");
       }
 
-      // Get or create task conversation
-      let conversation;
-      if (input.conversationId) {
-        conversation = await prisma.conversation.findUnique({
-          where: { id: input.conversationId },
-        });
-      }
-
-      if (!conversation) {
-        conversation = await prisma.conversation.findFirst({
-          where: {
-            studentId: student.id,
-            conversationType: ConversationType.task_specific,
-            taskId: input.taskId,
-          },
-        });
-
-        if (!conversation) {
-          conversation = await prisma.conversation.create({
-            data: {
-              studentId: student.id,
-              conversationType: ConversationType.task_specific,
-              taskId: input.taskId,
-              messages: [],
-            },
-          });
-        }
-      }
-
-      // Add user message to history
-      const messages = (conversation.messages as any[]) || [];
-      messages.push({
-        role: "user",
-        content: input.message,
-        timestamp: new Date().toISOString(),
+      return processMessage({
+        studentId: student.id,
+        userId: ctx.session.user.id,
+        message: input.message,
+        conversationType: "task_specific",
+        taskId: input.taskId,
+        conversationId: input.conversationId,
       });
-
-      // Build context for task-specific conversation
-      const context = {
-        name: student.name,
-        preferences: student.preferences,
-        task: {
-          id: task.id,
-          description: task.description,
-          complexity: task.complexity,
-          category: task.category,
-          dueDate: task.dueDate,
-          completed: task.completed,
-        },
-        conversationType: ConversationType.task_specific,
-      };
-
-      // Generate response using ConversationalAI
-      const chatMessages = messages.map((m) => ({
-        role: m.role,
-        content: m.content,
-      }));
-
-      const response = await conversationalAI.chat(chatMessages, context);
-
-      // Add assistant message
-      messages.push({
-        role: "assistant",
-        content: response,
-        timestamp: new Date().toISOString(),
-      });
-
-      // Save conversation
-      await prisma.conversation.update({
-        where: { id: conversation.id },
-        data: { messages },
-      });
-
-      return {
-        conversationId: conversation.id,
-        message: response,
-      };
     }),
 
   // Send message and get response (backward compatibility)
@@ -326,113 +338,20 @@ export const chatRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ input, ctx }) => {
-      // Default to daily planning for backward compatibility
-      // Reuse the sendDailyMessage logic
+      // Backward compatibility - defaults to daily planning
       const student = await prisma.student.findUnique({
         where: { userId: ctx.session.user.id },
-        include: {
-          preferences: true,
-        },
       });
 
       if (!student) throw new Error("Student not found");
 
-      // Get or create daily conversation
-      let conversation;
-      if (input.conversationId) {
-        conversation = await prisma.conversation.findUnique({
-          where: { id: input.conversationId },
-        });
-      }
-
-      if (!conversation) {
-        const todayStart = getTodayStart();
-        const todayEnd = getTodayEnd();
-
-        conversation = await prisma.conversation.findFirst({
-          where: {
-            studentId: student.id,
-            conversationType: ConversationType.daily_planning,
-            dailyConversationDate: {
-              gte: todayStart,
-              lte: todayEnd,
-            },
-          },
-        });
-
-        if (!conversation) {
-          conversation = await prisma.conversation.create({
-            data: {
-              studentId: student.id,
-              conversationType: ConversationType.daily_planning,
-              dailyConversationDate: new Date(),
-              messages: [],
-            },
-          });
-        }
-      }
-
-      // Add user message to history
-      const messages = (conversation.messages as any[]) || [];
-      messages.push({
-        role: "user",
-        content: input.message,
-        timestamp: new Date().toISOString(),
+      return processMessage({
+        studentId: student.id,
+        userId: ctx.session.user.id,
+        message: input.message,
+        conversationType: "daily_planning",
+        conversationId: input.conversationId,
       });
-
-      // Get today's tasks for context
-      const todayStart = getTodayStart();
-      const todayEnd = getTodayEnd();
-      const todayTasks = await prisma.task.findMany({
-        where: {
-          studentId: student.id,
-          createdAt: {
-            gte: todayStart,
-            lte: todayEnd,
-          },
-        },
-        orderBy: { createdAt: "desc" },
-      });
-
-      // Build context for daily planning
-      const currentTime = new Date();
-      const context = {
-        name: student.name,
-        preferences: student.preferences,
-        recentTasks: todayTasks.map((t) => ({
-          description: t.description,
-          category: t.category,
-          completed: t.completed,
-        })),
-        conversationType: "daily_planning" as const,
-        currentTime, // Pass current time for time-aware scheduling
-      };
-
-      // Generate response using ConversationalAI
-      const chatMessages = messages.map((m) => ({
-        role: m.role,
-        content: m.content,
-      }));
-
-      const response = await conversationalAI.chat(chatMessages, context);
-
-      // Add assistant message
-      messages.push({
-        role: "assistant",
-        content: response,
-        timestamp: new Date().toISOString(),
-      });
-
-      // Save conversation
-      await prisma.conversation.update({
-        where: { id: conversation.id },
-        data: { messages },
-      });
-
-      return {
-        conversationId: conversation.id,
-        message: response,
-      };
     }),
 
   // Get conversation history
@@ -479,13 +398,15 @@ export const chatRouter = createTRPCRouter({
   getCurrent: protectedProcedure.query(async ({ ctx }) => {
     const student = await prisma.student.findUnique({
       where: { userId: ctx.session.user.id },
+      include: { preferences: true },
     });
 
     if (!student) throw new Error("Student not found");
 
-    // Default to today's daily planning conversation
-    const todayStart = getTodayStart();
-    const todayEnd = getTodayEnd();
+    // Get user's timezone from preferences for timezone-aware date queries
+    const timezone = getUserTimezone(student.preferences);
+    const todayStart = getTodayStartInTimezone(timezone);
+    const todayEnd = getTodayEndInTimezone(timezone);
 
     // Check if daily conversation exists for today
     let conversation = await prisma.conversation.findFirst({

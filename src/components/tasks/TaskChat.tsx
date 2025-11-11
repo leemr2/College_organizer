@@ -6,12 +6,7 @@ import { MessageBubble } from "../chat/MessageBubble";
 import { VoiceInput } from "../chat/VoiceInput";
 import { toast } from "react-toastify";
 import { ChevronDown, ChevronUp } from "lucide-react";
-
-interface Message {
-  role: "user" | "assistant";
-  content: string;
-  timestamp?: string | Date;
-}
+import { Message } from "@/lib/types";
 
 interface TaskChatProps {
   taskId: string;
@@ -35,7 +30,7 @@ export function TaskChat({ taskId, taskDescription }: TaskChatProps) {
       setConversationId(conversation.id);
       // Load existing messages
       if (conversation.messages && Array.isArray(conversation.messages)) {
-        const loadedMessages = (conversation.messages as any[]).map((m) => ({
+        const loadedMessages = (conversation.messages as unknown as Message[]).map((m) => ({
           role: m.role,
           content: m.content,
           timestamp: m.timestamp,
@@ -53,7 +48,7 @@ export function TaskChat({ taskId, taskDescription }: TaskChatProps) {
         {
           role: "assistant",
           content: data.message,
-          timestamp: new Date(),
+          timestamp: new Date().toISOString(),
         },
       ]);
       setIsLoading(false);
@@ -71,7 +66,7 @@ export function TaskChat({ taskId, taskDescription }: TaskChatProps) {
     const userMessage: Message = {
       role: "user",
       content: text,
-      timestamp: new Date(),
+      timestamp: new Date().toISOString(),
     };
     setMessages((prev) => [...prev, userMessage]);
     setIsLoading(true);
@@ -123,15 +118,17 @@ export function TaskChat({ taskId, taskDescription }: TaskChatProps) {
             <p>How can I help you with this task?</p>
           </div>
         )}
-        {messages.map((message, index) => (
-          <div key={index} className="text-sm">
-            <MessageBubble
-              role={message.role}
-              content={message.content}
-              timestamp={message.timestamp}
-            />
-          </div>
-        ))}
+        {messages
+          .filter((message) => message.role !== "system")
+          .map((message, index) => (
+            <div key={index} className="text-sm">
+              <MessageBubble
+                role={message.role as "user" | "assistant"}
+                content={message.content}
+                timestamp={message.timestamp}
+              />
+            </div>
+          ))}
         {isLoading && (
           <div className="flex justify-start">
             <div className="bg-gray-100 dark:bg-gray-800 rounded-lg px-3 py-2">

@@ -5,7 +5,10 @@ const sendFn = inngest.createFunction(
   { name: "inngest/send", id: "inngest/send" },
   { event: "inngest/send" },
   async ({ event }) => {
-    console.log("inngest/send", event);
+    if (process.env.NODE_ENV === 'development') {
+      // eslint-disable-next-line no-console
+      console.log("[Inngest] Event:", event);
+    }
   },
 );
 

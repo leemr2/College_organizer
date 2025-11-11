@@ -71,7 +71,7 @@ export const adminRouter = createTRPCRouter({
         })
         .optional()
     )
-    .query(async ({ input, ctx }) => {
+    .query(async ({ input }) => {
       const where = input?.status ? { status: input.status } : {};
       return await prisma.accessRequest.findMany({
         where,
@@ -129,7 +129,7 @@ export const adminRouter = createTRPCRouter({
       // Send approval email (don't fail if email fails)
       try {
         await sendAccessApprovedEmail(request.email);
-      } catch (error) {
+      } catch {
         // Continue even if email fails
       }
 

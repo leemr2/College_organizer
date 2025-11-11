@@ -22,7 +22,7 @@ export function MessageBubble({ role, content, timestamp }: MessageBubbleProps) 
     try {
       await navigator.clipboard.writeText(content);
       toast.success("Copied to clipboard!");
-    } catch (error) {
+    } catch {
       toast.error("Failed to copy to clipboard");
     }
   };

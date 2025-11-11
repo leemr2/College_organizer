@@ -90,16 +90,6 @@ export function AdminDashboard() {
       (r: { id: string; email: string; status: string; requestedAt: Date }) =>
         r.status === "pending"
     ) || [];
-  const approvedRequests =
-    accessRequests?.filter(
-      (r: { id: string; email: string; status: string; requestedAt: Date }) =>
-        r.status === "approved"
-    ) || [];
-  const rejectedRequests =
-    accessRequests?.filter(
-      (r: { id: string; email: string; status: string; requestedAt: Date }) =>
-        r.status === "rejected"
-    ) || [];
 
   return (
     <div className="space-y-8">

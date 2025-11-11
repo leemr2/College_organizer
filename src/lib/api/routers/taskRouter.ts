@@ -2,6 +2,7 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { prisma } from "@/lib/db";
 import { conversationalAI } from "@/lib/ai/conversational";
+import { getUserTimezone, getDateStartInTimezone, getDateEndInTimezone } from "@/lib/utils/timezone";
 
 export const taskRouter = createTRPCRouter({
   // Extract tasks from natural language input
@@ -20,7 +21,7 @@ export const taskRouter = createTRPCRouter({
 
       // Create tasks in database
       const createdTasks = await prisma.$transaction(
-        tasks.map((task: any) =>
+        tasks.map((task) =>
           prisma.task.create({
             data: {
               studentId: student.id,
@@ -38,7 +39,7 @@ export const taskRouter = createTRPCRouter({
   // Generate clarification questions for a task
   getClarificationQuestions: protectedProcedure
     .input(z.object({ taskId: z.string() }))
-    .query(async ({ input, ctx }) => {
+    .query(async ({ input }) => {
       const task = await prisma.task.findUnique({
         where: { id: input.taskId },
         include: { student: true },
@@ -61,6 +62,7 @@ export const taskRouter = createTRPCRouter({
         recentTasks: recentTasks.map((t) => ({
           description: t.description,
           category: t.category,
+          completed: t.completed,
         })),
       };
 
@@ -101,23 +103,32 @@ export const taskRouter = createTRPCRouter({
       try {
         const student = await prisma.student.findUnique({
           where: { userId: ctx.session.user.id },
+          include: {
+            preferences: true, // Include preferences to get timezone
+          },
         });
 
         if (!student) throw new Error("Student not found");
 
-        const startOfDay = new Date(input.date);
-        startOfDay.setHours(0, 0, 0, 0);
+        // Get user's timezone from preferences
+        const timezone = getUserTimezone(student.preferences);
 
-        const endOfDay = new Date(input.date);
-        endOfDay.setHours(23, 59, 59, 999);
+        // Get start/end of the specified date in user's timezone (returns UTC dates for DB comparison)
+        const startOfDay = getDateStartInTimezone(input.date, timezone);
+        const endOfDay = getDateEndInTimezone(input.date, timezone);
 
         const tasks = await prisma.task.findMany({
           where: {
             studentId: student.id,
             OR: [
+              // Tasks due on the specified date in user's timezone
               { dueDate: { gte: startOfDay, lte: endOfDay } },
+              // Tasks created on the specified date in user's timezone that have no dueDate
               {
-                createdAt: { gte: startOfDay, lte: endOfDay },
+                AND: [
+                  { createdAt: { gte: startOfDay, lte: endOfDay } },
+                  { dueDate: null },
+                ],
               },
             ],
           },

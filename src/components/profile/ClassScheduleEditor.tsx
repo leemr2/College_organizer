@@ -7,7 +7,7 @@ import { api } from "@/lib/trpc/react";
 import { toast } from "react-toastify";
 import { WeekCalendar } from "@/components/calendar/WeekCalendar";
 import { TimeBlockEditor } from "@/components/calendar/TimeBlockEditor";
-import { TimeBlock, TimeBlockType } from "@/lib/types/calendar";
+import { TimeBlock, TimeBlockType, MeetingTime } from "@/lib/types/calendar";
 
 export function ClassScheduleEditor() {
   const { data: student, isLoading, refetch } = api.student.me.useQuery();
@@ -62,7 +62,7 @@ export function ClassScheduleEditor() {
       id: schedule.id,
       title: schedule.courseName,
       type: "class" as TimeBlockType,
-      meetingTimes: (schedule.meetingTimes as any[]) || [],
+      meetingTimes: (schedule.meetingTimes as unknown as MeetingTime[]) || [],
       courseCode: schedule.courseCode || undefined,
       professor: schedule.professor || undefined,
       semester: schedule.semester,
@@ -81,7 +81,7 @@ export function ClassScheduleEditor() {
         id: schedule.id,
         title: schedule.courseName,
         type: "class",
-        meetingTimes: (schedule.meetingTimes as any[]) || [],
+        meetingTimes: (schedule.meetingTimes as unknown as MeetingTime[]) || [],
         courseCode: schedule.courseCode || undefined,
         professor: schedule.professor || undefined,
         semester: schedule.semester,
@@ -159,7 +159,7 @@ export function ClassScheduleEditor() {
           </h3>
           <div className="space-y-2">
             {student.classSchedules.map((schedule) => {
-              const meetingTimes = (schedule.meetingTimes as any[]) || [];
+              const meetingTimes = (schedule.meetingTimes as unknown as MeetingTime[]) || [];
               return (
                 <div
                   key={schedule.id}

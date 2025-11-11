@@ -15,7 +15,7 @@ The product's core innovation is its **tool discovery and optimization engine** 
 
 > 📖 For detailed product requirements and feature specifications, see [PRD-Kiras-Scout.md](./PRD-Kiras-Scout.md)
 
-## ✨ Current Features (Phase 1 MVP)
+## ✨ Current Features (Phase 1 & 2)
 
 ### 🗣️ Daily Check-In & Task Capture
 - Voice-to-text input using Web Speech API
@@ -34,8 +34,17 @@ The product's core innovation is its **tool discovery and optimization engine** 
 - Task creation and tracking
 - Complexity classification (simple, medium, complex)
 - Due date management
-- Completion tracking
+- Completion tracking with effectiveness ratings
 - **Task-specific conversations**: Chat directly within each task to get help, ask clarifying questions, or discuss task details. Each task maintains its own conversation history separate from daily planning chats.
+- **Effectiveness tracking**: Rate task completion effectiveness (1-5 stars), track time spent, and add notes for learning
+
+### 🛠️ Tool Discovery & Recommendations (Phase 2)
+- **AI-powered tool recommendations**: Get personalized tool suggestions based on task type and context
+- **Tool database**: 20+ curated productivity tools, study apps, and techniques
+- **On-demand recommendations**: Request tool suggestions directly in task chat
+- **Proactive suggestions**: Automatic tool recommendations when task effectiveness is poor (<3 stars)
+- **Tool adoption tracking**: Track which tools you're using, trying, or have abandoned
+- **Tool management**: View tools you're using and recommended tools on dashboard
 
 ### 👤 Student Profiles & Onboarding
 - Personalized onboarding flow
@@ -51,6 +60,7 @@ The product's core innovation is its **tool discovery and optimization engine** 
 - Today's tasks view
 - Quick navigation to chat and tasks
 - Week calendar view (ready for Phase 3 scheduling integration)
+- **Tools section**: View tools you're using and recommended tools
 
 ## 🏗️ Technical Architecture
 
@@ -200,6 +210,10 @@ Key models:
 - **Conversation** - Chat history (daily planning and task-specific)
 - **ClassSchedule** - Course information with recurring meeting times (editable via profile)
 - **StudentPreferences** - Study preferences and patterns (editable via profile)
+- **Tool** - Productivity tools and study techniques database (Phase 2)
+- **StudentTool** - Student-tool relationships and adoption tracking (Phase 2)
+- **ToolSuggestion** - Tool recommendation records (Phase 2)
+- **EffectivenessLog** - Task completion effectiveness tracking (Phase 2)
 
 See `prisma/schema.prisma` for the complete schema.
 
@@ -234,7 +248,7 @@ This application is optimized for deployment on [Vercel](https://vercel.com).
 
 Based on the PRD, Scout is being developed in phases:
 
-### ✅ Phase 1: MVP Core (Current)
+### ✅ Phase 1: MVP Core (Completed)
 - User authentication and onboarding
 - Daily check-in chat interface
 - Voice-to-text input
@@ -244,13 +258,15 @@ Based on the PRD, Scout is being developed in phases:
 - Profile update system with visual calendar for class schedules
 - Week calendar components (ready for Phase 3 scheduling)
 
-### 🔄 Phase 2: Intelligence Layer (Next)
-- Tool research integration (Claude + web search)
-- Tool database and recommendation engine
-- Advanced clarification questions
-- Memory system basics
-- Effectiveness tracking
-- Enhanced dashboard
+### ✅ Phase 2: Intelligence Layer (Completed)
+- Tool database and recommendation engine (20+ tools)
+- AI-powered tool recommendations (GPT-5)
+- On-demand tool suggestions in task chat
+- Proactive tool suggestions when effectiveness is poor
+- Effectiveness tracking (1-5 star ratings, time spent, notes)
+- Tool adoption tracking (using, trying, abandoned)
+- Enhanced dashboard with tools section
+- Enhanced clarification questions with tool awareness
 
 ### 📅 Phase 3: Scheduling & Proactive (Planned)
 - Intelligent time block generation

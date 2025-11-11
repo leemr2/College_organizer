@@ -154,11 +154,27 @@ export const taskRouter = createTRPCRouter({
       z.object({
         taskId: z.string(),
         effectiveness: z.number().min(1).max(5).optional(),
+        timeSpent: z.number().optional(),
         notes: z.string().optional(),
       })
     )
-    .mutation(async ({ input }) => {
-      const task = await prisma.task.update({
+    .mutation(async ({ input, ctx }) => {
+      const student = await prisma.student.findUnique({
+        where: { userId: ctx.session.user.id },
+      });
+
+      if (!student) throw new Error("Student not found");
+
+      const task = await prisma.task.findUnique({
+        where: { id: input.taskId },
+      });
+
+      if (!task || task.studentId !== student.id) {
+        throw new Error("Task not found");
+      }
+
+      // Update task completion
+      const updatedTask = await prisma.task.update({
         where: { id: input.taskId },
         data: {
           completed: true,
@@ -166,7 +182,28 @@ export const taskRouter = createTRPCRouter({
         },
       });
 
-      return task;
+      // Create effectiveness log if effectiveness rating provided
+      if (input.effectiveness !== undefined) {
+        await prisma.effectivenessLog.create({
+          data: {
+            studentId: student.id,
+            taskId: input.taskId,
+            effectiveness: input.effectiveness,
+            timeSpent: input.timeSpent,
+            completed: true,
+            notes: input.notes,
+          },
+        });
+
+        // Trigger proactive tool suggestion if effectiveness is poor (<3)
+        if (input.effectiveness < 3) {
+          // This will be handled asynchronously - we'll add a background job or
+          // handle it in the chat router when student asks for help
+          // For now, we'll just return the task and let the frontend handle it
+        }
+      }
+
+      return updatedTask;
     }),
 
   // Get task by ID

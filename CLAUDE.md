@@ -93,6 +93,31 @@ npm run build-storybook  # Build Storybook for deployment
 - Supports multiple meeting times per class (e.g., MWF classes)
 - Editable via profile settings with visual week calendar
 
+**Tool** (Phase 2): Productivity tools and study techniques database
+- Stores tool metadata: name, category, description, useCases, cost, learningCurve, website, features
+- Tools loaded from JSON database (`src/lib/data/tools.json`) and synced to database on first use
+- Relations: studentTools, toolSuggestions
+
+**StudentTool** (Phase 2): Student-tool relationship tracking
+- `adoptedStatus`: "suggested" | "trying" | "using" | "abandoned"
+- `effectivenessRating`: 1-5 rating (optional)
+- `featuresDiscovered`: JSON array of discovered features
+- `notes`: Student feedback
+- Tracks which tools student has seen, tried, or adopted
+
+**ToolSuggestion** (Phase 2): Tool recommendation records
+- Links student, task, and tool
+- `context`: Why the tool was suggested
+- `studentResponse`: "interested" | "not_interested" | "already_using" | null
+- `followUpScheduled`: Boolean for future follow-up
+
+**EffectivenessLog** (Phase 2): Task completion effectiveness tracking
+- `effectiveness`: 1-5 rating
+- `timeSpent`: Minutes spent (optional)
+- `completed`: Boolean
+- `notes`: Student notes about what worked/didn't work
+- Used for learning patterns and triggering proactive tool suggestions
+
 ### AI Chat Flow Pattern
 
 ```typescript
@@ -175,22 +200,31 @@ src/
 │   ├── onboarding/       # Onboarding flow components
 │   ├── profile/          # Profile editing components
 │   ├── tasks/            # Task management components
+│   │   ├── TaskCard.tsx
+│   │   ├── TaskChat.tsx  # Task-specific chat with tool recommendations (Phase 2)
+│   │   ├── TaskCompletion.tsx  # Task completion with effectiveness tracking (Phase 2)
+│   │   └── ToolRecommendation.tsx  # Tool suggestion UI component (Phase 2)
 │   └── ui/               # Shared UI primitives
 ├── lib/
 │   ├── ai/               # AI integration
-│   │   └── conversational.ts  # ConversationalAI class
+│   │   ├── conversational.ts  # ConversationalAI class
+│   │   └── toolRecommendation.ts  # ToolRecommendationService (Phase 2)
 │   ├── api/              # tRPC setup
-│   │   ├── routers/      # tRPC routers (chat, task, student)
-│   │   │   └── studentRouter.ts  # Profile updates, class schedule CRUD
+│   │   ├── routers/      # tRPC routers (chat, task, student, tool)
+│   │   │   ├── studentRouter.ts  # Profile updates, class schedule CRUD
+│   │   │   └── toolRouter.ts  # Tool operations (Phase 2)
 │   │   ├── root.ts       # Router composition
 │   │   └── trpc.ts       # tRPC config
 │   ├── auth/             # NextAuth configuration
+│   ├── data/             # Static data files
+│   │   └── tools.json    # Tool database (Phase 2)
 │   ├── trpc/             # tRPC client setup
 │   ├── types/            # TypeScript type definitions
 │   │   └── calendar.ts   # Calendar and time block types
 │   ├── utils/            # Shared utilities
 │   │   ├── shared.ts     # Client-side utilities (time formatting, date helpers)
-│   │   └── server.ts     # Server-side utilities
+│   │   ├── server.ts     # Server-side utilities
+│   │   └── toolDatabase.ts  # Tool database utilities (Phase 2)
 │   ├── aiClient.ts       # AI provider facade
 │   └── db.ts             # Prisma client
 └── stories/              # Storybook stories
@@ -223,6 +257,38 @@ import "./styles.css";                      // Styles
 - Use `parseJsonResponse()` when expecting JSON from AI models
 - Handle AI errors gracefully with try-catch and user-friendly messages
 - Store conversation history in database for context continuity
+
+### Tool Recommendation Patterns (Phase 2)
+
+**Tool Database**:
+- Tools stored in `src/lib/data/tools.json` (20+ tools across 7 categories)
+- Loaded via `src/lib/utils/toolDatabase.ts` utility functions
+- Tools synced to database on first suggestion (lazy loading)
+
+**Tool Recommendation Flow**:
+```typescript
+// 1. Get tool recommendations for a task
+const recommendations = await api.tool.recommend.query({ taskId });
+
+// 2. Display recommendations in UI (ToolRecommendation component)
+// 3. Student responds: "interested", "not_interested", or "already_using"
+// 4. Record suggestion and update StudentTool relationship
+await api.tool.recordSuggestion.mutate({ taskId, toolId, context });
+await api.tool.updateStudentTool.mutate({ toolId, adoptedStatus: "trying" });
+```
+
+**Proactive Suggestions**:
+- Triggered when task effectiveness rating < 3 stars
+- Displayed in TaskCompletion component after poor rating
+- Uses same recommendation service but with context of poor performance
+
+**Tool Router Procedures**:
+- `tool.search`: Search tools by category, keyword, learning curve
+- `tool.recommend`: Get AI-powered recommendations for a task
+- `tool.recordSuggestion`: Save tool suggestion record
+- `tool.updateStudentTool`: Update adoption status (suggested/trying/using/abandoned)
+- `tool.getStudentTools`: Get tools student is using/trying
+- `tool.getSuggestedTools`: Get recent tool suggestions
 
 ## Environment Setup
 
@@ -472,9 +538,9 @@ Before considering documentation complete:
 4. **Ensure consistency** across all documentation files
 5. **Test code examples** if included in documentation
 
-## Current Phase: MVP (Phase 1)
+## Current Phase: Intelligence Layer (Phase 2)
 
-Completed features:
+Completed features (Phase 1):
 - ✅ User authentication and onboarding
 - ✅ Daily check-in chat interface with voice input
 - ✅ Task capture and AI classification
@@ -486,12 +552,23 @@ Completed features:
 - ✅ Calendar components: WeekCalendar (M-Sunday, 6am-10pm) and TimeBlockEditor for managing recurring class schedules
 - ✅ Class schedule management: Full CRUD operations with visual week calendar view
 
-Next phase (Phase 2 - Intelligence Layer):
-- Tool research integration (Claude + web search)
-- Tool database and recommendation engine
-- Advanced clarification questions
-- Memory system for pattern recognition
-- Effectiveness tracking
+Completed features (Phase 2):
+- ✅ Tool database: 20+ curated productivity tools stored in JSON (`src/lib/data/tools.json`)
+- ✅ Tool recommendation service: AI-powered tool matching using GPT-5 (`src/lib/ai/toolRecommendation.ts`)
+- ✅ Tool router: tRPC procedures for tool operations (`src/lib/api/routers/toolRouter.ts`)
+- ✅ On-demand tool recommendations: Request tools in task chat via "Get tool recommendations" button
+- ✅ Proactive tool suggestions: Automatic recommendations when task effectiveness < 3 stars
+- ✅ Effectiveness tracking: 1-5 star ratings, time spent, notes on task completion
+- ✅ Tool adoption tracking: Track tools (suggested, trying, using, abandoned) via StudentTool model
+- ✅ Enhanced conversational AI: Tool recommendation awareness in task-specific chats
+- ✅ Dashboard tools section: Display tools being used and recommended tools
+
+Next phase (Phase 3 - Scheduling & Proactive):
+- Intelligent time block generation
+- Schedule optimization algorithm
+- Proactive check-ins during study blocks
+- End of day review
+- Pattern recognition
 
 Phase 3 preparation:
 - Calendar components designed for ScheduleBlock integration

@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import { api } from "@/lib/trpc/react";
 import { MessageBubble } from "../chat/MessageBubble";
 import { VoiceInput } from "../chat/VoiceInput";
+import { ToolRecommendation } from "./ToolRecommendation";
 import { toast } from "react-toastify";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, Lightbulb } from "lucide-react";
 import { Message } from "@/lib/types";
 
 interface TaskChatProps {
@@ -18,6 +19,14 @@ export function TaskChat({ taskId, taskDescription }: TaskChatProps) {
   const [conversationId, setConversationId] = useState<string | undefined>();
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [showToolRecommendations, setShowToolRecommendations] = useState(false);
+
+  // Fetch tool recommendations
+  const { data: toolRecommendations, refetch: refetchRecommendations } =
+    api.tool.recommend.useQuery(
+      { taskId },
+      { enabled: isExpanded && showToolRecommendations }
+    );
 
   // Get or create task conversation
   const { data: conversation } = api.chat.getTaskConversation.useQuery(
@@ -111,11 +120,45 @@ export function TaskChat({ taskId, taskDescription }: TaskChatProps) {
         </button>
       </div>
 
+      {/* Tool Recommendations Section */}
+      {showToolRecommendations && toolRecommendations && toolRecommendations.length > 0 && (
+        <div className="mb-3 space-y-3">
+          {toolRecommendations.map((rec) => (
+            <ToolRecommendation
+              key={rec.toolId}
+              toolId={rec.toolId}
+              toolName={rec.tool.name}
+              description={rec.tool.description}
+              reason={rec.reason}
+              website={rec.tool.website}
+              learningCurve={rec.learningCurve}
+              howToGetStarted={rec.howToGetStarted}
+              taskId={taskId}
+              onResponse={() => {
+                refetchRecommendations();
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Get Tool Recommendations Button */}
+      {!showToolRecommendations && (
+        <button
+          onClick={() => setShowToolRecommendations(true)}
+          className="mb-3 w-full flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 border border-purple-200 dark:border-purple-800 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors"
+        >
+          <Lightbulb size={16} />
+          <span>Get tool recommendations</span>
+        </button>
+      )}
+
       {/* Compact Message List */}
       <div className="max-h-64 overflow-y-auto mb-3 space-y-2 px-2">
-        {messages.length === 0 && (
+        {messages.length === 0 && !showToolRecommendations && (
           <div className="text-center py-4 text-sm text-gray-500 dark:text-gray-400">
             <p>How can I help you with this task?</p>
+            <p className="mt-2 text-xs">Ask for help or get tool recommendations!</p>
           </div>
         )}
         {messages

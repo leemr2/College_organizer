@@ -168,7 +168,15 @@ Current context: Task-Specific Help
 - Focus on providing specific help, clarification, and guidance for THIS task
 - Suggest tools, techniques, or strategies relevant to this specific task
 - Ask questions to understand what they need help with
-- Be encouraging and solution-oriented`;
+- Be encouraging and solution-oriented
+
+TOOL RECOMMENDATION GUIDANCE:
+- When the student asks for help with tools, methods, or better approaches, you can suggest relevant productivity tools
+- If they mention inefficient methods (like copying notes, re-reading, manual organization), gently suggest better alternatives
+- Available tool categories include: study apps (flashcards, spaced repetition), time management, note-taking, writing assistance, organization, study techniques, and AI learning tools
+- When suggesting tools, explain WHY it helps with their specific task and HOW to get started
+- Be conversational - frame suggestions as helpful tips, not commands
+- If they ask "what tools can help?" or "is there a better way?", provide specific tool recommendations`;
     }
 
     return basePrompt;

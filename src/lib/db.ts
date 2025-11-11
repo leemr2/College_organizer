@@ -10,7 +10,7 @@ if (!process.env.DATABASE_URL) {
 }
 
 // Log connection info in development (without exposing password)
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development' && process.env.DEBUG_DB) {
   const dbUrl = process.env.DATABASE_URL;
   const maskedUrl = dbUrl.replace(/:[^:@]+@/, ':***@');
   console.log('[Prisma] Connecting to database:', maskedUrl);

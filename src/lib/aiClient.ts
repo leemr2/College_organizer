@@ -135,7 +135,7 @@ export async function generateGeminiWebResponse(
   const modelId = AI_MODELS[model];
   const geminiModel = genAI.getGenerativeModel({
     model: modelId,
-    // @ts-ignore
+    // @ts-expect-error - Gemini SDK types don't include googleSearch tool definition yet
     tools: ground ? [{ googleSearch: {} }] : undefined,
   });
 

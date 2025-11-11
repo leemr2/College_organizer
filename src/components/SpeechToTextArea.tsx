@@ -121,12 +121,10 @@ export const SpeechToTextArea = forwardRef<
       mediaRecorderRef.current = new MediaRecorder(stream, { mimeType });
 
       mediaRecorderRef.current.ondataavailable = (event: BlobEvent) => {
-        console.log("Data available:", event.data.size);
         audioChunksRef.current.push(event.data);
       };
 
       mediaRecorderRef.current.onstop = async () => {
-        console.log("Recorder stopped");
         if (audioCtxRef.current) {
           await audioCtxRef.current.close();
           audioCtxRef.current = null;
@@ -137,7 +135,6 @@ export const SpeechToTextArea = forwardRef<
         setWaveformActive(false);
 
         const audioBlob = new Blob(audioChunksRef.current, { type: mimeType });
-        console.log("Audio Blob size:", audioBlob.size);
 
         if (audioBlob.size === 0) {
           console.error("Audio Blob is empty.");
@@ -171,7 +168,6 @@ export const SpeechToTextArea = forwardRef<
       try {
         const formData = new FormData();
         formData.append("file", audioBlob, "audio.webm");
-        console.log("FormData file size:", audioBlob.size);
 
         const response = await fetch("/api/transcribe", {
           method: "POST",

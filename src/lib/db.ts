@@ -13,6 +13,7 @@ if (!process.env.DATABASE_URL) {
 if (process.env.NODE_ENV === 'development' && process.env.DEBUG_DB) {
   const dbUrl = process.env.DATABASE_URL;
   const maskedUrl = dbUrl.replace(/:[^:@]+@/, ':***@');
+  // eslint-disable-next-line no-console
   console.log('[Prisma] Connecting to database:', maskedUrl);
 }
 

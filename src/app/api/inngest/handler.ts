@@ -6,6 +6,7 @@ const sendFn = inngest.createFunction(
   { event: "inngest/send" },
   async ({ event }) => {
     if (process.env.NODE_ENV === 'development') {
+      // eslint-disable-next-line no-console
       console.log("[Inngest] Event:", event);
     }
   },

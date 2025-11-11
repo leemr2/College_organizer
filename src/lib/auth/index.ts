@@ -227,7 +227,7 @@ export const authOptions: NextAuthOptions = {
         return session;
       }
     },
-    async jwt({ token, user, account }) {
+    async jwt({ token, user, account: _account }) {
       // Store user info in token for credentials provider
       if (user) {
         token.sub = user.id;

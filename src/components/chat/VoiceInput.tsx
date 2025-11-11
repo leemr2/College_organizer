@@ -1,8 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { Mic, MicOff } from "lucide-react";
-import { motion } from "framer-motion";
+import { useState } from "react";
 import SpeechToTextArea from "@/components/SpeechToTextArea";
 
 interface VoiceInputProps {
@@ -14,8 +12,8 @@ interface VoiceInputProps {
 
 export function VoiceInput({
   onTranscript,
-  onStart,
-  onStop,
+  onStart: _onStart,
+  onStop: _onStop,
   disabled,
 }: VoiceInputProps) {
   const [value, setValue] = useState("");

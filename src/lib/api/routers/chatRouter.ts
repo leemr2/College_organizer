@@ -4,7 +4,8 @@ import { prisma } from "@/lib/db";
 import { conversationalAI } from "@/lib/ai/conversational";
 import { getTodayStart, getTodayEnd } from "@/lib/utils/dailyDetection";
 import { getUserTimezone, getTodayStartInTimezone, getTodayEndInTimezone } from "@/lib/utils/timezone";
-import { Message, MessageArray, StudentContext, TaskSummary } from "@/lib/types";
+import { Message, StudentContext, TaskSummary } from "@/lib/types";
+import type { Prisma } from "@prisma/client";
 
 // ConversationType enum values
 const ConversationType = {
@@ -94,7 +95,7 @@ async function processMessage(params: ProcessMessageParams) {
   }
 
   // Add user message to history
-  const messages = ((conversation.messages as unknown) as MessageArray) || [];
+  const messages = ((conversation.messages as unknown) as Message[]) || [];
   messages.push({
     role: "user",
     content: message,
@@ -174,7 +175,7 @@ async function processMessage(params: ProcessMessageParams) {
   // Save conversation
   await prisma.conversation.update({
     where: { id: conversation.id },
-    data: { messages: messages as any },
+    data: { messages: messages as unknown as Prisma.JsonArray },
   });
 
   return {

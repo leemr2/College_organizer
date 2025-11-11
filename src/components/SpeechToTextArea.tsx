@@ -9,7 +9,6 @@ import {
   faMicrophone,
   faStop,
   faSpinner,
-  faUpload,
 } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
@@ -60,7 +59,6 @@ export const SpeechToTextArea = forwardRef<
 
     const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
     const [isTranscribing, setIsTranscribing] = useState(false);
-    const [isUploading, setIsUploading] = useState(false);
 
     const startRecording = async () => {
       let stream = mediaStream;
@@ -195,9 +193,10 @@ export const SpeechToTextArea = forwardRef<
           return null;
         }
         return data.text.trim();
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error("Transcription error:", error);
-        const errorMessage = error?.message || "An error occurred during transcription";
+        const err = error as { message?: string };
+        const errorMessage = err?.message || "An error occurred during transcription";
         toast.error(errorMessage);
         return null;
       } finally {
@@ -324,7 +323,7 @@ export const SpeechToTextArea = forwardRef<
               } transform text-xl dark:text-gray-300 dark:hover:text-gray-500`}
               onClick={isRecording ? stopRecording : startRecording}
               aria-label={isRecording ? "Stop recording" : "Start recording"}
-              disabled={isTranscribing || isUploading}
+              disabled={isTranscribing}
             >
               {isTranscribing ? (
                 <FontAwesomeIcon icon={faSpinner} spin />
@@ -342,7 +341,7 @@ export const SpeechToTextArea = forwardRef<
                   waveformActive ? "hidden" : ""
                 } flex h-8 w-8 items-center justify-center rounded-full bg-aurora-500 text-white transition-colors hover:bg-aurora-600 focus-visible:outline-none disabled:bg-gray-300 dark:bg-sky-600 dark:hover:bg-sky-700 dark:disabled:bg-gray-600`}
                 disabled={
-                  !value.trim() || isLoading || waveformActive || isUploading
+                  !value.trim() || isLoading || waveformActive
                 }
                 onClick={(e) => {
                   e.preventDefault();

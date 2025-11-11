@@ -42,7 +42,7 @@ export function TaskCompletion({ taskId, onComplete }: TaskCompletionProps) {
         effectiveness: effectiveness,
         notes: notes || undefined,
       });
-    } catch (error) {
+    } catch {
       // Error handled in mutation
     }
   };

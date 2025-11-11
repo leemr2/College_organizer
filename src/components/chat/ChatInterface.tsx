@@ -5,12 +5,7 @@ import { api } from "@/lib/trpc/react";
 import { MessageList } from "./MessageList";
 import { VoiceInput } from "./VoiceInput";
 import { toast } from "react-toastify";
-
-interface Message {
-  role: "user" | "assistant";
-  content: string;
-  timestamp?: string | Date;
-}
+import { Message } from "@/lib/types";
 
 interface ChatInterfaceProps {
   conversationType?: "daily_planning" | "task_specific";
@@ -40,7 +35,7 @@ export function ChatInterface({ conversationType = "daily_planning", taskId }: C
       setConversationId(conversation.id);
       // Load existing messages
       if (conversation.messages && Array.isArray(conversation.messages)) {
-        const loadedMessages = (conversation.messages as any[]).map((m) => ({
+        const loadedMessages = (conversation.messages as unknown as Message[]).map((m) => ({
           role: m.role,
           content: m.content,
           timestamp: m.timestamp,
@@ -58,7 +53,7 @@ export function ChatInterface({ conversationType = "daily_planning", taskId }: C
         {
           role: "assistant",
           content: data.message,
-          timestamp: new Date(),
+          timestamp: new Date().toISOString(),
         },
       ]);
       setIsLoading(false);
@@ -77,7 +72,7 @@ export function ChatInterface({ conversationType = "daily_planning", taskId }: C
         {
           role: "assistant",
           content: data.message,
-          timestamp: new Date(),
+          timestamp: new Date().toISOString(),
         },
       ]);
       setIsLoading(false);
@@ -107,7 +102,7 @@ export function ChatInterface({ conversationType = "daily_planning", taskId }: C
     const userMessage: Message = {
       role: "user",
       content: text,
-      timestamp: new Date(),
+      timestamp: new Date().toISOString(),
     };
     setMessages((prev) => [...prev, userMessage]);
     setIsLoading(true);

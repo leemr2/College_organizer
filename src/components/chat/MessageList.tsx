@@ -2,12 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { MessageBubble } from "./MessageBubble";
-
-interface Message {
-  role: "user" | "assistant";
-  content: string;
-  timestamp?: string | Date;
-}
+import { Message } from "@/lib/types";
 
 interface MessageListProps {
   messages: Message[];
@@ -31,14 +26,16 @@ export function MessageList({ messages, isLoading }: MessageListProps) {
           </div>
         </div>
       )}
-      {messages.map((message, index) => (
-        <MessageBubble
-          key={index}
-          role={message.role}
-          content={message.content}
-          timestamp={message.timestamp}
-        />
-      ))}
+      {messages
+        .filter((message) => message.role !== "system")
+        .map((message, index) => (
+          <MessageBubble
+            key={index}
+            role={message.role as "user" | "assistant"}
+            content={message.content}
+            timestamp={message.timestamp}
+          />
+        ))}
       {isLoading && (
         <div className="flex justify-start">
           <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl px-4 py-3">

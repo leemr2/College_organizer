@@ -2,7 +2,7 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { prisma } from "@/lib/db";
 import { conversationalAI } from "@/lib/ai/conversational";
-import { getUserTimezone, getTodayStartInTimezone, getTodayEndInTimezone, getDateStartInTimezone, getDateEndInTimezone } from "@/lib/utils/timezone";
+import { getUserTimezone, getDateStartInTimezone, getDateEndInTimezone } from "@/lib/utils/timezone";
 
 export const taskRouter = createTRPCRouter({
   // Extract tasks from natural language input
@@ -21,7 +21,7 @@ export const taskRouter = createTRPCRouter({
 
       // Create tasks in database
       const createdTasks = await prisma.$transaction(
-        tasks.map((task: { description: string; category: string; complexity: "simple" | "medium" | "complex" }) =>
+        tasks.map((task) =>
           prisma.task.create({
             data: {
               studentId: student.id,
@@ -39,7 +39,7 @@ export const taskRouter = createTRPCRouter({
   // Generate clarification questions for a task
   getClarificationQuestions: protectedProcedure
     .input(z.object({ taskId: z.string() }))
-    .query(async ({ input, ctx }) => {
+    .query(async ({ input }) => {
       const task = await prisma.task.findUnique({
         where: { id: input.taskId },
         include: { student: true },

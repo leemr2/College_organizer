@@ -1,5 +1,5 @@
-import { generateChatCompletion, parseJsonResponse, AI_MODELS } from "../aiClient";
-import { Message, StudentContext, TaskSummary, StudentPreferences } from "../types";
+import { generateChatCompletion, parseJsonResponse } from "../aiClient";
+import { Message, StudentContext } from "../types";
 
 export class ConversationalAI {
   /**
@@ -43,9 +43,9 @@ Return only a JSON array of questions: ["question 1", "question 2", ...]`;
     );
 
     try {
-      const parsed = parseJsonResponse(response);
-      return Array.isArray(parsed) ? parsed : parsed.questions || [];
-    } catch (error) {
+      const parsed = parseJsonResponse(response) as { questions?: string[] } | string[];
+      return Array.isArray(parsed) ? parsed : (parsed.questions || []);
+    } catch {
       // Fallback: try to extract questions from text
       const questions = response
         .split("\n")
@@ -59,7 +59,7 @@ Return only a JSON array of questions: ["question 1", "question 2", ...]`;
   /**
    * Extract tasks from natural language
    */
-  async extractTasks(text: string, currentTime?: Date): Promise<any[]> {
+  async extractTasks(text: string, currentTime?: Date): Promise<Array<{ description: string; category: string; complexity: string; urgency: string }>> {
     const now = currentTime || new Date();
     const timeOfDay = this.getTimeOfDay(now);
     const currentHour = now.getHours();
@@ -92,9 +92,9 @@ Return JSON:
     );
 
     try {
-      const parsed = parseJsonResponse(response);
+      const parsed = parseJsonResponse(response) as { tasks?: Array<{ description: string; category: string; complexity: string; urgency: string }> };
       return parsed.tasks || [];
-    } catch (error) {
+    } catch {
       // Fallback: create a single task from the text
       return [
         {

@@ -12,6 +12,7 @@ Prisma
 - Manage DB logic with Prisma in `prisma/schema.prisma`, `src/lib/db.ts`.
 - snake_case table → camelCase fields.
 - No raw SQL; run `npx prisma migrate dev`, never use `npx prisma db push`.
+- **IMPORTANT**: When creating new tables, ALWAYS enable Row Level Security (RLS) in a migration. See CLAUDE.md "Database Security (RLS)" section for details.
 
 Icons
 
@@ -34,16 +35,22 @@ tRPC Routers
 - `publicProcedure` or `protectedProcedure` with Zod.
 - Access from React via `@/lib/trpc/react`.
 
-TypeScript & Syntax
+TypeScript & Type Safety
 
-- Strict mode. Avoid `any`.
-- Use optional chaining, union types (no enums).
+- Strict mode enabled. **NEVER use `any`** - use proper types or `unknown` with type guards.
+- **ALWAYS import types from `src/lib/types.ts`** before creating new type definitions.
+- Check `src/lib/types.ts` for existing types (Message, StudentContext, TaskSummary, OnboardingData, etc.) before defining new ones.
+- When adding new domain models or data structures, **add types to `src/lib/types.ts`** first, then use them throughout the codebase.
+- Use optional chaining (`?.`) and nullish coalescing (`??`).
+- Union types over enums (e.g., `"simple" | "medium" | "complex"`).
+- For error handling, use `unknown` instead of `any`: `catch (error: unknown) { const err = error as { code?: string; message?: string }; }`.
+- After making type changes, verify with `npx tsc --noEmit` to ensure zero type errors.
+- Sort imports (external → internal → sibling → styles).
 
 File & Folder Names
 
 - Next.js routes in kebab-case (e.g. `app/dashboard/page.tsx`).
 - Shared types in `src/lib/types.ts`.
-- Sort imports (external → internal → sibling → styles).
 
 Tailwind Usage
 
@@ -101,3 +108,5 @@ Documentation Maintenance
 IMPORTANT:
 
 - After all changes are made, ALWAYS build the project with `npm run build`. Ignore warnings, fix errors.
+- **Type Safety**: Before committing, run `npx tsc --noEmit` to verify zero type errors. Never commit code with `any` types (except necessary library code).
+- **Type Reuse**: Always check `src/lib/types.ts` for existing types before creating new type definitions. Reuse shared types to maintain consistency.

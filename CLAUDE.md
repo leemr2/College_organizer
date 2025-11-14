@@ -31,7 +31,8 @@ npm run build-storybook  # Build Storybook for deployment
 ### Critical Rules
 - **NEVER use `npx prisma db push`** - Always create proper migrations with `migrate dev`
 - **ALWAYS run `npm run build`** after making changes to verify no errors (ignore warnings)
-- **Database schema changes**: Edit `prisma/schema.prisma` → Run `npx prisma migrate dev` → Name migration descriptively
+- **Type Safety**: Run `npx tsc --noEmit` after type changes to ensure zero type errors. Never use `any` types.
+- **Database schema changes**: Edit `prisma/schema.prisma` → Run `npx prisma migrate dev` → Update types in `src/lib/types.ts` → Name migration descriptively
 
 ## Architecture
 
@@ -232,11 +233,39 @@ src/
 
 ## Important Conventions
 
-### TypeScript
-- Strict mode enabled - avoid `any`
+### TypeScript & Type Safety
+
+**Type System Architecture**:
+- **Centralized Types**: All shared types are defined in `src/lib/types.ts`
+- **Type Categories**: Message types, Student preferences, Class schedules, AI context, Onboarding data
+- **Import Pattern**: Always import from `@/lib/types` (e.g., `import { Message, StudentContext } from "@/lib/types"`)
+
+**Type Safety Rules**:
+- **Strict mode enabled** - TypeScript strict mode is required
+- **NEVER use `any`** - Use proper types, `unknown` with type guards, or specific interfaces
+- **Check existing types first** - Before creating new types, check `src/lib/types.ts` for existing definitions
+- **Add types to central file** - When adding new domain models, add types to `src/lib/types.ts` first
+- **Type verification** - Run `npx tsc --noEmit` after type changes to ensure zero errors
+
+**Type Patterns**:
 - Use optional chaining (`?.`) and nullish coalescing (`??`)
-- Union types over enums
-- Shared types: `src/lib/types.ts`
+- Union types over enums (e.g., `"daily_planning" | "task_specific"`)
+- For error handling: `catch (error: unknown) { const err = error as { code?: string; message?: string }; }`
+- For JSON data from Prisma: Cast with proper types (e.g., `(conversation.messages as MessageArray)`)
+
+**Available Types in `src/lib/types.ts`**:
+- `Message`, `MessageRole`, `MessageArray` - Chat message types
+- `StudentPreferences`, `NotificationSettings` - Student preference types
+- `ClassScheduleData`, `MeetingTime` - Class schedule types
+- `StudentContext`, `TaskContext`, `TaskSummary` - AI context types
+- `OnboardingData` - Onboarding flow types
+
+**Type Maintenance**:
+- When adding new features, review existing types in `src/lib/types.ts` for reuse
+- If creating new domain models, add corresponding types to `src/lib/types.ts`
+- Update types when domain models change (e.g., Prisma schema updates)
+- Maintain type consistency across routers, components, and AI services
+- **Reference**: See `quality-improvements-workflow.md` for the comprehensive type system implementation that established these patterns
 
 ### Imports
 Sort order: external → internal → sibling → styles
@@ -251,6 +280,74 @@ import "./styles.css";                      // Styles
 - Use Prisma relations to fetch related data (avoid N+1 queries)
 - Include relevant relations in queries: `include: { preferences: true, tasks: true }`
 - Filter by date ranges for daily conversations using `getTodayStart()` and `getTodayEnd()`
+
+### Database Security (RLS)
+
+**Row Level Security (RLS) is REQUIRED for all new tables** to protect against unauthorized database access via PostgREST or direct SQL queries.
+
+#### RLS Setup Process for New Tables
+
+When creating new tables, follow this process:
+
+1. **Create the table migration** (as usual):
+   ```bash
+   npx prisma migrate dev --name add_new_table
+   ```
+
+2. **Create a separate RLS migration**:
+   ```bash
+   npx prisma migrate dev --create-only --name enable_rls_new_table
+   ```
+
+3. **Add RLS policies** in the migration file:
+   ```sql
+   -- Enable RLS on the new table
+   ALTER TABLE "NewTable" ENABLE ROW LEVEL SECURITY;
+   
+   -- Deny all access by default (service role bypasses automatically)
+   CREATE POLICY "Deny all access to NewTable"
+     ON "NewTable"
+     FOR ALL
+     USING (false)
+     WITH CHECK (false);
+   ```
+
+4. **Apply the migration**:
+   ```bash
+   npx prisma migrate dev
+   ```
+
+#### RLS Policy Patterns
+
+**Default Pattern (Most Tables)**:
+- Deny all access by default
+- Service role (used by Prisma) automatically bypasses RLS
+- Protects against PostgREST and direct SQL access
+
+**Future: User-Specific Access** (if migrating to Supabase Auth):
+```sql
+-- Example: Allow users to read their own records
+CREATE POLICY "Users can read own records"
+  ON "NewTable"
+  FOR SELECT
+  USING ("studentId" IN (
+    SELECT id FROM "Student" WHERE "userId" = auth.uid()::text
+  ));
+```
+
+#### Important Notes
+
+- **Service Role Bypass**: Prisma uses service role connections which automatically bypass RLS. All application operations continue to work normally.
+- **No Breaking Changes**: RLS doesn't affect Prisma operations since they use service role.
+- **Defense in Depth**: RLS adds an additional security layer alongside tRPC authorization.
+- **Exception**: `_prisma_migrations` table should NOT have RLS enabled (breaks Prisma migrations).
+
+#### Reference Migrations
+
+- Phase 1 tables: `20251110184900_enable_row_level_security`
+- Phase 2 tables: `20251114040240_enable_rls_phase2_tables`
+
+See these migrations for examples of RLS policy patterns.
 
 ### AI Best Practices
 - Always pass student context to ConversationalAI for personalized responses
@@ -308,15 +405,18 @@ INNGEST_SIGNING_KEY="..."            # Optional (background jobs)
 
 ### Starting New Features
 1. Create branch: `git checkout -b feature/feature-name`
-2. If schema changes needed:
+2. **Type Safety First**: Check `src/lib/types.ts` for existing types. If adding new domain models, add types to `src/lib/types.ts` first.
+3. If schema changes needed:
    - Edit `prisma/schema.prisma`
    - Run `npx prisma migrate dev --name descriptive_name`
-3. Create tRPC router procedures in `src/lib/api/routers/`
-4. Build React components in `src/components/[feature]/`
-5. Create routes in `src/app/[route]/page.tsx`
-6. Test with `npm run dev`
-7. Build with `npm run build` - fix all errors
-8. Commit with semantic message
+   - Update types in `src/lib/types.ts` if domain models changed
+4. Create tRPC router procedures in `src/lib/api/routers/` (use types from `@/lib/types`)
+5. Build React components in `src/components/[feature]/` (import types from `@/lib/types`)
+6. Create routes in `src/app/[route]/page.tsx`
+7. Test with `npm run dev`
+8. **Type Check**: Run `npx tsc --noEmit` to verify zero type errors
+9. Build with `npm run build` - fix all errors
+10. Commit with semantic message
 
 ### Task Complexity Flow
 When creating tasks, the AI classifies complexity and generates clarifying questions:
@@ -419,28 +519,36 @@ Each documentation file serves a specific purpose:
 **API Changes (tRPC routers, procedures)**:
 1. Review `CLAUDE.md`:
    - "Type-Safe API Layer" section (tRPC patterns)
+   - "TypeScript & Type Safety" section (type usage patterns)
    - Existing router implementations in `src/lib/api/routers/`
    - "AI Chat Flow Pattern" (if conversational)
    - `studentRouter.ts` has examples of profile update and class schedule CRUD operations
 2. Review `AGENTS.md` "Backend" section for conventions
 3. Check existing procedures for naming conventions and error handling patterns
+4. **Type Safety**: Ensure all procedures use types from `src/lib/types.ts`, never use `any`
 
 **Schema Changes (Prisma)**:
 1. Review `CLAUDE.md`:
    - "Key Domain Models" section
    - "Database Patterns" section
+   - "TypeScript & Type Safety" section (update types after schema changes)
+   - "Database Security (RLS)" section (REQUIRED for new tables)
 2. Review existing migrations in `prisma/migrations/` to understand migration patterns
 3. Review `README.md` "Database Schema" section for public-facing schema documentation
 4. Check related models for relationship patterns
+5. **IMPORTANT**: If creating new tables, create a separate RLS migration following the process in "Database Security (RLS)" section
+6. **Type Safety**: After schema changes, update corresponding types in `src/lib/types.ts` and verify with `npx tsc --noEmit`
 
 **Component Changes**:
 1. Review `CLAUDE.md`:
    - "Component Guidelines" section
+   - "TypeScript & Type Safety" section (ensure proper type usage)
    - "File Organization" section
    - "UI Patterns" section
 2. Review `AGENTS.md` "Frontend" section
 3. Search for similar components to understand patterns and conventions
 4. Check Storybook stories for component documentation patterns
+5. **Type Safety**: Import types from `@/lib/types`, never use `any` or define duplicate types
 
 **AI Integration Changes**:
 1. Review `CLAUDE.md`:
@@ -476,17 +584,22 @@ Each documentation file serves a specific purpose:
   - Update router documentation in relevant sections
   - Update "AI Chat Flow Pattern" if conversational API changed
   - Add new patterns to "Development Workflow" if significant
+  - Update "TypeScript & Type Safety" if new types added
 - [ ] Update code examples if patterns changed
+- [ ] **Type Safety**: Add new types to `src/lib/types.ts` if new domain models introduced
 
 **Schema Changes**:
 - [ ] Update `CLAUDE.md` "Key Domain Models" section with new/changed models
 - [ ] Update `README.md` "Database Schema" section if significant public-facing changes
 - [ ] Update migration documentation if patterns changed
+- [ ] **If new tables created**: Create and apply RLS migration following "Database Security (RLS)" section
+- [ ] **Type Safety**: Update types in `src/lib/types.ts` to match schema changes, run `npx tsc --noEmit` to verify
 
 **Component Changes**:
 - [ ] Update `CLAUDE.md` "Component Guidelines" if patterns changed
 - [ ] Update "UI Patterns" if new patterns introduced
 - [ ] Update Storybook documentation if component structure changed
+- [ ] **Type Safety**: If new component-specific types needed, add to `src/lib/types.ts` if shared, or keep local if truly component-specific
 
 **AI Integration Changes**:
 - [ ] Update `CLAUDE.md` "AI Integration" section

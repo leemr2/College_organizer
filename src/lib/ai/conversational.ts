@@ -59,20 +59,31 @@ Return only a JSON array of questions: ["question 1", "question 2", ...]`;
   /**
    * Extract tasks from natural language
    */
-  async extractTasks(text: string, currentTime?: Date): Promise<Array<{ description: string; category: string; complexity: string; urgency: string }>> {
+  async extractTasks(text: string, currentTime?: Date): Promise<Array<{ description: string; category: string; complexity: string; urgency: string; dueDate?: string | null }>> {
     const now = currentTime || new Date();
     const timeOfDay = this.getTimeOfDay(now);
     const currentHour = now.getHours();
     const currentMinute = now.getMinutes();
     const timeString = `${String(currentHour).padStart(2, '0')}:${String(currentMinute).padStart(2, '0')}`;
+    const currentDate = now.toISOString().split('T')[0]; // YYYY-MM-DD format
+    const dayOfWeek = now.toLocaleDateString('en-US', { weekday: 'long' });
     
     const prompt = `Extract individual tasks from: "${text}"
 
-IMPORTANT: Current time is ${timeString} (${timeOfDay}). When suggesting times for tasks, consider:
-- If it's morning (before 12pm), tasks can be scheduled for today morning, afternoon, or evening
-- If it's afternoon (12pm-5pm), tasks should be scheduled for today afternoon or evening
-- If it's evening (after 5pm), tasks should be scheduled for today evening or tomorrow
-- Never schedule tasks in the past
+IMPORTANT: Current date/time is ${currentDate} (${dayOfWeek}) at ${timeString} (${timeOfDay}).
+
+When extracting tasks, look for due date/time references in the text such as:
+- Relative dates: "tomorrow", "next Friday", "in 3 days", "next week", "this Friday"
+- Absolute dates: "December 15th", "Friday the 20th", "next Monday"
+- Time references: "by 5pm", "before noon", "end of day"
+- Event-based: "before the test", "after the exam", "by the deadline"
+
+For each task, extract the due date if mentioned:
+- Parse relative dates based on current date: ${currentDate} (${dayOfWeek})
+- Convert to ISO 8601 format (YYYY-MM-DDTHH:mm:ss) or null if no due date mentioned
+- If only a date is mentioned (no time), set time to end of day (23:59:59) in the user's local timezone
+- If only a time is mentioned (no date), assume today if the time is in the future, otherwise tomorrow
+- Never set due dates in the past
 
 Return JSON:
 {
@@ -81,7 +92,8 @@ Return JSON:
       "description": "clear task description",
       "category": "exam|assignment|life|other",
       "complexity": "simple|medium|complex",
-      "urgency": "high|medium|low"
+      "urgency": "high|medium|low",
+      "dueDate": "ISO 8601 date string or null if no due date mentioned"
     }
   ]
 }`;
@@ -92,7 +104,7 @@ Return JSON:
     );
 
     try {
-      const parsed = parseJsonResponse(response) as { tasks?: Array<{ description: string; category: string; complexity: string; urgency: string }> };
+      const parsed = parseJsonResponse(response) as { tasks?: Array<{ description: string; category: string; complexity: string; urgency: string; dueDate?: string | null }> };
       return parsed.tasks || [];
     } catch {
       // Fallback: create a single task from the text
@@ -102,6 +114,7 @@ Return JSON:
           category: "other",
           complexity: "medium",
           urgency: "medium",
+          dueDate: null,
         },
       ];
     }

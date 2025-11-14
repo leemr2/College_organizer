@@ -11,6 +11,9 @@ export const taskRouter = createTRPCRouter({
     .mutation(async ({ input, ctx }) => {
       const student = await prisma.student.findUnique({
         where: { userId: ctx.session.user.id },
+        include: {
+          preferences: true,
+        },
       });
 
       if (!student) throw new Error("Student not found");
@@ -19,18 +22,38 @@ export const taskRouter = createTRPCRouter({
       const currentTime = new Date();
       const tasks = await conversationalAI.extractTasks(input.text, currentTime);
 
+      // Get user's timezone for date parsing
+      const timezone = getUserTimezone(student.preferences);
+
       // Create tasks in database
       const createdTasks = await prisma.$transaction(
-        tasks.map((task) =>
-          prisma.task.create({
+        tasks.map((task) => {
+          // Parse dueDate if provided
+          let dueDate: Date | null = null;
+          if (task.dueDate) {
+            try {
+              // Parse ISO 8601 date string
+              const parsedDate = new Date(task.dueDate);
+              // Validate the date is valid and not in the past
+              if (!isNaN(parsedDate.getTime()) && parsedDate >= currentTime) {
+                dueDate = parsedDate;
+              }
+            } catch {
+              // If parsing fails, leave as null
+              dueDate = null;
+            }
+          }
+
+          return prisma.task.create({
             data: {
               studentId: student.id,
               description: task.description,
               category: task.category,
               complexity: task.complexity as "simple" | "medium" | "complex",
+              dueDate,
             },
-          })
-        )
+          });
+        })
       );
 
       return createdTasks;
@@ -130,9 +153,20 @@ export const taskRouter = createTRPCRouter({
                   { dueDate: null },
                 ],
               },
+              // Tasks with future due dates that were created on or before the selected date
+              // These should appear every day until their due date
+              {
+                AND: [
+                  { dueDate: { gt: endOfDay } }, // Due date is after the selected date
+                  { createdAt: { lte: endOfDay } }, // Created on or before the selected date
+                ],
+              },
             ],
           },
-          orderBy: { dueDate: "asc" },
+          orderBy: [
+            { dueDate: "asc" }, // Sort by due date ascending (nulls last)
+            { createdAt: "desc" }, // Then by creation date descending
+          ],
         });
 
         return tasks;
@@ -225,6 +259,40 @@ export const taskRouter = createTRPCRouter({
       }
 
       return task;
+    }),
+
+  // Update task due date
+  updateDueDate: protectedProcedure
+    .input(
+      z.object({
+        taskId: z.string(),
+        dueDate: z.date().nullable(),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      const student = await prisma.student.findUnique({
+        where: { userId: ctx.session.user.id },
+      });
+
+      if (!student) throw new Error("Student not found");
+
+      const task = await prisma.task.findUnique({
+        where: { id: input.taskId },
+      });
+
+      if (!task || task.studentId !== student.id) {
+        throw new Error("Task not found");
+      }
+
+      // Update task due date
+      const updatedTask = await prisma.task.update({
+        where: { id: input.taskId },
+        data: {
+          dueDate: input.dueDate,
+        },
+      });
+
+      return updatedTask;
     }),
 });
 

@@ -167,6 +167,10 @@ Your role:
 
 ${context.preferences ? `Student preferences: ${JSON.stringify(context.preferences)}` : ""}
 
+${context.currentTools && context.currentTools.length > 0
+  ? `\n\nTools ${context.name} currently uses:\n${context.currentTools.map((t) => `- ${t.name}`).join("\n")}\n\nWhen relevant to a task, remind them to use these tools. Do not suggest these tools again as new recommendations.`
+  : ""}
+
 Be natural, supportive, and focused on helping them work smarter.`;
 
     // Add context-specific instructions

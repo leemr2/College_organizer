@@ -52,11 +52,17 @@ export class ToolRecommendationService {
     // Get initial candidate tools based on task category and description
     const candidateTools = this.getCandidateTools(task);
 
+    // Filter out tools student is already using
+    const studentToolIds = (studentContext.currentTools || []).map((t) => t.id);
+    const filteredCandidates = candidateTools.filter(
+      (tool) => !studentToolIds.includes(tool.id)
+    );
+
     // Use AI to analyze task and rank tools
     const recommendations = await this.analyzeAndRankTools(
       task,
       studentContext,
-      candidateTools
+      filteredCandidates
     );
 
     // Return top 3 recommendations
@@ -232,6 +238,8 @@ Due Date: ${task.dueDate ? new Date(task.dueDate).toLocaleDateString() : "not se
 Student Context:
 - Name: ${studentContext.name}
 - Preferences: ${JSON.stringify(studentContext.preferences || {})}
+- Tools already using: ${studentContext.currentTools?.map((t) => t.name).join(", ") || "None"}
+  (Do NOT recommend these tools - they already use them!)
 
 Available Tools:
 ${JSON.stringify(toolSummaries, null, 2)}

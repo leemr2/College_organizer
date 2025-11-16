@@ -81,6 +81,11 @@ export interface StudentContext {
   conversationType?: "daily_planning" | "task_specific";
   currentTime?: Date;
   task?: TaskContext;
+  currentTools?: Array<{
+    id: string;
+    name: string;
+    category: string[];
+  }>;
 }
 
 // ============================================

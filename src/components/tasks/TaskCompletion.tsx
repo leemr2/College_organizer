@@ -20,12 +20,20 @@ export function TaskCompletion({ taskId, onComplete }: TaskCompletionProps) {
   const [notes, setNotes] = useState("");
 
   const [showProactiveSuggestion, setShowProactiveSuggestion] = useState(false);
+  const [diagnosticStep, setDiagnosticStep] = useState<'initial' | 'collecting' | 'suggesting'>('initial');
+  const [whatDidntWork, setWhatDidntWork] = useState('');
+  const [challengesFaced, setChallengesFaced] = useState('');
 
-  // Fetch tool recommendations for proactive suggestion
-  const { data: toolRecommendations } = api.tool.recommend.useQuery(
-    { taskId },
-    { enabled: showProactiveSuggestion }
-  );
+  // Diagnostic analysis mutation
+  const analyzeDiagnostic = api.tool.analyzeDiagnostic.useMutation({
+    onSuccess: () => {
+      setDiagnosticStep('suggesting');
+    },
+    onError: (error) => {
+      toast.error("Failed to analyze diagnostic: " + error.message);
+      setDiagnosticStep('initial');
+    },
+  });
 
   const completeTask = api.task.complete.useMutation({
     onSuccess: (_, variables) => {
@@ -153,67 +161,150 @@ export function TaskCompletion({ taskId, onComplete }: TaskCompletionProps) {
 
   // Show proactive tool suggestions if effectiveness was poor
   if (showProactiveSuggestion) {
-    return (
-      <div className="space-y-4 rounded-lg border border-orange-200 bg-orange-50 p-4 dark:border-orange-800 dark:bg-orange-900/20">
-        <div className="flex items-start justify-between">
-          <div>
-            <h4 className="mb-2 font-medium text-gray-900 dark:text-white">
-              💡 Want to improve next time?
-            </h4>
-            <p className="text-sm text-gray-700 dark:text-gray-300">
-              Since this task was challenging, here are some tools that might help you work more effectively:
-            </p>
+    if (diagnosticStep === 'initial') {
+      return (
+        <div className="space-y-4 rounded-lg border border-orange-200 bg-orange-50 p-4 dark:border-orange-800 dark:bg-orange-900/20">
+          <div className="flex items-start justify-between">
+            <div>
+              <h4 className="mb-2 font-medium text-gray-900 dark:text-white">
+                Let's figure out what didn't work 💡
+              </h4>
+              <p className="text-sm text-gray-700 dark:text-gray-300">
+                I noticed this task was challenging. Understanding what went wrong will help me suggest better approaches.
+              </p>
+            </div>
+            <button
+              onClick={() => {
+                setShowProactiveSuggestion(false);
+                onComplete?.();
+              }}
+              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+              aria-label="Close"
+            >
+              <X size={18} />
+            </button>
           </div>
-          <button
+          
+          <div>
+            <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              What specifically didn't work well?
+            </label>
+            <textarea
+              value={whatDidntWork}
+              onChange={(e) => setWhatDidntWork(e.target.value)}
+              placeholder="e.g., 'I kept getting distracted', 'The material was confusing', 'I ran out of time'"
+              rows={2}
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+            />
+          </div>
+          
+          <div>
+            <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              What challenges did you face?
+            </label>
+            <textarea
+              value={challengesFaced}
+              onChange={(e) => setChallengesFaced(e.target.value)}
+              placeholder="e.g., 'Hard to focus', 'Material was dense', 'Not sure if I was studying right'"
+              rows={2}
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+            />
+          </div>
+          
+          <div className="flex gap-2">
+            <Button 
+              variant="outline" 
+              onClick={() => {
+                setShowProactiveSuggestion(false);
+                onComplete?.();
+              }}
+              className="flex-1"
+            >
+              Skip for now
+            </Button>
+            <Button 
+              onClick={() => {
+                analyzeDiagnostic.mutate({ 
+                  taskId, 
+                  whatDidntWork, 
+                  challengesFaced 
+                });
+                setDiagnosticStep('collecting');
+              }}
+              disabled={(!whatDidntWork.trim() && !challengesFaced.trim()) || analyzeDiagnostic.isPending}
+              className="flex-1"
+            >
+              Get suggestions
+            </Button>
+          </div>
+        </div>
+      );
+    }
+    
+    if (diagnosticStep === 'collecting') {
+      return (
+        <div className="space-y-4 rounded-lg border border-orange-200 bg-orange-50 p-4 dark:border-orange-800 dark:bg-orange-900/20">
+          <div className="text-center py-4">
+            <p className="text-gray-700 dark:text-gray-300">Analyzing and finding tools to help...</p>
+          </div>
+        </div>
+      );
+    }
+    
+    if (diagnosticStep === 'suggesting' && analyzeDiagnostic.data) {
+      return (
+        <div className="space-y-4 rounded-lg border border-orange-200 bg-orange-50 p-4 dark:border-orange-800 dark:bg-orange-900/20">
+          <div className="flex items-start justify-between">
+            <h4 className="font-medium text-gray-900 dark:text-white">
+              Based on your feedback, here's what might help:
+            </h4>
+            <button
+              onClick={() => {
+                setShowProactiveSuggestion(false);
+                onComplete?.();
+              }}
+              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+              aria-label="Close"
+            >
+              <X size={18} />
+            </button>
+          </div>
+          
+          <div className="text-sm text-gray-700 dark:text-gray-300 mb-3">
+            {analyzeDiagnostic.data.analysis}
+          </div>
+          
+          {analyzeDiagnostic.data.recommendations.map((rec) => (
+            <ToolRecommendation
+              key={rec.toolId}
+              toolId={rec.toolId}
+              toolName={rec.tool.name}
+              description={rec.tool.description}
+              reason={rec.reason}
+              website={rec.tool.website}
+              learningCurve={rec.learningCurve}
+              howToGetStarted={rec.howToGetStarted}
+              taskId={taskId}
+              onResponse={() => {
+                setShowProactiveSuggestion(false);
+                onComplete?.();
+              }}
+            />
+          ))}
+          
+          <Button
+            variant="outline"
             onClick={() => {
               setShowProactiveSuggestion(false);
               onComplete?.();
             }}
-            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-            aria-label="Close suggestions"
+            className="w-full"
           >
-            <X size={18} />
-          </button>
+            Thanks, I'll consider these
+          </Button>
         </div>
-
-        {toolRecommendations && toolRecommendations.length > 0 ? (
-          <div className="space-y-3">
-            {toolRecommendations.slice(0, 2).map((rec) => (
-              <ToolRecommendation
-                key={rec.toolId}
-                toolId={rec.toolId}
-                toolName={rec.tool.name}
-                description={rec.tool.description}
-                reason={rec.reason}
-                website={rec.tool.website}
-                learningCurve={rec.learningCurve}
-                howToGetStarted={rec.howToGetStarted}
-                taskId={taskId}
-                onResponse={() => {
-                  setShowProactiveSuggestion(false);
-                  onComplete?.();
-                }}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="text-sm text-gray-600 dark:text-gray-400">
-            Loading recommendations...
-          </div>
-        )}
-
-        <Button
-          variant="outline"
-          onClick={() => {
-            setShowProactiveSuggestion(false);
-            onComplete?.();
-          }}
-          className="w-full"
-        >
-          Thanks, I'm good
-        </Button>
-      </div>
-    );
+      );
+    }
   }
 
   return (

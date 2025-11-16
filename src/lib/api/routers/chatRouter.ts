@@ -101,6 +101,15 @@ async function processMessage(params: ProcessMessageParams) {
     timestamp: new Date().toISOString(),
   });
 
+  // Get student's current tools
+  const studentTools = await prisma.studentTool.findMany({
+    where: {
+      studentId,
+      adoptedStatus: "using",
+    },
+    include: { tool: true },
+  });
+
   // Build context based on conversation type
   let context: StudentContext;
   const currentTime = new Date();
@@ -129,6 +138,11 @@ async function processMessage(params: ProcessMessageParams) {
       })),
       conversationType: "daily_planning",
       currentTime,
+      currentTools: studentTools.map((st) => ({
+        id: st.tool.id,
+        name: st.tool.name,
+        category: st.tool.category,
+      })),
     };
   } else {
     // task_specific context
@@ -152,6 +166,11 @@ async function processMessage(params: ProcessMessageParams) {
         completed: task.completed,
       },
       conversationType: "task_specific",
+      currentTools: studentTools.map((st) => ({
+        id: st.tool.id,
+        name: st.tool.name,
+        category: st.tool.category,
+      })),
     };
   }
 

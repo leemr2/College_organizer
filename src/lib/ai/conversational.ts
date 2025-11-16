@@ -59,7 +59,7 @@ Return only a JSON array of questions: ["question 1", "question 2", ...]`;
   /**
    * Extract tasks from natural language
    */
-  async extractTasks(text: string, currentTime?: Date): Promise<Array<{ description: string; category: string; complexity: string; urgency: string; dueDate?: string | null }>> {
+  async extractTasks(text: string, currentTime?: Date): Promise<Array<{ description: string; category: string; complexity: string; urgency: string; dueDate?: string | null; isRecurring?: boolean }>> {
     const now = currentTime || new Date();
     const timeOfDay = this.getTimeOfDay(now);
     const currentHour = now.getHours();
@@ -78,12 +78,28 @@ When extracting tasks, look for due date/time references in the text such as:
 - Time references: "by 5pm", "before noon", "end of day"
 - Event-based: "before the test", "after the exam", "by the deadline"
 
+RECURRING TASKS: Identify tasks that should be done daily until a due date/event. These include:
+- Study tasks: "study for exam", "study for test", "review for", "prepare for exam"
+- Practice tasks: "practice", "work on daily", "daily practice"
+- Preparation tasks: "prepare for", "get ready for"
+- Tasks that imply daily repetition until an event: "study until", "practice until"
+
+For recurring tasks:
+- Set isRecurring: true
+- Extract the due date/event date as dueDate
+- These tasks will be scheduled for each day from today until the due date
+
+For one-time tasks (assignments, papers, single events):
+- Set isRecurring: false
+- Extract due date if mentioned
+
 For each task, extract the due date if mentioned:
 - Parse relative dates based on current date: ${currentDate} (${dayOfWeek})
 - Convert to ISO 8601 format (YYYY-MM-DDTHH:mm:ss) or null if no due date mentioned
 - If only a date is mentioned (no time), set time to end of day (23:59:59) in the user's local timezone
 - If only a time is mentioned (no date), assume today if the time is in the future, otherwise tomorrow
 - Never set due dates in the past
+- Recurring tasks MUST have a dueDate (if no due date, treat as one-time task)
 
 Return JSON:
 {
@@ -93,7 +109,8 @@ Return JSON:
       "category": "exam|assignment|life|other",
       "complexity": "simple|medium|complex",
       "urgency": "high|medium|low",
-      "dueDate": "ISO 8601 date string or null if no due date mentioned"
+      "dueDate": "ISO 8601 date string or null if no due date mentioned",
+      "isRecurring": true or false (true for daily tasks like "study for exam", false for one-time tasks like "write paper")
     }
   ]
 }`;
@@ -104,7 +121,7 @@ Return JSON:
     );
 
     try {
-      const parsed = parseJsonResponse(response) as { tasks?: Array<{ description: string; category: string; complexity: string; urgency: string; dueDate?: string | null }> };
+      const parsed = parseJsonResponse(response) as { tasks?: Array<{ description: string; category: string; complexity: string; urgency: string; dueDate?: string | null; isRecurring?: boolean }> };
       return parsed.tasks || [];
     } catch {
       // Fallback: create a single task from the text
@@ -115,6 +132,7 @@ Return JSON:
           complexity: "medium",
           urgency: "medium",
           dueDate: null,
+          isRecurring: false,
         },
       ];
     }

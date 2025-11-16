@@ -26,34 +26,87 @@ export const taskRouter = createTRPCRouter({
       const timezone = getUserTimezone(student.preferences);
 
       // Create tasks in database
-      const createdTasks = await prisma.$transaction(
-        tasks.map((task) => {
-          // Parse dueDate if provided
-          let dueDate: Date | null = null;
-          if (task.dueDate) {
-            try {
-              // Parse ISO 8601 date string
-              const parsedDate = new Date(task.dueDate);
-              // Validate the date is valid and not in the past
-              if (!isNaN(parsedDate.getTime()) && parsedDate >= currentTime) {
-                dueDate = parsedDate;
-              }
-            } catch {
-              // If parsing fails, leave as null
-              dueDate = null;
-            }
-          }
+      const tasksToCreate: Array<{
+        studentId: string;
+        description: string;
+        category: string;
+        complexity: "simple" | "medium" | "complex";
+        dueDate: Date | null;
+        isRecurring: boolean;
+        scheduledDate: Date | null;
+        recurringTaskGroupId: string | null;
+      }> = [];
 
-          return prisma.task.create({
-            data: {
+      for (const task of tasks) {
+        // Parse dueDate if provided
+        let dueDate: Date | null = null;
+        if (task.dueDate) {
+          try {
+            // Parse ISO 8601 date string
+            const parsedDate = new Date(task.dueDate);
+            // Validate the date is valid and not in the past
+            if (!isNaN(parsedDate.getTime()) && parsedDate >= currentTime) {
+              dueDate = parsedDate;
+            }
+          } catch {
+            // If parsing fails, leave as null
+            dueDate = null;
+          }
+        }
+
+        const isRecurring = task.isRecurring === true && dueDate !== null;
+
+        if (isRecurring && dueDate) {
+          // Generate daily instances for recurring tasks
+          // Limit to max 30 days to prevent excessive instances
+          const todayStart = getDateStartInTimezone(currentTime, timezone);
+          const dueDateStart = getDateStartInTimezone(dueDate, timezone);
+          
+          // Calculate days between today and due date
+          const daysDiff = Math.ceil((dueDateStart.getTime() - todayStart.getTime()) / (24 * 60 * 60 * 1000));
+          const maxDays = Math.min(Math.max(daysDiff, 1), 30); // Limit to 30 days max, at least 1 day
+          
+          // Generate a group ID for linking related instances
+          const groupId = `recurring_${Date.now()}_${Math.random().toString(36).substring(7)}`;
+          
+          // Create one task instance per day from today until due date (max 30 days)
+          for (let i = 0; i < maxDays; i++) {
+            // Create scheduled date by adding days to today's start
+            const scheduledDate = new Date(todayStart.getTime() + i * 24 * 60 * 60 * 1000);
+            
+            tasksToCreate.push({
               studentId: student.id,
               description: task.description,
               category: task.category,
               complexity: task.complexity as "simple" | "medium" | "complex",
               dueDate,
-            },
+              isRecurring: true,
+              scheduledDate,
+              recurringTaskGroupId: groupId,
+            });
+          }
+        } else {
+          // One-time task - create single instance
+          tasksToCreate.push({
+            studentId: student.id,
+            description: task.description,
+            category: task.category,
+            complexity: task.complexity as "simple" | "medium" | "complex",
+            dueDate,
+            isRecurring: false,
+            scheduledDate: null,
+            recurringTaskGroupId: null,
           });
-        })
+        }
+      }
+
+      // Create all tasks in a single transaction
+      const createdTasks = await prisma.$transaction(
+        tasksToCreate.map((taskData) =>
+          prisma.task.create({
+            data: taskData,
+          })
+        )
       );
 
       return createdTasks;
@@ -144,19 +197,33 @@ export const taskRouter = createTRPCRouter({
           where: {
             studentId: student.id,
             OR: [
-              // Tasks due on the specified date in user's timezone
-              { dueDate: { gte: startOfDay, lte: endOfDay } },
-              // Tasks created on the specified date in user's timezone that have no dueDate
+              // Recurring tasks: match by scheduledDate for the selected date
               {
                 AND: [
+                  { isRecurring: true },
+                  { scheduledDate: { gte: startOfDay, lte: endOfDay } },
+                ],
+              },
+              // One-time tasks: tasks due on the specified date in user's timezone
+              {
+                AND: [
+                  { isRecurring: false },
+                  { dueDate: { gte: startOfDay, lte: endOfDay } },
+                ],
+              },
+              // One-time tasks: tasks created on the specified date in user's timezone that have no dueDate
+              {
+                AND: [
+                  { isRecurring: false },
                   { createdAt: { gte: startOfDay, lte: endOfDay } },
                   { dueDate: null },
                 ],
               },
-              // Tasks with future due dates that were created on or before the selected date
+              // One-time tasks: tasks with future due dates that were created on or before the selected date
               // These should appear every day until their due date
               {
                 AND: [
+                  { isRecurring: false },
                   { dueDate: { gt: endOfDay } }, // Due date is after the selected date
                   { createdAt: { lte: endOfDay } }, // Created on or before the selected date
                 ],
@@ -164,7 +231,8 @@ export const taskRouter = createTRPCRouter({
             ],
           },
           orderBy: [
-            { dueDate: "asc" }, // Sort by due date ascending (nulls last)
+            { scheduledDate: "asc" }, // Sort by scheduled date first (for recurring tasks)
+            { dueDate: "asc" }, // Then by due date ascending (nulls last)
             { createdAt: "desc" }, // Then by creation date descending
           ],
         });
@@ -272,6 +340,9 @@ export const taskRouter = createTRPCRouter({
     .mutation(async ({ input, ctx }) => {
       const student = await prisma.student.findUnique({
         where: { userId: ctx.session.user.id },
+        include: {
+          preferences: true,
+        },
       });
 
       if (!student) throw new Error("Student not found");
@@ -284,15 +355,92 @@ export const taskRouter = createTRPCRouter({
         throw new Error("Task not found");
       }
 
-      // Update task due date
-      const updatedTask = await prisma.task.update({
-        where: { id: input.taskId },
-        data: {
-          dueDate: input.dueDate,
-        },
-      });
+      // Get user's timezone
+      const timezone = getUserTimezone(student.preferences);
+      const currentTime = new Date();
 
-      return updatedTask;
+      // If task is recurring, regenerate all instances
+      if (task.isRecurring && task.recurringTaskGroupId) {
+        // Delete all related instances
+        await prisma.task.deleteMany({
+          where: {
+            recurringTaskGroupId: task.recurringTaskGroupId,
+            studentId: student.id,
+          },
+        });
+
+        // If new due date is provided, regenerate instances
+        if (input.dueDate) {
+          const todayStart = getDateStartInTimezone(currentTime, timezone);
+          const dueDateStart = getDateStartInTimezone(input.dueDate, timezone);
+          
+          // Calculate days between today and due date
+          const daysDiff = Math.ceil((dueDateStart.getTime() - todayStart.getTime()) / (24 * 60 * 60 * 1000));
+          const maxDays = Math.min(Math.max(daysDiff, 1), 30); // Limit to 30 days max, at least 1 day
+          
+          // Use the same group ID to maintain grouping
+          const groupId = task.recurringTaskGroupId;
+          
+          // Create new instances
+          const tasksToCreate = [];
+          for (let i = 0; i < maxDays; i++) {
+            const scheduledDate = new Date(todayStart.getTime() + i * 24 * 60 * 60 * 1000);
+            
+            tasksToCreate.push({
+              studentId: student.id,
+              description: task.description,
+              category: task.category,
+              complexity: task.complexity,
+              dueDate: input.dueDate,
+              isRecurring: true,
+              scheduledDate,
+              recurringTaskGroupId: groupId,
+            });
+          }
+
+          // Create all new instances
+          const createdTasks = await prisma.task.createMany({
+            data: tasksToCreate,
+          });
+
+          // Return the first created task (or a representative one)
+          const firstTask = await prisma.task.findFirst({
+            where: {
+              recurringTaskGroupId: groupId,
+              studentId: student.id,
+            },
+            orderBy: {
+              scheduledDate: "asc",
+            },
+          });
+
+          return firstTask || task;
+        } else {
+          // If due date is cleared, convert to one-time task
+          return await prisma.task.create({
+            data: {
+              studentId: student.id,
+              description: task.description,
+              category: task.category,
+              complexity: task.complexity,
+              dueDate: null,
+              isRecurring: false,
+              scheduledDate: null,
+              recurringTaskGroupId: null,
+            },
+          });
+        }
+      } else {
+        // One-time task - update normally
+        const updatedTask = await prisma.task.update({
+          where: { id: input.taskId },
+          data: {
+            dueDate: input.dueDate,
+          },
+        });
+
+        return updatedTask;
+      }
     }),
 });
 

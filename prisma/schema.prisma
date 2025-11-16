@@ -108,6 +108,9 @@ model Task {
   complexity            TaskComplexity
   category              String?
   dueDate               DateTime?
+  isRecurring           Boolean        @default(false)
+  scheduledDate         DateTime?
+  recurringTaskGroupId  String?
   clarificationComplete Boolean        @default(false)
   clarificationData     Json?
   completed             Boolean        @default(false)
@@ -121,6 +124,8 @@ model Task {
 
   @@index([studentId])
   @@index([dueDate])
+  @@index([scheduledDate])
+  @@index([recurringTaskGroupId])
 }
 
 model Conversation {

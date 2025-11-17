@@ -937,23 +937,31 @@ export const endOfDayReview = inngest.createFunction(
 - System remembers class schedule
 - Dashboard shows daily overview
 
-### Phase 3: Scheduling & Proactive (Weeks 9-12)
+### Phase 3.0: Scheduling
 
-**Goal**: Time blocking and check-ins
+**Goal**: Time blocking and scheduling
 
 **Features**:
 - ✅ Intelligent time block generation
 - ✅ Schedule optimization algorithm
 - ✅ Visual calendar/timeline view
 - ✅ Task rescheduling flow
-- ✅ Proactive check-ins during study blocks
-- ✅ End of day review
 - ✅ Pattern recognition (basic)
 
 **Success Criteria**:
 - Scout suggests realistic daily schedules
-- Check-ins feel helpful, not annoying
 - Students can easily reschedule tasks
+
+### Phase 3.5: Proactive check in
+
+**Goal**: check-ins
+
+**Features**:
+- ✅ Proactive check-ins during study blocks
+- ✅ End of day review
+
+**Success Criteria**:
+- Check-ins feel helpful, not annoying
 - End of day reviews provide value
 
 ### Phase 4: Learning & Optimization (Weeks 13-16)

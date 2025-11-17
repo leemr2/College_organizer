@@ -29,6 +29,8 @@ The product's core innovation is its **tool discovery and optimization engine** 
 - Task clarification through intelligent questioning
 - Persistent conversation history
 - **Task-specific chat threads**: Each task has its own dedicated conversation thread where students can ask questions, get help, or discuss details about that specific task. Conversations are context-aware and include task details (description, complexity, due date) in the AI's context.
+- **Deep dive conversations**: Choose between "Quick Help" for immediate suggestions or "Deep Dive" for personalized workflow discovery. Deep dive mode asks intelligent questions one at a time to understand your approach before providing comprehensive recommendations.
+- **Tool optimization**: Scout analyzes how you're using existing tools and suggests advanced features and optimization techniques using real-time web search.
 
 ### 📋 Task Management
 - Task creation and tracking
@@ -45,6 +47,8 @@ The product's core innovation is its **tool discovery and optimization engine** 
 - **Proactive suggestions**: Automatic tool recommendations when task effectiveness is poor (<3 stars)
 - **Tool adoption tracking**: Track which tools you're using, trying, or have abandoned
 - **Tool management**: View tools you're using and recommended tools on dashboard
+- **Tool optimization**: Scout analyzes your existing tool usage and suggests advanced features, optimization techniques, and step-by-step guides using real-time web search
+- **Web search integration**: Real-time research for tool tips, tutorials, and best practices using Gemini web grounding and Perplexity
 
 ### 👤 Student Profiles & Onboarding
 - Personalized onboarding flow
@@ -83,7 +87,10 @@ The product's core innovation is its **tool discovery and optimization engine** 
 ### 🤖 AI Integration
 
 - [**OpenAI GPT-4**](https://openai.com) - Primary conversational interface
-- [**Anthropic Claude**](https://anthropic.com) - Research and analysis (planned)
+- [**OpenAI GPT-5**](https://openai.com) - Advanced reasoning and tool recommendations
+- [**Anthropic Claude Sonnet**](https://anthropic.com) - Research, analysis, and deep dive conversations
+- [**Google Gemini**](https://gemini.google.com) - Web-grounded search for real-time tool tips and tutorials
+- [**Perplexity**](https://www.perplexity.ai) - Web search fallback for research queries
 - Web Speech API - Voice-to-text transcription
 - Custom AI client abstraction for easy provider switching
 
@@ -138,11 +145,13 @@ DIRECT_URL="postgresql://..."
 NEXTAUTH_SECRET="..." # Generate with: openssl rand -base64 32
 NEXTAUTH_URL="http://localhost:3000"
 
-# AI Provider
+# AI Providers
 OPENAI_API_KEY="sk-..."
+ANTHROPIC_API_KEY="sk-ant-..." # Required for deep dive conversations and tool optimization
+GEMINI_API_KEY="..." # Required for web search (tool tips and tutorials)
+PERPLEXITY_API_KEY="..." # Optional (web search fallback)
 
 # Optional
-ANTHROPIC_API_KEY="sk-ant-..." # For future research features
 INNGEST_EVENT_KEY="..."
 INNGEST_SIGNING_KEY="..."
 ```
@@ -187,7 +196,7 @@ Visit [http://localhost:3000](http://localhost:3000) to see Scout.
 │   │   ├── profile/      # Profile editing components
 │   │   └── tasks/        # Task management components
 │   ├── lib/
-│   │   ├── ai/           # AI integration (conversational, research)
+│   │   ├── ai/           # AI integration (conversational, toolRecommendation, toolOptimization, discoveryQuestions, webSearch)
 │   │   ├── api/          # tRPC routers
 │   │   │   └── routers/  # chatRouter, taskRouter, studentRouter (with profile/class schedule CRUD)
 │   │   ├── types/        # TypeScript type definitions
@@ -207,7 +216,7 @@ Visit [http://localhost:3000](http://localhost:3000) to see Scout.
 Key models:
 - **Student** - User profiles and preferences (editable via `/profile`)
 - **Task** - Tasks with complexity and clarification data
-- **Conversation** - Chat history (daily planning and task-specific)
+- **Conversation** - Chat history (daily planning and task-specific) with conversation modes (quick_help, deep_dive) and discovery data
 - **ClassSchedule** - Course information with recurring meeting times (editable via profile)
 - **StudentPreferences** - Study preferences and patterns (editable via profile)
 - **Tool** - Productivity tools and study techniques database (Phase 2)
@@ -267,6 +276,10 @@ Based on the PRD, Scout is being developed in phases:
 - Tool adoption tracking (using, trying, abandoned)
 - Enhanced dashboard with tools section
 - Enhanced clarification questions with tool awareness
+- **Deep dive conversations**: Multi-turn discovery mode that asks intelligent questions to understand workflows before providing recommendations
+- **Tool optimization**: Analyzes existing tool usage and suggests advanced features using web search
+- **Web search integration**: Real-time research for tool tips, tutorials, and best practices (Gemini + Perplexity)
+- **Discovery questions engine**: Generates layered questions to identify inefficiencies and optimization opportunities
 
 ### 📅 Phase 3: Scheduling & Proactive (Planned)
 - Intelligent time block generation

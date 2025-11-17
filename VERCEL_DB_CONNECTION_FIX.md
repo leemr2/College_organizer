@@ -71,13 +71,24 @@ If your database password contains special characters (`@`, `#`, `%`, `&`, etc.)
 **Example:**
 If your password is `p@ss#word`, it should be `p%40ss%23word` in the connection string.
 
-### Step 5: Verify Database is Active
+### Step 5: Try Restarting Database
+
+**Quick Fix for Sudden Connection Failures:**
+1. Go to Supabase Dashboard → Settings → Database
+2. Look for **"Restart database"** or **"Pause/Resume"** option
+3. Click **"Restart"** (or **"Resume"** if paused)
+4. Wait 1-2 minutes for database to fully restart
+5. Test connection again
+
+**Why this works:** Connection poolers can get stuck. Restarting clears connection pools and resets the connection state.
+
+### Step 6: Verify Database is Active
 
 1. Go to Supabase Dashboard
 2. Check if your project shows "Active" (not "Paused")
 3. If paused, click "Restore" and wait 1-2 minutes
 
-### Step 6: Test Connection String Locally
+### Step 7: Test Connection String Locally
 
 Before deploying, test the connection string:
 
@@ -91,7 +102,7 @@ npx prisma db execute --stdin --schema prisma/schema.prisma
 
 If this fails locally, the connection string is wrong.
 
-### Step 7: Redeploy on Vercel
+### Step 8: Redeploy on Vercel
 
 After updating the environment variable:
 1. Go to Vercel Dashboard → Your Project → Deployments

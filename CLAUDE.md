@@ -61,9 +61,14 @@ npm run build-storybook  # Build Storybook for deployment
 **AI Integration**: Multi-provider abstraction in `src/lib/aiClient.ts`
 - **Primary AI function**: `generateChatCompletion(messages, model, options)`
 - **Default model**: `GPT_5` (preferred for all new AI features)
-- **Available models**: GPT-5, O1, GPT-4o, GPT-4o-mini, Gemini (2.5-pro, 2.5-flash, 2.0-flash variants), Perplexity (sonar, sonar-pro)
-- **Conversational AI**: `src/lib/ai/conversational.ts` - ConversationalAI class with student context awareness
+- **Available models**: GPT-5, O1, GPT-4o, GPT-4o-mini, Claude Sonnet 4, Gemini (2.5-pro, 2.5-flash, 2.0-flash variants), Perplexity (sonar, sonar-pro)
+- **Conversational AI**: `src/lib/ai/conversational.ts` - ConversationalAI class with student context awareness and deep dive conversation support
+- **Tool Recommendation**: `src/lib/ai/toolRecommendation.ts` - ToolRecommendationService for AI-powered tool matching
+- **Tool Optimization**: `src/lib/ai/toolOptimization.ts` - ToolOptimizationService for analyzing existing tool usage and suggesting improvements
+- **Discovery Questions**: `src/lib/ai/discoveryQuestions.ts` - DiscoveryQuestionsService for generating intelligent discovery questions
+- **Web Search**: `src/lib/ai/webSearch.ts` - Web search service using Gemini web grounding and Perplexity for real-time research
 - **Model selection**: Use `AI_MODELS.GPT_5` or model key like `"GPT_5"`, not raw strings
+- **Claude integration**: Use `AI_MODELS.SONNET` for research, analysis, and deep dive conversations
 
 ### Key Domain Models
 
@@ -82,6 +87,10 @@ npm run build-storybook  # Build Storybook for deployment
 - `task_specific`: Task-focused chat threads (linked to taskId)
 - `messages` (JSON): Array of `{role, content, timestamp}`
 - `context` (JSON): Conversation-relevant context
+- `conversationMode`: "quick_help" | "deep_dive" - Conversation mode for task-specific chats
+- `currentPhase`: "discovery" | "analysis" | "recommendation" - Current phase in deep dive mode
+- `discoveryData` (JSON): Stores discovery questions and answers for deep dive conversations
+- `analysisResult` (JSON): Stores analysis insights from discovery phase
 
 **StudentPreferences**: Study preferences and patterns
 - `peakEnergyTimes`, `preferredBreakLength`, `morningPerson`, `studyAloneVsGroup`
@@ -121,6 +130,7 @@ npm run build-storybook  # Build Storybook for deployment
 
 ### AI Chat Flow Pattern
 
+**Daily Planning Conversation**:
 ```typescript
 // 1. Get/create conversation
 const conversation = await api.chat.getDailyConversation.query();
@@ -144,6 +154,25 @@ const aiResponse = await generateChatCompletion(
   [{ role: "system", content: systemPrompt }, ...messages],
   "GPT_5"
 );
+```
+
+**Task-Specific Conversation (Deep Dive)**:
+```typescript
+// 1. Start deep dive conversation
+const { conversationId, message, mode } = await api.chat.startDeepDive.mutate({
+  taskId: task.id,
+  mode: "deep_dive"
+});
+
+// 2. Discovery phase: Answer questions one at a time
+await api.chat.sendTaskMessage.mutate({
+  taskId: task.id,
+  conversationId,
+  message: answer
+});
+
+// 3. Analysis phase: Scout analyzes and uses web search
+// 4. Recommendation phase: Comprehensive response with tool optimization guides
 ```
 
 ### Background Jobs
@@ -202,14 +231,18 @@ src/
 │   ├── profile/          # Profile editing components
 │   ├── tasks/            # Task management components
 │   │   ├── TaskCard.tsx
-│   │   ├── TaskChat.tsx  # Task-specific chat with tool recommendations (Phase 2)
+│   │   ├── TaskChat.tsx  # Task-specific chat with mode selection (quick help/deep dive) and tool recommendations
 │   │   ├── TaskCompletion.tsx  # Task completion with effectiveness tracking (Phase 2)
-│   │   └── ToolRecommendation.tsx  # Tool suggestion UI component (Phase 2)
+│   │   ├── ToolRecommendation.tsx  # Tool suggestion UI component (Phase 2)
+│   │   └── ToolOptimizationCard.tsx  # Tool optimization results UI component (Phase 2)
 │   └── ui/               # Shared UI primitives
 ├── lib/
 │   ├── ai/               # AI integration
-│   │   ├── conversational.ts  # ConversationalAI class
-│   │   └── toolRecommendation.ts  # ToolRecommendationService (Phase 2)
+│   │   ├── conversational.ts  # ConversationalAI class with deep dive support
+│   │   ├── toolRecommendation.ts  # ToolRecommendationService (Phase 2)
+│   │   ├── toolOptimization.ts  # ToolOptimizationService for existing tool enhancement
+│   │   ├── discoveryQuestions.ts  # DiscoveryQuestionsService for intelligent questioning
+│   │   └── webSearch.ts  # Web search service (Gemini + Perplexity)
 │   ├── api/              # tRPC setup
 │   │   ├── routers/      # tRPC routers (chat, task, student, tool)
 │   │   │   ├── studentRouter.ts  # Profile updates, class schedule CRUD
@@ -258,6 +291,7 @@ src/
 - `StudentPreferences`, `NotificationSettings` - Student preference types
 - `ClassScheduleData`, `MeetingTime` - Class schedule types
 - `StudentContext`, `TaskContext`, `TaskSummary` - AI context types
+- `ConversationMode`, `DiscoveryQuestion` - Deep dive conversation types
 - `OnboardingData` - Onboarding flow types
 
 **Type Maintenance**:
@@ -354,6 +388,10 @@ See these migrations for examples of RLS policy patterns.
 - Use `parseJsonResponse()` when expecting JSON from AI models
 - Handle AI errors gracefully with try-catch and user-friendly messages
 - Store conversation history in database for context continuity
+- Use Claude (SONNET) for research, analysis, and deep dive conversations
+- Use GPT-5 for tool recommendations and general reasoning
+- Use Gemini with web grounding for real-time tool tips and tutorials
+- Use Perplexity as fallback for web search when Gemini is unavailable
 
 ### Tool Recommendation Patterns (Phase 2)
 
@@ -379,6 +417,25 @@ await api.tool.updateStudentTool.mutate({ toolId, adoptedStatus: "trying" });
 - Displayed in TaskCompletion component after poor rating
 - Uses same recommendation service but with context of poor performance
 
+**Tool Optimization Flow**:
+```typescript
+// 1. Analyze existing tool usage
+const optimization = await api.tool.optimizeExistingTool.mutate({
+  toolId: "notion",
+  taskId: task.id,
+  currentUsage: "I'm using Notion for notes"
+});
+
+// 2. Display optimization results (ToolOptimizationCard component)
+// Shows untapped features, step-by-step guides, and optimization tips
+```
+
+**Web Search Integration**:
+- Uses Gemini web grounding as primary provider for real-time tool tips
+- Falls back to Perplexity for web-grounded searches
+- Search functions: `searchToolOptimization()`, `searchToolFeature()`, `searchStudyMethod()`, `searchBestPractices()`
+- Results include answer text and source links
+
 **Tool Router Procedures**:
 - `tool.search`: Search tools by category, keyword, learning curve
 - `tool.recommend`: Get AI-powered recommendations for a task
@@ -386,6 +443,50 @@ await api.tool.updateStudentTool.mutate({ toolId, adoptedStatus: "trying" });
 - `tool.updateStudentTool`: Update adoption status (suggested/trying/using/abandoned)
 - `tool.getStudentTools`: Get tools student is using/trying
 - `tool.getSuggestedTools`: Get recent tool suggestions
+- `tool.optimizeExistingTool`: Analyze and optimize existing tool usage with web search
+- `tool.researchToolTips`: Research advanced features for a tool using web search
+
+### Deep Dive Conversation Patterns (Phase 2)
+
+**Conversation Modes**:
+- **Quick Help**: Immediate suggestions and recommendations (single-turn)
+- **Deep Dive**: Multi-turn discovery mode that asks questions one at a time to understand workflow
+
+**Deep Dive Flow**:
+```typescript
+// 1. Start deep dive conversation
+const { conversationId, message, mode, questions } = await api.chat.startDeepDive.mutate({
+  taskId: task.id,
+  mode: "deep_dive"
+});
+
+// 2. Discovery phase: Answer questions one at a time
+// Each answer triggers next question or moves to analysis phase
+
+// 3. Analysis phase: Scout analyzes collected data
+// - Detects inefficiencies in current approach
+// - Identifies existing tools mentioned
+// - Uses web search for tool optimization tips
+// - Generates comprehensive recommendations
+
+// 4. Recommendation phase: Comprehensive response with:
+// - Educational component (why current method doesn't work)
+// - Tool optimization guides (for existing tools)
+// - New tool suggestions (if relevant)
+// - Personalized study plan
+```
+
+**Discovery Questions Service**:
+- Generates 3-5 layered questions based on task complexity
+- Questions adapt based on previous answers
+- Determines when enough information is gathered
+- Uses Claude (SONNET) for intelligent question generation
+
+**Tool Optimization Service**:
+- Analyzes how student is using existing tools
+- Uses web search to find advanced features and optimization tips
+- Generates step-by-step guides for tool optimization
+- Detects inefficient tool usage patterns
 
 ## Environment Setup
 
@@ -396,7 +497,9 @@ DIRECT_URL="postgresql://..."        # Direct database connection
 NEXTAUTH_SECRET="..."                # Generate: openssl rand -base64 32
 NEXTAUTH_URL="http://localhost:3000"
 OPENAI_API_KEY="sk-..."              # Required for AI features
-ANTHROPIC_API_KEY="sk-ant-..."       # Optional (future research features)
+ANTHROPIC_API_KEY="sk-ant-..."       # Required for deep dive conversations and tool optimization
+GEMINI_API_KEY="..."                 # Required for web search (tool tips and tutorials)
+PERPLEXITY_API_KEY="..."             # Optional (web search fallback)
 INNGEST_EVENT_KEY="..."              # Optional (background jobs)
 INNGEST_SIGNING_KEY="..."            # Optional (background jobs)
 ```
@@ -430,6 +533,16 @@ When creating tasks, the AI classifies complexity and generates clarifying quest
 - Uses `dailyConversationDate` to determine today's conversation
 - System prompt includes time awareness, preferences, and recent context
 - Voice input supported via Web Speech API
+
+### Task-Specific Conversation Pattern
+- Each task has its own conversation thread
+- Two conversation modes available:
+  - **Quick Help**: Immediate suggestions (single-turn response)
+  - **Deep Dive**: Multi-turn discovery with intelligent questioning
+- Deep dive flow: Discovery → Analysis → Recommendation
+- Discovery phase asks questions one at a time to understand workflow
+- Analysis phase uses web search to find tool optimization tips
+- Recommendation phase provides comprehensive guidance with step-by-step guides
 
 ### Profile Update System & Calendar Components
 
@@ -675,6 +788,12 @@ Completed features (Phase 2):
 - ✅ Tool adoption tracking: Track tools (suggested, trying, using, abandoned) via StudentTool model
 - ✅ Enhanced conversational AI: Tool recommendation awareness in task-specific chats
 - ✅ Dashboard tools section: Display tools being used and recommended tools
+- ✅ Deep dive conversations: Multi-turn discovery mode with intelligent questioning (`src/lib/ai/discoveryQuestions.ts`)
+- ✅ Tool optimization service: Analyzes existing tool usage and suggests improvements (`src/lib/ai/toolOptimization.ts`)
+- ✅ Web search integration: Real-time research for tool tips using Gemini web grounding and Perplexity (`src/lib/ai/webSearch.ts`)
+- ✅ Conversation mode system: Quick help vs deep dive modes with phase tracking
+- ✅ ToolOptimizationCard component: UI for displaying tool optimization results
+- ✅ Claude integration: Anthropic Claude Sonnet for research, analysis, and deep dive conversations
 
 Next phase (Phase 3 - Scheduling & Proactive):
 - Intelligent time block generation

@@ -3,7 +3,7 @@ import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { prisma } from "@/lib/db";
 import { conversationalAI } from "@/lib/ai/conversational";
 import { getUserTimezone, getTodayStartInTimezone, getTodayEndInTimezone } from "@/lib/utils/timezone";
-import { Message, StudentContext, TaskSummary } from "@/lib/types";
+import { Message, StudentContext, TaskSummary, ConversationMode, DiscoveryQuestion } from "@/lib/types";
 import type { Prisma } from "@prisma/client";
 
 // ConversationType enum values
@@ -101,6 +101,15 @@ async function processMessage(params: ProcessMessageParams) {
     timestamp: new Date().toISOString(),
   });
 
+  // Get student's current tools
+  const studentTools = await prisma.studentTool.findMany({
+    where: {
+      studentId,
+      adoptedStatus: "using",
+    },
+    include: { tool: true },
+  });
+
   // Build context based on conversation type
   let context: StudentContext;
   const currentTime = new Date();
@@ -129,6 +138,11 @@ async function processMessage(params: ProcessMessageParams) {
       })),
       conversationType: "daily_planning",
       currentTime,
+      currentTools: studentTools.map((st) => ({
+        id: st.tool.id,
+        name: st.tool.name,
+        category: st.tool.category,
+      })),
     };
   } else {
     // task_specific context
@@ -152,17 +166,106 @@ async function processMessage(params: ProcessMessageParams) {
         completed: task.completed,
       },
       conversationType: "task_specific",
+      currentTools: studentTools.map((st) => ({
+        id: st.tool.id,
+        name: st.tool.name,
+        category: st.tool.category,
+      })),
     };
   }
 
-  // Generate AI response
-  const chatMessages = messages.map((m): Message => ({
-    role: m.role,
-    content: m.content,
-    timestamp: m.timestamp,
-  }));
+  // Check conversation mode and handle deep dive if needed
+  const conversationMode = (conversation.conversationMode as unknown) as ConversationMode | null;
+  const currentPhase = conversation.currentPhase || "discovery";
+  const discoveryData = (conversation.discoveryData as unknown) as {
+    questions?: DiscoveryQuestion[];
+    answers?: Record<string, string>;
+  } | null;
 
-  const response = await conversationalAI.chat(chatMessages, context);
+  let response: string;
+  let updatedMode: ConversationMode | null = conversationMode;
+  let updatedPhase = currentPhase;
+  let updatedDiscoveryData = discoveryData || {};
+
+  if (conversationMode?.type === "deep_dive" && currentPhase === "discovery") {
+    // Deep dive discovery phase - process answer and get next question
+    const lastQuestion = conversationMode.discoveryQuestions?.find(
+      (q) => !q.answered
+    ) || conversationMode.discoveryQuestions?.[conversationMode.currentQuestionIndex || 0];
+
+    if (lastQuestion) {
+      const processResult = await conversationalAI.processDiscoveryAnswer(
+        lastQuestion.id,
+        message,
+        conversationMode,
+        context.task!
+      );
+
+      // Update discovery data
+      if (!updatedDiscoveryData.questions) {
+        updatedDiscoveryData.questions = conversationMode.discoveryQuestions || [];
+      }
+      const questionIndex = updatedDiscoveryData.questions.findIndex((q) => q.id === lastQuestion.id);
+      if (questionIndex >= 0) {
+        updatedDiscoveryData.questions[questionIndex].answered = true;
+        updatedDiscoveryData.questions[questionIndex].answer = message;
+      }
+
+      if (!updatedDiscoveryData.answers) {
+        updatedDiscoveryData.answers = {};
+      }
+      updatedDiscoveryData.answers[lastQuestion.id] = message;
+
+      if (processResult.shouldProceedToRecommendations) {
+        // Move to analysis phase
+        updatedPhase = "analysis";
+        
+        // Analyze discovery data
+        const analysisResult = await conversationalAI.analyzeDiscoveryData(
+          updatedDiscoveryData.answers || {},
+          context.task!,
+          context
+        );
+
+        // Generate comprehensive recommendation
+        response = await conversationalAI.generateComprehensiveRecommendation(
+          analysisResult,
+          context.task!,
+          context
+        );
+
+        updatedPhase = "recommendation";
+        updatedMode = {
+          ...conversationMode,
+          currentPhase: "recommendation",
+        };
+      } else {
+        // Continue with next question
+        response = processResult.nextQuestion || "Thank you for that information. Let me think about the best way to help you.";
+        updatedMode = {
+          ...conversationMode,
+          currentQuestionIndex: (conversationMode.currentQuestionIndex || 0) + 1,
+        };
+      }
+    } else {
+      // Fallback to regular chat
+      const chatMessages = messages.map((m): Message => ({
+        role: m.role,
+        content: m.content,
+        timestamp: m.timestamp,
+      }));
+      response = await conversationalAI.chat(chatMessages, context);
+    }
+  } else {
+    // Regular chat or quick help mode
+    const chatMessages = messages.map((m): Message => ({
+      role: m.role,
+      content: m.content,
+      timestamp: m.timestamp,
+    }));
+
+    response = await conversationalAI.chat(chatMessages, context);
+  }
 
   // Add assistant message
   messages.push({
@@ -171,10 +274,15 @@ async function processMessage(params: ProcessMessageParams) {
     timestamp: new Date().toISOString(),
   });
 
-  // Save conversation
+  // Save conversation with updated mode and phase
   await prisma.conversation.update({
     where: { id: conversation.id },
-    data: { messages: messages as unknown as Prisma.JsonArray },
+    data: {
+      messages: messages as unknown as Prisma.JsonArray,
+      conversationMode: updatedMode?.type || null,
+      currentPhase: updatedPhase,
+      discoveryData: updatedDiscoveryData ? (updatedDiscoveryData as unknown as Prisma.InputJsonValue) : undefined,
+    },
   });
 
   return {
@@ -327,6 +435,162 @@ export const chatRouter = createTRPCRouter({
         taskId: input.taskId,
         conversationId: input.conversationId,
       });
+    }),
+
+  // Start deep dive or quick help mode for a task
+  startDeepDive: protectedProcedure
+    .input(
+      z.object({
+        taskId: z.string(),
+        mode: z.enum(["quick_help", "deep_dive"]),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      const student = await prisma.student.findUnique({
+        where: { userId: ctx.session.user.id },
+        include: { preferences: true },
+      });
+
+      if (!student) throw new Error("Student not found");
+
+      // Verify task belongs to student
+      const task = await prisma.task.findUnique({
+        where: { id: input.taskId },
+      });
+
+      if (!task || task.studentId !== student.id) {
+        throw new Error("Task not found");
+      }
+
+      // Get or create conversation
+      let conversation = await prisma.conversation.findFirst({
+        where: {
+          studentId: student.id,
+          conversationType: ConversationType.task_specific,
+          taskId: input.taskId,
+        },
+      });
+
+      if (!conversation) {
+        conversation = await prisma.conversation.create({
+          data: {
+            studentId: student.id,
+            conversationType: ConversationType.task_specific,
+            taskId: input.taskId,
+            messages: [],
+          },
+        });
+      }
+
+      // Get student's current tools
+      const studentTools = await prisma.studentTool.findMany({
+        where: {
+          studentId: student.id,
+          adoptedStatus: "using",
+        },
+        include: { tool: true },
+      });
+
+      const taskContext = {
+        id: task.id,
+        description: task.description,
+        complexity: task.complexity,
+        category: task.category,
+        dueDate: task.dueDate,
+        completed: task.completed,
+      };
+
+      const studentContext: StudentContext = {
+        name: student.name,
+        preferences: (student.preferences as unknown) as StudentContext["preferences"],
+        task: taskContext,
+        conversationType: "task_specific",
+        currentTools: studentTools.map((st) => ({
+          id: st.tool.id,
+          name: st.tool.name,
+          category: st.tool.category,
+        })),
+      };
+
+      if (input.mode === "deep_dive") {
+        // Start deep dive discovery
+        const { questions, initialMessage } = await conversationalAI.startDeepDive(
+          taskContext,
+          studentContext
+        );
+
+        const conversationMode: ConversationMode = {
+          type: "deep_dive",
+          currentPhase: "discovery",
+          discoveryQuestions: questions,
+          currentQuestionIndex: 0,
+        };
+
+        // Save conversation with mode
+        await prisma.conversation.update({
+          where: { id: conversation.id },
+          data: {
+            conversationMode: "deep_dive",
+            currentPhase: "discovery",
+            discoveryData: {
+              questions,
+              answers: {},
+            } as unknown as Prisma.InputJsonValue,
+            messages: [
+              {
+                role: "assistant",
+                content: initialMessage,
+                timestamp: new Date().toISOString(),
+              },
+            ] as unknown as Prisma.JsonArray,
+          },
+        });
+
+        return {
+          conversationId: conversation.id,
+          message: initialMessage,
+          mode: "deep_dive",
+          questions,
+        };
+      } else {
+        // Quick help mode - generate immediate response
+        const messages: Message[] = [
+          {
+            role: "user",
+            content: `I need help with: ${task.description}`,
+            timestamp: new Date().toISOString(),
+          },
+        ];
+
+        studentContext.conversationMode = {
+          type: "quick_help",
+          currentPhase: "recommendation",
+        };
+
+        const response = await conversationalAI.chat(messages, studentContext);
+
+        // Save conversation
+        await prisma.conversation.update({
+          where: { id: conversation.id },
+          data: {
+            conversationMode: "quick_help",
+            messages: [
+              ...messages,
+              {
+                role: "assistant",
+                content: response,
+                timestamp: new Date().toISOString(),
+              },
+            ] as unknown as Prisma.JsonArray,
+          },
+        });
+
+        return {
+          conversationId: conversation.id,
+          message: response,
+          mode: "quick_help",
+        };
+      }
     }),
 
   // Send message and get response (backward compatibility)

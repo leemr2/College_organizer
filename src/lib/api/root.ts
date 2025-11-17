@@ -3,6 +3,7 @@ import { studentRouter } from "./routers/studentRouter";
 import { taskRouter } from "./routers/taskRouter";
 import { chatRouter } from "./routers/chatRouter";
 import { adminRouter } from "./routers/adminRouter";
+import { toolRouter } from "./routers/toolRouter";
 
 /**
  * This is the primary router for your server.
@@ -14,6 +15,7 @@ export const appRouter = createTRPCRouter({
   task: taskRouter,
   chat: chatRouter,
   admin: adminRouter,
+  tool: toolRouter,
 });
 
 // export type definition of API

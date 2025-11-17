@@ -73,6 +73,21 @@ export interface TaskContext {
   completed: boolean;
 }
 
+export interface DiscoveryQuestion {
+  id: string;
+  question: string;
+  purpose: string; // What we're trying to learn
+  answered: boolean;
+  answer?: string;
+}
+
+export interface ConversationMode {
+  type: "quick_help" | "deep_dive";
+  currentPhase?: "discovery" | "analysis" | "recommendation";
+  discoveryQuestions?: DiscoveryQuestion[];
+  currentQuestionIndex?: number;
+}
+
 export interface StudentContext {
   name: string;
   preferences?: StudentPreferences | null;
@@ -81,6 +96,12 @@ export interface StudentContext {
   conversationType?: "daily_planning" | "task_specific";
   currentTime?: Date;
   task?: TaskContext;
+  currentTools?: Array<{
+    id: string;
+    name: string;
+    category: string[];
+  }>;
+  conversationMode?: ConversationMode;
 }
 
 // ============================================

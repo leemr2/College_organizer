@@ -31,7 +31,8 @@ npm run build-storybook  # Build Storybook for deployment
 ### Critical Rules
 - **NEVER use `npx prisma db push`** - Always create proper migrations with `migrate dev`
 - **ALWAYS run `npm run build`** after making changes to verify no errors (ignore warnings)
-- **Database schema changes**: Edit `prisma/schema.prisma` → Run `npx prisma migrate dev` → Name migration descriptively
+- **Type Safety**: Run `npx tsc --noEmit` after type changes to ensure zero type errors. Never use `any` types.
+- **Database schema changes**: Edit `prisma/schema.prisma` → Run `npx prisma migrate dev` → Update types in `src/lib/types.ts` → Name migration descriptively
 
 ## Architecture
 
@@ -92,6 +93,31 @@ npm run build-storybook  # Build Storybook for deployment
 - `meetingTimes` (JSON): Array of `{day, startTime, endTime}` objects
 - Supports multiple meeting times per class (e.g., MWF classes)
 - Editable via profile settings with visual week calendar
+
+**Tool** (Phase 2): Productivity tools and study techniques database
+- Stores tool metadata: name, category, description, useCases, cost, learningCurve, website, features
+- Tools loaded from JSON database (`src/lib/data/tools.json`) and synced to database on first use
+- Relations: studentTools, toolSuggestions
+
+**StudentTool** (Phase 2): Student-tool relationship tracking
+- `adoptedStatus`: "suggested" | "trying" | "using" | "abandoned"
+- `effectivenessRating`: 1-5 rating (optional)
+- `featuresDiscovered`: JSON array of discovered features
+- `notes`: Student feedback
+- Tracks which tools student has seen, tried, or adopted
+
+**ToolSuggestion** (Phase 2): Tool recommendation records
+- Links student, task, and tool
+- `context`: Why the tool was suggested
+- `studentResponse`: "interested" | "not_interested" | "already_using" | null
+- `followUpScheduled`: Boolean for future follow-up
+
+**EffectivenessLog** (Phase 2): Task completion effectiveness tracking
+- `effectiveness`: 1-5 rating
+- `timeSpent`: Minutes spent (optional)
+- `completed`: Boolean
+- `notes`: Student notes about what worked/didn't work
+- Used for learning patterns and triggering proactive tool suggestions
 
 ### AI Chat Flow Pattern
 
@@ -175,22 +201,31 @@ src/
 │   ├── onboarding/       # Onboarding flow components
 │   ├── profile/          # Profile editing components
 │   ├── tasks/            # Task management components
+│   │   ├── TaskCard.tsx
+│   │   ├── TaskChat.tsx  # Task-specific chat with tool recommendations (Phase 2)
+│   │   ├── TaskCompletion.tsx  # Task completion with effectiveness tracking (Phase 2)
+│   │   └── ToolRecommendation.tsx  # Tool suggestion UI component (Phase 2)
 │   └── ui/               # Shared UI primitives
 ├── lib/
 │   ├── ai/               # AI integration
-│   │   └── conversational.ts  # ConversationalAI class
+│   │   ├── conversational.ts  # ConversationalAI class
+│   │   └── toolRecommendation.ts  # ToolRecommendationService (Phase 2)
 │   ├── api/              # tRPC setup
-│   │   ├── routers/      # tRPC routers (chat, task, student)
-│   │   │   └── studentRouter.ts  # Profile updates, class schedule CRUD
+│   │   ├── routers/      # tRPC routers (chat, task, student, tool)
+│   │   │   ├── studentRouter.ts  # Profile updates, class schedule CRUD
+│   │   │   └── toolRouter.ts  # Tool operations (Phase 2)
 │   │   ├── root.ts       # Router composition
 │   │   └── trpc.ts       # tRPC config
 │   ├── auth/             # NextAuth configuration
+│   ├── data/             # Static data files
+│   │   └── tools.json    # Tool database (Phase 2)
 │   ├── trpc/             # tRPC client setup
 │   ├── types/            # TypeScript type definitions
 │   │   └── calendar.ts   # Calendar and time block types
 │   ├── utils/            # Shared utilities
 │   │   ├── shared.ts     # Client-side utilities (time formatting, date helpers)
-│   │   └── server.ts     # Server-side utilities
+│   │   ├── server.ts     # Server-side utilities
+│   │   └── toolDatabase.ts  # Tool database utilities (Phase 2)
 │   ├── aiClient.ts       # AI provider facade
 │   └── db.ts             # Prisma client
 └── stories/              # Storybook stories
@@ -198,11 +233,39 @@ src/
 
 ## Important Conventions
 
-### TypeScript
-- Strict mode enabled - avoid `any`
+### TypeScript & Type Safety
+
+**Type System Architecture**:
+- **Centralized Types**: All shared types are defined in `src/lib/types.ts`
+- **Type Categories**: Message types, Student preferences, Class schedules, AI context, Onboarding data
+- **Import Pattern**: Always import from `@/lib/types` (e.g., `import { Message, StudentContext } from "@/lib/types"`)
+
+**Type Safety Rules**:
+- **Strict mode enabled** - TypeScript strict mode is required
+- **NEVER use `any`** - Use proper types, `unknown` with type guards, or specific interfaces
+- **Check existing types first** - Before creating new types, check `src/lib/types.ts` for existing definitions
+- **Add types to central file** - When adding new domain models, add types to `src/lib/types.ts` first
+- **Type verification** - Run `npx tsc --noEmit` after type changes to ensure zero errors
+
+**Type Patterns**:
 - Use optional chaining (`?.`) and nullish coalescing (`??`)
-- Union types over enums
-- Shared types: `src/lib/types.ts`
+- Union types over enums (e.g., `"daily_planning" | "task_specific"`)
+- For error handling: `catch (error: unknown) { const err = error as { code?: string; message?: string }; }`
+- For JSON data from Prisma: Cast with proper types (e.g., `(conversation.messages as MessageArray)`)
+
+**Available Types in `src/lib/types.ts`**:
+- `Message`, `MessageRole`, `MessageArray` - Chat message types
+- `StudentPreferences`, `NotificationSettings` - Student preference types
+- `ClassScheduleData`, `MeetingTime` - Class schedule types
+- `StudentContext`, `TaskContext`, `TaskSummary` - AI context types
+- `OnboardingData` - Onboarding flow types
+
+**Type Maintenance**:
+- When adding new features, review existing types in `src/lib/types.ts` for reuse
+- If creating new domain models, add corresponding types to `src/lib/types.ts`
+- Update types when domain models change (e.g., Prisma schema updates)
+- Maintain type consistency across routers, components, and AI services
+- **Reference**: See `quality-improvements-workflow.md` for the comprehensive type system implementation that established these patterns
 
 ### Imports
 Sort order: external → internal → sibling → styles
@@ -218,11 +281,111 @@ import "./styles.css";                      // Styles
 - Include relevant relations in queries: `include: { preferences: true, tasks: true }`
 - Filter by date ranges for daily conversations using `getTodayStart()` and `getTodayEnd()`
 
+### Database Security (RLS)
+
+**Row Level Security (RLS) is REQUIRED for all new tables** to protect against unauthorized database access via PostgREST or direct SQL queries.
+
+#### RLS Setup Process for New Tables
+
+When creating new tables, follow this process:
+
+1. **Create the table migration** (as usual):
+   ```bash
+   npx prisma migrate dev --name add_new_table
+   ```
+
+2. **Create a separate RLS migration**:
+   ```bash
+   npx prisma migrate dev --create-only --name enable_rls_new_table
+   ```
+
+3. **Add RLS policies** in the migration file:
+   ```sql
+   -- Enable RLS on the new table
+   ALTER TABLE "NewTable" ENABLE ROW LEVEL SECURITY;
+   
+   -- Deny all access by default (service role bypasses automatically)
+   CREATE POLICY "Deny all access to NewTable"
+     ON "NewTable"
+     FOR ALL
+     USING (false)
+     WITH CHECK (false);
+   ```
+
+4. **Apply the migration**:
+   ```bash
+   npx prisma migrate dev
+   ```
+
+#### RLS Policy Patterns
+
+**Default Pattern (Most Tables)**:
+- Deny all access by default
+- Service role (used by Prisma) automatically bypasses RLS
+- Protects against PostgREST and direct SQL access
+
+**Future: User-Specific Access** (if migrating to Supabase Auth):
+```sql
+-- Example: Allow users to read their own records
+CREATE POLICY "Users can read own records"
+  ON "NewTable"
+  FOR SELECT
+  USING ("studentId" IN (
+    SELECT id FROM "Student" WHERE "userId" = auth.uid()::text
+  ));
+```
+
+#### Important Notes
+
+- **Service Role Bypass**: Prisma uses service role connections which automatically bypass RLS. All application operations continue to work normally.
+- **No Breaking Changes**: RLS doesn't affect Prisma operations since they use service role.
+- **Defense in Depth**: RLS adds an additional security layer alongside tRPC authorization.
+- **Exception**: `_prisma_migrations` table should NOT have RLS enabled (breaks Prisma migrations).
+
+#### Reference Migrations
+
+- Phase 1 tables: `20251110184900_enable_row_level_security`
+- Phase 2 tables: `20251114040240_enable_rls_phase2_tables`
+
+See these migrations for examples of RLS policy patterns.
+
 ### AI Best Practices
 - Always pass student context to ConversationalAI for personalized responses
 - Use `parseJsonResponse()` when expecting JSON from AI models
 - Handle AI errors gracefully with try-catch and user-friendly messages
 - Store conversation history in database for context continuity
+
+### Tool Recommendation Patterns (Phase 2)
+
+**Tool Database**:
+- Tools stored in `src/lib/data/tools.json` (20+ tools across 7 categories)
+- Loaded via `src/lib/utils/toolDatabase.ts` utility functions
+- Tools synced to database on first suggestion (lazy loading)
+
+**Tool Recommendation Flow**:
+```typescript
+// 1. Get tool recommendations for a task
+const recommendations = await api.tool.recommend.query({ taskId });
+
+// 2. Display recommendations in UI (ToolRecommendation component)
+// 3. Student responds: "interested", "not_interested", or "already_using"
+// 4. Record suggestion and update StudentTool relationship
+await api.tool.recordSuggestion.mutate({ taskId, toolId, context });
+await api.tool.updateStudentTool.mutate({ toolId, adoptedStatus: "trying" });
+```
+
+**Proactive Suggestions**:
+- Triggered when task effectiveness rating < 3 stars
+- Displayed in TaskCompletion component after poor rating
+- Uses same recommendation service but with context of poor performance
+
+**Tool Router Procedures**:
+- `tool.search`: Search tools by category, keyword, learning curve
+- `tool.recommend`: Get AI-powered recommendations for a task
+- `tool.recordSuggestion`: Save tool suggestion record
+- `tool.updateStudentTool`: Update adoption status (suggested/trying/using/abandoned)
+- `tool.getStudentTools`: Get tools student is using/trying
+- `tool.getSuggestedTools`: Get recent tool suggestions
 
 ## Environment Setup
 
@@ -242,15 +405,18 @@ INNGEST_SIGNING_KEY="..."            # Optional (background jobs)
 
 ### Starting New Features
 1. Create branch: `git checkout -b feature/feature-name`
-2. If schema changes needed:
+2. **Type Safety First**: Check `src/lib/types.ts` for existing types. If adding new domain models, add types to `src/lib/types.ts` first.
+3. If schema changes needed:
    - Edit `prisma/schema.prisma`
    - Run `npx prisma migrate dev --name descriptive_name`
-3. Create tRPC router procedures in `src/lib/api/routers/`
-4. Build React components in `src/components/[feature]/`
-5. Create routes in `src/app/[route]/page.tsx`
-6. Test with `npm run dev`
-7. Build with `npm run build` - fix all errors
-8. Commit with semantic message
+   - Update types in `src/lib/types.ts` if domain models changed
+4. Create tRPC router procedures in `src/lib/api/routers/` (use types from `@/lib/types`)
+5. Build React components in `src/components/[feature]/` (import types from `@/lib/types`)
+6. Create routes in `src/app/[route]/page.tsx`
+7. Test with `npm run dev`
+8. **Type Check**: Run `npx tsc --noEmit` to verify zero type errors
+9. Build with `npm run build` - fix all errors
+10. Commit with semantic message
 
 ### Task Complexity Flow
 When creating tasks, the AI classifies complexity and generates clarifying questions:
@@ -353,28 +519,36 @@ Each documentation file serves a specific purpose:
 **API Changes (tRPC routers, procedures)**:
 1. Review `CLAUDE.md`:
    - "Type-Safe API Layer" section (tRPC patterns)
+   - "TypeScript & Type Safety" section (type usage patterns)
    - Existing router implementations in `src/lib/api/routers/`
    - "AI Chat Flow Pattern" (if conversational)
    - `studentRouter.ts` has examples of profile update and class schedule CRUD operations
 2. Review `AGENTS.md` "Backend" section for conventions
 3. Check existing procedures for naming conventions and error handling patterns
+4. **Type Safety**: Ensure all procedures use types from `src/lib/types.ts`, never use `any`
 
 **Schema Changes (Prisma)**:
 1. Review `CLAUDE.md`:
    - "Key Domain Models" section
    - "Database Patterns" section
+   - "TypeScript & Type Safety" section (update types after schema changes)
+   - "Database Security (RLS)" section (REQUIRED for new tables)
 2. Review existing migrations in `prisma/migrations/` to understand migration patterns
 3. Review `README.md` "Database Schema" section for public-facing schema documentation
 4. Check related models for relationship patterns
+5. **IMPORTANT**: If creating new tables, create a separate RLS migration following the process in "Database Security (RLS)" section
+6. **Type Safety**: After schema changes, update corresponding types in `src/lib/types.ts` and verify with `npx tsc --noEmit`
 
 **Component Changes**:
 1. Review `CLAUDE.md`:
    - "Component Guidelines" section
+   - "TypeScript & Type Safety" section (ensure proper type usage)
    - "File Organization" section
    - "UI Patterns" section
 2. Review `AGENTS.md` "Frontend" section
 3. Search for similar components to understand patterns and conventions
 4. Check Storybook stories for component documentation patterns
+5. **Type Safety**: Import types from `@/lib/types`, never use `any` or define duplicate types
 
 **AI Integration Changes**:
 1. Review `CLAUDE.md`:
@@ -410,17 +584,22 @@ Each documentation file serves a specific purpose:
   - Update router documentation in relevant sections
   - Update "AI Chat Flow Pattern" if conversational API changed
   - Add new patterns to "Development Workflow" if significant
+  - Update "TypeScript & Type Safety" if new types added
 - [ ] Update code examples if patterns changed
+- [ ] **Type Safety**: Add new types to `src/lib/types.ts` if new domain models introduced
 
 **Schema Changes**:
 - [ ] Update `CLAUDE.md` "Key Domain Models" section with new/changed models
 - [ ] Update `README.md` "Database Schema" section if significant public-facing changes
 - [ ] Update migration documentation if patterns changed
+- [ ] **If new tables created**: Create and apply RLS migration following "Database Security (RLS)" section
+- [ ] **Type Safety**: Update types in `src/lib/types.ts` to match schema changes, run `npx tsc --noEmit` to verify
 
 **Component Changes**:
 - [ ] Update `CLAUDE.md` "Component Guidelines" if patterns changed
 - [ ] Update "UI Patterns" if new patterns introduced
 - [ ] Update Storybook documentation if component structure changed
+- [ ] **Type Safety**: If new component-specific types needed, add to `src/lib/types.ts` if shared, or keep local if truly component-specific
 
 **AI Integration Changes**:
 - [ ] Update `CLAUDE.md` "AI Integration" section
@@ -472,9 +651,9 @@ Before considering documentation complete:
 4. **Ensure consistency** across all documentation files
 5. **Test code examples** if included in documentation
 
-## Current Phase: MVP (Phase 1)
+## Current Phase: Intelligence Layer (Phase 2)
 
-Completed features:
+Completed features (Phase 1):
 - ✅ User authentication and onboarding
 - ✅ Daily check-in chat interface with voice input
 - ✅ Task capture and AI classification
@@ -486,12 +665,23 @@ Completed features:
 - ✅ Calendar components: WeekCalendar (M-Sunday, 6am-10pm) and TimeBlockEditor for managing recurring class schedules
 - ✅ Class schedule management: Full CRUD operations with visual week calendar view
 
-Next phase (Phase 2 - Intelligence Layer):
-- Tool research integration (Claude + web search)
-- Tool database and recommendation engine
-- Advanced clarification questions
-- Memory system for pattern recognition
-- Effectiveness tracking
+Completed features (Phase 2):
+- ✅ Tool database: 20+ curated productivity tools stored in JSON (`src/lib/data/tools.json`)
+- ✅ Tool recommendation service: AI-powered tool matching using GPT-5 (`src/lib/ai/toolRecommendation.ts`)
+- ✅ Tool router: tRPC procedures for tool operations (`src/lib/api/routers/toolRouter.ts`)
+- ✅ On-demand tool recommendations: Request tools in task chat via "Get tool recommendations" button
+- ✅ Proactive tool suggestions: Automatic recommendations when task effectiveness < 3 stars
+- ✅ Effectiveness tracking: 1-5 star ratings, time spent, notes on task completion
+- ✅ Tool adoption tracking: Track tools (suggested, trying, using, abandoned) via StudentTool model
+- ✅ Enhanced conversational AI: Tool recommendation awareness in task-specific chats
+- ✅ Dashboard tools section: Display tools being used and recommended tools
+
+Next phase (Phase 3 - Scheduling & Proactive):
+- Intelligent time block generation
+- Schedule optimization algorithm
+- Proactive check-ins during study blocks
+- End of day review
+- Pattern recognition
 
 Phase 3 preparation:
 - Calendar components designed for ScheduleBlock integration

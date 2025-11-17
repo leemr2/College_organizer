@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { api } from "@/lib/trpc/react";
 import { toast } from "react-toastify";
+import { ToolsPreferenceEditor } from "./ToolsPreferenceEditor";
 
 // Common timezones with user-friendly labels
 const TIMEZONES = [
@@ -189,6 +190,17 @@ export function PreferencesEditor() {
               ? `Detected: ${getUserTimezone()}. You can change this if needed.`
               : "We'll automatically detect your timezone."}
           </p>
+        </div>
+
+        {/* My Tools Section */}
+        <div className="space-y-2">
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+            My Tools
+          </h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            Select the tools you currently use. Scout will use this to provide better recommendations.
+          </p>
+          <ToolsPreferenceEditor />
         </div>
       </div>
 

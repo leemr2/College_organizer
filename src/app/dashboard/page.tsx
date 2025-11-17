@@ -6,6 +6,7 @@ import { DailyGreeting } from "@/components/dashboard/DailyGreeting";
 import { DailyPlanningButton } from "@/components/dashboard/DailyPlanningButton";
 import { TasksButton } from "@/components/dashboard/TasksButton";
 import { TodayStats } from "@/components/dashboard/TodayStats";
+import { ToolsSection } from "@/components/dashboard/ToolsSection";
 import ClientProvider from "@/components/ClientProvider";
 
 export const dynamic = "force-dynamic";
@@ -48,6 +49,9 @@ export default async function DashboardPage() {
               <DailyPlanningButton />
               <TasksButton />
             </div>
+
+            {/* Tools Section */}
+            <ToolsSection />
 
             {/* Pro Tip */}
             <div className="mt-12 rounded-xl bg-gradient-to-r from-brandBlue-50 to-brandBlue-100 dark:from-brandBlue-900/20 dark:to-brandBlue-800/20 p-6 border border-brandBlue-200 dark:border-brandBlue-700">

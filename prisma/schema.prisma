@@ -94,6 +94,9 @@ model Student {
   user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   preferences        StudentPreferences?
   tasks              Task[]
+  studentTools       StudentTool[]
+  toolSuggestions    ToolSuggestion[]
+  effectivenessLogs  EffectivenessLog[]
 
   @@index([userId])
 }
@@ -105,6 +108,9 @@ model Task {
   complexity            TaskComplexity
   category              String?
   dueDate               DateTime?
+  isRecurring           Boolean        @default(false)
+  scheduledDate         DateTime?
+  recurringTaskGroupId  String?
   clarificationComplete Boolean        @default(false)
   clarificationData     Json?
   completed             Boolean        @default(false)
@@ -113,9 +119,13 @@ model Task {
   updatedAt             DateTime       @updatedAt
   conversations         Conversation[]
   student               Student        @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  toolSuggestions       ToolSuggestion[]
+  effectivenessLogs    EffectivenessLog[]
 
   @@index([studentId])
   @@index([dueDate])
+  @@index([scheduledDate])
+  @@index([recurringTaskGroupId])
 }
 
 model Conversation {
@@ -128,6 +138,10 @@ model Conversation {
   conversationType      ConversationType @default(daily_planning)
   dailyConversationDate DateTime?
   taskId                String?
+  conversationMode      String?          // "quick_help" | "deep_dive"
+  currentPhase          String?          // "discovery" | "analysis" | "recommendation"
+  discoveryData         Json?            // Store questions and answers
+  analysisResult        Json?            // Store analysis insights
   student               Student          @relation(fields: [studentId], references: [id], onDelete: Cascade)
   task                  Task?            @relation(fields: [taskId], references: [id], onDelete: Cascade)
 
@@ -184,4 +198,78 @@ enum TaskComplexity {
 enum ConversationType {
   daily_planning
   task_specific
+}
+
+model Tool {
+  id                  String           @id @default(cuid())
+  name                String
+  category            String[]
+  description         String
+  useCases            String[]
+  cost                String
+  studentFriendly     Boolean
+  learningCurve       String
+  website             String
+  features            Json
+  platformAvailability String[]
+  integrations        String[]
+  popularity          String?
+  bestFor             String[]
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
+  studentTools        StudentTool[]
+  toolSuggestions     ToolSuggestion[]
+
+  @@index([name])
+}
+
+model StudentTool {
+  id                  String           @id @default(cuid())
+  studentId           String
+  toolId              String
+  discoveredDate      DateTime         @default(now())
+  adoptedStatus       String           @default("suggested")
+  effectivenessRating Int?
+  featuresDiscovered  Json?
+  notes               String?
+  student             Student          @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  tool                Tool             @relation(fields: [toolId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, toolId])
+  @@index([studentId])
+  @@index([toolId])
+}
+
+model ToolSuggestion {
+  id                String           @id @default(cuid())
+  studentId         String
+  taskId            String?
+  toolId            String
+  context           String
+  suggestedDate     DateTime         @default(now())
+  studentResponse   String?
+  followUpScheduled Boolean          @default(false)
+  student           Student          @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  task              Task?            @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  tool              Tool             @relation(fields: [toolId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+  @@index([taskId])
+  @@index([toolId])
+}
+
+model EffectivenessLog {
+  id              String           @id @default(cuid())
+  studentId       String
+  taskId          String
+  effectiveness   Int
+  timeSpent       Int?
+  completed       Boolean
+  notes           String?
+  loggedAt        DateTime         @default(now())
+  student         Student          @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  task            Task             @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+  @@index([taskId])
 }

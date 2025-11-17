@@ -1,5 +1,8 @@
 import { generateChatCompletion, parseJsonResponse } from "../aiClient";
-import { Message, StudentContext } from "../types";
+import { Message, StudentContext, TaskContext, DiscoveryQuestion, ConversationMode } from "../types";
+import { discoveryQuestionsService } from "./discoveryQuestions";
+import { toolOptimizationService, type ToolOptimizationResult } from "./toolOptimization";
+import { toolRecommendationService, type InefficiencyDetection, type ToolRecommendation } from "./toolRecommendation";
 
 export class ConversationalAI {
   /**
@@ -59,20 +62,47 @@ Return only a JSON array of questions: ["question 1", "question 2", ...]`;
   /**
    * Extract tasks from natural language
    */
-  async extractTasks(text: string, currentTime?: Date): Promise<Array<{ description: string; category: string; complexity: string; urgency: string }>> {
+  async extractTasks(text: string, currentTime?: Date): Promise<Array<{ description: string; category: string; complexity: string; urgency: string; dueDate?: string | null; isRecurring?: boolean }>> {
     const now = currentTime || new Date();
     const timeOfDay = this.getTimeOfDay(now);
     const currentHour = now.getHours();
     const currentMinute = now.getMinutes();
     const timeString = `${String(currentHour).padStart(2, '0')}:${String(currentMinute).padStart(2, '0')}`;
+    const currentDate = now.toISOString().split('T')[0]; // YYYY-MM-DD format
+    const dayOfWeek = now.toLocaleDateString('en-US', { weekday: 'long' });
     
     const prompt = `Extract individual tasks from: "${text}"
 
-IMPORTANT: Current time is ${timeString} (${timeOfDay}). When suggesting times for tasks, consider:
-- If it's morning (before 12pm), tasks can be scheduled for today morning, afternoon, or evening
-- If it's afternoon (12pm-5pm), tasks should be scheduled for today afternoon or evening
-- If it's evening (after 5pm), tasks should be scheduled for today evening or tomorrow
-- Never schedule tasks in the past
+IMPORTANT: Current date/time is ${currentDate} (${dayOfWeek}) at ${timeString} (${timeOfDay}).
+
+When extracting tasks, look for due date/time references in the text such as:
+- Relative dates: "tomorrow", "next Friday", "in 3 days", "next week", "this Friday"
+- Absolute dates: "December 15th", "Friday the 20th", "next Monday"
+- Time references: "by 5pm", "before noon", "end of day"
+- Event-based: "before the test", "after the exam", "by the deadline"
+
+RECURRING TASKS: Identify tasks that should be done daily until a due date/event. These include:
+- Study tasks: "study for exam", "study for test", "review for", "prepare for exam"
+- Practice tasks: "practice", "work on daily", "daily practice"
+- Preparation tasks: "prepare for", "get ready for"
+- Tasks that imply daily repetition until an event: "study until", "practice until"
+
+For recurring tasks:
+- Set isRecurring: true
+- Extract the due date/event date as dueDate
+- These tasks will be scheduled for each day from today until the due date
+
+For one-time tasks (assignments, papers, single events):
+- Set isRecurring: false
+- Extract due date if mentioned
+
+For each task, extract the due date if mentioned:
+- Parse relative dates based on current date: ${currentDate} (${dayOfWeek})
+- Convert to ISO 8601 format (YYYY-MM-DDTHH:mm:ss) or null if no due date mentioned
+- If only a date is mentioned (no time), set time to end of day (23:59:59) in the user's local timezone
+- If only a time is mentioned (no date), assume today if the time is in the future, otherwise tomorrow
+- Never set due dates in the past
+- Recurring tasks MUST have a dueDate (if no due date, treat as one-time task)
 
 Return JSON:
 {
@@ -81,7 +111,9 @@ Return JSON:
       "description": "clear task description",
       "category": "exam|assignment|life|other",
       "complexity": "simple|medium|complex",
-      "urgency": "high|medium|low"
+      "urgency": "high|medium|low",
+      "dueDate": "ISO 8601 date string or null if no due date mentioned",
+      "isRecurring": true or false (true for daily tasks like "study for exam", false for one-time tasks like "write paper")
     }
   ]
 }`;
@@ -92,7 +124,7 @@ Return JSON:
     );
 
     try {
-      const parsed = parseJsonResponse(response) as { tasks?: Array<{ description: string; category: string; complexity: string; urgency: string }> };
+      const parsed = parseJsonResponse(response) as { tasks?: Array<{ description: string; category: string; complexity: string; urgency: string; dueDate?: string | null; isRecurring?: boolean }> };
       return parsed.tasks || [];
     } catch {
       // Fallback: create a single task from the text
@@ -102,6 +134,8 @@ Return JSON:
           category: "other",
           complexity: "medium",
           urgency: "medium",
+          dueDate: null,
+          isRecurring: false,
         },
       ];
     }
@@ -115,6 +149,182 @@ Return JSON:
     if (hour < 12) return "morning";
     if (hour < 17) return "afternoon";
     return "evening";
+  }
+
+  /**
+   * Start deep dive discovery - generate initial questions
+   */
+  async startDeepDive(
+    task: TaskContext,
+    context: StudentContext
+  ): Promise<{ questions: DiscoveryQuestion[], initialMessage: string }> {
+    const questions = await discoveryQuestionsService.generateDiscoveryQuestions(task, context);
+    
+    const initialMessage = `Got it - ${task.description}. Let me ask a few questions so I can help you prepare effectively:
+
+${questions[0]?.question || "What have you been doing to prepare for this task?"}`;
+
+    return {
+      questions,
+      initialMessage,
+    };
+  }
+
+  /**
+   * Process discovery answer and determine next question
+   */
+  async processDiscoveryAnswer(
+    questionId: string,
+    answer: string,
+    mode: ConversationMode,
+    task: TaskContext
+  ): Promise<{ 
+    nextQuestion?: string,
+    phase: "discovery" | "analysis" | "recommendation",
+    shouldProceedToRecommendations: boolean 
+  }> {
+    // Update the question with the answer
+    const questions = mode.discoveryQuestions || [];
+    const questionIndex = questions.findIndex((q) => q.id === questionId);
+    
+    if (questionIndex >= 0) {
+      questions[questionIndex].answered = true;
+      questions[questionIndex].answer = answer;
+    }
+
+    // Collect all answers
+    const answers: Record<string, string> = {};
+    questions.forEach((q) => {
+      if (q.answered && q.answer) {
+        answers[q.id] = q.answer;
+      }
+    });
+
+    // Check if we should proceed to analysis
+    const shouldProceed = discoveryQuestionsService.shouldProceedToAnalysis(
+      questions.filter((q) => q.answered),
+      questions
+    );
+
+    if (shouldProceed) {
+      return {
+        phase: "analysis",
+        shouldProceedToRecommendations: true,
+      };
+    }
+
+    // Generate next question
+    const nextQuestion = await discoveryQuestionsService.generateFollowUpQuestion(
+      answers,
+      task,
+      questions
+    );
+
+    return {
+      nextQuestion: nextQuestion || undefined,
+      phase: "discovery",
+      shouldProceedToRecommendations: false,
+    };
+  }
+
+  /**
+   * Analyze collected discovery data and generate insights
+   */
+  async analyzeDiscoveryData(
+    answers: Record<string, string>,
+    task: TaskContext,
+    studentContext: StudentContext
+  ): Promise<{
+    inefficiencies: InefficiencyDetection[],
+    toolOptimizations: ToolOptimizationResult[],
+    newToolRecommendations: ToolRecommendation[]
+  }> {
+    // Detect inefficiencies
+    const inefficiency = await toolRecommendationService.detectInefficiency(
+      task,
+      answers
+    );
+
+    const inefficiencies: InefficiencyDetection[] = [];
+    if (inefficiency) {
+      inefficiencies.push(inefficiency);
+    }
+
+    // Check for existing tools mentioned in answers
+    const toolOptimizations: ToolOptimizationResult[] = [];
+    const answerText = Object.values(answers).join(" ").toLowerCase();
+    
+    // Check if student mentioned any of their current tools
+    if (studentContext.currentTools) {
+      for (const tool of studentContext.currentTools) {
+        if (answerText.includes(tool.name.toLowerCase())) {
+          // Find how they're using it
+          const usageMatch = answers[Object.keys(answers).find((k) => 
+            answers[k].toLowerCase().includes(tool.name.toLowerCase())
+          ) || ""] || "";
+
+          if (usageMatch) {
+            const optimization = await toolOptimizationService.analyzeCurrentToolUsage(
+              tool.name,
+              usageMatch,
+              task
+            );
+            toolOptimizations.push(optimization);
+          }
+        }
+      }
+    }
+
+    // Get new tool recommendations
+    const newToolRecommendations = await toolRecommendationService.recommendForTask(
+      task,
+      studentContext
+    );
+
+    return {
+      inefficiencies,
+      toolOptimizations,
+      newToolRecommendations,
+    };
+  }
+
+  /**
+   * Generate comprehensive response with all recommendations
+   */
+  async generateComprehensiveRecommendation(
+    analysisResult: {
+      inefficiencies: InefficiencyDetection[],
+      toolOptimizations: ToolOptimizationResult[],
+      newToolRecommendations: ToolRecommendation[]
+    },
+    task: TaskContext,
+    studentContext: StudentContext
+  ): Promise<string> {
+    const prompt = `Generate a comprehensive, helpful response for a student based on this analysis:
+
+Task: "${task.description}"
+Student: ${studentContext.name}
+
+Analysis Results:
+${JSON.stringify(analysisResult, null, 2)}
+
+Create a response that:
+1. Acknowledges what you learned about their approach
+2. Explains any inefficiencies you found (educational component)
+3. If they're using existing tools, shows how to optimize them with step-by-step guides
+4. Suggests new tools if relevant (but prioritize optimizing existing tools first)
+5. Provides a personalized study plan or approach
+6. Is encouraging and supportive
+7. Offers quick start vs full system options when appropriate
+
+Format the response naturally, like a helpful coach. Include specific steps, examples, and actionable advice.`;
+
+    const response = await generateChatCompletion(
+      [{ role: "user", content: prompt }],
+      "SONNET" // Use Claude for better analysis and synthesis
+    );
+
+    return response;
   }
 
   private buildSystemPrompt(context: StudentContext): string {
@@ -135,6 +345,10 @@ Your role:
 - Remember context from previous conversations
 
 ${context.preferences ? `Student preferences: ${JSON.stringify(context.preferences)}` : ""}
+
+${context.currentTools && context.currentTools.length > 0
+  ? `\n\nTools ${context.name} currently uses:\n${context.currentTools.map((t) => `- ${t.name}`).join("\n")}\n\nWhen relevant to a task, remind them to use these tools. Do not suggest these tools again as new recommendations.`
+  : ""}
 
 Be natural, supportive, and focused on helping them work smarter.`;
 
@@ -168,7 +382,29 @@ Current context: Task-Specific Help
 - Focus on providing specific help, clarification, and guidance for THIS task
 - Suggest tools, techniques, or strategies relevant to this specific task
 - Ask questions to understand what they need help with
-- Be encouraging and solution-oriented`;
+- Be encouraging and solution-oriented
+
+TOOL RECOMMENDATION GUIDANCE:
+- When the student asks for help with tools, methods, or better approaches, you can suggest relevant productivity tools
+- If they mention inefficient methods (like copying notes, re-reading, manual organization), gently suggest better alternatives
+- Available tool categories include: study apps (flashcards, spaced repetition), time management, note-taking, writing assistance, organization, study techniques, and AI learning tools
+- When suggesting tools, explain WHY it helps with their specific task and HOW to get started
+- Be conversational - frame suggestions as helpful tips, not commands
+- If they ask "what tools can help?" or "is there a better way?", provide specific tool recommendations`;
+    }
+
+    // Add deep dive mode instructions
+    if (context.conversationMode?.type === "deep_dive") {
+      const modeInstructions = `
+DEEP DIVE MODE:
+- You are in discovery phase - ask ONE question at a time
+- Wait for the student's answer before asking the next question
+- Be patient, empathetic, and focused on understanding their workflow
+- Ask follow-up questions that dig deeper into their specific approach
+- Identify existing tools they mention and think about how to optimize them
+- When you have enough information, proceed to analysis phase`;
+      
+      return `${basePrompt}\n\n${modeInstructions}`;
     }
 
     return basePrompt;

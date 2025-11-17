@@ -1,7 +1,10 @@
 "use client";
 
-import { CheckCircle2, Circle, Clock } from "lucide-react";
+import { useState } from "react";
+import { CheckCircle2, Circle, Clock, Edit2, X } from "lucide-react";
 import { format } from "date-fns";
+import { toast } from "react-toastify";
+import { api } from "@/lib/trpc/react";
 import { TaskCompletion } from "./TaskCompletion";
 import { TaskChat } from "./TaskChat";
 
@@ -19,6 +22,64 @@ interface TaskCardProps {
 }
 
 export function TaskCard({ task, onComplete }: TaskCardProps) {
+  const [isEditingDueDate, setIsEditingDueDate] = useState(false);
+  const [dueDateValue, setDueDateValue] = useState(() => {
+    if (task.dueDate) {
+      const date = new Date(task.dueDate);
+      // Format for datetime-local input: YYYY-MM-DDTHH:mm
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+      return `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+    return "";
+  });
+
+  const updateDueDate = api.task.updateDueDate.useMutation({
+    onSuccess: () => {
+      toast.success("Due date updated!");
+      setIsEditingDueDate(false);
+      onComplete?.(); // Refresh the task list
+    },
+    onError: (error) => {
+      toast.error("Failed to update due date: " + error.message);
+    },
+  });
+
+  const handleSaveDueDate = () => {
+    if (dueDateValue) {
+      const date = new Date(dueDateValue);
+      updateDueDate.mutate({
+        taskId: task.id,
+        dueDate: date,
+      });
+    } else {
+      // Clear due date
+      updateDueDate.mutate({
+        taskId: task.id,
+        dueDate: null,
+      });
+    }
+  };
+
+  const handleCancelEdit = () => {
+    // Reset to original value
+    if (task.dueDate) {
+      const date = new Date(task.dueDate);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+      setDueDateValue(`${year}-${month}-${day}T${hours}:${minutes}`);
+    } else {
+      setDueDateValue("");
+    }
+    setIsEditingDueDate(false);
+  };
+
   const complexityColors = {
     simple: "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400",
     medium: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400",
@@ -60,7 +121,59 @@ export function TaskCard({ task, onComplete }: TaskCardProps) {
             >
               {task.complexity}
             </span>
-            {task.dueDate && (
+            {!task.completed && (
+              <div className="flex items-center gap-1">
+                {isEditingDueDate ? (
+                  <div className="flex items-center gap-1">
+                    <input
+                      type="datetime-local"
+                      value={dueDateValue}
+                      onChange={(e) => setDueDateValue(e.target.value)}
+                      className="text-xs px-2 py-1 rounded border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                      disabled={updateDueDate.isPending}
+                    />
+                    <button
+                      onClick={handleSaveDueDate}
+                      disabled={updateDueDate.isPending}
+                      className="text-xs px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                      title="Save"
+                    >
+                      ✓
+                    </button>
+                    <button
+                      onClick={handleCancelEdit}
+                      disabled={updateDueDate.isPending}
+                      className="text-xs px-2 py-1 rounded bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                      title="Cancel"
+                    >
+                      <X size={12} />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-1">
+                    {task.dueDate ? (
+                      <span className="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400 flex items-center gap-1">
+                        <Clock size={12} />
+                        {format(new Date(task.dueDate), "MMM d, h:mm a")}
+                      </span>
+                    ) : (
+                      <span className="text-xs px-2 py-1 rounded bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 flex items-center gap-1">
+                        <Clock size={12} />
+                        No due date
+                      </span>
+                    )}
+                    <button
+                      onClick={() => setIsEditingDueDate(true)}
+                      className="text-xs p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                      title="Edit due date"
+                    >
+                      <Edit2 size={12} />
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+            {task.completed && task.dueDate && (
               <span className="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400 flex items-center gap-1">
                 <Clock size={12} />
                 {format(new Date(task.dueDate), "MMM d, h:mm a")}

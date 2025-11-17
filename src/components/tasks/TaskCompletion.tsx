@@ -38,9 +38,11 @@ export function TaskCompletion({ taskId, onComplete }: TaskCompletionProps) {
   const completeTask = api.task.complete.useMutation({
     onSuccess: (_, variables) => {
       toast.success("Task completed!");
+      setIsCompleting(false);
       
       // Show proactive suggestion if effectiveness is poor (<3)
       if (variables.effectiveness !== undefined && variables.effectiveness < 3) {
+        setShowRating(false); // Hide rating form first
         setShowProactiveSuggestion(true);
       } else {
         onComplete?.();
@@ -82,84 +84,7 @@ export function TaskCompletion({ taskId, onComplete }: TaskCompletionProps) {
     }
   };
 
-  if (showRating) {
-    return (
-      <div className="space-y-4 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
-        <h4 className="font-medium text-gray-900 dark:text-white">
-          How did it go?
-        </h4>
-        
-        <div>
-          <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
-            Effectiveness (1-5 stars)
-          </label>
-          <div className="flex gap-2">
-            {[1, 2, 3, 4, 5].map((rating) => (
-              <button
-                key={rating}
-                type="button"
-                onClick={() => setEffectiveness(rating)}
-                className={`flex-1 rounded-lg border px-4 py-2 text-center transition-colors ${
-                  effectiveness === rating
-                    ? "border-blue-500 bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400"
-                    : "border-gray-300 text-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
-                }`}
-              >
-                {rating} ⭐
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
-            Time spent (minutes, optional)
-          </label>
-          <input
-            type="number"
-            value={timeSpent}
-            onChange={(e) => setTimeSpent(e.target.value)}
-            placeholder="e.g., 30 or 1.5 (hours)"
-            min="0"
-            step="0.5"
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-          />
-        </div>
-
-        <div>
-          <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
-            Notes (optional)
-          </label>
-          <textarea
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            placeholder="What worked well? What didn't?"
-            rows={2}
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-          />
-        </div>
-
-        <div className="flex gap-2">
-          <Button
-            variant="outline"
-            onClick={() => setShowRating(false)}
-            className="flex-1"
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={handleComplete}
-            disabled={isCompleting}
-            className="flex-1"
-          >
-            {isCompleting ? "Completing..." : "Complete"}
-          </Button>
-        </div>
-      </div>
-    );
-  }
-
-  // Show proactive tool suggestions if effectiveness was poor
+  // Show proactive tool suggestions if effectiveness was poor (check this first)
   if (showProactiveSuggestion) {
     if (diagnosticStep === 'initial') {
       return (
@@ -305,6 +230,83 @@ export function TaskCompletion({ taskId, onComplete }: TaskCompletionProps) {
         </div>
       );
     }
+  }
+
+  if (showRating) {
+    return (
+      <div className="space-y-4 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
+        <h4 className="font-medium text-gray-900 dark:text-white">
+          How did it go?
+        </h4>
+        
+        <div>
+          <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+            Effectiveness (1-5 stars)
+          </label>
+          <div className="flex gap-2">
+            {[1, 2, 3, 4, 5].map((rating) => (
+              <button
+                key={rating}
+                type="button"
+                onClick={() => setEffectiveness(rating)}
+                className={`flex-1 rounded-lg border px-4 py-2 text-center transition-colors ${
+                  effectiveness === rating
+                    ? "border-blue-500 bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400"
+                    : "border-gray-300 text-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
+                }`}
+              >
+                {rating} ⭐
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+            Time spent (minutes, optional)
+          </label>
+          <input
+            type="number"
+            value={timeSpent}
+            onChange={(e) => setTimeSpent(e.target.value)}
+            placeholder="e.g., 30 or 1.5 (hours)"
+            min="0"
+            step="0.5"
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+          />
+        </div>
+
+        <div>
+          <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+            Notes (optional)
+          </label>
+          <textarea
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            placeholder="What worked well? What didn't?"
+            rows={2}
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+          />
+        </div>
+
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            onClick={() => setShowRating(false)}
+            className="flex-1"
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleComplete}
+            disabled={isCompleting}
+            className="flex-1"
+          >
+            {isCompleting ? "Completing..." : "Complete"}
+          </Button>
+        </div>
+      </div>
+    );
   }
 
   return (

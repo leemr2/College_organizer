@@ -217,7 +217,7 @@ export async function generateChatCompletion(
           model: modelId,
           input: messages.map((message) => ({
             role: message.role,
-            content: [{ type: "text", text: message.content }],
+            content: [{ type: "input_text", text: message.content }],
           })),
           ...(reasoning ? { reasoning } : {}),
           ...(text ? { text } : {}),

@@ -8,6 +8,7 @@ import type { StudentContext } from "@/lib/types";
 import type { Prisma } from "@prisma/client";
 import { generateChatCompletion, parseJsonResponse } from "@/lib/aiClient";
 import type { Tool } from "@/lib/utils/toolDatabase";
+import { toolOptimizationService } from "@/lib/ai/toolOptimization";
 
 export const toolRouter = createTRPCRouter({
   // Search tools by query parameters
@@ -524,6 +525,74 @@ Return JSON:
       return {
         analysis: parsed.analysis,
         recommendations,
+      };
+    }),
+
+  // Optimize existing tool usage
+  optimizeExistingTool: protectedProcedure
+    .input(
+      z.object({
+        toolId: z.string(),
+        taskId: z.string(),
+        currentUsage: z.string(),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      const student = await prisma.student.findUnique({
+        where: { userId: ctx.session.user.id },
+      });
+
+      if (!student) throw new Error("Student not found");
+
+      const task = await prisma.task.findUnique({
+        where: { id: input.taskId },
+      });
+
+      if (!task || task.studentId !== student.id) {
+        throw new Error("Task not found");
+      }
+
+      const tool = getToolById(input.toolId);
+      if (!tool) {
+        throw new Error("Tool not found");
+      }
+
+      const taskContext = {
+        id: task.id,
+        description: task.description,
+        complexity: task.complexity,
+        category: task.category,
+        dueDate: task.dueDate,
+        completed: task.completed,
+      };
+
+      const optimization = await toolOptimizationService.analyzeCurrentToolUsage(
+        tool.name,
+        input.currentUsage,
+        taskContext
+      );
+
+      return optimization;
+    }),
+
+  // Research tool tips using web search
+  researchToolTips: protectedProcedure
+    .input(
+      z.object({
+        toolName: z.string(),
+        useCase: z.string(),
+      })
+    )
+    .query(async ({ input }) => {
+      const features = await toolOptimizationService.researchAdvancedFeatures(
+        input.toolName,
+        input.useCase
+      );
+
+      return {
+        toolName: input.toolName,
+        useCase: input.useCase,
+        features,
       };
     }),
 });

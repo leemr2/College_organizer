@@ -138,6 +138,10 @@ model Conversation {
   conversationType      ConversationType @default(daily_planning)
   dailyConversationDate DateTime?
   taskId                String?
+  conversationMode      String?          // "quick_help" | "deep_dive"
+  currentPhase          String?          // "discovery" | "analysis" | "recommendation"
+  discoveryData         Json?            // Store questions and answers
+  analysisResult        Json?            // Store analysis insights
   student               Student          @relation(fields: [studentId], references: [id], onDelete: Cascade)
   task                  Task?            @relation(fields: [taskId], references: [id], onDelete: Cascade)
 

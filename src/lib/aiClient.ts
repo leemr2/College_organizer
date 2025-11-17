@@ -1,26 +1,29 @@
 /**
- * AI provider facade coordinating OpenAI, Perplexity, and Gemini chat completions.
+ * AI provider facade coordinating OpenAI, Perplexity, Gemini, and Anthropic Claude chat completions.
  *
  * Key Behaviors:
  * - Routes model identifiers to the proper provider client; normalizes Gemini calls via generateGeminiWebResponse.
  * - Uses OpenAI Responses API for GPT-5 with optional reasoning/text parameters.
+ * - Supports Anthropic Claude models for research and analysis tasks.
  *
  * Inputs/Outputs:
- * - Inputs: env OPENAI_API_KEY, PERPLEXITY_API_KEY, GEMINI_API_KEY; chat message history.
+ * - Inputs: env OPENAI_API_KEY, PERPLEXITY_API_KEY, GEMINI_API_KEY, ANTHROPIC_API_KEY; chat message history.
  * - Outputs: text reply string; Gemini responses may include sourceLink metadata.
  *
  * Dependencies:
- * - openai SDK, @google/generative-ai, global fetch for Responses API requests.
+ * - openai SDK, @google/generative-ai, @anthropic-ai/sdk, global fetch for Responses API requests.
  *
  * Side Effects:
  * - Issues outbound HTTPS calls to third-party AI providers; logs errors on failure.
  *
  * Recent Changes:
  * - 2025-09-23: Added GPT-5 Responses API bridge and Gemini 2.5 model support.
+ * - 2025-01-XX: Added Anthropic Claude support for research and analysis.
  */
 
 import OpenAI from "openai";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import Anthropic from "@anthropic-ai/sdk";
 
 // Custom type for Gemini API request
 interface GeminiGroundedResponse {
@@ -110,11 +113,20 @@ const perplexity = new OpenAI({
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
+const anthropic = new Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY,
+});
+
 function getClientForModel(model: AIModel): AIClientResponse {
   const modelId = AI_MODELS[model];
 
   if (modelId.includes("sonar")) {
     return { client: perplexity, type: "openai" };
+  }
+
+  if (modelId.startsWith("claude")) {
+    // Return anthropic client wrapped in OpenAI-compatible structure
+    return { client: anthropic as unknown as OpenAI, type: "openai" };
   }
 
   return { client: openai, type: "openai" };
@@ -200,6 +212,36 @@ export async function generateChatCompletion(
         false,
       );
       return geminiResp.text;
+    }
+
+    // Handle Claude/Anthropic models
+    if (modelId.startsWith("claude")) {
+      if (!process.env.ANTHROPIC_API_KEY) {
+        throw new Error("ANTHROPIC_API_KEY is not configured");
+      }
+
+      // Convert messages to Anthropic format
+      // Anthropic uses system/user/assistant roles, but system must be separate
+      const systemMessage = messages.find((m) => m.role === "system");
+      const conversationMessages = messages
+        .filter((m) => m.role !== "system")
+        .map((m) => ({
+          role: m.role === "assistant" ? "assistant" : "user",
+          content: m.content,
+        })) as Array<{ role: "user" | "assistant"; content: string }>;
+
+      const response = await anthropic.messages.create({
+        model: modelId,
+        max_tokens: 4096,
+        system: systemMessage?.content || "",
+        messages: conversationMessages,
+      });
+
+      // Extract text from response
+      const textContent = response.content.find(
+        (item) => item.type === "text",
+      );
+      return textContent?.type === "text" ? textContent.text : "";
     }
 
     if (modelId.startsWith("gpt-5")) {

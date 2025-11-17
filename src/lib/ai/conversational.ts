@@ -1,5 +1,8 @@
 import { generateChatCompletion, parseJsonResponse } from "../aiClient";
-import { Message, StudentContext } from "../types";
+import { Message, StudentContext, TaskContext, DiscoveryQuestion, ConversationMode } from "../types";
+import { discoveryQuestionsService } from "./discoveryQuestions";
+import { toolOptimizationService, type ToolOptimizationResult } from "./toolOptimization";
+import { toolRecommendationService, type InefficiencyDetection, type ToolRecommendation } from "./toolRecommendation";
 
 export class ConversationalAI {
   /**
@@ -148,6 +151,182 @@ Return JSON:
     return "evening";
   }
 
+  /**
+   * Start deep dive discovery - generate initial questions
+   */
+  async startDeepDive(
+    task: TaskContext,
+    context: StudentContext
+  ): Promise<{ questions: DiscoveryQuestion[], initialMessage: string }> {
+    const questions = await discoveryQuestionsService.generateDiscoveryQuestions(task, context);
+    
+    const initialMessage = `Got it - ${task.description}. Let me ask a few questions so I can help you prepare effectively:
+
+${questions[0]?.question || "What have you been doing to prepare for this task?"}`;
+
+    return {
+      questions,
+      initialMessage,
+    };
+  }
+
+  /**
+   * Process discovery answer and determine next question
+   */
+  async processDiscoveryAnswer(
+    questionId: string,
+    answer: string,
+    mode: ConversationMode,
+    task: TaskContext
+  ): Promise<{ 
+    nextQuestion?: string,
+    phase: "discovery" | "analysis" | "recommendation",
+    shouldProceedToRecommendations: boolean 
+  }> {
+    // Update the question with the answer
+    const questions = mode.discoveryQuestions || [];
+    const questionIndex = questions.findIndex((q) => q.id === questionId);
+    
+    if (questionIndex >= 0) {
+      questions[questionIndex].answered = true;
+      questions[questionIndex].answer = answer;
+    }
+
+    // Collect all answers
+    const answers: Record<string, string> = {};
+    questions.forEach((q) => {
+      if (q.answered && q.answer) {
+        answers[q.id] = q.answer;
+      }
+    });
+
+    // Check if we should proceed to analysis
+    const shouldProceed = discoveryQuestionsService.shouldProceedToAnalysis(
+      questions.filter((q) => q.answered),
+      questions
+    );
+
+    if (shouldProceed) {
+      return {
+        phase: "analysis",
+        shouldProceedToRecommendations: true,
+      };
+    }
+
+    // Generate next question
+    const nextQuestion = await discoveryQuestionsService.generateFollowUpQuestion(
+      answers,
+      task,
+      questions
+    );
+
+    return {
+      nextQuestion: nextQuestion || undefined,
+      phase: "discovery",
+      shouldProceedToRecommendations: false,
+    };
+  }
+
+  /**
+   * Analyze collected discovery data and generate insights
+   */
+  async analyzeDiscoveryData(
+    answers: Record<string, string>,
+    task: TaskContext,
+    studentContext: StudentContext
+  ): Promise<{
+    inefficiencies: InefficiencyDetection[],
+    toolOptimizations: ToolOptimizationResult[],
+    newToolRecommendations: ToolRecommendation[]
+  }> {
+    // Detect inefficiencies
+    const inefficiency = await toolRecommendationService.detectInefficiency(
+      task,
+      answers
+    );
+
+    const inefficiencies: InefficiencyDetection[] = [];
+    if (inefficiency) {
+      inefficiencies.push(inefficiency);
+    }
+
+    // Check for existing tools mentioned in answers
+    const toolOptimizations: ToolOptimizationResult[] = [];
+    const answerText = Object.values(answers).join(" ").toLowerCase();
+    
+    // Check if student mentioned any of their current tools
+    if (studentContext.currentTools) {
+      for (const tool of studentContext.currentTools) {
+        if (answerText.includes(tool.name.toLowerCase())) {
+          // Find how they're using it
+          const usageMatch = answers[Object.keys(answers).find((k) => 
+            answers[k].toLowerCase().includes(tool.name.toLowerCase())
+          ) || ""] || "";
+
+          if (usageMatch) {
+            const optimization = await toolOptimizationService.analyzeCurrentToolUsage(
+              tool.name,
+              usageMatch,
+              task
+            );
+            toolOptimizations.push(optimization);
+          }
+        }
+      }
+    }
+
+    // Get new tool recommendations
+    const newToolRecommendations = await toolRecommendationService.recommendForTask(
+      task,
+      studentContext
+    );
+
+    return {
+      inefficiencies,
+      toolOptimizations,
+      newToolRecommendations,
+    };
+  }
+
+  /**
+   * Generate comprehensive response with all recommendations
+   */
+  async generateComprehensiveRecommendation(
+    analysisResult: {
+      inefficiencies: InefficiencyDetection[],
+      toolOptimizations: ToolOptimizationResult[],
+      newToolRecommendations: ToolRecommendation[]
+    },
+    task: TaskContext,
+    studentContext: StudentContext
+  ): Promise<string> {
+    const prompt = `Generate a comprehensive, helpful response for a student based on this analysis:
+
+Task: "${task.description}"
+Student: ${studentContext.name}
+
+Analysis Results:
+${JSON.stringify(analysisResult, null, 2)}
+
+Create a response that:
+1. Acknowledges what you learned about their approach
+2. Explains any inefficiencies you found (educational component)
+3. If they're using existing tools, shows how to optimize them with step-by-step guides
+4. Suggests new tools if relevant (but prioritize optimizing existing tools first)
+5. Provides a personalized study plan or approach
+6. Is encouraging and supportive
+7. Offers quick start vs full system options when appropriate
+
+Format the response naturally, like a helpful coach. Include specific steps, examples, and actionable advice.`;
+
+    const response = await generateChatCompletion(
+      [{ role: "user", content: prompt }],
+      "SONNET" // Use Claude for better analysis and synthesis
+    );
+
+    return response;
+  }
+
   private buildSystemPrompt(context: StudentContext): string {
     const now = context.currentTime || new Date();
     const timeOfDay = this.getTimeOfDay(now);
@@ -212,6 +391,20 @@ TOOL RECOMMENDATION GUIDANCE:
 - When suggesting tools, explain WHY it helps with their specific task and HOW to get started
 - Be conversational - frame suggestions as helpful tips, not commands
 - If they ask "what tools can help?" or "is there a better way?", provide specific tool recommendations`;
+    }
+
+    // Add deep dive mode instructions
+    if (context.conversationMode?.type === "deep_dive") {
+      const modeInstructions = `
+DEEP DIVE MODE:
+- You are in discovery phase - ask ONE question at a time
+- Wait for the student's answer before asking the next question
+- Be patient, empathetic, and focused on understanding their workflow
+- Ask follow-up questions that dig deeper into their specific approach
+- Identify existing tools they mention and think about how to optimize them
+- When you have enough information, proceed to analysis phase`;
+      
+      return `${basePrompt}\n\n${modeInstructions}`;
     }
 
     return basePrompt;

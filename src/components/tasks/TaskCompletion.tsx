@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle2, X } from "lucide-react";
 import { toast } from "react-toastify";
 import { ToolRecommendation } from "./ToolRecommendation";
+import SpeechToTextArea from "@/components/SpeechToTextArea";
 
 interface TaskCompletionProps {
   taskId: string;
@@ -114,26 +115,32 @@ export function TaskCompletion({ taskId, onComplete }: TaskCompletionProps) {
             <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
               What specifically didn't work well?
             </label>
-            <textarea
-              value={whatDidntWork}
-              onChange={(e) => setWhatDidntWork(e.target.value)}
-              placeholder="e.g., 'I kept getting distracted', 'The material was confusing', 'I ran out of time'"
-              rows={2}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-            />
+            <div className="w-full">
+              <SpeechToTextArea
+                value={whatDidntWork}
+                onChange={(e) => setWhatDidntWork(e.target.value)}
+                placeholder="e.g., 'I kept getting distracted', 'The material was confusing', 'I ran out of time' - or use the microphone to record"
+                isLoading={false}
+                shouldSubmitOnEnter={false}
+                minHeight="60px"
+              />
+            </div>
           </div>
           
           <div>
             <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
               What challenges did you face?
             </label>
-            <textarea
-              value={challengesFaced}
-              onChange={(e) => setChallengesFaced(e.target.value)}
-              placeholder="e.g., 'Hard to focus', 'Material was dense', 'Not sure if I was studying right'"
-              rows={2}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-            />
+            <div className="w-full">
+              <SpeechToTextArea
+                value={challengesFaced}
+                onChange={(e) => setChallengesFaced(e.target.value)}
+                placeholder="e.g., 'Hard to focus', 'Material was dense', 'Not sure if I was studying right' - or use the microphone to record"
+                isLoading={false}
+                shouldSubmitOnEnter={false}
+                minHeight="60px"
+              />
+            </div>
           </div>
           
           <div className="flex gap-2">

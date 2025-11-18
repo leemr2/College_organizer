@@ -446,6 +446,50 @@ const optimization = await api.tool.optimizeExistingTool.mutate({
 - `tool.optimizeExistingTool`: Analyze and optimize existing tool usage with web search
 - `tool.researchToolTips`: Research advanced features for a tool using web search
 
+### Scheduling System (Phase 3)
+
+**ScheduleBlock Model**: Daily time blocks for tasks, classes, breaks
+- Relations: Student, Task (optional)
+- Types: class, task, break, commitment, lunch, dinner
+- `reasoning`: AI explanation for scheduling decision
+- `isRecurring`: Boolean flag for recurring task blocks
+
+**Scheduling Flow**:
+1. Morning check-in captures tasks (including recurring tasks with `scheduledDate`)
+2. Student triggers "Generate schedule" (via button or chat prompt)
+3. `scheduleRouter.generateDailySchedule` queries tasks for target date:
+   - Tasks WHERE `scheduledDate = targetDate` (includes recurring tasks for that day)
+   - OR (dueDate = targetDate AND isRecurring = false) (one-time tasks due today)
+4. `SchedulingService.generateDailySchedule()` analyzes context (tasks, classes, preferences)
+5. AI generates time blocks with reasoning using GPT-5
+6. ScheduleBlock records created in database
+7. Display in dashboard with drag-and-drop
+
+**Rescheduling**:
+- Drag block to new time: Opens reschedule dialog
+- Request AI suggestions: `scheduleRouter.requestReschedule` → `SchedulingService.suggestRescheduleOptions()`
+- Shows 2-3 alternative times with reasoning
+- Apply reschedule: `scheduleRouter.applyReschedule` updates block times
+
+**Recurring Tasks**:
+- Detected during task extraction (`isRecurring=true` when user says "study for test next Wednesday")
+- Multiple Task records created: one per day from today until dueDate (max 30 days)
+- Each task has `scheduledDate` set to its specific day
+- During schedule generation, recurring tasks for that day are included automatically
+- Recurring task blocks are placeholders - can be adjusted based on priority
+
+**Schedule Components**:
+- `ScheduleView`: Full-day schedule display with time blocks (6am-10pm)
+- `ScheduleBlock`: Individual block component with drag handle
+- `RescheduleDialog`: Modal for AI-suggested rescheduling options
+- `ScheduleGenerationPrompt`: Prompt shown after task extraction in chat
+
+**Phase 4 Preparation**:
+- `SchedulingService` designed for algorithm improvements
+- `calculatePriority()` stub for advanced scoring (currently basic: due date + complexity)
+- Additional context fields ready (energy times, patterns, dependencies)
+- Algorithm can be enhanced without changing API or UI
+
 ### Deep Dive Conversation Patterns (Phase 2)
 
 **Conversation Modes**:
@@ -764,7 +808,7 @@ Before considering documentation complete:
 4. **Ensure consistency** across all documentation files
 5. **Test code examples** if included in documentation
 
-## Current Phase: Intelligence Layer (Phase 2)
+## Current Phase: Scheduling & Time Blocking (Phase 3.0)
 
 Completed features (Phase 1):
 - ✅ User authentication and onboarding
@@ -795,14 +839,23 @@ Completed features (Phase 2):
 - ✅ ToolOptimizationCard component: UI for displaying tool optimization results
 - ✅ Claude integration: Anthropic Claude Sonnet for research, analysis, and deep dive conversations
 
-Next phase (Phase 3 - Scheduling & Proactive):
-- Intelligent time block generation
-- Schedule optimization algorithm
+Completed features (Phase 3.0):
+- ✅ ScheduleBlock model with RLS
+- ✅ Basic scheduling algorithm (fill available time slots)
+- ✅ AI-powered schedule generation with reasoning (GPT-5)
+- ✅ Drag-and-drop rescheduling (using @dnd-kit)
+- ✅ AI reschedule suggestions with alternative times
+- ✅ Recurring task automation (daily scheduling until due date)
+- ✅ Dashboard schedule view integration
+- ✅ Schedule generation prompt in chat interface
+- ✅ Completion tracking (schedule block completion syncs with task completion)
+
+Next phase (Phase 3.5 - Proactive Check-Ins):
 - Proactive check-ins during study blocks
 - End of day review
-- Pattern recognition
+- Pattern recognition (basic)
 
-Phase 3 preparation:
-- Calendar components designed for ScheduleBlock integration
-- WeekCalendarView component ready for dashboard integration
-- TimeBlockEditor supports both ClassSchedule and future ScheduleBlock types
+Phase 4 preparation:
+- SchedulingService algorithm designed for enhancement
+- calculatePriority() stub ready for advanced scoring
+- Context fields ready for energy optimization and dependencies

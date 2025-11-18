@@ -105,6 +105,47 @@ export interface StudentContext {
 }
 
 // ============================================
+// SCHEDULING TYPES
+// ============================================
+
+export interface ScheduleBlockData {
+  id: string;
+  title: string;
+  description?: string;
+  startTime: Date;
+  endTime: Date;
+  type: "class" | "task" | "break" | "commitment" | "lunch" | "dinner";
+  completed: boolean;
+  taskId?: string;
+  reasoning?: string; // AI explanation
+}
+
+export interface SchedulingContext {
+  tasks: TaskContext[];
+  classSchedules: ClassScheduleData[];
+  existingBlocks: ScheduleBlockData[];
+  preferences: StudentPreferences;
+  currentDate: Date;
+  timezone: string;
+}
+
+export interface ScheduleSuggestion {
+  blocks: ScheduleBlockData[];
+  reasoning: string; // Overall explanation of schedule strategy
+  warnings?: string[]; // e.g., "This is a packed day, consider rescheduling non-urgent tasks"
+}
+
+export interface RescheduleOptions {
+  taskId: string;
+  currentBlockId: string;
+  suggestedTimes: Array<{
+    startTime: Date;
+    endTime: Date;
+    reasoning: string;
+  }>;
+}
+
+// ============================================
 // ONBOARDING
 // ============================================
 

@@ -97,6 +97,7 @@ model Student {
   studentTools       StudentTool[]
   toolSuggestions    ToolSuggestion[]
   effectivenessLogs  EffectivenessLog[]
+  scheduleBlocks     ScheduleBlock[]
 
   @@index([userId])
 }
@@ -121,6 +122,7 @@ model Task {
   student               Student        @relation(fields: [studentId], references: [id], onDelete: Cascade)
   toolSuggestions       ToolSuggestion[]
   effectivenessLogs    EffectivenessLog[]
+  scheduleBlocks        ScheduleBlock[]
 
   @@index([studentId])
   @@index([dueDate])
@@ -198,6 +200,40 @@ enum TaskComplexity {
 enum ConversationType {
   daily_planning
   task_specific
+}
+
+enum ScheduleBlockType {
+  class
+  task
+  break
+  commitment
+  lunch
+  dinner
+}
+
+model ScheduleBlock {
+  id             String            @id @default(cuid())
+  studentId      String
+  taskId         String?
+  title          String
+  description    String?
+  startTime      DateTime
+  endTime        DateTime
+  type           ScheduleBlockType
+  completed      Boolean           @default(false)
+  completionTime DateTime?
+  reasoning      String?          // AI explanation for scheduling decision
+  isRecurring    Boolean          @default(false)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  
+  student        Student           @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  task           Task?            @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  
+  @@index([studentId])
+  @@index([taskId])
+  @@index([startTime])
+  @@index([completed])
 }
 
 model Tool {

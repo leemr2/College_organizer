@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { api } from "@/lib/trpc/react";
 import { MessageList } from "./MessageList";
 import { VoiceInput } from "./VoiceInput";
+import { ScheduleGenerationPrompt } from "@/components/schedule/ScheduleGenerationPrompt";
 import { toast } from "react-toastify";
 import { Message } from "@/lib/types";
 
@@ -16,6 +17,7 @@ export function ChatInterface({ conversationType = "daily_planning", taskId }: C
   const [conversationId, setConversationId] = useState<string | undefined>();
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [showSchedulePrompt, setShowSchedulePrompt] = useState(false);
 
   // Get or create conversation based on type
   const { data: dailyConversation } = api.chat.getDailyConversation.useQuery(
@@ -87,6 +89,10 @@ export function ChatInterface({ conversationType = "daily_planning", taskId }: C
     onSuccess: (tasks) => {
       if (tasks.length > 0) {
         toast.success(`Extracted ${tasks.length} task${tasks.length > 1 ? "s" : ""} from your message!`);
+        // Show schedule generation prompt after tasks are extracted (only in daily planning mode)
+        if (conversationType === "daily_planning") {
+          setShowSchedulePrompt(true);
+        }
       }
     },
     onError: (error) => {
@@ -149,6 +155,13 @@ export function ChatInterface({ conversationType = "daily_planning", taskId }: C
       {/* Message List */}
       <div className="flex-1 overflow-y-auto">
         <MessageList messages={messages} isLoading={isLoading} />
+        {showSchedulePrompt && conversationType === "daily_planning" && (
+          <div className="px-4 pb-4">
+            <ScheduleGenerationPrompt
+              onScheduleGenerated={() => setShowSchedulePrompt(false)}
+            />
+          </div>
+        )}
       </div>
 
       {/* Input Area */}

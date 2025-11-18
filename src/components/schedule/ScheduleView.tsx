@@ -4,7 +4,6 @@ import { useState, useMemo } from "react";
 import { api } from "@/lib/trpc/react";
 import { ScheduleBlockData } from "@/lib/types";
 import { ScheduleBlock } from "./ScheduleBlock";
-import { RescheduleDialog } from "./RescheduleDialog";
 import { toast } from "react-toastify";
 import { Calendar, Loader2 } from "lucide-react";
 import {
@@ -67,8 +66,6 @@ function DraggableScheduleBlock({
 }
 
 export function ScheduleView({ date, onDateChange, className = "" }: ScheduleViewProps) {
-  const [reschedulingBlock, setReschedulingBlock] = useState<ScheduleBlockData | null>(null);
-  
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -154,15 +151,6 @@ export function ScheduleView({ date, onDateChange, className = "" }: ScheduleVie
     });
   };
 
-  const handleBlockReschedule = (block: ScheduleBlockData) => {
-    setReschedulingBlock(block);
-  };
-
-  const handleRescheduleComplete = () => {
-    setReschedulingBlock(null);
-    refetch();
-  };
-
   const formatTime = (date: Date): string => {
     return date.toLocaleTimeString("en-US", {
       hour: "numeric",
@@ -184,17 +172,44 @@ export function ScheduleView({ date, onDateChange, className = "" }: ScheduleVie
   };
 
   const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
+    const { active, delta } = event;
     
-    if (!over || !scheduleBlocks) return;
+    if (!scheduleBlocks) return;
 
     const draggedBlock = scheduleBlocks.find(b => b.id === active.id);
     if (!draggedBlock) return;
 
-    // Calculate new time based on drop position
-    // For simplicity, we'll use the reschedule dialog for now
-    // Full drag-to-time-slot implementation would require more complex logic
-    setReschedulingBlock(draggedBlock);
+    // If no movement, don't update
+    if (delta.y === 0) return;
+
+    // Calculate new time based on vertical displacement
+    // 60px = 1 hour, so delta.y / 60 = hours moved
+    const minutesMoved = Math.round((delta.y / 60) * 60); // Convert to minutes
+    
+    // Calculate new start and end times
+    const newStartTime = new Date(draggedBlock.startTime);
+    newStartTime.setMinutes(newStartTime.getMinutes() + minutesMoved);
+    
+    const newEndTime = new Date(draggedBlock.endTime);
+    newEndTime.setMinutes(newEndTime.getMinutes() + minutesMoved);
+
+    // Ensure times are within 6am-10pm range
+    const minTime = new Date(newStartTime);
+    minTime.setHours(6, 0, 0, 0);
+    const maxTime = new Date(newStartTime);
+    maxTime.setHours(22, 0, 0, 0);
+
+    if (newStartTime < minTime || newEndTime > maxTime) {
+      toast.error("Cannot schedule outside of 6am-10pm");
+      return;
+    }
+
+    // Update the block with new times
+    updateBlock.mutate({
+      blockId: draggedBlock.id,
+      startTime: newStartTime,
+      endTime: newEndTime,
+    });
   };
 
   if (isLoading) {
@@ -299,7 +314,7 @@ export function ScheduleView({ date, onDateChange, className = "" }: ScheduleVie
                       <DraggableScheduleBlock
                         block={block}
                         onClick={() => handleBlockClick(block)}
-                        onReschedule={() => handleBlockReschedule(block)}
+                        onReschedule={() => {}}
                       />
                     </div>
                   );
@@ -310,13 +325,6 @@ export function ScheduleView({ date, onDateChange, className = "" }: ScheduleVie
         </div>
       )}
 
-      {reschedulingBlock && (
-        <RescheduleDialog
-          block={reschedulingBlock}
-          onClose={() => setReschedulingBlock(null)}
-          onComplete={handleRescheduleComplete}
-        />
-      )}
     </div>
   );
 }

@@ -69,13 +69,27 @@ Return JSON:
 
 IMPORTANT: When linking to a task, use the EXACT task ID shown in the task list. Do not generate new IDs or use descriptions as IDs.`;
 
-    const response = await generateChatCompletion(
-      [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: userPrompt }
-      ],
-      "GPT_5"
-    );
+    let response: string;
+    try {
+      // Try GPT-5 first
+      response = await generateChatCompletion(
+        [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userPrompt }
+        ],
+        "GPT_5"
+      );
+    } catch (error) {
+      // Fallback to GPT-4o if GPT-5 fails
+      console.warn("GPT-5 unavailable, falling back to GPT-4o:", error instanceof Error ? error.message : String(error));
+      response = await generateChatCompletion(
+        [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userPrompt }
+        ],
+        "GPT_4O"
+      );
+    }
 
     try {
       const parsed = parseJsonResponse(response) as {
@@ -193,10 +207,21 @@ Rank the top 3 time slots and provide reasoning for each. Return JSON:
   ]
 }`;
 
-    const response = await generateChatCompletion(
-      [{ role: "user", content: prompt }],
-      "GPT_5"
-    );
+    let response: string;
+    try {
+      // Try GPT-5 first
+      response = await generateChatCompletion(
+        [{ role: "user", content: prompt }],
+        "GPT_5"
+      );
+    } catch (error) {
+      // Fallback to GPT-4o if GPT-5 fails
+      console.warn("GPT-5 unavailable, falling back to GPT-4o:", error instanceof Error ? error.message : String(error));
+      response = await generateChatCompletion(
+        [{ role: "user", content: prompt }],
+        "GPT_4O"
+      );
+    }
 
     try {
       const parsed = parseJsonResponse(response) as {

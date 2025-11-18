@@ -43,9 +43,9 @@ export function ScheduleBlock({ block, onClick, onReschedule, className = "" }: 
   return (
     <div
       className={`
-        rounded-lg border p-2 text-sm transition-all
+        rounded-lg border p-2 text-sm transition-all cursor-grab active:cursor-grabbing
         ${colorClass}
-        ${isClickable ? "cursor-pointer hover:shadow-md hover:scale-[1.02]" : ""}
+        ${isClickable ? "hover:shadow-lg" : ""}
         ${block.completed ? "opacity-60" : ""}
         ${className}
       `}
@@ -82,18 +82,9 @@ export function ScheduleBlock({ block, onClick, onReschedule, className = "" }: 
           <span className="text-xs px-1.5 py-0.5 rounded bg-white/50 dark:bg-black/20">
             {typeLabels[block.type]}
           </span>
-          {onReschedule && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onReschedule();
-              }}
-              className="p-1 hover:bg-white/50 dark:hover:bg-black/20 rounded"
-              title="Reschedule"
-            >
-              <GripVertical className="h-4 w-4 text-gray-400" />
-            </button>
-          )}
+          <div className="p-1" title="Drag to reschedule">
+            <GripVertical className="h-4 w-4 text-gray-400" />
+          </div>
         </div>
       </div>
     </div>

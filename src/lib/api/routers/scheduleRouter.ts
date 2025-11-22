@@ -2,7 +2,7 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { prisma } from "@/lib/db";
 import { schedulingService } from "@/lib/ai/scheduling";
-import { getUserTimezone, getDateStartInTimezone, getDateEndInTimezone } from "@/lib/utils/timezone";
+import { getUserTimezone, getDateStartInTimezone, getDateEndInTimezone, createDateAtTimeInTimezone } from "@/lib/utils/timezone";
 import type { SchedulingContext, ScheduleBlockData, TaskContext, ClassScheduleData } from "@/lib/types";
 
 export const scheduleRouter = createTRPCRouter({
@@ -172,36 +172,79 @@ export const scheduleRouter = createTRPCRouter({
         throw new Error(`Failed to generate schedule: ${errorMessage}`);
       }
 
-      // Create ScheduleBlock records
+      // Create ScheduleBlock records with validation
       let createdBlocks;
       try {
+        // Validate all blocks before attempting to save
+        for (const block of suggestion.blocks) {
+          // Validate dates are valid
+          if (isNaN(block.startTime.getTime()) || isNaN(block.endTime.getTime())) {
+            throw new Error(`Invalid date values in block "${block.title}": startTime or endTime is invalid`);
+          }
+          
+          // Validate time range
+          if (block.endTime <= block.startTime) {
+            throw new Error(`Invalid time range in block "${block.title}": endTime must be after startTime`);
+          }
+          
+          // Validate dates are within reasonable bounds
+          const minDate = new Date('1970-01-01');
+          const maxDate = new Date('2100-01-01');
+          if (block.startTime < minDate || block.startTime > maxDate || 
+              block.endTime < minDate || block.endTime > maxDate) {
+            throw new Error(`Date out of valid range in block "${block.title}"`);
+          }
+          
+          // Validate dates are within the target date range (with some tolerance)
+          const dateStart = getDateStartInTimezone(targetDate, timezone);
+          const dateEnd = getDateEndInTimezone(targetDate, timezone);
+          const dayBefore = new Date(dateStart.getTime() - 24 * 60 * 60 * 1000);
+          const dayAfter = new Date(dateEnd.getTime() + 24 * 60 * 60 * 1000);
+          
+          if (block.startTime < dayBefore || block.startTime > dayAfter) {
+            console.warn(`Block "${block.title}" startTime is outside target date range, but allowing it`);
+          }
+        }
+        
         // Create a map of valid task IDs for validation
         const validTaskIds = new Set(tasks.map(t => t.id));
         
-        createdBlocks = await prisma.$transaction(
-          suggestion.blocks.map(block => {
-            // Validate taskId - only use it if it exists in our tasks
-            const taskId = block.taskId && validTaskIds.has(block.taskId) ? block.taskId : null;
-            const linkedTask = taskId ? tasks.find(t => t.id === taskId) : null;
-            
-            return prisma.scheduleBlock.create({
-              data: {
-                studentId: student.id,
-                taskId: taskId, // Will be null if invalid or not provided
-                title: block.title,
-                description: block.description || null,
-                startTime: block.startTime,
-                endTime: block.endTime,
-                type: block.type,
-                reasoning: block.reasoning || null,
-                isRecurring: linkedTask?.isRecurring || false,
-              },
-            });
-          })
-        );
+        createdBlocks = await prisma.$transaction(async (tx) => {
+          return Promise.all(
+            suggestion.blocks.map(block => {
+              // Validate taskId - only use it if it exists in our tasks
+              const taskId = block.taskId && validTaskIds.has(block.taskId) ? block.taskId : null;
+              const linkedTask = taskId ? tasks.find(t => t.id === taskId) : null;
+              
+              return tx.scheduleBlock.create({
+                data: {
+                  studentId: student.id,
+                  taskId: taskId, // Will be null if invalid or not provided
+                  title: block.title,
+                  description: block.description || null,
+                  startTime: block.startTime,
+                  endTime: block.endTime,
+                  type: block.type,
+                  reasoning: block.reasoning || null,
+                  isRecurring: linkedTask?.isRecurring || false,
+                },
+              });
+            })
+          );
+        });
       } catch (error) {
-        const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
-        throw new Error(`Failed to save schedule: ${errorMessage}`);
+        // Enhanced error handling
+        if (error instanceof Error) {
+          // Check if it's a Prisma error
+          if (error.message.includes('Can\'t reach database')) {
+            throw new Error(`Database connection error. Please try again in a moment.`);
+          }
+          if (error.message.includes('timeout')) {
+            throw new Error(`Request timed out. The schedule may be too large. Please try again.`);
+          }
+          throw new Error(`Failed to save schedule: ${error.message}`);
+        }
+        throw new Error(`Failed to save schedule: Unknown error occurred`);
       }
 
       return {
@@ -277,10 +320,10 @@ export const scheduleRouter = createTRPCRouter({
             if (meetingTime.day === dayName) {
               const [startHour, startMin] = meetingTime.startTime.split(":").map(Number);
               const [endHour, endMin] = meetingTime.endTime.split(":").map(Number);
-              const blockStart = new Date(currentDate);
-              blockStart.setHours(startHour, startMin, 0, 0);
-              const blockEnd = new Date(currentDate);
-              blockEnd.setHours(endHour, endMin, 0, 0);
+              
+              // Create dates in the user's timezone using the helper function
+              const blockStart = createDateAtTimeInTimezone(currentDate, startHour, startMin, timezone);
+              const blockEnd = createDateAtTimeInTimezone(currentDate, endHour, endMin, timezone);
 
               classBlocks.push({
                 id: `class-${schedule.id}-${currentDate.toISOString()}`,
@@ -336,6 +379,12 @@ export const scheduleRouter = createTRPCRouter({
 
       if (!student) throw new Error("Student not found");
 
+      // Check if this is a class block (synthetic ID starting with "class-")
+      // Class blocks cannot be updated as they don't exist in the database
+      if (input.blockId.startsWith("class-")) {
+        throw new Error("Class schedule times are fixed and cannot be rescheduled. Please edit the class schedule instead.");
+      }
+
       // Get the block
       const block = await prisma.scheduleBlock.findUnique({
         where: { id: input.blockId },
@@ -344,6 +393,36 @@ export const scheduleRouter = createTRPCRouter({
 
       if (!block || block.studentId !== student.id) {
         throw new Error("Schedule block not found");
+      }
+      
+      // Validate dates if provided
+      if (input.startTime !== undefined) {
+        if (isNaN(input.startTime.getTime())) {
+          throw new Error("Invalid startTime value");
+        }
+        const minDate = new Date('1970-01-01');
+        const maxDate = new Date('2100-01-01');
+        if (input.startTime < minDate || input.startTime > maxDate) {
+          throw new Error("startTime is out of valid range");
+        }
+      }
+      
+      if (input.endTime !== undefined) {
+        if (isNaN(input.endTime.getTime())) {
+          throw new Error("Invalid endTime value");
+        }
+        const minDate = new Date('1970-01-01');
+        const maxDate = new Date('2100-01-01');
+        if (input.endTime < minDate || input.endTime > maxDate) {
+          throw new Error("endTime is out of valid range");
+        }
+      }
+      
+      // Validate time range if both are provided
+      const finalStartTime = input.startTime ?? block.startTime;
+      const finalEndTime = input.endTime ?? block.endTime;
+      if (finalEndTime <= finalStartTime) {
+        throw new Error("endTime must be after startTime");
       }
 
       // Update block

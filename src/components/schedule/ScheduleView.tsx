@@ -179,6 +179,12 @@ export function ScheduleView({ date, onDateChange, className = "" }: ScheduleVie
     const draggedBlock = scheduleBlocks.find(b => b.id === active.id);
     if (!draggedBlock) return;
 
+    // Prevent dragging class blocks (they have synthetic IDs starting with "class-")
+    if (draggedBlock.id.startsWith("class-")) {
+      toast.error("Class schedule times are fixed and cannot be rescheduled. Please edit the class schedule in your profile settings.");
+      return;
+    }
+
     // If no movement, don't update
     if (delta.y === 0) return;
 

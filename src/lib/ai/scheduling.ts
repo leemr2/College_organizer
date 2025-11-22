@@ -8,6 +8,7 @@
 
 import { generateChatCompletion, parseJsonResponse } from "../aiClient";
 import { SchedulingContext, ScheduleSuggestion, ScheduleBlockData, RescheduleOptions, TaskContext } from "../types";
+import { parseAIDateInTimezone } from "../utils/timezone";
 
 export class SchedulingService {
   /**
@@ -24,7 +25,33 @@ export class SchedulingService {
     const classScheduleDescription = this.formatClassSchedule(context.classSchedules);
     const existingBlocksDescription = this.formatExistingBlocks(context.existingBlocks);
 
-    const userPrompt = `Generate a daily schedule for ${context.currentDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}.
+    // Format the target date in the user's timezone for the AI
+    const targetDateStr = context.currentDate.toLocaleDateString('en-US', { 
+      weekday: 'long', 
+      month: 'long', 
+      day: 'numeric',
+      year: 'numeric',
+      timeZone: context.timezone 
+    });
+    
+    // Get example times in the user's timezone
+    const exampleMorning = new Date(context.currentDate);
+    exampleMorning.setHours(9, 0, 0, 0);
+    const exampleAfternoon = new Date(context.currentDate);
+    exampleAfternoon.setHours(14, 0, 0, 0);
+    
+    const exampleMorningStr = exampleMorning.toLocaleTimeString('en-US', { 
+      hour: '2-digit', 
+      minute: '2-digit',
+      timeZone: context.timezone 
+    });
+    const exampleAfternoonStr = exampleAfternoon.toLocaleTimeString('en-US', { 
+      hour: '2-digit', 
+      minute: '2-digit',
+      timeZone: context.timezone 
+    });
+
+    const userPrompt = `Generate a daily schedule for ${targetDateStr} in timezone ${context.timezone}.
 
 TASKS TO SCHEDULE:
 ${tasksDescription}
@@ -50,14 +77,22 @@ INSTRUCTIONS:
 7. Use realistic time estimates based on task complexity
 8. Schedule recurring tasks with placeholder times (they can be adjusted)
 
+CRITICAL TIMEZONE INSTRUCTIONS:
+- The user's timezone is: ${context.timezone}
+- All times must be generated for ${targetDateStr} in this timezone
+- Generate ISO 8601 datetime strings WITHOUT timezone suffix (e.g., "2025-11-19T09:00:00" not "2025-11-19T09:00:00Z")
+- The times should represent local time in ${context.timezone} (e.g., ${exampleMorningStr} should be "2025-11-19T09:00:00", ${exampleAfternoonStr} should be "2025-11-19T14:00:00")
+- DO NOT include 'Z' suffix or timezone offsets - just the date and time in format YYYY-MM-DDTHH:mm:ss
+- The system will interpret these times as being in ${context.timezone}
+
 Return JSON:
 {
   "blocks": [
     {
       "title": "task title",
       "description": "optional description",
-      "startTime": "ISO 8601 datetime string",
-      "endTime": "ISO 8601 datetime string",
+      "startTime": "ISO 8601 datetime string (YYYY-MM-DDTHH:mm:ss, NO timezone suffix)",
+      "endTime": "ISO 8601 datetime string (YYYY-MM-DDTHH:mm:ss, NO timezone suffix)",
       "type": "task|break|lunch|dinner",
       "reasoning": "why this time slot",
       "taskId": "EXACT task ID from the task list above (must match exactly) or omit if not a task block"
@@ -67,7 +102,9 @@ Return JSON:
   "warnings": ["warning 1", "warning 2"] // optional
 }
 
-IMPORTANT: When linking to a task, use the EXACT task ID shown in the task list. Do not generate new IDs or use descriptions as IDs.`;
+IMPORTANT: 
+- When linking to a task, use the EXACT task ID shown in the task list. Do not generate new IDs or use descriptions as IDs.
+- Generate times WITHOUT timezone suffix (no 'Z', no '+/-HH:mm') - just YYYY-MM-DDTHH:mm:ss format.`;
 
     let response: string;
     try {
@@ -110,18 +147,47 @@ IMPORTANT: When linking to a task, use the EXACT task ID shown in the task list.
         throw new Error("No blocks generated");
       }
 
-      // Convert to ScheduleBlockData format
+      // Convert to ScheduleBlockData format with timezone-aware parsing
       const blocks: ScheduleBlockData[] = parsed.blocks.map((block, index) => {
-        // Parse dates with validation
-        const startTime = new Date(block.startTime);
-        const endTime = new Date(block.endTime);
+        let startTime: Date;
+        let endTime: Date;
         
-        if (isNaN(startTime.getTime()) || isNaN(endTime.getTime())) {
-          throw new Error(`Invalid date format in block ${index}: startTime=${block.startTime}, endTime=${block.endTime}`);
+        try {
+          // Parse dates with timezone awareness
+          startTime = parseAIDateInTimezone(block.startTime, context.timezone, context.currentDate);
+          endTime = parseAIDateInTimezone(block.endTime, context.timezone, context.currentDate);
+        } catch (error) {
+          throw new Error(
+            `Invalid date format in block ${index} (${block.title}): ${error instanceof Error ? error.message : String(error)}. ` +
+            `startTime=${block.startTime}, endTime=${block.endTime}`
+          );
         }
         
+        // Validate dates are valid
+        if (isNaN(startTime.getTime()) || isNaN(endTime.getTime())) {
+          throw new Error(`Invalid date values in block ${index}: startTime=${block.startTime}, endTime=${block.endTime}`);
+        }
+        
+        // Validate time range
         if (endTime <= startTime) {
-          throw new Error(`Invalid time range in block ${index}: endTime must be after startTime`);
+          throw new Error(`Invalid time range in block ${index} (${block.title}): endTime must be after startTime`);
+        }
+        
+        // Validate dates are within reasonable bounds (not too far in past/future)
+        const minDate = new Date('1970-01-01');
+        const maxDate = new Date('2100-01-01');
+        if (startTime < minDate || startTime > maxDate || endTime < minDate || endTime > maxDate) {
+          throw new Error(`Date out of valid range in block ${index} (${block.title}): startTime=${block.startTime}, endTime=${block.endTime}`);
+        }
+        
+        // Validate dates are on the target date (within 24 hours of target date start)
+        const targetDateStart = new Date(context.currentDate);
+        targetDateStart.setHours(0, 0, 0, 0);
+        const targetDateEnd = new Date(targetDateStart);
+        targetDateEnd.setDate(targetDateEnd.getDate() + 1);
+        
+        if (startTime < targetDateStart || startTime >= targetDateEnd) {
+          console.warn(`Block ${index} (${block.title}) startTime is not on target date: ${startTime.toISOString()}, target: ${context.currentDate.toISOString()}`);
         }
         
         return {

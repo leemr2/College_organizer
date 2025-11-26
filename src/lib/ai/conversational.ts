@@ -62,18 +62,49 @@ Return only a JSON array of questions: ["question 1", "question 2", ...]`;
   /**
    * Extract tasks from natural language
    */
-  async extractTasks(text: string, currentTime?: Date): Promise<Array<{ description: string; category: string; complexity: string; urgency: string; dueDate?: string | null; isRecurring?: boolean }>> {
+  async extractTasks(
+    text: string, 
+    currentTime?: Date,
+    timezone?: string
+  ): Promise<Array<{ description: string; category: string; complexity: string; urgency: string; dueDate?: string | null; isRecurring?: boolean }>> {
     const now = currentTime || new Date();
-    const timeOfDay = this.getTimeOfDay(now);
-    const currentHour = now.getHours();
-    const currentMinute = now.getMinutes();
+    const tz = timezone || "UTC";
+    
+    // Format date/time in user's timezone
+    const dateFormatter = new Intl.DateTimeFormat("en-US", {
+      timeZone: tz,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      weekday: "long",
+    });
+    
+    const timeFormatter = new Intl.DateTimeFormat("en-US", {
+      timeZone: tz,
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+    
+    const dateParts = dateFormatter.formatToParts(now);
+    const timeParts = timeFormatter.formatToParts(now);
+    
+    const currentYear = dateParts.find(p => p.type === "year")?.value || "";
+    const currentMonth = dateParts.find(p => p.type === "month")?.value || "";
+    const currentDay = dateParts.find(p => p.type === "day")?.value || "";
+    const dayOfWeek = dateParts.find(p => p.type === "weekday")?.value || "";
+    const currentHour = parseInt(timeParts.find(p => p.type === "hour")?.value || "0");
+    const currentMinute = parseInt(timeParts.find(p => p.type === "minute")?.value || "0");
+    
+    const currentDate = `${currentYear}-${currentMonth}-${currentDay}`;
     const timeString = `${String(currentHour).padStart(2, '0')}:${String(currentMinute).padStart(2, '0')}`;
-    const currentDate = now.toISOString().split('T')[0]; // YYYY-MM-DD format
-    const dayOfWeek = now.toLocaleDateString('en-US', { weekday: 'long' });
+    
+    // Get time of day in user's timezone
+    const timeOfDay = this.getTimeOfDayInTimezone(now, tz);
     
     const prompt = `Extract individual tasks from: "${text}"
 
-IMPORTANT: Current date/time is ${currentDate} (${dayOfWeek}) at ${timeString} (${timeOfDay}).
+IMPORTANT: Current date/time is ${currentDate} (${dayOfWeek}) at ${timeString} (${timeOfDay}) in timezone ${tz}.
 
 When extracting tasks, look for due date/time references in the text such as:
 - Relative dates: "tomorrow", "next Friday", "in 3 days", "next week", "this Friday"
@@ -97,12 +128,13 @@ For one-time tasks (assignments, papers, single events):
 - Extract due date if mentioned
 
 For each task, extract the due date if mentioned:
-- Parse relative dates based on current date: ${currentDate} (${dayOfWeek})
+- Parse relative dates based on current date: ${currentDate} (${dayOfWeek}) in timezone ${tz}
 - Convert to ISO 8601 format (YYYY-MM-DDTHH:mm:ss) or null if no due date mentioned
-- If only a date is mentioned (no time), set time to end of day (23:59:59) in the user's local timezone
-- If only a time is mentioned (no date), assume today if the time is in the future, otherwise tomorrow
-- Never set due dates in the past
+- If only a date is mentioned (no time), set time to end of day (23:59:59) in timezone ${tz}
+- If only a time is mentioned (no date), assume TODAY (${currentDate}) if the time is in the future relative to ${timeString}, otherwise TOMORROW
+- Never set due dates in the past relative to ${currentDate} ${timeString} ${tz}
 - Recurring tasks MUST have a dueDate (if no due date, treat as one-time task)
+- IMPORTANT: "today" means ${currentDate} in ${tz}, "tomorrow" means the day after ${currentDate} in ${tz}
 
 Return JSON:
 {
@@ -146,6 +178,22 @@ Return JSON:
    */
   private getTimeOfDay(date: Date): string {
     const hour = date.getHours();
+    if (hour < 12) return "morning";
+    if (hour < 17) return "afternoon";
+    return "evening";
+  }
+
+  /**
+   * Get time of day description in a specific timezone
+   */
+  private getTimeOfDayInTimezone(date: Date, timezone: string): string {
+    const formatter = new Intl.DateTimeFormat("en-US", {
+      timeZone: timezone,
+      hour: "2-digit",
+      hour12: false,
+    });
+    const parts = formatter.formatToParts(date);
+    const hour = parseInt(parts.find(p => p.type === "hour")?.value || "0");
     if (hour < 12) return "morning";
     if (hour < 17) return "afternoon";
     return "evening";

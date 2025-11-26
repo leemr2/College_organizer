@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MessageSquare, CheckSquare, LayoutDashboard, LogOut, Shield, Settings } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
+import { Clock } from "@/components/dashboard/Clock";
 
 export function NavigationBar() {
   const pathname = usePathname();
@@ -52,7 +53,8 @@ export function NavigationBar() {
               })}
             </div>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center gap-4">
+            <Clock compact={true} />
             <button
               onClick={() => signOut({ callbackUrl: "/" })}
               className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"

@@ -81,11 +81,31 @@ export interface DiscoveryQuestion {
   answer?: string;
 }
 
+// Draft task (not yet in DB)
+export interface DraftTask {
+  tempId: string; // temporary ID for tracking
+  description: string;
+  category: string;
+  complexity: "simple" | "medium" | "complex";
+  urgency: string;
+  dueDate: Date | null;
+  isRecurring: boolean;
+}
+
+// Planning session state
+export interface PlanningSessionState {
+  status: "active" | "generating_schedule" | "completed";
+  draftTasks: DraftTask[];
+  scheduleSuggestion?: ScheduleSuggestion;
+  lastUpdated: string; // ISO timestamp
+}
+
 export interface ConversationMode {
-  type: "quick_help" | "deep_dive";
-  currentPhase?: "discovery" | "analysis" | "recommendation";
+  type: "quick_help" | "deep_dive" | "planning_session";
+  currentPhase?: "discovery" | "analysis" | "recommendation" | "task_extraction" | "schedule_generation";
   discoveryQuestions?: DiscoveryQuestion[];
   currentQuestionIndex?: number;
+  planningSession?: PlanningSessionState;
 }
 
 export interface StudentContext {

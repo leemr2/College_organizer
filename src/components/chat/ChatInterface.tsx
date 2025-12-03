@@ -5,8 +5,10 @@ import { api } from "@/lib/trpc/react";
 import { MessageList } from "./MessageList";
 import { VoiceInput } from "./VoiceInput";
 import { ScheduleGenerationPrompt } from "@/components/schedule/ScheduleGenerationPrompt";
+import { DraftTaskPreview } from "./DraftTaskPreview";
+import { SchedulePreview } from "./SchedulePreview";
 import { toast } from "react-toastify";
-import { Message } from "@/lib/types";
+import { Message, DraftTask, ScheduleSuggestion, ConversationMode } from "@/lib/types";
 
 interface ChatInterfaceProps {
   conversationType?: "daily_planning" | "task_specific";
@@ -18,9 +20,13 @@ export function ChatInterface({ conversationType = "daily_planning", taskId }: C
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showSchedulePrompt, setShowSchedulePrompt] = useState(false);
+  const [draftTasks, setDraftTasks] = useState<DraftTask[]>([]);
+  const [scheduleSuggestion, setScheduleSuggestion] = useState<ScheduleSuggestion | null>(null);
+
+  const utils = api.useUtils();
 
   // Get or create conversation based on type
-  const { data: dailyConversation } = api.chat.getDailyConversation.useQuery(
+  const { data: dailyConversation, refetch: refetchDailyConversation } = api.chat.getDailyConversation.useQuery(
     undefined,
     { enabled: conversationType === "daily_planning" }
   );
@@ -44,11 +50,58 @@ export function ChatInterface({ conversationType = "daily_planning", taskId }: C
         }));
         setMessages(loadedMessages);
       }
+
+      // Extract draft tasks and schedule from planning session
+      if (conversationType === "daily_planning" && conversation.conversationMode) {
+        // Parse conversationMode from JSON string if needed
+        let mode: ConversationMode | null = null;
+        if (typeof conversation.conversationMode === 'string') {
+          try {
+            mode = JSON.parse(conversation.conversationMode) as ConversationMode;
+          } catch {
+            // Not JSON, treat as simple mode type string
+            mode = { type: conversation.conversationMode as ConversationMode['type'] };
+          }
+        } else {
+          mode = conversation.conversationMode as unknown as ConversationMode;
+        }
+        
+        if (mode?.planningSession) {
+          // Parse dates from strings to Date objects
+          const parsedDraftTasks = (mode.planningSession.draftTasks || []).map((dt: DraftTask & { dueDate?: string | Date | null }) => ({
+            ...dt,
+            dueDate: dt.dueDate ? (typeof dt.dueDate === 'string' ? new Date(dt.dueDate) : dt.dueDate) : null,
+          }));
+          setDraftTasks(parsedDraftTasks);
+          
+          // Parse dates in schedule suggestion if it exists
+          if (mode.planningSession.scheduleSuggestion) {
+            const parsedSuggestion: ScheduleSuggestion = {
+              ...mode.planningSession.scheduleSuggestion,
+              blocks: mode.planningSession.scheduleSuggestion.blocks.map((block: ScheduleSuggestion['blocks'][0] & { startTime?: string | Date; endTime?: string | Date }) => ({
+                ...block,
+                startTime: typeof block.startTime === 'string' ? new Date(block.startTime) : block.startTime,
+                endTime: typeof block.endTime === 'string' ? new Date(block.endTime) : block.endTime,
+              })),
+            };
+            setScheduleSuggestion(parsedSuggestion);
+          } else {
+            setScheduleSuggestion(null);
+          }
+        } else {
+          setDraftTasks([]);
+          setScheduleSuggestion(null);
+        }
+      } else if (conversationType === "daily_planning") {
+        // Reset if no conversationMode
+        setDraftTasks([]);
+        setScheduleSuggestion(null);
+      }
     }
-  }, [conversation]);
+  }, [conversation, conversationType]);
 
   const sendDailyMessage = api.chat.sendDailyMessage.useMutation({
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       setConversationId(data.conversationId);
       setMessages((prev) => [
         ...prev,
@@ -59,6 +112,52 @@ export function ChatInterface({ conversationType = "daily_planning", taskId }: C
         },
       ]);
       setIsLoading(false);
+      // Fetch the updated conversation directly by ID to get planning session
+      if (conversationType === "daily_planning" && data.conversationId) {
+        // Small delay to ensure database transaction is committed
+        setTimeout(async () => {
+          try {
+            const updatedConversation = await utils.chat.getConversation.fetch({ conversationId: data.conversationId });
+            // Update local state with planning session from updated conversation
+            if (updatedConversation?.conversationMode) {
+              let mode: ConversationMode | null = null;
+              if (typeof updatedConversation.conversationMode === 'string') {
+                try {
+                  mode = JSON.parse(updatedConversation.conversationMode) as ConversationMode;
+                } catch {
+                  mode = { type: updatedConversation.conversationMode as ConversationMode['type'] };
+                }
+              } else {
+                mode = updatedConversation.conversationMode as unknown as ConversationMode;
+              }
+              
+              if (mode?.planningSession) {
+                const parsedDraftTasks = (mode.planningSession.draftTasks || []).map((dt: DraftTask & { dueDate?: string | Date | null }) => ({
+                  ...dt,
+                  dueDate: dt.dueDate ? (typeof dt.dueDate === 'string' ? new Date(dt.dueDate) : dt.dueDate) : null,
+                }));
+                setDraftTasks(parsedDraftTasks);
+                
+                if (mode.planningSession.scheduleSuggestion) {
+                  const parsedSuggestion: ScheduleSuggestion = {
+                    ...mode.planningSession.scheduleSuggestion,
+                    blocks: mode.planningSession.scheduleSuggestion.blocks.map((block: ScheduleSuggestion['blocks'][0] & { startTime?: string | Date; endTime?: string | Date }) => ({
+                      ...block,
+                      startTime: typeof block.startTime === 'string' ? new Date(block.startTime) : block.startTime,
+                      endTime: typeof block.endTime === 'string' ? new Date(block.endTime) : block.endTime,
+                    })),
+                  };
+                  setScheduleSuggestion(parsedSuggestion);
+                } else {
+                  setScheduleSuggestion(null);
+                }
+              }
+            }
+          } catch (error) {
+            console.error("Failed to fetch updated conversation:", error);
+          }
+        }, 200);
+      }
     },
     onError: (error) => {
       toast.error("Failed to send message: " + error.message);
@@ -85,19 +184,52 @@ export function ChatInterface({ conversationType = "daily_planning", taskId }: C
     },
   });
 
-  const extractTasks = api.task.extractFromText.useMutation({
-    onSuccess: (tasks) => {
-      if (tasks.length > 0) {
-        toast.success(`Extracted ${tasks.length} task${tasks.length > 1 ? "s" : ""} from your message!`);
-        // Show schedule generation prompt after tasks are extracted (only in daily planning mode)
-        if (conversationType === "daily_planning") {
-          setShowSchedulePrompt(true);
-        }
+  const completePlanning = api.chat.completePlanningSession.useMutation({
+    onSuccess: async (data) => {
+      // Parse dates from strings to Date objects
+      const parsedDraftTasks = data.draftTasks.map(dt => ({
+        ...dt,
+        dueDate: dt.dueDate ? (typeof dt.dueDate === 'string' ? new Date(dt.dueDate) : dt.dueDate) : null,
+      }));
+      setDraftTasks(parsedDraftTasks);
+      
+      // Parse dates in schedule suggestion blocks
+      if (data.scheduleSuggestion) {
+        const parsedSuggestion: ScheduleSuggestion = {
+          ...data.scheduleSuggestion,
+          blocks: data.scheduleSuggestion.blocks.map(block => ({
+            ...block,
+            startTime: typeof block.startTime === 'string' ? new Date(block.startTime) : block.startTime,
+            endTime: typeof block.endTime === 'string' ? new Date(block.endTime) : block.endTime,
+          })),
+        };
+        setScheduleSuggestion(parsedSuggestion);
+      } else {
+        setScheduleSuggestion(null);
+      }
+      
+      toast.success("Schedule generated!");
+      // Don't invalidate - the state is already updated from the mutation response
+      // Invalidating causes a refetch that may create a new conversation
+    },
+    onError: (error) => {
+      toast.error(`Failed to generate schedule: ${error.message}`);
+    },
+  });
+
+  const commitPlanning = api.chat.commitPlanningSession.useMutation({
+    onSuccess: async () => {
+      toast.success("Tasks and schedule saved!");
+      setDraftTasks([]);
+      setScheduleSuggestion(null);
+      setShowSchedulePrompt(false);
+      // Refetch to get the cleared conversation state
+      if (conversationType === "daily_planning") {
+        await refetchDailyConversation();
       }
     },
     onError: (error) => {
-      // Silently fail task extraction - don't interrupt chat flow
-      console.error("Task extraction failed:", error);
+      toast.error(`Failed to save: ${error.message}`);
     },
   });
 
@@ -114,12 +246,8 @@ export function ChatInterface({ conversationType = "daily_planning", taskId }: C
     setIsLoading(true);
 
     try {
-      // Only extract tasks in daily planning mode
-      if (conversationType === "daily_planning") {
-        extractTasks.mutate({ text });
-      }
-
       // Send to backend for chat response
+      // Task extraction now happens inside processMessage on the backend
       if (conversationType === "task_specific" && taskId) {
         await sendTaskMessage.mutateAsync({
           message: text,
@@ -154,6 +282,44 @@ export function ChatInterface({ conversationType = "daily_planning", taskId }: C
 
       {/* Message List */}
       <div className="flex-1 overflow-y-auto">
+        <div className="px-4 py-4 space-y-4">
+          {conversationType === "daily_planning" && draftTasks.length > 0 && (
+            <DraftTaskPreview draftTasks={draftTasks} />
+          )}
+
+          {conversationType === "daily_planning" && scheduleSuggestion && (
+            <SchedulePreview
+              suggestion={scheduleSuggestion}
+              onConfirm={() => {
+                if (conversationId) {
+                  commitPlanning.mutate({ conversationId });
+                }
+              }}
+              onRegenerate={() => {
+                if (conversationId) {
+                  completePlanning.mutate({ conversationId });
+                }
+              }}
+            />
+          )}
+
+          {/* Add "Complete Planning" button when there are draft tasks */}
+          {conversationType === "daily_planning" && draftTasks.length > 0 && !scheduleSuggestion && (
+            <div className="px-4 pb-4">
+              <button
+                onClick={() => {
+                  if (conversationId) {
+                    completePlanning.mutate({ conversationId });
+                  }
+                }}
+                disabled={completePlanning.isPending}
+                className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {completePlanning.isPending ? "Generating Schedule..." : "Generate My Schedule"}
+              </button>
+            </div>
+          )}
+        </div>
         <MessageList messages={messages} isLoading={isLoading} />
         {showSchedulePrompt && conversationType === "daily_planning" && (
           <div className="px-4 pb-4">

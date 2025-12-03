@@ -1,5 +1,5 @@
 import { generateChatCompletion, parseJsonResponse } from "../aiClient";
-import { Message, StudentContext, TaskContext, DiscoveryQuestion, ConversationMode } from "../types";
+import { Message, StudentContext, TaskContext, DiscoveryQuestion, ConversationMode, DraftTask } from "../types";
 import { discoveryQuestionsService } from "./discoveryQuestions";
 import { toolOptimizationService, type ToolOptimizationResult } from "./toolOptimization";
 import { toolRecommendationService, type InefficiencyDetection, type ToolRecommendation } from "./toolRecommendation";
@@ -66,7 +66,7 @@ Return only a JSON array of questions: ["question 1", "question 2", ...]`;
     text: string, 
     currentTime?: Date,
     timezone?: string
-  ): Promise<Array<{ description: string; category: string; complexity: string; urgency: string; dueDate?: string | null; isRecurring?: boolean }>> {
+  ): Promise<DraftTask[]> {
     const now = currentTime || new Date();
     const tz = timezone || "UTC";
     
@@ -126,6 +126,7 @@ For recurring tasks:
 For one-time tasks (assignments, papers, single events):
 - Set isRecurring: false
 - Extract due date if mentioned
+- IMPORTANT: If no due date mentioned for one-time tasks, assume TODAY end of day (23:59:59) in timezone ${tz}
 
 For each task, extract the due date if mentioned:
 - Parse relative dates based on current date: ${currentDate} (${dayOfWeek}) in timezone ${tz}
@@ -157,16 +158,47 @@ Return JSON:
 
     try {
       const parsed = parseJsonResponse(response) as { tasks?: Array<{ description: string; category: string; complexity: string; urgency: string; dueDate?: string | null; isRecurring?: boolean }> };
-      return parsed.tasks || [];
+      const tasks = parsed.tasks || [];
+      
+      // Apply same-day defaults and convert to DraftTask format
+      const tasksWithDefaults: DraftTask[] = tasks.map(task => {
+        let dueDate: Date | null = null;
+        
+        if (task.dueDate) {
+          // Parse the ISO date string
+          dueDate = new Date(task.dueDate);
+        } else if (!task.isRecurring) {
+          // Auto-assign today EOD for same-day tasks (not recurring, no due date)
+          const todayEOD = new Date(now);
+          todayEOD.setHours(23, 59, 59, 999);
+          dueDate = todayEOD;
+        }
+        
+        return {
+          tempId: `draft-${Date.now()}-${Math.random().toString(36).substring(7)}`,
+          description: task.description,
+          category: task.category,
+          complexity: task.complexity as "simple" | "medium" | "complex",
+          urgency: task.urgency,
+          dueDate,
+          isRecurring: task.isRecurring || false,
+        };
+      });
+      
+      return tasksWithDefaults;
     } catch {
       // Fallback: create a single task from the text
+      const todayEOD = new Date(now);
+      todayEOD.setHours(23, 59, 59, 999);
+      
       return [
         {
+          tempId: `draft-${Date.now()}-${Math.random().toString(36).substring(7)}`,
           description: text,
           category: "other",
           complexity: "medium",
           urgency: "medium",
-          dueDate: null,
+          dueDate: todayEOD,
           isRecurring: false,
         },
       ];
@@ -402,15 +434,20 @@ Be natural, supportive, and focused on helping them work smarter.`;
 
     // Add context-specific instructions
     if (context.conversationType === "daily_planning") {
+      const planningSession = context.conversationMode?.planningSession;
+      const draftTaskCount = planningSession?.draftTasks?.length || 0;
+      
       return `${basePrompt}
 
 Current context: Daily Planning Session
 - Current date and time: ${dateString} at ${timeString} (${timeOfDay})
-- Focus on helping ${context.name} plan their day
-- Extract tasks from their natural language input
-- Ask clarifying questions about tasks they mention
-- Help prioritize and organize their day
-- Be encouraging about what they want to accomplish today
+- Draft tasks collected: ${draftTaskCount}
+- Session status: ${planningSession?.status || "starting"}
+- Focus on helping ${context.name} identify and clarify all tasks for today
+- When you've collected all tasks, let them know they can generate their schedule
+- Be conversational and help them think through what needs to be done today
+- For tasks without specific times, they'll be scheduled for today
+- Ask clarifying questions to understand priorities and constraints
 - IMPORTANT: When suggesting times for tasks, be time-aware:
   * It is currently ${timeString} (${timeOfDay})
   * If it's morning (before 12pm), suggest times for today morning, afternoon, or evening
@@ -456,6 +493,54 @@ DEEP DIVE MODE:
     }
 
     return basePrompt;
+  }
+
+  /**
+   * Merge new draft tasks with existing, preventing duplicates
+   */
+  mergeDraftTasks(existing: DraftTask[], newTasks: DraftTask[]): DraftTask[] {
+    const merged = [...existing];
+    
+    for (const newTask of newTasks) {
+      // Check for duplicate by description similarity
+      const isDuplicate = existing.some(
+        t => this.isSimilarTask(t.description, newTask.description)
+      );
+      
+      if (!isDuplicate) {
+        merged.push(newTask);
+      }
+    }
+    
+    return merged;
+  }
+
+  /**
+   * Check if two task descriptions are similar (fuzzy match)
+   */
+  private isSimilarTask(desc1: string, desc2: string): boolean {
+    const normalize = (s: string) => s.toLowerCase().trim();
+    const d1 = normalize(desc1);
+    const d2 = normalize(desc2);
+    
+    // Exact match or high similarity
+    return d1 === d2 || (
+      d1.includes(d2) || d2.includes(d1)
+    );
+  }
+
+  /**
+   * Update existing draft task
+   */
+  updateDraftTask(tasks: DraftTask[], tempId: string, updates: Partial<DraftTask>): DraftTask[] {
+    return tasks.map(t => t.tempId === tempId ? { ...t, ...updates } : t);
+  }
+
+  /**
+   * Remove draft task
+   */
+  removeDraftTask(tasks: DraftTask[], tempId: string): DraftTask[] {
+    return tasks.filter(t => t.tempId !== tempId);
   }
 }
 

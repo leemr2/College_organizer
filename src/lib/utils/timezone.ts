@@ -203,3 +203,216 @@ export function isTodayInTimezone(
   
   return inputDate >= todayStart && inputDate <= todayEnd;
 }
+
+/**
+ * Parse an AI-generated ISO 8601 date string and convert it to a UTC Date
+ * representing that time in the user's timezone.
+ * 
+ * This handles cases where the AI generates dates like:
+ * - "2025-11-19T13:30:00" (no timezone - interpreted as user's local time)
+ * - "2025-11-19T13:30:00Z" (UTC - we'll validate it's reasonable)
+ * 
+ * @param dateString - ISO 8601 date string from AI
+ * @param timezone - User's timezone (e.g., "America/New_York")
+ * @param targetDate - The target date for scheduling (to ensure dates are on the correct day)
+ * @returns UTC Date object representing the time in the user's timezone
+ */
+export function parseAIDateInTimezone(
+  dateString: string,
+  timezone: string,
+  targetDate: Date
+): Date {
+  // If timezone is explicitly specified (Z or +/-), parse as UTC
+  if (dateString.includes('Z') || dateString.match(/[+-]\d{2}:\d{2}$/)) {
+    const parsed = new Date(dateString);
+    if (isNaN(parsed.getTime())) {
+      throw new Error(`Invalid date string: ${dateString}`);
+    }
+    // Validate it's within reasonable range
+    const minDate = new Date('1970-01-01');
+    const maxDate = new Date('2100-01-01');
+    if (parsed < minDate || parsed > maxDate) {
+      throw new Error(`Date out of valid range: ${dateString}`);
+    }
+    return parsed;
+  }
+  
+  // No timezone specified - parse components and interpret as local time in user's timezone
+  const match = dateString.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?$/);
+  if (!match) {
+    throw new Error(`Invalid date format: ${dateString}. Expected ISO 8601 format (YYYY-MM-DDTHH:mm:ss).`);
+  }
+  
+  const [, year, month, day, hour, minute, second, millisecond] = match;
+  const hourNum = parseInt(hour, 10);
+  const minuteNum = parseInt(minute, 10);
+  const secondNum = parseInt(second, 10) || 0;
+  const msNum = millisecond ? parseInt(millisecond.slice(0, 3).padEnd(3, '0'), 10) : 0;
+  
+  // Get the target date's year/month/day in the user's timezone
+  const targetDateStart = getDateStartInTimezone(targetDate, timezone);
+  const targetFormatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: timezone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  const targetParts = targetFormatter.formatToParts(targetDateStart);
+  const targetYear = parseInt(targetParts.find(p => p.type === "year")?.value || "0");
+  const targetMonth = parseInt(targetParts.find(p => p.type === "month")?.value || "0") - 1;
+  const targetDay = parseInt(targetParts.find(p => p.type === "day")?.value || "0");
+  
+  // Create a formatter to check times in the timezone
+  const timeFormatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: timezone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  });
+  
+  // Find the UTC time that represents hour:minute:second on targetYear-month-day in the timezone
+  // Strategy: Start with a reasonable UTC time and adjust iteratively
+  // Use noon UTC as starting point to avoid DST edge cases
+  let candidateUtc = new Date(Date.UTC(targetYear, targetMonth, targetDay, 12, 0, 0, 0));
+  
+  // Calculate the offset needed
+  // We'll try different UTC times and find one that formats to the desired local time
+  let bestMatch = candidateUtc;
+  let bestDiff = Infinity;
+  
+  // Try UTC times from -12 to +12 hours from the desired hour
+  for (let utcHourOffset = -12; utcHourOffset <= 12; utcHourOffset++) {
+    const testUtc = new Date(Date.UTC(targetYear, targetMonth, targetDay, hourNum + utcHourOffset, minuteNum, secondNum, msNum));
+    const tzParts = timeFormatter.formatToParts(testUtc);
+    const tzYear = parseInt(tzParts.find(p => p.type === "year")?.value || "0");
+    const tzMonth = parseInt(tzParts.find(p => p.type === "month")?.value || "0") - 1;
+    const tzDay = parseInt(tzParts.find(p => p.type === "day")?.value || "0");
+    const tzHour = parseInt(tzParts.find(p => p.type === "hour")?.value || "0");
+    const tzMinute = parseInt(tzParts.find(p => p.type === "minute")?.value || "0");
+    const tzSecond = parseInt(tzParts.find(p => p.type === "second")?.value || "0");
+    
+    // Check for exact match
+    if (tzYear === targetYear && tzMonth === targetMonth && tzDay === targetDay &&
+        tzHour === hourNum && tzMinute === minuteNum && tzSecond === secondNum) {
+      candidateUtc = testUtc;
+      break;
+    }
+    
+    // Track closest match
+    if (tzYear === targetYear && tzMonth === targetMonth && tzDay === targetDay) {
+      const diff = Math.abs(tzHour - hourNum) * 60 + Math.abs(tzMinute - minuteNum);
+      if (diff < bestDiff) {
+        bestDiff = diff;
+        bestMatch = testUtc;
+      }
+    }
+  }
+  
+  // If we didn't find an exact match, use the best match and adjust
+  if (bestDiff > 0) {
+    const tzParts = timeFormatter.formatToParts(bestMatch);
+    const tzHour = parseInt(tzParts.find(p => p.type === "hour")?.value || "0");
+    const tzMinute = parseInt(tzParts.find(p => p.type === "minute")?.value || "0");
+    const hourDiff = hourNum - tzHour;
+    const minuteDiff = minuteNum - tzMinute;
+    const offsetMs = (hourDiff * 3600 + minuteDiff * 60) * 1000;
+    candidateUtc = new Date(bestMatch.getTime() + offsetMs);
+  } else {
+    candidateUtc = bestMatch;
+  }
+  
+  // Final validation
+  if (isNaN(candidateUtc.getTime())) {
+    throw new Error(`Invalid date string: ${dateString}`);
+  }
+  
+  // Ensure the date is within a reasonable range
+  const minDate = new Date('1970-01-01');
+  const maxDate = new Date('2100-01-01');
+  if (candidateUtc < minDate || candidateUtc > maxDate) {
+    throw new Error(`Date out of valid range: ${dateString}`);
+  }
+  
+  return candidateUtc;
+}
+
+/**
+ * Create a UTC Date representing a specific time (hour:minute) on a specific date in a timezone.
+ * 
+ * @param date - The target date
+ * @param hour - Hour (0-23) in the timezone
+ * @param minute - Minute (0-59) in the timezone
+ * @param timezone - The timezone (e.g., "America/New_York")
+ * @returns UTC Date object
+ */
+export function createDateAtTimeInTimezone(
+  date: Date,
+  hour: number,
+  minute: number,
+  timezone: string
+): Date {
+  // Get the start of the date in the timezone
+  const dateStart = getDateStartInTimezone(date, timezone);
+  
+  // Create a formatter to check times
+  const timeFormatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: timezone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+  
+  // Find the UTC time that represents hour:minute in the timezone
+  // Try different UTC times around the expected time
+  let bestMatch = dateStart;
+  let bestDiff = Infinity;
+  
+  for (let utcHourOffset = -12; utcHourOffset <= 12; utcHourOffset++) {
+    const testUtc = new Date(dateStart.getTime() + (hour + utcHourOffset) * 3600000 + minute * 60000);
+    const tzParts = timeFormatter.formatToParts(testUtc);
+    const tzYear = parseInt(tzParts.find(p => p.type === "year")?.value || "0");
+    const tzMonth = parseInt(tzParts.find(p => p.type === "month")?.value || "0") - 1;
+    const tzDay = parseInt(tzParts.find(p => p.type === "day")?.value || "0");
+    const tzHour = parseInt(tzParts.find(p => p.type === "hour")?.value || "0");
+    const tzMinute = parseInt(tzParts.find(p => p.type === "minute")?.value || "0");
+    
+    // Check if this matches the target date and time
+    const dateParts = timeFormatter.formatToParts(dateStart);
+    const targetYear = parseInt(dateParts.find(p => p.type === "year")?.value || "0");
+    const targetMonth = parseInt(dateParts.find(p => p.type === "month")?.value || "0") - 1;
+    const targetDay = parseInt(dateParts.find(p => p.type === "day")?.value || "0");
+    
+    if (tzYear === targetYear && tzMonth === targetMonth && tzDay === targetDay) {
+      if (tzHour === hour && tzMinute === minute) {
+        return testUtc; // Exact match
+      }
+      
+      // Track closest match
+      const diff = Math.abs(tzHour - hour) * 60 + Math.abs(tzMinute - minute);
+      if (diff < bestDiff) {
+        bestDiff = diff;
+        bestMatch = testUtc;
+      }
+    }
+  }
+  
+  // If we found a close match, fine-tune it
+  if (bestDiff > 0) {
+    const tzParts = timeFormatter.formatToParts(bestMatch);
+    const tzHour = parseInt(tzParts.find(p => p.type === "hour")?.value || "0");
+    const tzMinute = parseInt(tzParts.find(p => p.type === "minute")?.value || "0");
+    const hourDiff = hour - tzHour;
+    const minuteDiff = minute - tzMinute;
+    const offsetMs = (hourDiff * 3600 + minuteDiff * 60) * 1000;
+    return new Date(bestMatch.getTime() + offsetMs);
+  }
+  
+  return bestMatch;
+}

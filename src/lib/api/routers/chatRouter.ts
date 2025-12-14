@@ -2,8 +2,9 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { prisma } from "@/lib/db";
 import { conversationalAI } from "@/lib/ai/conversational";
-import { getUserTimezone, getTodayStartInTimezone, getTodayEndInTimezone } from "@/lib/utils/timezone";
-import { Message, StudentContext, TaskSummary, ConversationMode, DiscoveryQuestion } from "@/lib/types";
+import { schedulingService } from "@/lib/ai/scheduling";
+import { getUserTimezone, getTodayStartInTimezone, getTodayEndInTimezone, getDateStartInTimezone, getDateEndInTimezone } from "@/lib/utils/timezone";
+import { Message, StudentContext, TaskSummary, ConversationMode, DiscoveryQuestion, PlanningSessionState, DraftTask, SchedulingContext, ScheduleBlockData, TaskContext, ClassScheduleData, StudentPreferences } from "@/lib/types";
 import type { Prisma } from "@prisma/client";
 
 // ConversationType enum values
@@ -60,11 +61,15 @@ async function processMessage(params: ProcessMessageParams) {
       });
 
       if (!conversation) {
+        // Get user's timezone for setting dailyConversationDate
+        const timezone = getUserTimezone(student.preferences);
+        const todayStart = getTodayStartInTimezone(timezone);
+        
         conversation = await prisma.conversation.create({
           data: {
             studentId,
             conversationType: ConversationType.daily_planning,
-            dailyConversationDate: new Date(),
+            dailyConversationDate: todayStart, // Use timezone-aware date
             messages: [],
           },
         });
@@ -114,6 +119,61 @@ async function processMessage(params: ProcessMessageParams) {
   let context: StudentContext;
   const currentTime = new Date();
 
+  // Initialize planning session for daily_planning
+  let planningSession: PlanningSessionState | null = null;
+  if (conversationType === "daily_planning") {
+    // Parse conversationMode from JSON string if it exists
+    let parsedConversationMode: ConversationMode | null = null;
+    if (conversation.conversationMode) {
+      if (typeof conversation.conversationMode === 'string') {
+        try {
+          parsedConversationMode = JSON.parse(conversation.conversationMode) as ConversationMode;
+        } catch {
+          // Not JSON, treat as simple mode type string
+          parsedConversationMode = { type: conversation.conversationMode as ConversationMode['type'] };
+        }
+      } else {
+        parsedConversationMode = conversation.conversationMode as unknown as ConversationMode;
+      }
+    }
+    
+    // Get or initialize planning session from conversation mode
+    if (parsedConversationMode?.planningSession) {
+      // Parse Date objects from ISO strings
+      planningSession = {
+        ...parsedConversationMode.planningSession,
+        draftTasks: parsedConversationMode.planningSession.draftTasks.map(dt => ({
+          ...dt,
+          dueDate: dt.dueDate ? (typeof dt.dueDate === 'string' ? new Date(dt.dueDate) : dt.dueDate) : null,
+        })),
+      };
+    } else {
+      // Initialize new planning session if not exists
+      planningSession = {
+        status: "active",
+        draftTasks: [],
+        lastUpdated: new Date().toISOString(),
+      };
+    }
+
+    // Extract draft tasks from user message
+    if (planningSession.status === "active") {
+      const timezone = getUserTimezone(student.preferences);
+      const newDraftTasks = await conversationalAI.extractTasks(
+        message,
+        currentTime,
+        timezone
+      );
+      
+      // Merge with existing drafts (prevent duplicates)
+      planningSession.draftTasks = conversationalAI.mergeDraftTasks(
+        planningSession.draftTasks,
+        newDraftTasks
+      );
+      planningSession.lastUpdated = new Date().toISOString();
+    }
+  }
+
   if (conversationType === "daily_planning") {
     // Get user's timezone from preferences for timezone-aware date queries
     const timezone = getUserTimezone(student.preferences);
@@ -143,6 +203,11 @@ async function processMessage(params: ProcessMessageParams) {
         name: st.tool.name,
         category: st.tool.category,
       })),
+      conversationMode: planningSession ? {
+        type: "planning_session",
+        currentPhase: "task_extraction",
+        planningSession,
+      } : undefined,
     };
   } else {
     // task_specific context
@@ -175,7 +240,21 @@ async function processMessage(params: ProcessMessageParams) {
   }
 
   // Check conversation mode and handle deep dive if needed
-  const conversationMode = (conversation.conversationMode as unknown) as ConversationMode | null;
+  // Parse conversationMode from JSON string if it's a planning session, otherwise treat as string
+  let conversationMode: ConversationMode | null = null;
+  if (conversation.conversationMode) {
+    if (typeof conversation.conversationMode === 'string') {
+      // Try to parse as JSON (planning session) or use as string (other modes)
+      try {
+        conversationMode = JSON.parse(conversation.conversationMode) as ConversationMode;
+      } catch {
+        // Not JSON, treat as simple mode type string
+        conversationMode = { type: conversation.conversationMode as ConversationMode['type'] };
+      }
+    } else {
+      conversationMode = conversation.conversationMode as unknown as ConversationMode;
+    }
+  }
   const currentPhase = conversation.currentPhase || "discovery";
   const discoveryData = (conversation.discoveryData as unknown) as {
     questions?: DiscoveryQuestion[];
@@ -186,6 +265,15 @@ async function processMessage(params: ProcessMessageParams) {
   let updatedMode: ConversationMode | null = conversationMode;
   let updatedPhase = currentPhase;
   let updatedDiscoveryData = discoveryData || {};
+
+  // Update conversation mode with planning session if it exists
+  if (planningSession && conversationType === "daily_planning") {
+    updatedMode = {
+      type: "planning_session",
+      currentPhase: "task_extraction",
+      planningSession,
+    };
+  }
 
   if (conversationMode?.type === "deep_dive" && currentPhase === "discovery") {
     // Deep dive discovery phase - process answer and get next question
@@ -275,11 +363,34 @@ async function processMessage(params: ProcessMessageParams) {
   });
 
   // Save conversation with updated mode and phase
+  // For planning sessions, serialize the full mode object as JSON string
+  // Need to serialize Date objects to ISO strings for JSON compatibility
+  let conversationModeToSave: string | null = null;
+  if (updatedMode) {
+    if (updatedMode.type === "planning_session" && updatedMode.planningSession) {
+      // Serialize planning session with Date objects converted to ISO strings
+      const serializedSession = {
+        ...updatedMode,
+        planningSession: {
+          ...updatedMode.planningSession,
+          draftTasks: updatedMode.planningSession.draftTasks.map(dt => ({
+            ...dt,
+            dueDate: dt.dueDate ? dt.dueDate.toISOString() : null,
+          })),
+        },
+      };
+      conversationModeToSave = JSON.stringify(serializedSession);
+    } else {
+      // For other modes, just save the type string
+      conversationModeToSave = updatedMode.type;
+    }
+  }
+
   await prisma.conversation.update({
     where: { id: conversation.id },
     data: {
       messages: messages as unknown as Prisma.JsonArray,
-      conversationMode: updatedMode?.type || null,
+      conversationMode: conversationModeToSave,
       currentPhase: updatedPhase,
       discoveryData: updatedDiscoveryData ? (updatedDiscoveryData as unknown as Prisma.InputJsonValue) : undefined,
     },
@@ -435,6 +546,331 @@ export const chatRouter = createTRPCRouter({
         taskId: input.taskId,
         conversationId: input.conversationId,
       });
+    }),
+
+  // Complete planning session and generate schedule
+  completePlanningSession: protectedProcedure
+    .input(z.object({
+      conversationId: z.string(),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      const student = await prisma.student.findUnique({
+        where: { userId: ctx.session.user.id },
+        include: {
+          preferences: true,
+          classSchedules: true,
+        },
+      });
+
+      if (!student) throw new Error("Student not found");
+
+      const conversation = await prisma.conversation.findUnique({
+        where: { id: input.conversationId },
+      });
+
+      if (!conversation) throw new Error("Conversation not found");
+
+      // Extract planning session - parse from JSON string if needed
+      let mode: ConversationMode | null = null;
+      if (conversation.conversationMode) {
+        if (typeof conversation.conversationMode === 'string') {
+          try {
+            mode = JSON.parse(conversation.conversationMode) as ConversationMode;
+          } catch {
+            mode = { type: conversation.conversationMode as ConversationMode['type'] };
+          }
+        } else {
+          mode = conversation.conversationMode as unknown as ConversationMode;
+        }
+      }
+      
+      // Parse Date objects from ISO strings in planning session
+      let planningSession = mode?.planningSession;
+      if (planningSession) {
+        planningSession = {
+          ...planningSession,
+          draftTasks: planningSession.draftTasks.map(dt => ({
+            ...dt,
+            dueDate: dt.dueDate ? (typeof dt.dueDate === 'string' ? new Date(dt.dueDate) : dt.dueDate) : null,
+          })),
+        };
+      }
+
+      if (!planningSession || planningSession.draftTasks.length === 0) {
+        throw new Error("No tasks to schedule");
+      }
+
+      // Update status to generating
+      planningSession.status = "generating_schedule";
+      
+      // Serialize planning session with Date objects converted to ISO strings
+      const serializedMode = {
+        ...mode!,
+        planningSession: {
+          ...planningSession,
+          draftTasks: planningSession.draftTasks.map(dt => ({
+            ...dt,
+            dueDate: dt.dueDate ? dt.dueDate.toISOString() : null,
+          })),
+        },
+      };
+      
+      await prisma.conversation.update({
+        where: { id: conversation.id },
+        data: {
+          conversationMode: JSON.stringify(serializedMode),
+        },
+      });
+
+      // Build scheduling context from draft tasks
+      const timezone = getUserTimezone(student.preferences);
+      const todayStart = getTodayStartInTimezone(timezone);
+      const todayEnd = getTodayEndInTimezone(timezone);
+
+      // Get existing schedule blocks
+      const existingBlocks = await prisma.scheduleBlock.findMany({
+        where: {
+          studentId: student.id,
+          startTime: { gte: todayStart, lte: todayEnd },
+        },
+      });
+
+      const existingBlockData: ScheduleBlockData[] = existingBlocks.map(b => ({
+        id: b.id,
+        title: b.title,
+        description: b.description || undefined,
+        startTime: b.startTime,
+        endTime: b.endTime,
+        type: b.type as ScheduleBlockData["type"],
+        completed: b.completed,
+        taskId: b.taskId || undefined,
+      }));
+
+      const taskContexts: TaskContext[] = planningSession.draftTasks.map(dt => ({
+        id: dt.tempId,
+        description: dt.description,
+        complexity: dt.complexity,
+        category: dt.category,
+        dueDate: dt.dueDate,
+        completed: false,
+      }));
+
+      const classScheduleData: ClassScheduleData[] = student.classSchedules.map(cs => ({
+        courseName: cs.courseName,
+        courseCode: cs.courseCode || undefined,
+        professor: cs.professor || undefined,
+        meetingTimes: (cs.meetingTimes as unknown) as ClassScheduleData["meetingTimes"],
+        semester: cs.semester,
+      }));
+
+      const schedulingContext: SchedulingContext = {
+        tasks: taskContexts,
+        classSchedules: classScheduleData,
+        existingBlocks: existingBlockData,
+        preferences: (student.preferences as unknown) as StudentPreferences,
+        currentDate: new Date(),
+        timezone,
+      };
+
+      // Generate schedule
+      const suggestion = await schedulingService.generateDailySchedule(schedulingContext);
+
+      // Save schedule suggestion to session
+      planningSession.scheduleSuggestion = suggestion;
+      planningSession.status = "completed";
+
+      // Serialize completed planning session with Date objects converted to ISO strings
+      const serializedCompletedMode = {
+        ...mode!,
+        currentPhase: "schedule_generation" as const,
+        planningSession: {
+          ...planningSession,
+          draftTasks: planningSession.draftTasks.map(dt => ({
+            ...dt,
+            dueDate: dt.dueDate ? dt.dueDate.toISOString() : null,
+          })),
+          scheduleSuggestion: planningSession.scheduleSuggestion ? {
+            ...planningSession.scheduleSuggestion,
+            blocks: planningSession.scheduleSuggestion.blocks.map(block => ({
+              ...block,
+              startTime: block.startTime.toISOString(),
+              endTime: block.endTime.toISOString(),
+            })),
+          } : undefined,
+        },
+      };
+
+      await prisma.conversation.update({
+        where: { id: conversation.id },
+        data: {
+          conversationMode: JSON.stringify(serializedCompletedMode),
+        },
+      });
+
+      // Return with properly typed dates for frontend
+      return {
+        draftTasks: planningSession.draftTasks.map(dt => ({
+          ...dt,
+          dueDate: dt.dueDate,
+        })),
+        scheduleSuggestion: {
+          ...suggestion,
+          blocks: suggestion.blocks.map(block => ({
+            ...block,
+            startTime: block.startTime,
+            endTime: block.endTime,
+          })),
+        },
+      };
+    }),
+
+  // Commit planning session (tasks + schedule)
+  commitPlanningSession: protectedProcedure
+    .input(z.object({
+      conversationId: z.string(),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      const student = await prisma.student.findUnique({
+        where: { userId: ctx.session.user.id },
+        include: { preferences: true },
+      });
+
+      if (!student) throw new Error("Student not found");
+
+      const conversation = await prisma.conversation.findUnique({
+        where: { id: input.conversationId },
+      });
+
+      if (!conversation) throw new Error("Conversation not found");
+
+      // Extract planning session - parse from JSON string if needed
+      let mode: ConversationMode | null = null;
+      if (conversation.conversationMode) {
+        if (typeof conversation.conversationMode === 'string') {
+          try {
+            mode = JSON.parse(conversation.conversationMode) as ConversationMode;
+          } catch {
+            mode = { type: conversation.conversationMode as ConversationMode['type'] };
+          }
+        } else {
+          mode = conversation.conversationMode as unknown as ConversationMode;
+        }
+      }
+      
+      // Parse Date objects from ISO strings in planning session
+      let planningSession = mode?.planningSession;
+      if (planningSession) {
+        planningSession = {
+          ...planningSession,
+          draftTasks: planningSession.draftTasks.map(dt => ({
+            ...dt,
+            dueDate: dt.dueDate ? (typeof dt.dueDate === 'string' ? new Date(dt.dueDate) : dt.dueDate) : null,
+          })),
+          // Also parse dates in schedule suggestion blocks
+          scheduleSuggestion: planningSession.scheduleSuggestion ? {
+            ...planningSession.scheduleSuggestion,
+            blocks: planningSession.scheduleSuggestion.blocks.map(block => ({
+              ...block,
+              startTime: typeof block.startTime === 'string' ? new Date(block.startTime) : block.startTime,
+              endTime: typeof block.endTime === 'string' ? new Date(block.endTime) : block.endTime,
+            })),
+          } : undefined,
+        };
+      }
+
+      if (!planningSession || planningSession.status !== "completed") {
+        throw new Error("Planning session not ready to commit");
+      }
+
+      const timezone = getUserTimezone(student.preferences);
+      const todayStart = getTodayStartInTimezone(timezone);
+
+      // Create all tasks and schedule blocks in transaction
+      const result = await prisma.$transaction(async (tx) => {
+        // Create tasks from drafts
+        const createdTasks: Array<{ id: string }> = [];
+        const taskIdMap = new Map<string, string>(); // tempId -> realId
+
+        for (const draft of planningSession.draftTasks) {
+          if (draft.isRecurring && draft.dueDate) {
+            // Handle recurring tasks
+            const daysUntilDue = Math.ceil(
+              (draft.dueDate.getTime() - todayStart.getTime()) / (24 * 60 * 60 * 1000)
+            );
+            const maxDays = Math.min(Math.max(daysUntilDue, 1), 30);
+            const groupId = `recurring_${Date.now()}_${Math.random().toString(36).substring(7)}`;
+
+            for (let i = 0; i < maxDays; i++) {
+              const scheduledDate = new Date(todayStart.getTime() + i * 24 * 60 * 60 * 1000);
+              const task = await tx.task.create({
+                data: {
+                  studentId: student.id,
+                  description: draft.description,
+                  category: draft.category,
+                  complexity: draft.complexity,
+                  dueDate: draft.dueDate,
+                  isRecurring: true,
+                  scheduledDate,
+                  recurringTaskGroupId: groupId,
+                },
+              });
+              if (i === 0) {
+                createdTasks.push(task);
+                taskIdMap.set(draft.tempId, task.id);
+              }
+            }
+          } else {
+            // One-time task
+            const task = await tx.task.create({
+              data: {
+                studentId: student.id,
+                description: draft.description,
+                category: draft.category,
+                complexity: draft.complexity,
+                dueDate: draft.dueDate,
+                isRecurring: false,
+              },
+            });
+            createdTasks.push(task);
+            taskIdMap.set(draft.tempId, task.id);
+          }
+        }
+
+        // Create schedule blocks
+        const createdBlocks = [];
+        if (planningSession.scheduleSuggestion) {
+          for (const block of planningSession.scheduleSuggestion.blocks) {
+            // Map tempId to real taskId
+            const realTaskId = block.taskId ? taskIdMap.get(block.taskId) : undefined;
+
+            const scheduleBlock = await tx.scheduleBlock.create({
+              data: {
+                studentId: student.id,
+                title: block.title,
+                description: block.description,
+                startTime: block.startTime,
+                endTime: block.endTime,
+                type: block.type,
+                completed: false,
+                taskId: realTaskId,
+              },
+            });
+            createdBlocks.push(scheduleBlock);
+          }
+        }
+
+        return { createdTasks, createdBlocks };
+      });
+
+      // Clear planning session
+      await prisma.conversation.update({
+        where: { id: conversation.id },
+        data: {
+          conversationMode: null,
+        },
+      });
+
+      return result;
     }),
 
   // Start deep dive or quick help mode for a task

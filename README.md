@@ -15,7 +15,7 @@ The product's core innovation is its **tool discovery and optimization engine** 
 
 > 📖 For detailed product requirements and feature specifications, see [PRD-Kiras-Scout.md](./PRD-Kiras-Scout.md)
 
-## ✨ Current Features (Phase 1 & 2)
+## ✨ Current Features (Phase 1, 2 & 3)
 
 ### 🗣️ Daily Check-In & Task Capture
 - Voice-to-text input using Web Speech API
@@ -59,11 +59,21 @@ The product's core innovation is its **tool discovery and optimization engine** 
 - Manage class schedules (add, edit, delete with recurring patterns)
 - Update study preferences
 
+### 📅 Intelligent Scheduling & Time Blocking (Phase 3)
+- **AI-generated daily schedules**: Get personalized schedules after morning check-in
+- **Visual time block calendar**: See your day at a glance with class schedules and tasks
+- **Drag-and-drop rescheduling**: Easily move tasks to different time slots
+- **AI-powered reschedule suggestions**: Get intelligent alternatives when you need to reschedule
+- **Automatic break scheduling**: Breaks are automatically included between study blocks
+- **Recurring task automation**: Recurring tasks (like "study for test") are automatically scheduled daily until the due date
+- **Completion tracking**: Mark schedule blocks complete, which automatically marks linked tasks complete
+- **Schedule reasoning**: See why Scout scheduled each task at a specific time
+
 ### 📊 Dashboard
 - Daily overview and statistics
 - Today's tasks view
 - Quick navigation to chat and tasks
-- Week calendar view (ready for Phase 3 scheduling integration)
+- **Today's schedule view**: See your full daily schedule with time blocks
 - **Tools section**: View tools you're using and recommended tools
 
 ## 🏗️ Technical Architecture
@@ -281,14 +291,19 @@ Based on the PRD, Scout is being developed in phases:
 - **Web search integration**: Real-time research for tool tips, tutorials, and best practices (Gemini + Perplexity)
 - **Discovery questions engine**: Generates layered questions to identify inefficiencies and optimization opportunities
 
-### 📅 Phase 3: Scheduling & Proactive (Planned)
-- Intelligent time block generation
-- Schedule optimization algorithm
-- Visual calendar/timeline view (calendar components already built)
+### ✅ Phase 3.0: Scheduling (Completed)
+- Intelligent time block generation (basic algorithm)
+- Schedule optimization considering class schedule, due dates, task complexity
+- Visual calendar/timeline view (integrated with WeekCalendar)
+- Task rescheduling flow (drag-and-drop + AI suggestions)
+- Recurring task automation (daily scheduling until due date)
+- Completion tracking with task synchronization
+- **Note**: Algorithm designed for Phase 4 enhancements (pattern recognition, energy optimization, dependencies)
+
+### 📅 Phase 3.5: Proactive Check-Ins (Planned)
 - Proactive check-ins during study blocks
 - End of day review
-- Pattern recognition
-- **Note**: Calendar components (`WeekCalendar`, `TimeBlockEditor`) are already implemented and ready for ScheduleBlock integration
+- Pattern recognition (basic)
 
 ### 🎯 Phase 4: Learning & Optimization (Future)
 - Advanced effectiveness tracking

@@ -18,12 +18,12 @@ export const taskRouter = createTRPCRouter({
 
       if (!student) throw new Error("Student not found");
 
-      // Use ConversationalAI to extract tasks with current time for time-aware scheduling
-      const currentTime = new Date();
-      const tasks = await conversationalAI.extractTasks(input.text, currentTime);
-
       // Get user's timezone for date parsing
       const timezone = getUserTimezone(student.preferences);
+      
+      // Use ConversationalAI to extract tasks with current time and timezone for time-aware scheduling
+      const currentTime = new Date();
+      const tasks = await conversationalAI.extractTasks(input.text, currentTime, timezone);
 
       // Create tasks in database
       const tasksToCreate: Array<{

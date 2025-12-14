@@ -81,11 +81,31 @@ export interface DiscoveryQuestion {
   answer?: string;
 }
 
+// Draft task (not yet in DB)
+export interface DraftTask {
+  tempId: string; // temporary ID for tracking
+  description: string;
+  category: string;
+  complexity: "simple" | "medium" | "complex";
+  urgency: string;
+  dueDate: Date | null;
+  isRecurring: boolean;
+}
+
+// Planning session state
+export interface PlanningSessionState {
+  status: "active" | "generating_schedule" | "completed";
+  draftTasks: DraftTask[];
+  scheduleSuggestion?: ScheduleSuggestion;
+  lastUpdated: string; // ISO timestamp
+}
+
 export interface ConversationMode {
-  type: "quick_help" | "deep_dive";
-  currentPhase?: "discovery" | "analysis" | "recommendation";
+  type: "quick_help" | "deep_dive" | "planning_session";
+  currentPhase?: "discovery" | "analysis" | "recommendation" | "task_extraction" | "schedule_generation";
   discoveryQuestions?: DiscoveryQuestion[];
   currentQuestionIndex?: number;
+  planningSession?: PlanningSessionState;
 }
 
 export interface StudentContext {
@@ -102,6 +122,47 @@ export interface StudentContext {
     category: string[];
   }>;
   conversationMode?: ConversationMode;
+}
+
+// ============================================
+// SCHEDULING TYPES
+// ============================================
+
+export interface ScheduleBlockData {
+  id: string;
+  title: string;
+  description?: string;
+  startTime: Date;
+  endTime: Date;
+  type: "class" | "task" | "break" | "commitment" | "lunch" | "dinner";
+  completed: boolean;
+  taskId?: string;
+  reasoning?: string; // AI explanation
+}
+
+export interface SchedulingContext {
+  tasks: TaskContext[];
+  classSchedules: ClassScheduleData[];
+  existingBlocks: ScheduleBlockData[];
+  preferences: StudentPreferences;
+  currentDate: Date;
+  timezone: string;
+}
+
+export interface ScheduleSuggestion {
+  blocks: ScheduleBlockData[];
+  reasoning: string; // Overall explanation of schedule strategy
+  warnings?: string[]; // e.g., "This is a packed day, consider rescheduling non-urgent tasks"
+}
+
+export interface RescheduleOptions {
+  taskId: string;
+  currentBlockId: string;
+  suggestedTimes: Array<{
+    startTime: Date;
+    endTime: Date;
+    reasoning: string;
+  }>;
 }
 
 // ============================================

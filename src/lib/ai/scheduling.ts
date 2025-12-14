@@ -21,9 +21,9 @@ export class SchedulingService {
     const systemPrompt = this.buildSchedulingPrompt(context);
 
     // Prepare task list for AI
-    const tasksDescription = this.formatTasksForScheduling(context.tasks);
-    const classScheduleDescription = this.formatClassSchedule(context.classSchedules);
-    const existingBlocksDescription = this.formatExistingBlocks(context.existingBlocks);
+    const tasksDescription = this.formatTasksForScheduling(context.tasks, context.timezone);
+    const classScheduleDescription = this.formatClassSchedule(context.classSchedules, context.timezone);
+    const existingBlocksDescription = this.formatExistingBlocks(context.existingBlocks, context.timezone);
 
     // Format the target date in the user's timezone for the AI
     const targetDateStr = context.currentDate.toLocaleDateString('en-US', { 
@@ -56,10 +56,10 @@ export class SchedulingService {
 TASKS TO SCHEDULE:
 ${tasksDescription}
 
-CLASS SCHEDULE (fixed blocks - cannot be moved):
+CLASS SCHEDULE (fixed blocks - cannot be moved, times are in ${context.timezone}):
 ${classScheduleDescription}
 
-EXISTING SCHEDULE BLOCKS (already scheduled):
+EXISTING SCHEDULE BLOCKS (already scheduled, times are in ${context.timezone}):
 ${existingBlocksDescription}
 
 STUDENT PREFERENCES:
@@ -69,7 +69,7 @@ STUDENT PREFERENCES:
 
 INSTRUCTIONS:
 1. Schedule all tasks into available time slots
-2. Respect class schedule as fixed blocks
+2. Respect class schedule as fixed blocks - DO NOT schedule tasks during class times
 3. Consider task complexity and due dates for prioritization
 4. Add breaks between study blocks (${context.preferences.preferredBreakLength || 10} minutes)
 5. Provide reasoning for each time block placement
@@ -79,11 +79,13 @@ INSTRUCTIONS:
 
 CRITICAL TIMEZONE INSTRUCTIONS:
 - The user's timezone is: ${context.timezone}
+- All class times shown above are in ${context.timezone}
 - All times must be generated for ${targetDateStr} in this timezone
-- Generate ISO 8601 datetime strings WITHOUT timezone suffix (e.g., "2025-11-19T09:00:00" not "2025-11-19T09:00:00Z")
-- The times should represent local time in ${context.timezone} (e.g., ${exampleMorningStr} should be "2025-11-19T09:00:00", ${exampleAfternoonStr} should be "2025-11-19T14:00:00")
+- Generate ISO 8601 datetime strings WITHOUT timezone suffix (e.g., "2025-12-14T09:00:00" not "2025-12-14T09:00:00Z")
+- The times should represent local time in ${context.timezone} (e.g., ${exampleMorningStr} should be "2025-12-14T09:00:00", ${exampleAfternoonStr} should be "2025-12-14T14:00:00")
 - DO NOT include 'Z' suffix or timezone offsets - just the date and time in format YYYY-MM-DDTHH:mm:ss
 - The system will interpret these times as being in ${context.timezone}
+- Use the SAME DATE as shown above (${targetDateStr}) - do not schedule tasks on a different date
 
 Return JSON:
 {
@@ -104,7 +106,8 @@ Return JSON:
 
 IMPORTANT: 
 - When linking to a task, use the EXACT task ID shown in the task list. Do not generate new IDs or use descriptions as IDs.
-- Generate times WITHOUT timezone suffix (no 'Z', no '+/-HH:mm') - just YYYY-MM-DDTHH:mm:ss format.`;
+- Generate times WITHOUT timezone suffix (no 'Z', no '+/-HH:mm') - just YYYY-MM-DDTHH:mm:ss format.
+- The date portion should be ${context.currentDate.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: context.timezone }).split('/').reverse().join('-')} (YYYY-MM-DD format).`;
 
     let response: string;
     try {
@@ -245,18 +248,39 @@ IMPORTANT:
       blockToReschedule,
       context.existingBlocks,
       context.classSchedules,
-      context.currentDate
+      context.currentDate,
+      context.timezone
     );
 
     // Use AI to rank slots by suitability
     const prompt = `A student wants to reschedule this task:
 - Title: ${blockToReschedule.title}
-- Current time: ${blockToReschedule.startTime.toLocaleTimeString()} - ${blockToReschedule.endTime.toLocaleTimeString()}
+- Current time: ${blockToReschedule.startTime.toLocaleTimeString('en-US', { 
+    hour: '2-digit', 
+    minute: '2-digit',
+    hour12: true,
+    timeZone: context.timezone 
+  })} - ${blockToReschedule.endTime.toLocaleTimeString('en-US', { 
+    hour: '2-digit', 
+    minute: '2-digit',
+    hour12: true,
+    timeZone: context.timezone 
+  })}
 - Type: ${blockToReschedule.type}
 - Reasoning: ${blockToReschedule.reasoning || "none"}
 
-Available time slots:
-${availableSlots.map((slot, i) => `${i + 1}. ${slot.start.toLocaleTimeString()} - ${slot.end.toLocaleTimeString()}`).join("\n")}
+Available time slots (all times in ${context.timezone}):
+${availableSlots.map((slot, i) => `${i + 1}. ${slot.start.toLocaleTimeString('en-US', { 
+    hour: '2-digit', 
+    minute: '2-digit',
+    hour12: true,
+    timeZone: context.timezone 
+  })} - ${slot.end.toLocaleTimeString('en-US', { 
+    hour: '2-digit', 
+    minute: '2-digit',
+    hour12: true,
+    timeZone: context.timezone 
+  })}`).join("\n")}
 
 Student preferences:
 - Peak energy times: ${context.preferences.peakEnergyTimes?.join(", ") || "not specified"}
@@ -363,39 +387,53 @@ Your goal is to create a realistic, achievable daily schedule that:
 4. Provides clear reasoning for each time block
 5. Warns if the day is too packed
 
-Current date: ${context.currentDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}
+Current date: ${context.currentDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', timeZone: context.timezone })}
 Timezone: ${context.timezone}
 
 Be realistic about time estimates and include breaks between study sessions.`;
   }
 
-  private formatTasksForScheduling(tasks: TaskContext[]): string {
+  private formatTasksForScheduling(tasks: TaskContext[], timezone: string): string {
     if (tasks.length === 0) return "No tasks to schedule.";
 
     return tasks.map((task, i) => {
       const dueDateStr = task.dueDate
-        ? ` (due: ${task.dueDate.toLocaleDateString()})`
+        ? ` (due: ${task.dueDate.toLocaleDateString('en-US', { 
+            month: 'short', 
+            day: 'numeric',
+            timeZone: timezone 
+          })})`
         : "";
       return `${i + 1}. ${task.description} [${task.complexity}]${dueDateStr} (ID: ${task.id})`;
     }).join("\n");
   }
 
-  private formatClassSchedule(classSchedules: SchedulingContext["classSchedules"]): string {
+  private formatClassSchedule(classSchedules: SchedulingContext["classSchedules"], timezone: string): string {
     if (classSchedules.length === 0) return "No classes scheduled.";
 
     return classSchedules.map(schedule => {
       const times = schedule.meetingTimes.map(mt => 
-        `${mt.day} ${mt.startTime}-${mt.endTime}`
+        `${mt.day} ${mt.startTime}-${mt.endTime} (${timezone})`
       ).join(", ");
       return `- ${schedule.courseName}${schedule.courseCode ? ` (${schedule.courseCode})` : ""}: ${times}`;
     }).join("\n");
   }
 
-  private formatExistingBlocks(blocks: ScheduleBlockData[]): string {
+  private formatExistingBlocks(blocks: ScheduleBlockData[], timezone: string): string {
     if (blocks.length === 0) return "No existing schedule blocks.";
 
     return blocks.map(block => {
-      const timeStr = `${block.startTime.toLocaleTimeString()} - ${block.endTime.toLocaleTimeString()}`;
+      const timeStr = `${block.startTime.toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: true,
+        timeZone: timezone 
+      })} - ${block.endTime.toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: true,
+        timeZone: timezone 
+      })}`;
       return `- ${block.title} [${block.type}]: ${timeStr}`;
     }).join("\n");
   }
@@ -404,7 +442,8 @@ Be realistic about time estimates and include breaks between study sessions.`;
     blockToReschedule: ScheduleBlockData,
     existingBlocks: ScheduleBlockData[],
     classSchedules: SchedulingContext["classSchedules"],
-    currentDate: Date
+    currentDate: Date,
+    timezone: string
   ): Array<{ start: Date; end: Date }> {
     const duration = blockToReschedule.endTime.getTime() - blockToReschedule.startTime.getTime();
     const slots: Array<{ start: Date; end: Date }> = [];
@@ -419,7 +458,7 @@ Be realistic about time estimates and include breaks between study sessions.`;
     const occupied: Array<{ start: Date; end: Date }> = [];
 
     // Add class schedule blocks for today
-    const dayName = currentDate.toLocaleDateString('en-US', { weekday: 'long' });
+    const dayName = currentDate.toLocaleDateString('en-US', { weekday: 'long', timeZone: timezone });
     classSchedules.forEach(schedule => {
       schedule.meetingTimes.forEach(mt => {
         if (mt.day === dayName) {

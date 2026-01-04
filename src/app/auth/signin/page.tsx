@@ -45,17 +45,43 @@ function SignInContent() {
           redirect: false,
         });
         if (result?.error) {
-          alert("Invalid email or password");
+          toast.error("Invalid email or password");
           setIsLoading(false);
         } else if (result?.ok) {
           router.push(callbackUrl);
           router.refresh();
         }
       } else {
-        await signIn("email", { email, callbackUrl });
+        // Email provider redirects automatically, but we can catch errors
+        try {
+          const result = await signIn("email", { 
+            email, 
+            callbackUrl,
+            redirect: false,
+          });
+          
+          if (result?.error) {
+            // Email provider not configured or other error
+            if (result.error === "Configuration" || result.error.includes("provider") || result.error.includes("Email")) {
+              toast.error("Email sign-in is not configured. Please check that EMAIL_SERVER_PASSWORD is set in Vercel environment variables.");
+            } else {
+              toast.error(result.error || "Failed to send sign-in email. Please try again.");
+            }
+            setIsLoading(false);
+          } else {
+            // Success - NextAuth will redirect to verify page, but we can also redirect manually
+            router.push("/auth/verify");
+          }
+        } catch (error) {
+          // If signIn throws (e.g., provider doesn't exist), catch it here
+          console.error("Email sign-in error:", error);
+          toast.error("Email sign-in failed. The email provider may not be configured. Please contact support.");
+          setIsLoading(false);
+        }
       }
     } catch (error) {
       console.error("Sign in error:", error);
+      toast.error("An unexpected error occurred. Please try again.");
       setIsLoading(false);
     }
   };

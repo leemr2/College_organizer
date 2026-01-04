@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { ArrowLeft, Mail } from "lucide-react";
+import { ArrowLeft, Mail, AlertCircle } from "lucide-react";
 
 export default function VerifyRequest() {
   return (
@@ -29,24 +29,38 @@ export default function VerifyRequest() {
           </p>
         </div>
 
-        <div className="rounded-2xl bg-white dark:bg-neutral-800/50 p-8 shadow-xl">
+        <div className="rounded-2xl bg-white dark:bg-neutral-800/50 p-8 shadow-xl space-y-6">
           <div className="space-y-4 text-sm text-neutral-600 dark:text-neutral-400">
             <p>
               <strong>Didn't receive the email?</strong>
             </p>
             <ul className="list-disc pl-4 space-y-2">
-              <li>Check your spam folder</li>
+              <li>Check your spam/junk folder</li>
               <li>Make sure you entered the correct email address</li>
+              <li>Wait a few minutes - emails can sometimes be delayed</li>
               <li>
-                If you still haven't received it after a few minutes,{" "}
+                If you still haven't received it,{" "}
                 <Link
                   href="/auth/signin"
-                  className="text-brandBlue-600 dark:text-brandBlue-400 hover:text-brandBlue-500"
+                  className="text-brandBlue-600 dark:text-brandBlue-400 hover:text-brandBlue-500 font-medium"
                 >
                   try signing in again
                 </Link>
               </li>
             </ul>
+          </div>
+
+          <div className="rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-4">
+            <div className="flex gap-3">
+              <AlertCircle className="h-5 w-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+              <div className="text-sm text-amber-800 dark:text-amber-200">
+                <p className="font-medium mb-1">Troubleshooting</p>
+                <p className="text-amber-700 dark:text-amber-300">
+                  If you're not receiving emails, this may indicate a configuration issue. 
+                  Please check Vercel logs for errors or contact support if the problem persists.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

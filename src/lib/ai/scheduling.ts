@@ -224,7 +224,7 @@ IMPORTANT:
       // Fallback: create simple schedule
       try {
         return this.createFallbackSchedule(context);
-      } catch (fallbackError) {
+      } catch {
         throw new Error(`Failed to generate schedule: ${error instanceof Error ? error.message : "Unknown error"}`);
       }
     }
@@ -337,7 +337,7 @@ Rank the top 3 time slots and provide reasoning for each. Return JSON:
           reasoning: "Available time slot",
         })),
       };
-    } catch (error) {
+    } catch {
       // Fallback: return first 3 available slots
       return {
         taskId: blockToReschedule.taskId || "",

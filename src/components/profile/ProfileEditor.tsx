@@ -4,9 +4,10 @@ import { useState } from "react";
 import { PersonalInfoEditor } from "./PersonalInfoEditor";
 import { ClassScheduleEditor } from "./ClassScheduleEditor";
 import { PreferencesEditor } from "./PreferencesEditor";
-import { User, Calendar, Settings } from "lucide-react";
+import { SecurityEditor } from "./SecurityEditor";
+import { User, Calendar, Settings, Lock } from "lucide-react";
 
-type Tab = "personal" | "schedule" | "preferences";
+type Tab = "personal" | "schedule" | "preferences" | "security";
 
 export function ProfileEditor() {
   const [activeTab, setActiveTab] = useState<Tab>("personal");
@@ -15,6 +16,7 @@ export function ProfileEditor() {
     { id: "personal" as Tab, label: "Personal Info", icon: User },
     { id: "schedule" as Tab, label: "Class Schedule", icon: Calendar },
     { id: "preferences" as Tab, label: "Preferences", icon: Settings },
+    { id: "security" as Tab, label: "Security", icon: Lock },
   ];
 
   return (
@@ -51,6 +53,7 @@ export function ProfileEditor() {
         {activeTab === "personal" && <PersonalInfoEditor />}
         {activeTab === "schedule" && <ClassScheduleEditor />}
         {activeTab === "preferences" && <PreferencesEditor />}
+        {activeTab === "security" && <SecurityEditor />}
       </div>
     </div>
   );

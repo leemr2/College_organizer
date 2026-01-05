@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ArrowLeft, Mail, Lock, UserPlus, X } from "lucide-react";
@@ -8,19 +8,44 @@ import Link from "next/link";
 import { api } from "@/lib/trpc/react";
 import { toast } from "react-toastify";
 
-const isDev = process.env.NODE_ENV !== "production";
-
 function SignInContent() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
-  const [useCredentials, setUseCredentials] = React.useState(isDev);
   const [showRequestAccess, setShowRequestAccess] = React.useState(false);
   const [requestEmail, setRequestEmail] = React.useState("");
   const [isRequesting, setIsRequesting] = React.useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
+
+  // Debounced email check for user status
+  const [debouncedEmail, setDebouncedEmail] = React.useState<string>("");
+  // Validate email format more strictly
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const isValidEmail = debouncedEmail.length > 0 && emailRegex.test(debouncedEmail);
+  
+  // Only call query when we have a valid email - use skip token to avoid validation errors
+  const { data: userStatus, isLoading: isCheckingStatus } = api.auth.checkUserStatus.useQuery(
+    { email: isValidEmail ? debouncedEmail : "skip@validation.com" },
+    { 
+      enabled: isValidEmail,
+      retry: false,
+    }
+  );
+
+  // Debounce email input
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedEmail(email);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [email]);
+
+  // Determine if we should show password field
+  const shouldShowPassword = userStatus?.exists && userStatus?.hasPassword;
+  const shouldShowEmailLink = !userStatus?.exists || !userStatus?.hasPassword;
 
   const requestAccessMutation = api.admin.requestAccess.useMutation({
     onSuccess: () => {
@@ -37,7 +62,8 @@ function SignInContent() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      if (useCredentials) {
+      if (shouldShowPassword && password) {
+        // Use credentials provider for password auth
         const result = await signIn("credentials", {
           email,
           password,
@@ -51,8 +77,8 @@ function SignInContent() {
           router.push(callbackUrl);
           router.refresh();
         }
-      } else {
-        // Email provider redirects automatically, but we can catch errors
+      } else if (shouldShowEmailLink) {
+        // Use email provider for email link auth
         try {
           const result = await signIn("email", { 
             email, 
@@ -78,6 +104,10 @@ function SignInContent() {
           toast.error("Email sign-in failed. The email provider may not be configured. Please contact support.");
           setIsLoading(false);
         }
+      } else {
+        // Should not happen, but handle edge case
+        toast.error("Please enter your password or use email link sign-in");
+        setIsLoading(false);
       }
     } catch (error) {
       console.error("Sign in error:", error);
@@ -104,41 +134,13 @@ function SignInContent() {
             </span>
           </h1>
           <p className="mt-3 text-neutral-600 dark:text-neutral-300">
-            {useCredentials
-              ? "Sign in with email and password (Dev Mode)"
+            {shouldShowPassword
+              ? "Sign in with your password"
               : "Enter your email to sign in or create an account"}
           </p>
         </div>
 
         <div className="rounded-2xl bg-white dark:bg-neutral-800/50 p-8 shadow-xl">
-          {isDev && (
-            <div className="mb-6 flex gap-2 rounded-lg bg-neutral-100 dark:bg-neutral-700/50 p-1">
-              <button
-                type="button"
-                onClick={() => setUseCredentials(true)}
-                className={`flex-1 rounded-md px-4 py-2 text-sm font-medium transition-colors ${
-                  useCredentials
-                    ? "bg-white dark:bg-neutral-600 text-neutral-900 dark:text-white shadow-sm"
-                    : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200"
-                }`}
-              >
-                <Lock className="mr-2 inline h-4 w-4" />
-                Password (Dev)
-              </button>
-              <button
-                type="button"
-                onClick={() => setUseCredentials(false)}
-                className={`flex-1 rounded-md px-4 py-2 text-sm font-medium transition-colors ${
-                  !useCredentials
-                    ? "bg-white dark:bg-neutral-600 text-neutral-900 dark:text-white shadow-sm"
-                    : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200"
-                }`}
-              >
-                <Mail className="mr-2 inline h-4 w-4" />
-                Email Link
-              </button>
-            </div>
-          )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
@@ -163,7 +165,7 @@ function SignInContent() {
               </div>
             </div>
 
-            {useCredentials && (
+            {shouldShowPassword && (
               <div>
                 <label
                   htmlFor="password"
@@ -184,18 +186,33 @@ function SignInContent() {
                     placeholder="Enter your password"
                   />
                 </div>
-                <p className="mt-2 text-xs text-neutral-500 dark:text-neutral-400">
-                  💡 Dev mode: First-time login will create your account automatically
+              </div>
+            )}
+
+            {shouldShowEmailLink && userStatus?.exists && !userStatus?.hasPassword && (
+              <div className="rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 p-3">
+                <p className="text-sm text-blue-800 dark:text-blue-200">
+                  💡 Set a password in your{" "}
+                  <Link href="/profile" className="font-medium underline">
+                    profile settings
+                  </Link>{" "}
+                  for faster sign-in next time.
                 </p>
+              </div>
+            )}
+
+            {isCheckingStatus && debouncedEmail && (
+              <div className="text-xs text-neutral-500 dark:text-neutral-400 text-center">
+                Checking...
               </div>
             )}
 
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={isLoading || (shouldShowPassword && !password) || isCheckingStatus}
               className="group relative flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-brandBlue-500 to-brandBlue-600 px-4 py-3 text-white shadow-lg shadow-brandBlue-500/20 transition-all hover:from-brandBlue-600 hover:to-brandBlue-700 hover:shadow-xl hover:shadow-brandBlue-500/30 focus:outline-none focus:ring-2 focus:ring-brandBlue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {useCredentials ? (
+              {shouldShowPassword ? (
                 <>
                   <Lock className="h-5 w-5" />
                   {isLoading ? "Signing in..." : "Sign in"}

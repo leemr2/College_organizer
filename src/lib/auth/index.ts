@@ -62,75 +62,87 @@ declare module "next-auth" {
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
-    // Development-only credentials provider for quick testing
-    ...(process.env.NODE_ENV !== "production"
-      ? [
-          CredentialsProvider({
-            id: "credentials",
-            name: "Credentials (Dev Only)",
-            credentials: {
-              email: {
-                label: "Email",
-                type: "email",
-                placeholder: "test@example.com",
-              },
-              password: { label: "Password", type: "password" },
+    // Credentials provider for password-based authentication
+    CredentialsProvider({
+      id: "credentials",
+      name: "Credentials",
+      credentials: {
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "test@example.com",
+        },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials?.password) {
+          return null;
+        }
+
+        // Find existing user
+        const user = await prisma.user.findUnique({
+          where: { email: credentials.email },
+        });
+
+        if (!user) {
+          // In production, don't auto-create users via credentials
+          // Only email provider should create new users
+          if (process.env.NODE_ENV === "production") {
+            return null;
+          }
+          // In development, allow auto-creation for testing
+          const hashedPassword = await bcrypt.hash(credentials.password, 10);
+          const newUser = await prisma.user.create({
+            data: {
+              email: credentials.email,
+              name: credentials.email.split("@")[0],
+              hashedPassword,
+              role: UserRole.user,
             },
-            async authorize(credentials) {
-              if (!credentials?.email || !credentials?.password) {
-                return null;
-              }
+          });
+          return {
+            id: newUser.id,
+            email: newUser.email,
+            name: newUser.name,
+            role: newUser.role ? (newUser.role as UserRole) : undefined,
+          };
+        }
 
-              // Find or create user for development
-              let user = await prisma.user.findUnique({
-                where: { email: credentials.email },
-              });
+        // Check allowlist in production
+        if (process.env.NODE_ENV === "production") {
+          const inAllowlist = await prisma.allowlist.findUnique({
+            where: { email: credentials.email },
+          });
+          if (!inAllowlist) {
+            console.error(`[NextAuth] Access denied: ${credentials.email} is not on allowlist`);
+            return null;
+          }
+        }
 
-              if (!user) {
-                // Create new user for dev testing
-                const hashedPassword = await bcrypt.hash(credentials.password, 10);
-                user = await prisma.user.create({
-                  data: {
-                    email: credentials.email,
-                    name: credentials.email.split("@")[0],
-                    hashedPassword,
-                    role: UserRole.user,
-                  },
-                });
-              } else {
-                // Verify password for existing user
-                if (!user.hashedPassword) {
-                  // If user exists but has no password, set it
-                  const hashedPassword = await bcrypt.hash(
-                    credentials.password,
-                    10
-                  );
-                  user = await prisma.user.update({
-                    where: { id: user.id },
-                    data: { hashedPassword },
-                  });
-                } else {
-                  // Verify password
-                  const isValid = await bcrypt.compare(
-                    credentials.password,
-                    user.hashedPassword
-                  );
-                  if (!isValid) {
-                    return null;
-                  }
-                }
-              }
+        // Verify password for existing user
+        if (!user.hashedPassword) {
+          // User exists but has no password - don't allow credentials auth
+          // They need to set password via profile settings first
+          return null;
+        }
 
-              return {
-                id: user.id,
-                email: user.email,
-                name: user.name,
-                role: user.role ? (user.role as UserRole) : undefined,
-              };
-            },
-          }),
-        ]
-      : []),
+        // Verify password
+        const isValid = await bcrypt.compare(
+          credentials.password,
+          user.hashedPassword
+        );
+        if (!isValid) {
+          return null;
+        }
+
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          role: user.role ? (user.role as UserRole) : undefined,
+        };
+      },
+    }),
     // Email provider (requires EMAIL_SERVER_PASSWORD in production)
     ...(process.env.EMAIL_SERVER_PASSWORD
       ? [
@@ -149,8 +161,8 @@ export const authOptions: NextAuthOptions = {
       : []),
   ],
   session: {
-    // Use JWT for credentials provider (dev), database for email provider
-    strategy: process.env.NODE_ENV !== "production" ? "jwt" : "database",
+    // Use JWT strategy to support both credentials and email providers
+    strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
@@ -159,7 +171,8 @@ export const authOptions: NextAuthOptions = {
         const email = user?.email;
         if (!email) return false;
 
-        // Credentials provider doesn't use adapter, so we allow it
+        // Credentials provider authorization is handled in authorize() function
+        // Allowlist check is done there for credentials provider
         if (account?.provider === "credentials") {
           return true;
         }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { api } from "@/lib/trpc/react";
 import { toast } from "react-toastify";
 import {
@@ -12,6 +12,8 @@ import {
   Plus,
   Trash2,
   Shield,
+  Lock,
+  X,
 } from "lucide-react";
 import { format } from "date-fns";
 
@@ -19,6 +21,12 @@ export function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<"requests" | "allowlist">("requests");
   const [newEmail, setNewEmail] = useState("");
   const [showAddEmail, setShowAddEmail] = useState(false);
+  const [passwordModal, setPasswordModal] = useState<{
+    userId: string;
+    email: string;
+  } | null>(null);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   // Stats query
   const { data: stats, refetch: refetchStats } = api.admin.getStats.useQuery();
@@ -36,6 +44,28 @@ export function AdminDashboard() {
     isLoading: loadingAllowlist,
     refetch: refetchAllowlist,
   } = api.admin.getAllowlist.useQuery();
+
+  // Get users by emails for password status
+  const allowlistEmails = useMemo(
+    () => allowlist?.map((entry) => entry.email) || [],
+    [allowlist]
+  );
+
+  const { data: usersData, refetch: refetchUsers } = api.admin.getUsersByEmails.useQuery(
+    { emails: allowlistEmails },
+    { enabled: allowlistEmails.length > 0 && activeTab === "allowlist" }
+  );
+
+  // Create a map of email -> user data for quick lookup
+  const usersByEmail = useMemo(() => {
+    const map = new Map<string, { id: string; email: string | null; name: string | null; hasPassword: boolean }>();
+    usersData?.forEach((user) => {
+      if (user.email) {
+        map.set(user.email, user);
+      }
+    });
+    return map;
+  }, [usersData]);
 
   // Mutations
   const approveRequest = api.admin.approveAccessRequest.useMutation({
@@ -84,6 +114,38 @@ export function AdminDashboard() {
       toast.error(error.message || "Failed to remove email");
     },
   });
+
+  const setUserPassword = api.admin.setUserPassword.useMutation({
+    onSuccess: () => {
+      toast.success("Password set successfully");
+      setPasswordModal(null);
+      setPassword("");
+      setConfirmPassword("");
+      refetchUsers();
+    },
+    onError: (error) => {
+      toast.error(error.message || "Failed to set password");
+    },
+  });
+
+  const handleSetPassword = () => {
+    if (!passwordModal) return;
+
+    if (password.length < 8) {
+      toast.error("Password must be at least 8 characters");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    setUserPassword.mutate({
+      userId: passwordModal.userId,
+      password,
+    });
+  };
 
   const pendingRequests =
     accessRequests?.filter(
@@ -310,33 +372,148 @@ export function AdminDashboard() {
           ) : allowlist && allowlist.length > 0 ? (
             <div className="rounded-xl bg-white dark:bg-neutral-800 shadow-sm border border-neutral-200 dark:border-neutral-700 overflow-hidden">
               <div className="divide-y divide-neutral-200 dark:divide-neutral-700">
-                {allowlist.map((entry) => (
-                  <div
-                    key={entry.id}
-                    className="p-6 hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors flex items-center justify-between"
-                  >
-                    <div>
-                      <p className="font-medium text-neutral-900 dark:text-white">
-                        {entry.email}
-                      </p>
-                      <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-                        Added {format(new Date(entry.createdAt), "PPp")}
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => removeFromAllowlist.mutate({ id: entry.id })}
-                      disabled={removeFromAllowlist.isPending}
-                      className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors disabled:opacity-50"
+                {allowlist.map((entry) => {
+                  const user = usersByEmail.get(entry.email);
+                  const hasUser = !!user;
+                  const hasPassword = user?.hasPassword ?? false;
+
+                  return (
+                    <div
+                      key={entry.id}
+                      className="p-6 hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors"
                     >
-                      <Trash2 className="h-4 w-4" />
-                    </button>
-                  </div>
-                ))}
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2">
+                            <p className="font-medium text-neutral-900 dark:text-white">
+                              {entry.email}
+                            </p>
+                            {hasUser && (
+                              <span
+                                className={`text-xs px-2 py-1 rounded-full ${
+                                  hasPassword
+                                    ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                                    : "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400"
+                                }`}
+                              >
+                                {hasPassword ? "Password set" : "No password"}
+                              </span>
+                            )}
+                            {!hasUser && (
+                              <span className="text-xs px-2 py-1 rounded-full bg-neutral-100 text-neutral-600 dark:bg-neutral-700 dark:text-neutral-400">
+                                No account
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+                            Added {format(new Date(entry.createdAt), "PPp")}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          {hasUser && !hasPassword && (
+                            <button
+                              onClick={() =>
+                                setPasswordModal({
+                                  userId: user.id,
+                                  email: entry.email,
+                                })
+                              }
+                              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-brandBlue-500 text-white hover:bg-brandBlue-600 transition-colors"
+                            >
+                              <Lock className="h-4 w-4" />
+                              Set Password
+                            </button>
+                          )}
+                          <button
+                            onClick={() => removeFromAllowlist.mutate({ id: entry.id })}
+                            disabled={removeFromAllowlist.isPending}
+                            className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors disabled:opacity-50"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           ) : (
             <div className="text-center py-12 text-neutral-500 dark:text-neutral-400">
               No emails on allowlist
+            </div>
+          )}
+
+          {/* Password Setting Modal */}
+          {passwordModal && (
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+              <div className="bg-white dark:bg-neutral-800 rounded-xl shadow-xl max-w-md w-full p-6 space-y-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-white">
+                    Set Password
+                  </h3>
+                  <button
+                    onClick={() => {
+                      setPasswordModal(null);
+                      setPassword("");
+                      setConfirmPassword("");
+                    }}
+                    className="p-1 text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 transition-colors"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </div>
+                <div>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                    Setting password for: <span className="font-medium">{passwordModal.email}</span>
+                  </p>
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Minimum 8 characters"
+                      className="w-full rounded-lg border border-neutral-300 dark:border-neutral-600 px-4 py-2 text-neutral-900 dark:text-white placeholder-neutral-500 dark:placeholder-neutral-400 shadow-sm dark:bg-neutral-700 focus:border-brandBlue-500 dark:focus:border-brandBlue-400 focus:ring-brandBlue-500 dark:focus:ring-brandBlue-400"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+                      Confirm Password
+                    </label>
+                    <input
+                      type="password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      placeholder="Confirm password"
+                      className="w-full rounded-lg border border-neutral-300 dark:border-neutral-600 px-4 py-2 text-neutral-900 dark:text-white placeholder-neutral-500 dark:placeholder-neutral-400 shadow-sm dark:bg-neutral-700 focus:border-brandBlue-500 dark:focus:border-brandBlue-400 focus:ring-brandBlue-500 dark:focus:ring-brandBlue-400"
+                    />
+                  </div>
+                </div>
+                <div className="flex gap-2 pt-2">
+                  <button
+                    onClick={handleSetPassword}
+                    disabled={!password || !confirmPassword || setUserPassword.isPending}
+                    className="flex-1 px-4 py-2 rounded-lg bg-brandBlue-500 text-white hover:bg-brandBlue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    {setUserPassword.isPending ? "Setting..." : "Set Password"}
+                  </button>
+                  <button
+                    onClick={() => {
+                      setPasswordModal(null);
+                      setPassword("");
+                      setConfirmPassword("");
+                    }}
+                    className="px-4 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
             </div>
           )}
         </div>

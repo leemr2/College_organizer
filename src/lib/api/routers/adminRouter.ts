@@ -3,6 +3,7 @@ import { TRPCError } from "@trpc/server";
 import { createTRPCRouter, adminProcedure, publicProcedure } from "../trpc";
 import { prisma } from "@/lib/db";
 import { sendAccessApprovedEmail } from "@/lib/email/sendEmail";
+import bcrypt from "bcryptjs";
 
 export const adminRouter = createTRPCRouter({
   // Public endpoint: Request access
@@ -240,5 +241,78 @@ export const adminRouter = createTRPCRouter({
       allowlistCount,
     };
   }),
+
+  // Admin: Get users by emails (for password status checking)
+  getUsersByEmails: adminProcedure
+    .input(
+      z.object({
+        emails: z.array(z.string().email("Invalid email address")),
+      })
+    )
+    .query(async ({ input }) => {
+      const users = await prisma.user.findMany({
+        where: {
+          email: {
+            in: input.emails,
+          },
+        },
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          hashedPassword: true,
+        },
+      });
+
+      // Return users with password status
+      return users.map((user) => ({
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        hasPassword: !!user.hashedPassword,
+      }));
+    }),
+
+  // Admin: Set password for a user (only if they don't have one)
+  setUserPassword: adminProcedure
+    .input(
+      z.object({
+        userId: z.string(),
+        password: z.string().min(8, "Password must be at least 8 characters"),
+      })
+    )
+    .mutation(async ({ input }) => {
+      // Find user
+      const user = await prisma.user.findUnique({
+        where: { id: input.userId },
+        select: { hashedPassword: true },
+      });
+
+      if (!user) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "User not found",
+        });
+      }
+
+      // Check if user already has a password
+      if (user.hashedPassword) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "User already has a password set",
+        });
+      }
+
+      // Hash password
+      const hashedPassword = await bcrypt.hash(input.password, 10);
+
+      // Update user
+      await prisma.user.update({
+        where: { id: input.userId },
+        data: { hashedPassword },
+      });
+
+      return { success: true };
+    }),
 });
 

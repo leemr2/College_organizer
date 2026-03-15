@@ -1,0 +1,30 @@
+{
+  "id": "Clock:Clock:13",
+  "label": "Clock",
+  "file": "C:/Users/drlee/College_organizer/src/components/dashboard/Clock.tsx",
+  "type": "generic_function",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "Clock"
+  ],
+  "uses": [
+    "react:api:29",
+    "react:TRPCReactProvider:52"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "react:api:29",
+      "label": "api",
+      "relationship": "dependency"
+    },
+    {
+      "id": "react:TRPCReactProvider:52",
+      "label": "TRPCReactProvider",
+      "relationship": "dependency"
+    }
+  ]
+}

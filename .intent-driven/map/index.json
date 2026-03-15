@@ -1,0 +1,136 @@
+{
+  "schema_version": "2.0",
+  "project": {
+    "name": "College_organizer",
+    "stack": "security,+nextjs,+trpc,+prisma",
+    "file_count": 111,
+    "node_count": 201
+  },
+  "decisions": {
+    "api": {
+      "value": "tRPC procedures",
+      "scope": "all routers",
+      "override": "never"
+    },
+    "database": {
+      "value": "Prisma + PostgreSQL",
+      "scope": "all data access",
+      "override": "never"
+    },
+    "auth": {
+      "value": "NextAuth",
+      "scope": "auth domain",
+      "override": "never"
+    },
+    "auth_gate": {
+      "value": "protectedProcedure for all user data mutations",
+      "scope": "all routers",
+      "override": "never"
+    },
+    "admin_gate": {
+      "value": "adminProcedure for elevated access",
+      "scope": "admin domain",
+      "override": "explicit only"
+    }
+  },
+  "violations": {
+    "total": 2,
+    "critical": 2,
+    "violation_index": {
+      "SEC-002": {
+        "severity": "critical",
+        "ref": "violations/SEC-002.json"
+      },
+      "SEC-001": {
+        "severity": "critical",
+        "ref": "violations/SEC-001.json"
+      }
+    }
+  },
+  "constraint_templates": {
+    "new_mutation": [
+      "SEC-002: must use protectedProcedure unless explicitly justified"
+    ],
+    "new_pii_access": [
+      "SEC-001: auth gate required upstream"
+    ],
+    "new_ai_procedure": [
+      "SEC-003: rate limiting required for AI-touching mutations"
+    ]
+  },
+  "domains": [
+    {
+      "id": "presentation",
+      "label": "Presentation",
+      "node_count": 70,
+      "active_violations": [],
+      "ref": "domains/presentation.json"
+    },
+    {
+      "id": "api",
+      "label": "API Routes",
+      "node_count": 13,
+      "active_violations": [
+        "SEC-002"
+      ],
+      "ref": "domains/api.json"
+    },
+    {
+      "id": "auth",
+      "label": "Authentication",
+      "node_count": 1,
+      "active_violations": [],
+      "ref": "domains/auth.json"
+    },
+    {
+      "id": "data",
+      "label": "Data Access",
+      "node_count": 1,
+      "active_violations": [
+        "SEC-001"
+      ],
+      "ref": "domains/data.json"
+    },
+    {
+      "id": "infrastructure",
+      "label": "Infrastructure",
+      "node_count": 1,
+      "active_violations": [],
+      "ref": "domains/infrastructure.json"
+    },
+    {
+      "id": "business",
+      "label": "Business Logic",
+      "node_count": 77,
+      "active_violations": [],
+      "ref": "domains/business.json"
+    },
+    {
+      "id": "types",
+      "label": "Type Contracts",
+      "node_count": 24,
+      "active_violations": [],
+      "ref": "domains/types.json"
+    },
+    {
+      "id": "misc",
+      "label": "Miscellaneous",
+      "node_count": 13,
+      "active_violations": [],
+      "ref": "domains/misc.json"
+    }
+  ],
+  "task_context": {
+    "before_any_task": [
+      "State intersection with each active violation before writing any plan",
+      "If this task creates new mutations, apply SEC-002 check to them",
+      "If this task creates new AI-touching procedures, apply SEC-003"
+    ],
+    "violation_posture": "acknowledge",
+    "scope_boundary": "domains listed in this index only — justify any addition"
+  },
+  "ai_context": {
+    "summary": "TypeScript codebase with 201 semantic nodes across 8 domain(s): Presentation, API Routes, Authentication, Data Access, Infrastructure, Business Logic, Type Contracts, Miscellaneous. Frameworks detected: security, nextjs, trpc, prisma. 2 critical constraint violation(s) require attention.",
+    "token_estimate": 140
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "toolOptimization:ToolOptimizationResult:19",
+  "label": "ToolOptimizationResult",
+  "file": "C:/Users/drlee/College_organizer/src/lib/ai/toolOptimization.ts",
+  "type": "ai_service",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "ToolOptimizationResult"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

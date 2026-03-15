@@ -1,0 +1,16 @@
+{
+  "id": "webSearch:searchStudyMethod:81",
+  "label": "searchStudyMethod",
+  "file": "C:/Users/drlee/College_organizer/src/lib/ai/webSearch.ts",
+  "type": "ai_service",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "searchStudyMethod"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

@@ -1,0 +1,16 @@
+{
+  "id": "toolDatabase:getBudgetFriendlyTools:139",
+  "label": "getBudgetFriendlyTools",
+  "file": "C:/Users/drlee/College_organizer/src/lib/utils/toolDatabase.ts",
+  "type": "utility",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "getBudgetFriendlyTools"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

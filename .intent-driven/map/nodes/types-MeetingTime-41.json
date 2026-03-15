@@ -1,0 +1,16 @@
+{
+  "id": "types:MeetingTime:41",
+  "label": "MeetingTime",
+  "file": "C:/Users/drlee/College_organizer/src/lib/types.ts",
+  "type": "type_definition",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "MeetingTime"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

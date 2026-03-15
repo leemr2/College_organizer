@@ -1,0 +1,16 @@
+{
+  "id": "root:AppRouter:26",
+  "label": "AppRouter",
+  "file": "C:/Users/drlee/College_organizer/src/lib/api/root.ts",
+  "type": "generic_function",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "AppRouter"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

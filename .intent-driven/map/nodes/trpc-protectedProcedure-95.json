@@ -1,0 +1,16 @@
+{
+  "id": "trpc:protectedProcedure:95",
+  "label": "protectedProcedure",
+  "file": "C:/Users/drlee/College_organizer/src/lib/api/trpc.ts",
+  "type": "protected_procedure",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "protectedProcedure"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

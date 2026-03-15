@@ -1,0 +1,54 @@
+{
+  "id": "route:handler:19",
+  "label": "handler",
+  "file": "C:/Users/drlee/College_organizer/src/app/api/trpc/[trpc]/route.ts",
+  "type": "api_route_handler",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "uses": [
+    "root:appRouter:15",
+    "root:AppRouter:26",
+    "root:createCaller:35",
+    "trpc:createTRPCContext:27",
+    "trpc:createCallerFactory:62",
+    "trpc:createTRPCRouter:76",
+    "trpc:publicProcedure:85",
+    "trpc:protectedProcedure:95",
+    "trpc:adminProcedure:118"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "root:AppRouter:26",
+      "label": "AppRouter",
+      "relationship": "dependency"
+    },
+    {
+      "id": "root:createCaller:35",
+      "label": "createCaller",
+      "relationship": "dependency"
+    },
+    {
+      "id": "trpc:createTRPCContext:27",
+      "label": "createTRPCContext",
+      "relationship": "dependency"
+    },
+    {
+      "id": "trpc:createCallerFactory:62",
+      "label": "createCallerFactory",
+      "relationship": "dependency"
+    },
+    {
+      "id": "trpc:createTRPCRouter:76",
+      "label": "createTRPCRouter",
+      "relationship": "dependency"
+    },
+    {
+      "id": "trpc:adminProcedure:118",
+      "label": "adminProcedure",
+      "relationship": "auth_guard"
+    }
+  ]
+}

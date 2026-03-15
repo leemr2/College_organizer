@@ -1,0 +1,16 @@
+{
+  "id": "SpeechToTextArea:SpeechToTextAreaRef:28",
+  "label": "SpeechToTextAreaRef",
+  "file": "C:/Users/drlee/College_organizer/src/components/SpeechToTextArea.tsx",
+  "type": "generic_function",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "SpeechToTextAreaRef"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

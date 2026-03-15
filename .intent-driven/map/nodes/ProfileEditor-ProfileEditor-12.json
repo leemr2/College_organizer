@@ -1,0 +1,16 @@
+{
+  "id": "ProfileEditor:ProfileEditor:12",
+  "label": "ProfileEditor",
+  "file": "C:/Users/drlee/College_organizer/src/components/profile/ProfileEditor.tsx",
+  "type": "generic_function",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "ProfileEditor"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

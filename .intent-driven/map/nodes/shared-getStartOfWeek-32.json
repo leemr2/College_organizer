@@ -1,0 +1,16 @@
+{
+  "id": "shared:getStartOfWeek:32",
+  "label": "getStartOfWeek",
+  "file": "C:/Users/drlee/College_organizer/src/lib/utils/shared.ts",
+  "type": "utility",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "getStartOfWeek"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

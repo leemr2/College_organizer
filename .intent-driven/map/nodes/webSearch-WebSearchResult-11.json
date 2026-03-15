@@ -1,0 +1,16 @@
+{
+  "id": "webSearch:WebSearchResult:11",
+  "label": "WebSearchResult",
+  "file": "C:/Users/drlee/College_organizer/src/lib/ai/webSearch.ts",
+  "type": "ai_service",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "WebSearchResult"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

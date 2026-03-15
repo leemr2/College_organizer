@@ -1,0 +1,16 @@
+{
+  "id": "types:DiscoveryQuestion:76",
+  "label": "DiscoveryQuestion",
+  "file": "C:/Users/drlee/College_organizer/src/lib/types.ts",
+  "type": "type_definition",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "DiscoveryQuestion"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

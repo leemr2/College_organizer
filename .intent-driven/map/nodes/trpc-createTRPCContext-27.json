@@ -1,0 +1,16 @@
+{
+  "id": "trpc:createTRPCContext:27",
+  "label": "createTRPCContext",
+  "file": "C:/Users/drlee/College_organizer/src/lib/api/trpc.ts",
+  "type": "generic_function",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "createTRPCContext"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

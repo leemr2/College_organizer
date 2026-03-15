@@ -1,0 +1,16 @@
+{
+  "id": "timezone:getDateEndInTimezone:169",
+  "label": "getDateEndInTimezone",
+  "file": "C:/Users/drlee/College_organizer/src/lib/utils/timezone.ts",
+  "type": "utility",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "getDateEndInTimezone"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

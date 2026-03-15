@@ -1,0 +1,21 @@
+{
+  "id": "NavigationBar:NavigationBar:9",
+  "label": "NavigationBar",
+  "file": "C:/Users/drlee/College_organizer/src/components/NavigationBar.tsx",
+  "type": "auth_gate",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "NavigationBar"
+  ],
+  "uses": [
+    "Clock:Clock:13"
+  ],
+  "constraint_check": {},
+  "adjacent": [],
+  "decisions": {
+    "auth_gate": "protectedProcedure"
+  }
+}

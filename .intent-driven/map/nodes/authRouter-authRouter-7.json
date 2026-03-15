@@ -1,0 +1,29 @@
+{
+  "id": "authRouter:authRouter:7",
+  "label": "authRouter",
+  "file": "C:/Users/drlee/College_organizer/src/lib/api/routers/authRouter.ts",
+  "type": "trpc_router",
+  "procedures": {
+    "mutations": [],
+    "queries": [
+      "async"
+    ]
+  },
+  "exports": [
+    "authRouter"
+  ],
+  "uses": [
+    "db:prisma:20"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "db:prisma:20",
+      "label": "prisma",
+      "relationship": "dependency"
+    }
+  ],
+  "decisions": {
+    "api": "tRPC procedures"
+  }
+}

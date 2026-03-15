@@ -1,0 +1,31 @@
+{
+  "id": "data",
+  "label": "Data Access",
+  "layer": "data_access",
+  "patterns": [
+    "prisma_query"
+  ],
+  "active_violations": [
+    "SEC-001"
+  ],
+  "nodes": [
+    {
+      "id": "index:authOptions:62",
+      "label": "authOptions",
+      "type": "prisma_query",
+      "size": "medium",
+      "violation": "SEC-001",
+      "ref": "nodes/index-authOptions-62.json"
+    }
+  ],
+  "adjacent_domains": [
+    {
+      "id": "presentation",
+      "relationship": "Presentation — upstream dependency"
+    },
+    {
+      "id": "infrastructure",
+      "relationship": "Infrastructure — cross-domain dependency"
+    }
+  ]
+}

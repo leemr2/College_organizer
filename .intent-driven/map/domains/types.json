@@ -1,0 +1,165 @@
+{
+  "id": "types",
+  "label": "Type Contracts",
+  "layer": "business_logic",
+  "patterns": [
+    "type_definition"
+  ],
+  "active_violations": [],
+  "nodes": [
+    {
+      "id": "calendar:TimeBlockType:1",
+      "label": "TimeBlockType",
+      "type": "type_definition",
+      "ref": "nodes/calendar-TimeBlockType-1.json"
+    },
+    {
+      "id": "calendar:MeetingTime:9",
+      "label": "MeetingTime",
+      "type": "type_definition",
+      "ref": "nodes/calendar-MeetingTime-9.json"
+    },
+    {
+      "id": "calendar:TimeBlock:15",
+      "label": "TimeBlock",
+      "type": "type_definition",
+      "ref": "nodes/calendar-TimeBlock-15.json"
+    },
+    {
+      "id": "calendar:RecurringPattern:29",
+      "label": "RecurringPattern",
+      "type": "type_definition",
+      "ref": "nodes/calendar-RecurringPattern-29.json"
+    },
+    {
+      "id": "calendar:WeekView:35",
+      "label": "WeekView",
+      "type": "type_definition",
+      "ref": "nodes/calendar-WeekView-35.json"
+    },
+    {
+      "id": "calendar:CalendarEvent:45",
+      "label": "CalendarEvent",
+      "type": "type_definition",
+      "ref": "nodes/calendar-CalendarEvent-45.json"
+    },
+    {
+      "id": "types:MessageRole:5",
+      "label": "MessageRole",
+      "type": "type_definition",
+      "ref": "nodes/types-MessageRole-5.json"
+    },
+    {
+      "id": "types:Message:7",
+      "label": "Message",
+      "type": "type_definition",
+      "ref": "nodes/types-Message-7.json"
+    },
+    {
+      "id": "types:MessageArray:13",
+      "label": "MessageArray",
+      "type": "type_definition",
+      "ref": "nodes/types-MessageArray-13.json"
+    },
+    {
+      "id": "types:StudentPreferences:26",
+      "label": "StudentPreferences",
+      "type": "type_definition",
+      "ref": "nodes/types-StudentPreferences-26.json"
+    },
+    {
+      "id": "types:MeetingTime:41",
+      "label": "MeetingTime",
+      "type": "type_definition",
+      "ref": "nodes/types-MeetingTime-41.json"
+    },
+    {
+      "id": "types:ClassScheduleData:47",
+      "label": "ClassScheduleData",
+      "type": "type_definition",
+      "ref": "nodes/types-ClassScheduleData-47.json"
+    },
+    {
+      "id": "types:TaskSummary:61",
+      "label": "TaskSummary",
+      "type": "type_definition",
+      "ref": "nodes/types-TaskSummary-61.json"
+    },
+    {
+      "id": "types:TaskContext:67",
+      "label": "TaskContext",
+      "type": "type_definition",
+      "ref": "nodes/types-TaskContext-67.json"
+    },
+    {
+      "id": "types:DiscoveryQuestion:76",
+      "label": "DiscoveryQuestion",
+      "type": "type_definition",
+      "ref": "nodes/types-DiscoveryQuestion-76.json"
+    },
+    {
+      "id": "types:DraftTask:85",
+      "label": "DraftTask",
+      "type": "type_definition",
+      "ref": "nodes/types-DraftTask-85.json"
+    },
+    {
+      "id": "types:PlanningSessionState:96",
+      "label": "PlanningSessionState",
+      "type": "type_definition",
+      "ref": "nodes/types-PlanningSessionState-96.json"
+    },
+    {
+      "id": "types:ConversationMode:103",
+      "label": "ConversationMode",
+      "type": "type_definition",
+      "ref": "nodes/types-ConversationMode-103.json"
+    },
+    {
+      "id": "types:StudentContext:111",
+      "label": "StudentContext",
+      "type": "type_definition",
+      "ref": "nodes/types-StudentContext-111.json"
+    },
+    {
+      "id": "types:ScheduleBlockData:131",
+      "label": "ScheduleBlockData",
+      "type": "type_definition",
+      "ref": "nodes/types-ScheduleBlockData-131.json"
+    },
+    {
+      "id": "types:SchedulingContext:143",
+      "label": "SchedulingContext",
+      "type": "type_definition",
+      "ref": "nodes/types-SchedulingContext-143.json"
+    },
+    {
+      "id": "types:ScheduleSuggestion:152",
+      "label": "ScheduleSuggestion",
+      "type": "type_definition",
+      "ref": "nodes/types-ScheduleSuggestion-152.json"
+    },
+    {
+      "id": "types:RescheduleOptions:158",
+      "label": "RescheduleOptions",
+      "type": "type_definition",
+      "ref": "nodes/types-RescheduleOptions-158.json"
+    },
+    {
+      "id": "types:OnboardingData:172",
+      "label": "OnboardingData",
+      "type": "type_definition",
+      "ref": "nodes/types-OnboardingData-172.json"
+    }
+  ],
+  "adjacent_domains": [
+    {
+      "id": "presentation",
+      "relationship": "Presentation — upstream dependency"
+    },
+    {
+      "id": "api",
+      "relationship": "API Routes — upstream dependency"
+    }
+  ]
+}

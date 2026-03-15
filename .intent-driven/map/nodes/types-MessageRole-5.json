@@ -1,0 +1,16 @@
+{
+  "id": "types:MessageRole:5",
+  "label": "MessageRole",
+  "file": "C:/Users/drlee/College_organizer/src/lib/types.ts",
+  "type": "type_definition",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "MessageRole"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

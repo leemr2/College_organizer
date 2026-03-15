@@ -1,0 +1,16 @@
+{
+  "id": "ThemeProvider:ThemeProvider:14",
+  "label": "ThemeProvider",
+  "file": "C:/Users/drlee/College_organizer/src/components/theme/ThemeProvider.tsx",
+  "type": "generic_function",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "ThemeProvider"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

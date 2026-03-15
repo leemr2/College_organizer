@@ -1,0 +1,16 @@
+{
+  "id": "scheduling:schedulingService:578",
+  "label": "schedulingService",
+  "file": "C:/Users/drlee/College_organizer/src/lib/ai/scheduling.ts",
+  "type": "ai_service",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "schedulingService"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

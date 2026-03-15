@@ -1,0 +1,16 @@
+{
+  "id": "discoveryQuestions:discoveryQuestionsService:177",
+  "label": "discoveryQuestionsService",
+  "file": "C:/Users/drlee/College_organizer/src/lib/ai/discoveryQuestions.ts",
+  "type": "ai_service",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "discoveryQuestionsService"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

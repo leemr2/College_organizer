@@ -1,0 +1,16 @@
+{
+  "id": "webSearch:searchToolOptimization:70",
+  "label": "searchToolOptimization",
+  "file": "C:/Users/drlee/College_organizer/src/lib/ai/webSearch.ts",
+  "type": "ai_service",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "searchToolOptimization"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

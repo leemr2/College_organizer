@@ -1,0 +1,16 @@
+{
+  "id": "toolDatabase:getFreeTools:130",
+  "label": "getFreeTools",
+  "file": "C:/Users/drlee/College_organizer/src/lib/utils/toolDatabase.ts",
+  "type": "utility",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "getFreeTools"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

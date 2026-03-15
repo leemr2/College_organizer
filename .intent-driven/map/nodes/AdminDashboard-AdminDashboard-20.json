@@ -1,0 +1,33 @@
+{
+  "id": "AdminDashboard:AdminDashboard:20",
+  "label": "AdminDashboard",
+  "file": "C:/Users/drlee/College_organizer/src/components/admin/AdminDashboard.tsx",
+  "type": "auth_gate",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "AdminDashboard"
+  ],
+  "uses": [
+    "react:api:29",
+    "react:TRPCReactProvider:52"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "react:api:29",
+      "label": "api",
+      "relationship": "dependency"
+    },
+    {
+      "id": "react:TRPCReactProvider:52",
+      "label": "TRPCReactProvider",
+      "relationship": "dependency"
+    }
+  ],
+  "decisions": {
+    "auth_gate": "protectedProcedure"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "DailyGreeting:DailyGreeting:9",
+  "label": "DailyGreeting",
+  "file": "C:/Users/drlee/College_organizer/src/components/dashboard/DailyGreeting.tsx",
+  "type": "generic_function",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "DailyGreeting"
+  ],
+  "uses": [
+    "dailyGreetings:getDailyGreeting:5",
+    "dailyGreetings:getCurrentDayOfWeek:34"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "dailyGreetings:getDailyGreeting:5",
+      "label": "getDailyGreeting",
+      "relationship": "dependency"
+    },
+    {
+      "id": "dailyGreetings:getCurrentDayOfWeek:34",
+      "label": "getCurrentDayOfWeek",
+      "relationship": "dependency"
+    }
+  ]
+}

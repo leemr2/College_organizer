@@ -1,0 +1,43 @@
+{
+  "id": "adminRouter:adminRouter:8",
+  "label": "adminRouter",
+  "file": "C:/Users/drlee/College_organizer/src/lib/api/routers/adminRouter.ts",
+  "type": "trpc_router",
+  "procedures": {
+    "mutations": [
+      "async"
+    ],
+    "queries": []
+  },
+  "exports": [
+    "adminRouter"
+  ],
+  "uses": [
+    "db:prisma:20",
+    "sendEmail:sendWelcomeEmail:8",
+    "sendEmail:sendAccessApprovedEmail:17"
+  ],
+  "constraint_check": {
+    "SEC-002": "failing — \"adminRouter\" contains a publicProcedure mutation — mutations should use protectedProcedure to prevent unauthorized access."
+  },
+  "adjacent": [
+    {
+      "id": "db:prisma:20",
+      "label": "prisma",
+      "relationship": "dependency"
+    },
+    {
+      "id": "sendEmail:sendWelcomeEmail:8",
+      "label": "sendWelcomeEmail",
+      "relationship": "dependency"
+    },
+    {
+      "id": "sendEmail:sendAccessApprovedEmail:17",
+      "label": "sendAccessApprovedEmail",
+      "relationship": "dependency"
+    }
+  ],
+  "decisions": {
+    "api": "tRPC procedures"
+  }
+}

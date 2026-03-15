@@ -1,0 +1,19 @@
+{
+  "id": "root:appRouter:15",
+  "label": "appRouter",
+  "file": "C:/Users/drlee/College_organizer/src/lib/api/root.ts",
+  "type": "trpc_router",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "appRouter"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": [],
+  "decisions": {
+    "api": "tRPC procedures"
+  }
+}

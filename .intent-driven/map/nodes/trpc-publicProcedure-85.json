@@ -1,0 +1,16 @@
+{
+  "id": "trpc:publicProcedure:85",
+  "label": "publicProcedure",
+  "file": "C:/Users/drlee/College_organizer/src/lib/api/trpc.ts",
+  "type": "public_procedure",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "publicProcedure"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

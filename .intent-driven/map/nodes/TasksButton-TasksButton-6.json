@@ -1,0 +1,16 @@
+{
+  "id": "TasksButton:TasksButton:6",
+  "label": "TasksButton",
+  "file": "C:/Users/drlee/College_organizer/src/components/dashboard/TasksButton.tsx",
+  "type": "generic_function",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "TasksButton"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

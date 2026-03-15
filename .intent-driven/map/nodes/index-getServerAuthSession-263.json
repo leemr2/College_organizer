@@ -1,0 +1,24 @@
+{
+  "id": "index:getServerAuthSession:263",
+  "label": "getServerAuthSession",
+  "file": "C:/Users/drlee/College_organizer/src/lib/auth/index.ts",
+  "type": "auth_utility",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "getServerAuthSession"
+  ],
+  "uses": [
+    "db:prisma:20"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "db:prisma:20",
+      "label": "prisma",
+      "relationship": "dependency"
+    }
+  ]
+}

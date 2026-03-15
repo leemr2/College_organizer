@@ -1,0 +1,16 @@
+{
+  "id": "shared:formatTime:4",
+  "label": "formatTime",
+  "file": "C:/Users/drlee/College_organizer/src/lib/utils/shared.ts",
+  "type": "utility",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "formatTime"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

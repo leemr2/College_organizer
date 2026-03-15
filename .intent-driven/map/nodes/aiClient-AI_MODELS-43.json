@@ -1,0 +1,16 @@
+{
+  "id": "aiClient:AI_MODELS:43",
+  "label": "AI_MODELS",
+  "file": "C:/Users/drlee/College_organizer/src/lib/aiClient.ts",
+  "type": "generic_function",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "AI_MODELS"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

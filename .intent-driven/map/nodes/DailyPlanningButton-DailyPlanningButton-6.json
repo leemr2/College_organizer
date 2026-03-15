@@ -1,0 +1,16 @@
+{
+  "id": "DailyPlanningButton:DailyPlanningButton:6",
+  "label": "DailyPlanningButton",
+  "file": "C:/Users/drlee/College_organizer/src/components/dashboard/DailyPlanningButton.tsx",
+  "type": "generic_function",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "DailyPlanningButton"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

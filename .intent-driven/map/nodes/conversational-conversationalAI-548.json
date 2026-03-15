@@ -1,0 +1,16 @@
+{
+  "id": "conversational:conversationalAI:548",
+  "label": "conversationalAI",
+  "file": "C:/Users/drlee/College_organizer/src/lib/ai/conversational.ts",
+  "type": "ai_service",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "conversationalAI"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

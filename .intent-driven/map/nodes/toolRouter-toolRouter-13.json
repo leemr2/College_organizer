@@ -1,0 +1,294 @@
+{
+  "id": "toolRouter:toolRouter:13",
+  "label": "toolRouter",
+  "file": "C:/Users/drlee/College_organizer/src/lib/api/routers/toolRouter.ts",
+  "type": "trpc_router",
+  "procedures": {
+    "mutations": [],
+    "queries": [
+      "async"
+    ]
+  },
+  "exports": [
+    "toolRouter"
+  ],
+  "uses": [
+    "db:prisma:20",
+    "toolRecommendation:ToolRecommendation:12",
+    "toolRecommendation:InefficiencyDetection:22",
+    "toolRecommendation:ToolSearchQuery:29",
+    "toolRecommendation:ToolRecommendationService:37",
+    "toolRecommendation:toolRecommendationService:362",
+    "toolDatabase:Tool:10",
+    "toolDatabase:ToolSearchQuery:30",
+    "toolDatabase:getAllTools:41",
+    "toolDatabase:getToolById:48",
+    "toolDatabase:searchTools:55",
+    "toolDatabase:getToolsByCategory:103",
+    "toolDatabase:getToolsForTaskType:110",
+    "toolDatabase:getToolsByLearningCurve:123",
+    "toolDatabase:getFreeTools:130",
+    "toolDatabase:getBudgetFriendlyTools:139",
+    "types:MessageRole:5",
+    "types:Message:7",
+    "types:MessageArray:13",
+    "types:NotificationSettings:19",
+    "types:StudentPreferences:26",
+    "types:MeetingTime:41",
+    "types:ClassScheduleData:47",
+    "types:TaskSummary:61",
+    "types:TaskContext:67",
+    "types:DiscoveryQuestion:76",
+    "types:DraftTask:85",
+    "types:PlanningSessionState:96",
+    "types:ConversationMode:103",
+    "types:StudentContext:111",
+    "types:ScheduleBlockData:131",
+    "types:SchedulingContext:143",
+    "types:ScheduleSuggestion:152",
+    "types:RescheduleOptions:158",
+    "types:OnboardingData:172",
+    "aiClient:AI_MODELS:43",
+    "aiClient:AIModel:57",
+    "aiClient:GenerateChatCompletionOptions:61",
+    "aiClient:generateGeminiWebResponse:142",
+    "aiClient:parseJsonResponse:177",
+    "aiClient:generateChatCompletion:198",
+    "toolOptimization:Feature:12",
+    "toolOptimization:ToolOptimizationResult:19",
+    "toolOptimization:ToolOptimizationService:27",
+    "toolOptimization:toolOptimizationService:242"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "db:prisma:20",
+      "label": "prisma",
+      "relationship": "dependency"
+    },
+    {
+      "id": "toolRecommendation:ToolRecommendation:12",
+      "label": "ToolRecommendation",
+      "relationship": "ai_service"
+    },
+    {
+      "id": "toolRecommendation:InefficiencyDetection:22",
+      "label": "InefficiencyDetection",
+      "relationship": "ai_service"
+    },
+    {
+      "id": "toolRecommendation:ToolSearchQuery:29",
+      "label": "ToolSearchQuery",
+      "relationship": "ai_service"
+    },
+    {
+      "id": "toolRecommendation:ToolRecommendationService:37",
+      "label": "ToolRecommendationService",
+      "relationship": "ai_service"
+    },
+    {
+      "id": "toolRecommendation:toolRecommendationService:362",
+      "label": "toolRecommendationService",
+      "relationship": "ai_service"
+    },
+    {
+      "id": "toolDatabase:Tool:10",
+      "label": "Tool",
+      "relationship": "dependency"
+    },
+    {
+      "id": "toolDatabase:ToolSearchQuery:30",
+      "label": "ToolSearchQuery",
+      "relationship": "dependency"
+    },
+    {
+      "id": "toolDatabase:getAllTools:41",
+      "label": "getAllTools",
+      "relationship": "dependency"
+    },
+    {
+      "id": "toolDatabase:getToolById:48",
+      "label": "getToolById",
+      "relationship": "dependency"
+    },
+    {
+      "id": "toolDatabase:searchTools:55",
+      "label": "searchTools",
+      "relationship": "dependency"
+    },
+    {
+      "id": "toolDatabase:getToolsByCategory:103",
+      "label": "getToolsByCategory",
+      "relationship": "dependency"
+    },
+    {
+      "id": "toolDatabase:getToolsForTaskType:110",
+      "label": "getToolsForTaskType",
+      "relationship": "dependency"
+    },
+    {
+      "id": "toolDatabase:getToolsByLearningCurve:123",
+      "label": "getToolsByLearningCurve",
+      "relationship": "dependency"
+    },
+    {
+      "id": "toolDatabase:getFreeTools:130",
+      "label": "getFreeTools",
+      "relationship": "dependency"
+    },
+    {
+      "id": "toolDatabase:getBudgetFriendlyTools:139",
+      "label": "getBudgetFriendlyTools",
+      "relationship": "dependency"
+    },
+    {
+      "id": "types:MessageRole:5",
+      "label": "MessageRole",
+      "relationship": "dependency"
+    },
+    {
+      "id": "types:Message:7",
+      "label": "Message",
+      "relationship": "dependency"
+    },
+    {
+      "id": "types:MessageArray:13",
+      "label": "MessageArray",
+      "relationship": "dependency"
+    },
+    {
+      "id": "types:NotificationSettings:19",
+      "label": "NotificationSettings",
+      "relationship": "dependency"
+    },
+    {
+      "id": "types:StudentPreferences:26",
+      "label": "StudentPreferences",
+      "relationship": "dependency"
+    },
+    {
+      "id": "types:MeetingTime:41",
+      "label": "MeetingTime",
+      "relationship": "dependency"
+    },
+    {
+      "id": "types:ClassScheduleData:47",
+      "label": "ClassScheduleData",
+      "relationship": "dependency"
+    },
+    {
+      "id": "types:TaskSummary:61",
+      "label": "TaskSummary",
+      "relationship": "dependency"
+    },
+    {
+      "id": "types:TaskContext:67",
+      "label": "TaskContext",
+      "relationship": "dependency"
+    },
+    {
+      "id": "types:DiscoveryQuestion:76",
+      "label": "DiscoveryQuestion",
+      "relationship": "dependency"
+    },
+    {
+      "id": "types:DraftTask:85",
+      "label": "DraftTask",
+      "relationship": "dependency"
+    },
+    {
+      "id": "types:PlanningSessionState:96",
+      "label": "PlanningSessionState",
+      "relationship": "dependency"
+    },
+    {
+      "id": "types:ConversationMode:103",
+      "label": "ConversationMode",
+      "relationship": "dependency"
+    },
+    {
+      "id": "types:StudentContext:111",
+      "label": "StudentContext",
+      "relationship": "dependency"
+    },
+    {
+      "id": "types:ScheduleBlockData:131",
+      "label": "ScheduleBlockData",
+      "relationship": "dependency"
+    },
+    {
+      "id": "types:SchedulingContext:143",
+      "label": "SchedulingContext",
+      "relationship": "dependency"
+    },
+    {
+      "id": "types:ScheduleSuggestion:152",
+      "label": "ScheduleSuggestion",
+      "relationship": "dependency"
+    },
+    {
+      "id": "types:RescheduleOptions:158",
+      "label": "RescheduleOptions",
+      "relationship": "dependency"
+    },
+    {
+      "id": "types:OnboardingData:172",
+      "label": "OnboardingData",
+      "relationship": "dependency"
+    },
+    {
+      "id": "aiClient:AI_MODELS:43",
+      "label": "AI_MODELS",
+      "relationship": "dependency"
+    },
+    {
+      "id": "aiClient:AIModel:57",
+      "label": "AIModel",
+      "relationship": "dependency"
+    },
+    {
+      "id": "aiClient:GenerateChatCompletionOptions:61",
+      "label": "GenerateChatCompletionOptions",
+      "relationship": "dependency"
+    },
+    {
+      "id": "aiClient:generateGeminiWebResponse:142",
+      "label": "generateGeminiWebResponse",
+      "relationship": "dependency"
+    },
+    {
+      "id": "aiClient:parseJsonResponse:177",
+      "label": "parseJsonResponse",
+      "relationship": "dependency"
+    },
+    {
+      "id": "aiClient:generateChatCompletion:198",
+      "label": "generateChatCompletion",
+      "relationship": "dependency"
+    },
+    {
+      "id": "toolOptimization:Feature:12",
+      "label": "Feature",
+      "relationship": "ai_service"
+    },
+    {
+      "id": "toolOptimization:ToolOptimizationResult:19",
+      "label": "ToolOptimizationResult",
+      "relationship": "ai_service"
+    },
+    {
+      "id": "toolOptimization:ToolOptimizationService:27",
+      "label": "ToolOptimizationService",
+      "relationship": "ai_service"
+    },
+    {
+      "id": "toolOptimization:toolOptimizationService:242",
+      "label": "toolOptimizationService",
+      "relationship": "ai_service"
+    }
+  ],
+  "decisions": {
+    "api": "tRPC procedures",
+    "auth_gate": "protectedProcedure"
+  }
+}

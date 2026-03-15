@@ -1,0 +1,16 @@
+{
+  "id": "types:RescheduleOptions:158",
+  "label": "RescheduleOptions",
+  "file": "C:/Users/drlee/College_organizer/src/lib/types.ts",
+  "type": "type_definition",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "RescheduleOptions"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

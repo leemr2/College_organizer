@@ -1,0 +1,16 @@
+{
+  "id": "storage:uploadFile:11",
+  "label": "uploadFile",
+  "file": "C:/Users/drlee/College_organizer/src/lib/storage.ts",
+  "type": "generic_function",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "uploadFile"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

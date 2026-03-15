@@ -1,0 +1,19 @@
+{
+  "id": "timezone:getUserTimezone:10",
+  "label": "getUserTimezone",
+  "file": "C:/Users/drlee/College_organizer/src/lib/utils/timezone.ts",
+  "type": "auth_gate",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "getUserTimezone"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": [],
+  "decisions": {
+    "auth_gate": "protectedProcedure"
+  }
+}

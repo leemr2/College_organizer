@@ -1,0 +1,19 @@
+{
+  "id": "SpeechToTextArea:SpeechToTextArea:33",
+  "label": "SpeechToTextArea",
+  "file": "C:/Users/drlee/College_organizer/src/components/SpeechToTextArea.tsx",
+  "type": "auth_gate",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "SpeechToTextArea"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": [],
+  "decisions": {
+    "auth_gate": "protectedProcedure"
+  }
+}

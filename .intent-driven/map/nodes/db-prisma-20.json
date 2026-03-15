@@ -1,0 +1,16 @@
+{
+  "id": "db:prisma:20",
+  "label": "prisma",
+  "file": "C:/Users/drlee/College_organizer/src/lib/db.ts",
+  "type": "env_access",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "prisma"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

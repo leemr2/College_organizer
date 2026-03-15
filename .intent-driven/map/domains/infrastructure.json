@@ -1,0 +1,35 @@
+{
+  "id": "infrastructure",
+  "label": "Infrastructure",
+  "layer": "infrastructure",
+  "patterns": [
+    "env_access"
+  ],
+  "active_violations": [],
+  "nodes": [
+    {
+      "id": "db:prisma:20",
+      "label": "prisma",
+      "type": "env_access",
+      "ref": "nodes/db-prisma-20.json"
+    }
+  ],
+  "adjacent_domains": [
+    {
+      "id": "presentation",
+      "relationship": "Presentation — upstream dependency"
+    },
+    {
+      "id": "api",
+      "relationship": "API Routes — upstream dependency"
+    },
+    {
+      "id": "data",
+      "relationship": "Data Access — upstream dependency"
+    },
+    {
+      "id": "auth",
+      "relationship": "Authentication — upstream dependency"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "types:ScheduleSuggestion:152",
+  "label": "ScheduleSuggestion",
+  "file": "C:/Users/drlee/College_organizer/src/lib/types.ts",
+  "type": "type_definition",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "ScheduleSuggestion"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

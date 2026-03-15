@@ -1,0 +1,16 @@
+{
+  "id": "root:createCaller:35",
+  "label": "createCaller",
+  "file": "C:/Users/drlee/College_organizer/src/lib/api/root.ts",
+  "type": "generic_function",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "createCaller"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

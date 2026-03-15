@@ -1,0 +1,16 @@
+{
+  "id": "toolDatabase:getAllTools:41",
+  "label": "getAllTools",
+  "file": "C:/Users/drlee/College_organizer/src/lib/utils/toolDatabase.ts",
+  "type": "utility",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "getAllTools"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

@@ -1,0 +1,16 @@
+{
+  "id": "types:StudentPreferences:26",
+  "label": "StudentPreferences",
+  "file": "C:/Users/drlee/College_organizer/src/lib/types.ts",
+  "type": "type_definition",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "StudentPreferences"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

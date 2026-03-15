@@ -1,0 +1,16 @@
+{
+  "id": "aiClient:generateChatCompletion:198",
+  "label": "generateChatCompletion",
+  "file": "C:/Users/drlee/College_organizer/src/lib/aiClient.ts",
+  "type": "generic_function",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "generateChatCompletion"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

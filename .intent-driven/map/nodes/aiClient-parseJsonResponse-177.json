@@ -1,0 +1,16 @@
+{
+  "id": "aiClient:parseJsonResponse:177",
+  "label": "parseJsonResponse",
+  "file": "C:/Users/drlee/College_organizer/src/lib/aiClient.ts",
+  "type": "input_validation",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "parseJsonResponse"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

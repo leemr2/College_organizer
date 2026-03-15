@@ -1,0 +1,16 @@
+{
+  "id": "timezone:getTodayEndInTimezone:79",
+  "label": "getTodayEndInTimezone",
+  "file": "C:/Users/drlee/College_organizer/src/lib/utils/timezone.ts",
+  "type": "utility",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "getTodayEndInTimezone"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

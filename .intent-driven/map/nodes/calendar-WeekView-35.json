@@ -1,0 +1,16 @@
+{
+  "id": "calendar:WeekView:35",
+  "label": "WeekView",
+  "file": "C:/Users/drlee/College_organizer/src/lib/types/calendar.ts",
+  "type": "type_definition",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "WeekView"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

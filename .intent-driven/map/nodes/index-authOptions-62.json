@@ -1,0 +1,26 @@
+{
+  "id": "index:authOptions:62",
+  "label": "authOptions",
+  "file": "C:/Users/drlee/College_organizer/src/lib/auth/index.ts",
+  "type": "prisma_query",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "authOptions"
+  ],
+  "uses": [
+    "db:prisma:20"
+  ],
+  "constraint_check": {
+    "SEC-001": "failing — Node \"authOptions\" in C:/Users/drlee/College_organizer/src/lib/auth/index.ts accesses PII data without a detected upstream authentication gate."
+  },
+  "adjacent": [
+    {
+      "id": "db:prisma:20",
+      "label": "prisma",
+      "relationship": "dependency"
+    }
+  ]
+}

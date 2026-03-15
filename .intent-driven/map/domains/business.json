@@ -1,0 +1,510 @@
+{
+  "id": "business",
+  "label": "Business Logic",
+  "layer": "business_logic",
+  "patterns": [
+    "ai_service",
+    "generic_function",
+    "input_validation",
+    "auth_gate",
+    "pii_handling",
+    "utility"
+  ],
+  "active_violations": [],
+  "nodes": [
+    {
+      "id": "conversational:ConversationalAI:7",
+      "label": "ConversationalAI",
+      "type": "ai_service",
+      "size": "medium",
+      "ref": "nodes/conversational-ConversationalAI-7.json"
+    },
+    {
+      "id": "conversational:conversationalAI:548",
+      "label": "conversationalAI",
+      "type": "ai_service",
+      "ref": "nodes/conversational-conversationalAI-548.json"
+    },
+    {
+      "id": "discoveryQuestions:DiscoveryQuestionsService:11",
+      "label": "DiscoveryQuestionsService",
+      "type": "ai_service",
+      "size": "medium",
+      "ref": "nodes/discoveryQuestions-DiscoveryQuestionsService-11.json"
+    },
+    {
+      "id": "discoveryQuestions:discoveryQuestionsService:177",
+      "label": "discoveryQuestionsService",
+      "type": "ai_service",
+      "ref": "nodes/discoveryQuestions-discoveryQuestionsService-177.json"
+    },
+    {
+      "id": "scheduling:SchedulingService:13",
+      "label": "SchedulingService",
+      "type": "ai_service",
+      "size": "medium",
+      "ref": "nodes/scheduling-SchedulingService-13.json"
+    },
+    {
+      "id": "scheduling:schedulingService:578",
+      "label": "schedulingService",
+      "type": "ai_service",
+      "ref": "nodes/scheduling-schedulingService-578.json"
+    },
+    {
+      "id": "toolOptimization:Feature:12",
+      "label": "Feature",
+      "type": "ai_service",
+      "ref": "nodes/toolOptimization-Feature-12.json"
+    },
+    {
+      "id": "toolOptimization:ToolOptimizationResult:19",
+      "label": "ToolOptimizationResult",
+      "type": "ai_service",
+      "ref": "nodes/toolOptimization-ToolOptimizationResult-19.json"
+    },
+    {
+      "id": "toolOptimization:ToolOptimizationService:27",
+      "label": "ToolOptimizationService",
+      "type": "ai_service",
+      "size": "medium",
+      "ref": "nodes/toolOptimization-ToolOptimizationService-27.json"
+    },
+    {
+      "id": "toolOptimization:toolOptimizationService:242",
+      "label": "toolOptimizationService",
+      "type": "ai_service",
+      "ref": "nodes/toolOptimization-toolOptimizationService-242.json"
+    },
+    {
+      "id": "toolRecommendation:ToolRecommendation:12",
+      "label": "ToolRecommendation",
+      "type": "ai_service",
+      "ref": "nodes/toolRecommendation-ToolRecommendation-12.json"
+    },
+    {
+      "id": "toolRecommendation:InefficiencyDetection:22",
+      "label": "InefficiencyDetection",
+      "type": "ai_service",
+      "ref": "nodes/toolRecommendation-InefficiencyDetection-22.json"
+    },
+    {
+      "id": "toolRecommendation:ToolSearchQuery:29",
+      "label": "ToolSearchQuery",
+      "type": "ai_service",
+      "ref": "nodes/toolRecommendation-ToolSearchQuery-29.json"
+    },
+    {
+      "id": "toolRecommendation:ToolRecommendationService:37",
+      "label": "ToolRecommendationService",
+      "type": "ai_service",
+      "size": "medium",
+      "ref": "nodes/toolRecommendation-ToolRecommendationService-37.json"
+    },
+    {
+      "id": "toolRecommendation:toolRecommendationService:362",
+      "label": "toolRecommendationService",
+      "type": "ai_service",
+      "ref": "nodes/toolRecommendation-toolRecommendationService-362.json"
+    },
+    {
+      "id": "webSearch:WebSearchResult:11",
+      "label": "WebSearchResult",
+      "type": "ai_service",
+      "ref": "nodes/webSearch-WebSearchResult-11.json"
+    },
+    {
+      "id": "webSearch:SearchProvider:17",
+      "label": "SearchProvider",
+      "type": "ai_service",
+      "ref": "nodes/webSearch-SearchProvider-17.json"
+    },
+    {
+      "id": "webSearch:searchWeb:22",
+      "label": "searchWeb",
+      "type": "ai_service",
+      "size": "small",
+      "ref": "nodes/webSearch-searchWeb-22.json"
+    },
+    {
+      "id": "webSearch:searchToolOptimization:70",
+      "label": "searchToolOptimization",
+      "type": "ai_service",
+      "ref": "nodes/webSearch-searchToolOptimization-70.json"
+    },
+    {
+      "id": "webSearch:searchStudyMethod:81",
+      "label": "searchStudyMethod",
+      "type": "ai_service",
+      "ref": "nodes/webSearch-searchStudyMethod-81.json"
+    },
+    {
+      "id": "webSearch:searchBestPractices:92",
+      "label": "searchBestPractices",
+      "type": "ai_service",
+      "ref": "nodes/webSearch-searchBestPractices-92.json"
+    },
+    {
+      "id": "webSearch:searchToolFeature:102",
+      "label": "searchToolFeature",
+      "type": "ai_service",
+      "ref": "nodes/webSearch-searchToolFeature-102.json"
+    },
+    {
+      "id": "aiClient:AI_MODELS:43",
+      "label": "AI_MODELS",
+      "type": "generic_function",
+      "ref": "nodes/aiClient-AI_MODELS-43.json"
+    },
+    {
+      "id": "aiClient:AIModel:57",
+      "label": "AIModel",
+      "type": "generic_function",
+      "ref": "nodes/aiClient-AIModel-57.json"
+    },
+    {
+      "id": "aiClient:GenerateChatCompletionOptions:61",
+      "label": "GenerateChatCompletionOptions",
+      "type": "generic_function",
+      "ref": "nodes/aiClient-GenerateChatCompletionOptions-61.json"
+    },
+    {
+      "id": "aiClient:generateGeminiWebResponse:142",
+      "label": "generateGeminiWebResponse",
+      "type": "generic_function",
+      "size": "small",
+      "ref": "nodes/aiClient-generateGeminiWebResponse-142.json"
+    },
+    {
+      "id": "aiClient:parseJsonResponse:177",
+      "label": "parseJsonResponse",
+      "type": "input_validation",
+      "size": "small",
+      "ref": "nodes/aiClient-parseJsonResponse-177.json"
+    },
+    {
+      "id": "aiClient:generateChatCompletion:198",
+      "label": "generateChatCompletion",
+      "type": "generic_function",
+      "size": "medium",
+      "ref": "nodes/aiClient-generateChatCompletion-198.json"
+    },
+    {
+      "id": "root:AppRouter:26",
+      "label": "AppRouter",
+      "type": "generic_function",
+      "ref": "nodes/root-AppRouter-26.json"
+    },
+    {
+      "id": "root:createCaller:35",
+      "label": "createCaller",
+      "type": "generic_function",
+      "ref": "nodes/root-createCaller-35.json"
+    },
+    {
+      "id": "trpc:createTRPCContext:27",
+      "label": "createTRPCContext",
+      "type": "generic_function",
+      "ref": "nodes/trpc-createTRPCContext-27.json"
+    },
+    {
+      "id": "trpc:createCallerFactory:62",
+      "label": "createCallerFactory",
+      "type": "generic_function",
+      "ref": "nodes/trpc-createCallerFactory-62.json"
+    },
+    {
+      "id": "trpc:createTRPCRouter:76",
+      "label": "createTRPCRouter",
+      "type": "generic_function",
+      "ref": "nodes/trpc-createTRPCRouter-76.json"
+    },
+    {
+      "id": "trpc:adminProcedure:118",
+      "label": "adminProcedure",
+      "type": "auth_gate",
+      "size": "small",
+      "ref": "nodes/trpc-adminProcedure-118.json"
+    },
+    {
+      "id": "sendEmail:sendWelcomeEmail:8",
+      "label": "sendWelcomeEmail",
+      "type": "generic_function",
+      "ref": "nodes/sendEmail-sendWelcomeEmail-8.json"
+    },
+    {
+      "id": "sendEmail:sendAccessApprovedEmail:17",
+      "label": "sendAccessApprovedEmail",
+      "type": "pii_handling",
+      "ref": "nodes/sendEmail-sendAccessApprovedEmail-17.json"
+    },
+    {
+      "id": "AccessApprovedEmail:AccessApprovedEmail:7",
+      "label": "AccessApprovedEmail",
+      "type": "pii_handling",
+      "size": "small",
+      "ref": "nodes/AccessApprovedEmail-AccessApprovedEmail-7.json"
+    },
+    {
+      "id": "WelcomeEmail:WelcomeEmail:7",
+      "label": "WelcomeEmail",
+      "type": "generic_function",
+      "ref": "nodes/WelcomeEmail-WelcomeEmail-7.json"
+    },
+    {
+      "id": "inngest:userRegistered:3",
+      "label": "userRegistered",
+      "type": "generic_function",
+      "ref": "nodes/inngest-userRegistered-3.json"
+    },
+    {
+      "id": "storage:uploadFile:11",
+      "label": "uploadFile",
+      "type": "generic_function",
+      "ref": "nodes/storage-uploadFile-11.json"
+    },
+    {
+      "id": "client:trpc:4",
+      "label": "trpc",
+      "type": "generic_function",
+      "ref": "nodes/client-trpc-4.json"
+    },
+    {
+      "id": "react:api:29",
+      "label": "api",
+      "type": "generic_function",
+      "ref": "nodes/react-api-29.json"
+    },
+    {
+      "id": "react:TRPCReactProvider:52",
+      "label": "TRPCReactProvider",
+      "type": "generic_function",
+      "size": "medium",
+      "ref": "nodes/react-TRPCReactProvider-52.json"
+    },
+    {
+      "id": "server:api:22",
+      "label": "api",
+      "type": "generic_function",
+      "ref": "nodes/server-api-22.json"
+    },
+    {
+      "id": "types:NotificationSettings:19",
+      "label": "NotificationSettings",
+      "type": "pii_handling",
+      "ref": "nodes/types-NotificationSettings-19.json"
+    },
+    {
+      "id": "dailyDetection:isToday:8",
+      "label": "isToday",
+      "type": "utility",
+      "ref": "nodes/dailyDetection-isToday-8.json"
+    },
+    {
+      "id": "dailyDetection:getTodayStart:25",
+      "label": "getTodayStart",
+      "type": "utility",
+      "ref": "nodes/dailyDetection-getTodayStart-25.json"
+    },
+    {
+      "id": "dailyDetection:getTodayEnd:34",
+      "label": "getTodayEnd",
+      "type": "utility",
+      "ref": "nodes/dailyDetection-getTodayEnd-34.json"
+    },
+    {
+      "id": "dailyDetection:isConversationFromToday:43",
+      "label": "isConversationFromToday",
+      "type": "utility",
+      "ref": "nodes/dailyDetection-isConversationFromToday-43.json"
+    },
+    {
+      "id": "dailyDetection:formatDateForDailyConversation:52",
+      "label": "formatDateForDailyConversation",
+      "type": "utility",
+      "ref": "nodes/dailyDetection-formatDateForDailyConversation-52.json"
+    },
+    {
+      "id": "dailyGreetings:getDailyGreeting:5",
+      "label": "getDailyGreeting",
+      "type": "utility",
+      "size": "small",
+      "ref": "nodes/dailyGreetings-getDailyGreeting-5.json"
+    },
+    {
+      "id": "dailyGreetings:getCurrentDayOfWeek:34",
+      "label": "getCurrentDayOfWeek",
+      "type": "utility",
+      "ref": "nodes/dailyGreetings-getCurrentDayOfWeek-34.json"
+    },
+    {
+      "id": "shared:formatTime:4",
+      "label": "formatTime",
+      "type": "utility",
+      "ref": "nodes/shared-formatTime-4.json"
+    },
+    {
+      "id": "shared:getDayName:18",
+      "label": "getDayName",
+      "type": "utility",
+      "ref": "nodes/shared-getDayName-18.json"
+    },
+    {
+      "id": "shared:getShortDayName:25",
+      "label": "getShortDayName",
+      "type": "utility",
+      "ref": "nodes/shared-getShortDayName-25.json"
+    },
+    {
+      "id": "shared:getStartOfWeek:32",
+      "label": "getStartOfWeek",
+      "type": "utility",
+      "ref": "nodes/shared-getStartOfWeek-32.json"
+    },
+    {
+      "id": "timezone:getUserTimezone:10",
+      "label": "getUserTimezone",
+      "type": "auth_gate",
+      "ref": "nodes/timezone-getUserTimezone-10.json"
+    },
+    {
+      "id": "timezone:getTodayStartInTimezone:27",
+      "label": "getTodayStartInTimezone",
+      "type": "utility",
+      "size": "small",
+      "ref": "nodes/timezone-getTodayStartInTimezone-27.json"
+    },
+    {
+      "id": "timezone:getTodayEndInTimezone:79",
+      "label": "getTodayEndInTimezone",
+      "type": "utility",
+      "ref": "nodes/timezone-getTodayEndInTimezone-79.json"
+    },
+    {
+      "id": "timezone:getDateStartInTimezone:95",
+      "label": "getDateStartInTimezone",
+      "type": "utility",
+      "size": "small",
+      "ref": "nodes/timezone-getDateStartInTimezone-95.json"
+    },
+    {
+      "id": "timezone:getDateEndInTimezone:169",
+      "label": "getDateEndInTimezone",
+      "type": "utility",
+      "ref": "nodes/timezone-getDateEndInTimezone-169.json"
+    },
+    {
+      "id": "timezone:formatDateInTimezone:180",
+      "label": "formatDateInTimezone",
+      "type": "utility",
+      "ref": "nodes/timezone-formatDateInTimezone-180.json"
+    },
+    {
+      "id": "timezone:isTodayInTimezone:194",
+      "label": "isTodayInTimezone",
+      "type": "utility",
+      "ref": "nodes/timezone-isTodayInTimezone-194.json"
+    },
+    {
+      "id": "timezone:parseAIDateInTimezone:220",
+      "label": "parseAIDateInTimezone",
+      "type": "utility",
+      "size": "small",
+      "ref": "nodes/timezone-parseAIDateInTimezone-220.json"
+    },
+    {
+      "id": "timezone:createDateAtTimeInTimezone:352",
+      "label": "createDateAtTimeInTimezone",
+      "type": "utility",
+      "size": "small",
+      "ref": "nodes/timezone-createDateAtTimeInTimezone-352.json"
+    },
+    {
+      "id": "toolDatabase:Tool:10",
+      "label": "Tool",
+      "type": "utility",
+      "ref": "nodes/toolDatabase-Tool-10.json"
+    },
+    {
+      "id": "toolDatabase:ToolSearchQuery:30",
+      "label": "ToolSearchQuery",
+      "type": "utility",
+      "ref": "nodes/toolDatabase-ToolSearchQuery-30.json"
+    },
+    {
+      "id": "toolDatabase:getAllTools:41",
+      "label": "getAllTools",
+      "type": "utility",
+      "ref": "nodes/toolDatabase-getAllTools-41.json"
+    },
+    {
+      "id": "toolDatabase:getToolById:48",
+      "label": "getToolById",
+      "type": "utility",
+      "ref": "nodes/toolDatabase-getToolById-48.json"
+    },
+    {
+      "id": "toolDatabase:searchTools:55",
+      "label": "searchTools",
+      "type": "utility",
+      "size": "small",
+      "ref": "nodes/toolDatabase-searchTools-55.json"
+    },
+    {
+      "id": "toolDatabase:getToolsByCategory:103",
+      "label": "getToolsByCategory",
+      "type": "utility",
+      "ref": "nodes/toolDatabase-getToolsByCategory-103.json"
+    },
+    {
+      "id": "toolDatabase:getToolsForTaskType:110",
+      "label": "getToolsForTaskType",
+      "type": "utility",
+      "ref": "nodes/toolDatabase-getToolsForTaskType-110.json"
+    },
+    {
+      "id": "toolDatabase:getToolsByLearningCurve:123",
+      "label": "getToolsByLearningCurve",
+      "type": "utility",
+      "ref": "nodes/toolDatabase-getToolsByLearningCurve-123.json"
+    },
+    {
+      "id": "toolDatabase:getFreeTools:130",
+      "label": "getFreeTools",
+      "type": "utility",
+      "ref": "nodes/toolDatabase-getFreeTools-130.json"
+    },
+    {
+      "id": "toolDatabase:getBudgetFriendlyTools:139",
+      "label": "getBudgetFriendlyTools",
+      "type": "utility",
+      "ref": "nodes/toolDatabase-getBudgetFriendlyTools-139.json"
+    },
+    {
+      "id": "utils:cn:4",
+      "label": "cn",
+      "type": "generic_function",
+      "ref": "nodes/utils-cn-4.json"
+    },
+    {
+      "id": "userSchemas:userRegistrationSchema:3",
+      "label": "userRegistrationSchema",
+      "type": "input_validation",
+      "ref": "nodes/userSchemas-userRegistrationSchema-3.json"
+    }
+  ],
+  "adjacent_domains": [
+    {
+      "id": "api",
+      "relationship": "API Routes — upstream dependency"
+    },
+    {
+      "id": "presentation",
+      "relationship": "Presentation — upstream dependency"
+    },
+    {
+      "id": "misc",
+      "relationship": "Miscellaneous — upstream dependency"
+    }
+  ]
+}

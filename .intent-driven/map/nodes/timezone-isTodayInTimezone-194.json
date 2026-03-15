@@ -1,0 +1,16 @@
+{
+  "id": "timezone:isTodayInTimezone:194",
+  "label": "isTodayInTimezone",
+  "file": "C:/Users/drlee/College_organizer/src/lib/utils/timezone.ts",
+  "type": "utility",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "isTodayInTimezone"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

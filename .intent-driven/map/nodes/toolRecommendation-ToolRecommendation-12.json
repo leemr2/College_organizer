@@ -1,0 +1,16 @@
+{
+  "id": "toolRecommendation:ToolRecommendation:12",
+  "label": "ToolRecommendation",
+  "file": "C:/Users/drlee/College_organizer/src/lib/ai/toolRecommendation.ts",
+  "type": "ai_service",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "ToolRecommendation"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

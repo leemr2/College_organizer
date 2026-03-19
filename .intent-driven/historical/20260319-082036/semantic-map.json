@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-03-19T15:20:37.110Z",
+  "generated_at": "2026-03-18T04:01:46.127Z",
   "project": {
     "name": "College_organizer",
     "root": "C:\\Users\\drlee\\College_organizer",
@@ -13992,7 +13992,7 @@
   },
   "routeMap": {
     "meta": {
-      "scannedAt": "2026-03-19T15:20:36.789Z",
+      "scannedAt": "2026-03-18T04:01:45.809Z",
       "routingMode": "app",
       "repoRoot": "C:\\Users\\drlee\\College_organizer",
       "totalRoutes": 14,
@@ -14019,40 +14019,40 @@
         "isApiRoute": false,
         "elements": [
           {
-            "id": "el::route::index::page::link::get-started",
+            "id": "el::route::index::page::link::L30",
             "routeId": "route::index::page",
             "elementType": "link",
-            "label": "Get Started",
+            "label": "",
             "handlerRef": "",
             "lineNumber": 30,
             "isFlowEntry": false,
             "href": "/auth/signin"
           },
           {
-            "id": "el::route::index::page::link::privacy-policy",
+            "id": "el::route::index::page::link::L50",
             "routeId": "route::index::page",
             "elementType": "link",
-            "label": "Privacy Policy",
+            "label": "",
             "handlerRef": "",
             "lineNumber": 50,
             "isFlowEntry": false,
             "href": "/privacy"
           },
           {
-            "id": "el::route::index::page::link::terms-of-service",
+            "id": "el::route::index::page::link::L56",
             "routeId": "route::index::page",
             "elementType": "link",
-            "label": "Terms of Service",
+            "label": "",
             "handlerRef": "",
             "lineNumber": 56,
             "isFlowEntry": false,
             "href": "/terms"
           },
           {
-            "id": "el::route::index::page::link::contact",
+            "id": "el::route::index::page::link::L62",
             "routeId": "route::index::page",
             "elementType": "link",
-            "label": "Contact",
+            "label": "",
             "handlerRef": "",
             "lineNumber": 62,
             "isFlowEntry": false,
@@ -14237,20 +14237,20 @@
         "isApiRoute": false,
         "elements": [
           {
-            "id": "el::route::auth::error::page::link::back",
+            "id": "el::route::auth::error::page::link::L14",
             "routeId": "route::auth::error::page",
             "elementType": "link",
-            "label": "Back",
+            "label": "",
             "handlerRef": "",
             "lineNumber": 14,
             "isFlowEntry": false,
             "href": "/"
           },
           {
-            "id": "el::route::auth::error::page::link::try-again",
+            "id": "el::route::auth::error::page::link::L35",
             "routeId": "route::auth::error::page",
             "elementType": "link",
-            "label": "Try Again",
+            "label": "",
             "handlerRef": "",
             "lineNumber": 35,
             "isFlowEntry": false,
@@ -14280,10 +14280,10 @@
         "isApiRoute": false,
         "elements": [
           {
-            "id": "el::route::auth::signin::page::link::back",
+            "id": "el::route::auth::signin::page::link::L121",
             "routeId": "route::auth::signin::page",
             "elementType": "link",
-            "label": "Back",
+            "label": "",
             "handlerRef": "",
             "lineNumber": 121,
             "isFlowEntry": false,
@@ -14299,10 +14299,10 @@
             "isFlowEntry": true
           },
           {
-            "id": "el::route::auth::signin::page::link::profile-settings",
+            "id": "el::route::auth::signin::page::link::L196",
             "routeId": "route::auth::signin::page",
             "elementType": "link",
-            "label": "profile settings",
+            "label": "",
             "handlerRef": "",
             "lineNumber": 196,
             "isFlowEntry": false,
@@ -14318,20 +14318,20 @@
             "isFlowEntry": false
           },
           {
-            "id": "el::route::auth::signin::page::link::privacy-policy",
+            "id": "el::route::auth::signin::page::link::L232",
             "routeId": "route::auth::signin::page",
             "elementType": "link",
-            "label": "Privacy Policy",
+            "label": "",
             "handlerRef": "",
             "lineNumber": 232,
             "isFlowEntry": false,
             "href": "https://example.com/legal"
           },
           {
-            "id": "el::route::auth::signin::page::button::request-access",
+            "id": "el::route::auth::signin::page::button::setShowRequestAccess",
             "routeId": "route::auth::signin::page",
             "elementType": "button",
-            "label": "Request Access",
+            "label": "",
             "handlerRef": "setShowRequestAccess",
             "lineNumber": 242,
             "isFlowEntry": true
@@ -14355,10 +14355,10 @@
             "isFlowEntry": true
           },
           {
-            "id": "el::route::auth::signin::page::button::cancel",
+            "id": "el::route::auth::signin::page::button::setShowRequestAccess",
             "routeId": "route::auth::signin::page",
             "elementType": "button",
-            "label": "Cancel",
+            "label": "",
             "handlerRef": "setShowRequestAccess",
             "lineNumber": 316,
             "isFlowEntry": true
@@ -14393,10 +14393,10 @@
         "isApiRoute": false,
         "elements": [
           {
-            "id": "el::route::auth::signout::page::link::back",
+            "id": "el::route::auth::signout::page::link::L18",
             "routeId": "route::auth::signout::page",
             "elementType": "link",
-            "label": "Back",
+            "label": "",
             "handlerRef": "",
             "lineNumber": 18,
             "isFlowEntry": false,
@@ -14412,10 +14412,10 @@
             "isFlowEntry": false
           },
           {
-            "id": "el::route::auth::signout::page::link::cancel",
+            "id": "el::route::auth::signout::page::link::L50",
             "routeId": "route::auth::signout::page",
             "elementType": "link",
-            "label": "Cancel",
+            "label": "",
             "handlerRef": "",
             "lineNumber": 50,
             "isFlowEntry": false,
@@ -14445,20 +14445,20 @@
         "isApiRoute": false,
         "elements": [
           {
-            "id": "el::route::auth::verify::page::link::back",
+            "id": "el::route::auth::verify::page::link::L10",
             "routeId": "route::auth::verify::page",
             "elementType": "link",
-            "label": "Back",
+            "label": "",
             "handlerRef": "",
             "lineNumber": 10,
             "isFlowEntry": false,
             "href": "/"
           },
           {
-            "id": "el::route::auth::verify::page::link::try-signing-in-again",
+            "id": "el::route::auth::verify::page::link::L43",
             "routeId": "route::auth::verify::page",
             "elementType": "link",
-            "label": "try signing in again",
+            "label": "",
             "handlerRef": "",
             "lineNumber": 43,
             "isFlowEntry": false,
@@ -14501,7 +14501,7 @@
         "id": "edge::route::index::page::route::auth::signin::page",
         "source": "route::index::page",
         "target": "route::auth::signin::page",
-        "triggerElement": "el::route::index::page::link::get-started",
+        "triggerElement": "el::route::index::page::link::L30",
         "linkType": "Link",
         "isConditional": false,
         "authoring_mode": "inferred",
@@ -14710,7 +14710,7 @@
         "id": "edge::route::auth::error::page::route::index::page",
         "source": "route::auth::error::page",
         "target": "route::index::page",
-        "triggerElement": "el::route::auth::error::page::link::back",
+        "triggerElement": "el::route::auth::error::page::link::L14",
         "linkType": "Link",
         "isConditional": false,
         "authoring_mode": "inferred",
@@ -14721,7 +14721,7 @@
         "id": "edge::route::auth::error::page::route::auth::signin::page",
         "source": "route::auth::error::page",
         "target": "route::auth::signin::page",
-        "triggerElement": "el::route::auth::error::page::link::try-again",
+        "triggerElement": "el::route::auth::error::page::link::L35",
         "linkType": "Link",
         "isConditional": false,
         "authoring_mode": "inferred",
@@ -14732,7 +14732,7 @@
         "id": "edge::route::auth::signin::page::route::index::page",
         "source": "route::auth::signin::page",
         "target": "route::index::page",
-        "triggerElement": "el::route::auth::signin::page::link::back",
+        "triggerElement": "el::route::auth::signin::page::link::L121",
         "linkType": "Link",
         "isConditional": false,
         "authoring_mode": "inferred",
@@ -14743,7 +14743,7 @@
         "id": "edge::route::auth::signin::page::route::profile::page",
         "source": "route::auth::signin::page",
         "target": "route::profile::page",
-        "triggerElement": "el::route::auth::signin::page::link::profile-settings",
+        "triggerElement": "el::route::auth::signin::page::link::L196",
         "linkType": "Link",
         "isConditional": false,
         "authoring_mode": "inferred",
@@ -14765,7 +14765,7 @@
         "id": "edge::route::auth::signout::page::route::index::page",
         "source": "route::auth::signout::page",
         "target": "route::index::page",
-        "triggerElement": "el::route::auth::signout::page::link::back",
+        "triggerElement": "el::route::auth::signout::page::link::L18",
         "linkType": "Link",
         "isConditional": false,
         "authoring_mode": "inferred",
@@ -14776,7 +14776,7 @@
         "id": "edge::route::auth::signout::page::route::index::page",
         "source": "route::auth::signout::page",
         "target": "route::index::page",
-        "triggerElement": "el::route::auth::signout::page::link::cancel",
+        "triggerElement": "el::route::auth::signout::page::link::L50",
         "linkType": "Link",
         "isConditional": false,
         "authoring_mode": "inferred",
@@ -14787,7 +14787,7 @@
         "id": "edge::route::auth::verify::page::route::index::page",
         "source": "route::auth::verify::page",
         "target": "route::index::page",
-        "triggerElement": "el::route::auth::verify::page::link::back",
+        "triggerElement": "el::route::auth::verify::page::link::L10",
         "linkType": "Link",
         "isConditional": false,
         "authoring_mode": "inferred",
@@ -14798,7 +14798,7 @@
         "id": "edge::route::auth::verify::page::route::auth::signin::page",
         "source": "route::auth::verify::page",
         "target": "route::auth::signin::page",
-        "triggerElement": "el::route::auth::verify::page::link::try-signing-in-again",
+        "triggerElement": "el::route::auth::verify::page::link::L43",
         "linkType": "Link",
         "isConditional": false,
         "authoring_mode": "inferred",
@@ -14850,7 +14850,7 @@
         "title": "Orphaned route",
         "detail": "/admin has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /admin, or remove the route if no longer needed.",
-        "detectedAt": "2026-03-19T15:20:36.790Z"
+        "detectedAt": "2026-03-18T04:01:45.810Z"
       },
       {
         "id": "finding::NAV-001::tasks",
@@ -14863,7 +14863,7 @@
         "title": "Orphaned route",
         "detail": "/tasks has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /tasks, or remove the route if no longer needed.",
-        "detectedAt": "2026-03-19T15:20:36.790Z"
+        "detectedAt": "2026-03-18T04:01:45.810Z"
       },
       {
         "id": "finding::NAV-001::auth-error",
@@ -14876,7 +14876,7 @@
         "title": "Orphaned route",
         "detail": "/auth/error has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /auth/error, or remove the route if no longer needed.",
-        "detectedAt": "2026-03-19T15:20:36.790Z"
+        "detectedAt": "2026-03-18T04:01:45.810Z"
       },
       {
         "id": "finding::NAV-001::auth-signout",
@@ -14889,7 +14889,7 @@
         "title": "Orphaned route",
         "detail": "/auth/signout has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /auth/signout, or remove the route if no longer needed.",
-        "detectedAt": "2026-03-19T15:20:36.790Z"
+        "detectedAt": "2026-03-18T04:01:45.810Z"
       },
       {
         "id": "finding::NAV-004::admin",
@@ -14902,7 +14902,7 @@
         "title": "Unreachable route",
         "detail": "/admin cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-03-19T15:20:36.790Z"
+        "detectedAt": "2026-03-18T04:01:45.810Z"
       },
       {
         "id": "finding::NAV-004::tasks",
@@ -14915,7 +14915,7 @@
         "title": "Unreachable route",
         "detail": "/tasks cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-03-19T15:20:36.790Z"
+        "detectedAt": "2026-03-18T04:01:45.810Z"
       },
       {
         "id": "finding::NAV-004::auth-error",
@@ -14928,7 +14928,7 @@
         "title": "Unreachable route",
         "detail": "/auth/error cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-03-19T15:20:36.790Z"
+        "detectedAt": "2026-03-18T04:01:45.810Z"
       },
       {
         "id": "finding::NAV-004::auth-signout",
@@ -14941,7 +14941,7 @@
         "title": "Unreachable route",
         "detail": "/auth/signout cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-03-19T15:20:36.790Z"
+        "detectedAt": "2026-03-18T04:01:45.810Z"
       }
     ],
     "findingSummary": {

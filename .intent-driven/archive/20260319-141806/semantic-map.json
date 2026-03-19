@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-03-19T15:29:05.890Z",
+  "generated_at": "2026-03-19T21:10:29.511Z",
   "project": {
     "name": "College_organizer",
     "root": "C:\\Users\\drlee\\College_organizer",
@@ -13992,7 +13992,7 @@
   },
   "routeMap": {
     "meta": {
-      "scannedAt": "2026-03-19T15:29:05.548Z",
+      "scannedAt": "2026-03-19T21:10:29.201Z",
       "routingMode": "app",
       "repoRoot": "C:\\Users\\drlee\\College_organizer",
       "totalRoutes": 14,
@@ -14850,7 +14850,7 @@
         "title": "Orphaned route",
         "detail": "/admin has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /admin, or remove the route if no longer needed.",
-        "detectedAt": "2026-03-19T15:29:05.548Z"
+        "detectedAt": "2026-03-19T21:10:29.202Z"
       },
       {
         "id": "finding::NAV-001::tasks",
@@ -14863,7 +14863,7 @@
         "title": "Orphaned route",
         "detail": "/tasks has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /tasks, or remove the route if no longer needed.",
-        "detectedAt": "2026-03-19T15:29:05.548Z"
+        "detectedAt": "2026-03-19T21:10:29.202Z"
       },
       {
         "id": "finding::NAV-001::auth-error",
@@ -14876,7 +14876,7 @@
         "title": "Orphaned route",
         "detail": "/auth/error has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /auth/error, or remove the route if no longer needed.",
-        "detectedAt": "2026-03-19T15:29:05.548Z"
+        "detectedAt": "2026-03-19T21:10:29.202Z"
       },
       {
         "id": "finding::NAV-001::auth-signout",
@@ -14889,7 +14889,7 @@
         "title": "Orphaned route",
         "detail": "/auth/signout has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /auth/signout, or remove the route if no longer needed.",
-        "detectedAt": "2026-03-19T15:29:05.548Z"
+        "detectedAt": "2026-03-19T21:10:29.202Z"
       },
       {
         "id": "finding::NAV-004::admin",
@@ -14902,7 +14902,7 @@
         "title": "Unreachable route",
         "detail": "/admin cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-03-19T15:29:05.548Z"
+        "detectedAt": "2026-03-19T21:10:29.202Z"
       },
       {
         "id": "finding::NAV-004::tasks",
@@ -14915,7 +14915,7 @@
         "title": "Unreachable route",
         "detail": "/tasks cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-03-19T15:29:05.548Z"
+        "detectedAt": "2026-03-19T21:10:29.202Z"
       },
       {
         "id": "finding::NAV-004::auth-error",
@@ -14928,7 +14928,7 @@
         "title": "Unreachable route",
         "detail": "/auth/error cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-03-19T15:29:05.548Z"
+        "detectedAt": "2026-03-19T21:10:29.202Z"
       },
       {
         "id": "finding::NAV-004::auth-signout",
@@ -14941,7 +14941,7 @@
         "title": "Unreachable route",
         "detail": "/auth/signout cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-03-19T15:29:05.548Z"
+        "detectedAt": "2026-03-19T21:10:29.202Z"
       }
     ],
     "findingSummary": {

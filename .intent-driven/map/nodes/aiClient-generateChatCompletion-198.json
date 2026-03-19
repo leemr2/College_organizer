@@ -18,5 +18,12 @@
     "WARN-AI-001": "failing — AI input passed to provider without validation",
     "WARN-AI-002": "failing — Raw API key access — use a config module to centralize secret management"
   },
-  "adjacent": []
+  "adjacent": [],
+  "provenance": {
+    "source": "pre_idd",
+    "confidence": 0.9,
+    "design_ref": null,
+    "first_scanned": "2026-03-19",
+    "last_confirmed": "2026-03-19"
+  }
 }

@@ -41,5 +41,12 @@
       "label": "getStartOfWeek",
       "relationship": "imports"
     }
-  ]
+  ],
+  "provenance": {
+    "source": "pre_idd",
+    "confidence": 0.75,
+    "design_ref": null,
+    "first_scanned": "2026-03-19",
+    "last_confirmed": "2026-03-19"
+  }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-03-19T16:27:28.183Z",
+  "generated_at": "2026-03-19T21:18:06.598Z",
   "summary": {
     "total": 22,
     "pages": 12,
@@ -18,6 +18,7 @@
       "layer": "business_logic",
       "has_auth_gate": false,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [
         "SEC-002",
         "SEC-PRISMA-001"
@@ -33,6 +34,7 @@
       "layer": "business_logic",
       "has_auth_gate": false,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [],
       "node_ref": "nodes/authRouter-authRouter-7.json"
     },
@@ -45,6 +47,7 @@
       "layer": "business_logic",
       "has_auth_gate": true,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [],
       "node_ref": "nodes/chatRouter-chatRouter-405.json"
     },
@@ -57,6 +60,7 @@
       "layer": "presentation",
       "has_auth_gate": true,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [],
       "node_ref": "nodes/page-AdminPage-8.json"
     },
@@ -69,6 +73,7 @@
       "layer": "presentation",
       "has_auth_gate": true,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [],
       "node_ref": "nodes/page-ChatPage-9.json"
     },
@@ -81,6 +86,7 @@
       "layer": "presentation",
       "has_auth_gate": true,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [],
       "node_ref": "nodes/page-DashboardPage-15.json"
     },
@@ -93,6 +99,7 @@
       "layer": "presentation",
       "has_auth_gate": false,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [],
       "node_ref": "nodes/page-ErrorContent-8.json"
     },
@@ -105,6 +112,7 @@
       "layer": "presentation",
       "has_auth_gate": false,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [],
       "node_ref": "nodes/page-ErrorPage-47.json"
     },
@@ -117,6 +125,7 @@
       "layer": "presentation",
       "has_auth_gate": true,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [],
       "node_ref": "nodes/page-OnboardingPage-8.json"
     },
@@ -129,6 +138,7 @@
       "layer": "presentation",
       "has_auth_gate": true,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [],
       "node_ref": "nodes/page-ProfilePage-10.json"
     },
@@ -141,6 +151,7 @@
       "layer": "presentation",
       "has_auth_gate": false,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [],
       "node_ref": "nodes/page-SignIn-342.json"
     },
@@ -153,6 +164,7 @@
       "layer": "presentation",
       "has_auth_gate": false,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [],
       "node_ref": "nodes/page-SignInContent-11.json"
     },
@@ -165,6 +177,7 @@
       "layer": "presentation",
       "has_auth_gate": false,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [],
       "node_ref": "nodes/page-SignOut-8.json"
     },
@@ -177,6 +190,7 @@
       "layer": "presentation",
       "has_auth_gate": true,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [],
       "node_ref": "nodes/page-TasksPage-9.json"
     },
@@ -189,6 +203,7 @@
       "layer": "presentation",
       "has_auth_gate": false,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [],
       "node_ref": "nodes/page-VerifyRequest-7.json"
     },
@@ -201,6 +216,7 @@
       "layer": "business_logic",
       "has_auth_gate": false,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [],
       "node_ref": "nodes/route-api-transcribe-POST-8.json"
     },
@@ -213,6 +229,7 @@
       "layer": "business_logic",
       "has_auth_gate": false,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [],
       "node_ref": "nodes/route-api-upload-POST-4.json"
     },
@@ -225,6 +242,7 @@
       "layer": "business_logic",
       "has_auth_gate": false,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [
         "SEC-PRISMA-001"
       ],
@@ -239,6 +257,7 @@
       "layer": "business_logic",
       "has_auth_gate": true,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [],
       "node_ref": "nodes/scheduleRouter-scheduleRouter-8.json"
     },
@@ -251,6 +270,7 @@
       "layer": "business_logic",
       "has_auth_gate": true,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [],
       "node_ref": "nodes/studentRouter-studentRouter-8.json"
     },
@@ -263,6 +283,7 @@
       "layer": "business_logic",
       "has_auth_gate": false,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [],
       "node_ref": "nodes/taskRouter-taskRouter-7.json"
     },
@@ -275,6 +296,7 @@
       "layer": "business_logic",
       "has_auth_gate": true,
       "has_pii": false,
+      "provenance_source": "pre_idd",
       "active_violations": [],
       "node_ref": "nodes/toolRouter-toolRouter-13.json"
     }

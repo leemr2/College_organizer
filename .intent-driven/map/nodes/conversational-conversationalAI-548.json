@@ -22,5 +22,12 @@
     "toolRecommendation:toolRecommendationService:362"
   ],
   "constraint_check": {},
-  "adjacent": []
+  "adjacent": [],
+  "provenance": {
+    "source": "pre_idd",
+    "confidence": 0.6,
+    "design_ref": null,
+    "first_scanned": "2026-03-19",
+    "last_confirmed": "2026-03-19"
+  }
 }

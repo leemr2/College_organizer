@@ -1,0 +1,24 @@
+{
+  "id": "DraftTaskPreview:DraftTaskPreview:11",
+  "label": "DraftTaskPreview",
+  "file": "C:/Users/drlee/College_organizer/src/components/chat/DraftTaskPreview.tsx",
+  "type": "react_component",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "DraftTaskPreview"
+  ],
+  "uses": [
+    "types:DraftTask:85"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "types:DraftTask:85",
+      "label": "DraftTask",
+      "relationship": "imports"
+    }
+  ]
+}

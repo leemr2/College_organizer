@@ -1,0 +1,25 @@
+{
+  "id": "PreferencesEditor:PreferencesEditor:40",
+  "label": "PreferencesEditor",
+  "file": "C:/Users/drlee/College_organizer/src/components/profile/PreferencesEditor.tsx",
+  "type": "react_component",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "PreferencesEditor"
+  ],
+  "uses": [
+    "react:api:29",
+    "ToolsPreferenceEditor:ToolsPreferenceEditor:10"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "react:api:29",
+      "label": "api",
+      "relationship": "imports"
+    }
+  ]
+}

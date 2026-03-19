@@ -18,7 +18,7 @@
     {
       "id": "storage:uploadFile:11",
       "label": "uploadFile",
-      "relationship": "dependency"
+      "relationship": "imports"
     }
   ]
 }

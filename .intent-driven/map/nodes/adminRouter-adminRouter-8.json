@@ -14,27 +14,22 @@
   ],
   "uses": [
     "db:prisma:20",
-    "sendEmail:sendWelcomeEmail:8",
     "sendEmail:sendAccessApprovedEmail:17"
   ],
   "constraint_check": {
-    "SEC-002": "failing — \"adminRouter\" contains a publicProcedure mutation — mutations should use protectedProcedure to prevent unauthorized access."
+    "SEC-002": "failing — \"adminRouter\" imports publicProcedure and is a tRPC router — use protectedProcedure for all mutations to prevent unauthorized access.",
+    "SEC-PRISMA-001": "failing — Prisma mutation accessRequest.update is reachable without an auth check."
   },
   "adjacent": [
     {
       "id": "db:prisma:20",
       "label": "prisma",
-      "relationship": "dependency"
-    },
-    {
-      "id": "sendEmail:sendWelcomeEmail:8",
-      "label": "sendWelcomeEmail",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "sendEmail:sendAccessApprovedEmail:17",
       "label": "sendAccessApprovedEmail",
-      "relationship": "dependency"
+      "relationship": "imports"
     }
   ],
   "decisions": {

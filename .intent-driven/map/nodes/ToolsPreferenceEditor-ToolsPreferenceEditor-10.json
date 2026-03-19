@@ -1,0 +1,30 @@
+{
+  "id": "ToolsPreferenceEditor:ToolsPreferenceEditor:10",
+  "label": "ToolsPreferenceEditor",
+  "file": "C:/Users/drlee/College_organizer/src/components/profile/ToolsPreferenceEditor.tsx",
+  "type": "react_component",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "ToolsPreferenceEditor"
+  ],
+  "uses": [
+    "react:api:29",
+    "toolDatabase:Tool:10"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "react:api:29",
+      "label": "api",
+      "relationship": "imports"
+    },
+    {
+      "id": "toolDatabase:Tool:10",
+      "label": "Tool",
+      "relationship": "imports"
+    }
+  ]
+}

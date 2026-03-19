@@ -1,0 +1,16 @@
+{
+  "id": "MessageBubble:MessageBubble:14",
+  "label": "MessageBubble",
+  "file": "C:/Users/drlee/College_organizer/src/components/chat/MessageBubble.tsx",
+  "type": "react_component",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "MessageBubble"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

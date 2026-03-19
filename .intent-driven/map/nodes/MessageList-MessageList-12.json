@@ -1,0 +1,25 @@
+{
+  "id": "MessageList:MessageList:12",
+  "label": "MessageList",
+  "file": "C:/Users/drlee/College_organizer/src/components/chat/MessageList.tsx",
+  "type": "react_component",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "MessageList"
+  ],
+  "uses": [
+    "MessageBubble:MessageBubble:14",
+    "types:Message:7"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "types:Message:7",
+      "label": "Message",
+      "relationship": "imports"
+    }
+  ]
+}

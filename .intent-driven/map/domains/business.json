@@ -4,13 +4,17 @@
   "layer": "business_logic",
   "patterns": [
     "ai_service",
+    "ai_provider_client",
     "generic_function",
     "input_validation",
     "auth_gate",
     "pii_handling",
     "utility"
   ],
-  "active_violations": [],
+  "active_violations": [
+    "WARN-AI-001",
+    "WARN-AI-002"
+  ],
   "nodes": [
     {
       "id": "conversational:ConversationalAI:7",
@@ -153,7 +157,8 @@
     {
       "id": "aiClient:AI_MODELS:43",
       "label": "AI_MODELS",
-      "type": "generic_function",
+      "type": "ai_provider_client",
+      "violation": "WARN-AI-001",
       "ref": "nodes/aiClient-AI_MODELS-43.json"
     },
     {
@@ -165,14 +170,16 @@
     {
       "id": "aiClient:GenerateChatCompletionOptions:61",
       "label": "GenerateChatCompletionOptions",
-      "type": "generic_function",
+      "type": "ai_provider_client",
+      "violation": "WARN-AI-001",
       "ref": "nodes/aiClient-GenerateChatCompletionOptions-61.json"
     },
     {
       "id": "aiClient:generateGeminiWebResponse:142",
       "label": "generateGeminiWebResponse",
-      "type": "generic_function",
+      "type": "ai_provider_client",
       "size": "small",
+      "violation": "WARN-AI-001",
       "ref": "nodes/aiClient-generateGeminiWebResponse-142.json"
     },
     {
@@ -185,8 +192,9 @@
     {
       "id": "aiClient:generateChatCompletion:198",
       "label": "generateChatCompletion",
-      "type": "generic_function",
+      "type": "ai_provider_client",
       "size": "medium",
+      "violation": "WARN-AI-002",
       "ref": "nodes/aiClient-generateChatCompletion-198.json"
     },
     {
@@ -200,24 +208,6 @@
       "label": "createCaller",
       "type": "generic_function",
       "ref": "nodes/root-createCaller-35.json"
-    },
-    {
-      "id": "trpc:createTRPCContext:27",
-      "label": "createTRPCContext",
-      "type": "generic_function",
-      "ref": "nodes/trpc-createTRPCContext-27.json"
-    },
-    {
-      "id": "trpc:createCallerFactory:62",
-      "label": "createCallerFactory",
-      "type": "generic_function",
-      "ref": "nodes/trpc-createCallerFactory-62.json"
-    },
-    {
-      "id": "trpc:createTRPCRouter:76",
-      "label": "createTRPCRouter",
-      "type": "generic_function",
-      "ref": "nodes/trpc-createTRPCRouter-76.json"
     },
     {
       "id": "trpc:adminProcedure:118",
@@ -262,31 +252,6 @@
       "label": "uploadFile",
       "type": "generic_function",
       "ref": "nodes/storage-uploadFile-11.json"
-    },
-    {
-      "id": "client:trpc:4",
-      "label": "trpc",
-      "type": "generic_function",
-      "ref": "nodes/client-trpc-4.json"
-    },
-    {
-      "id": "react:api:29",
-      "label": "api",
-      "type": "generic_function",
-      "ref": "nodes/react-api-29.json"
-    },
-    {
-      "id": "react:TRPCReactProvider:52",
-      "label": "TRPCReactProvider",
-      "type": "generic_function",
-      "size": "medium",
-      "ref": "nodes/react-TRPCReactProvider-52.json"
-    },
-    {
-      "id": "server:api:22",
-      "label": "api",
-      "type": "generic_function",
-      "ref": "nodes/server-api-22.json"
     },
     {
       "id": "types:NotificationSettings:19",
@@ -503,8 +468,8 @@
       "relationship": "Presentation — upstream dependency"
     },
     {
-      "id": "misc",
-      "relationship": "Miscellaneous — upstream dependency"
+      "id": "infrastructure",
+      "relationship": "Infrastructure — cross-domain dependency"
     }
   ]
 }

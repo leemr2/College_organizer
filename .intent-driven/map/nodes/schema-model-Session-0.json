@@ -1,0 +1,16 @@
+{
+  "id": "schema:model:Session:0",
+  "label": "Session",
+  "file": "C:/Users/drlee/College_organizer/prisma/schema.prisma",
+  "type": "orm_model",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "Session"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

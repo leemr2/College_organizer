@@ -1,0 +1,16 @@
+{
+  "id": "Button:Button:19",
+  "label": "Button",
+  "file": "C:/Users/drlee/College_organizer/src/stories/Button.tsx",
+  "type": "generic_function",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "Button"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

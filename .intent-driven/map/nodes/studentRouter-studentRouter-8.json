@@ -12,127 +12,19 @@
   ],
   "uses": [
     "db:prisma:20",
-    "types:MessageRole:5",
-    "types:Message:7",
-    "types:MessageArray:13",
-    "types:NotificationSettings:19",
-    "types:StudentPreferences:26",
-    "types:MeetingTime:41",
-    "types:ClassScheduleData:47",
-    "types:TaskSummary:61",
-    "types:TaskContext:67",
-    "types:DiscoveryQuestion:76",
-    "types:DraftTask:85",
-    "types:PlanningSessionState:96",
-    "types:ConversationMode:103",
-    "types:StudentContext:111",
-    "types:ScheduleBlockData:131",
-    "types:SchedulingContext:143",
-    "types:ScheduleSuggestion:152",
-    "types:RescheduleOptions:158",
-    "types:OnboardingData:172"
+    "types:NotificationSettings:19"
   ],
   "constraint_check": {},
   "adjacent": [
     {
       "id": "db:prisma:20",
       "label": "prisma",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:MessageRole:5",
-      "label": "MessageRole",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:Message:7",
-      "label": "Message",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:MessageArray:13",
-      "label": "MessageArray",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "types:NotificationSettings:19",
       "label": "NotificationSettings",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:StudentPreferences:26",
-      "label": "StudentPreferences",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:MeetingTime:41",
-      "label": "MeetingTime",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:ClassScheduleData:47",
-      "label": "ClassScheduleData",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:TaskSummary:61",
-      "label": "TaskSummary",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:TaskContext:67",
-      "label": "TaskContext",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:DiscoveryQuestion:76",
-      "label": "DiscoveryQuestion",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:DraftTask:85",
-      "label": "DraftTask",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:PlanningSessionState:96",
-      "label": "PlanningSessionState",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:ConversationMode:103",
-      "label": "ConversationMode",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:StudentContext:111",
-      "label": "StudentContext",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:ScheduleBlockData:131",
-      "label": "ScheduleBlockData",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:SchedulingContext:143",
-      "label": "SchedulingContext",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:ScheduleSuggestion:152",
-      "label": "ScheduleSuggestion",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:RescheduleOptions:158",
-      "label": "RescheduleOptions",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:OnboardingData:172",
-      "label": "OnboardingData",
-      "relationship": "dependency"
+      "relationship": "imports"
     }
   ],
   "decisions": {

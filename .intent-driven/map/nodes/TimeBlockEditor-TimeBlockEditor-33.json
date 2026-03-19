@@ -2,7 +2,7 @@
   "id": "TimeBlockEditor:TimeBlockEditor:33",
   "label": "TimeBlockEditor",
   "file": "C:/Users/drlee/College_organizer/src/components/calendar/TimeBlockEditor.tsx",
-  "type": "generic_function",
+  "type": "react_component",
   "procedures": {
     "mutations": [],
     "queries": []
@@ -11,45 +11,20 @@
     "TimeBlockEditor"
   ],
   "uses": [
-    "button:ButtonProps:38",
     "calendar:TimeBlockType:1",
-    "calendar:MeetingTime:9",
-    "calendar:TimeBlock:15",
-    "calendar:RecurringPattern:29",
-    "calendar:WeekView:35",
-    "calendar:CalendarEvent:45"
+    "calendar:MeetingTime:9"
   ],
   "constraint_check": {},
   "adjacent": [
     {
       "id": "calendar:TimeBlockType:1",
       "label": "TimeBlockType",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "calendar:MeetingTime:9",
       "label": "MeetingTime",
-      "relationship": "dependency"
-    },
-    {
-      "id": "calendar:TimeBlock:15",
-      "label": "TimeBlock",
-      "relationship": "dependency"
-    },
-    {
-      "id": "calendar:RecurringPattern:29",
-      "label": "RecurringPattern",
-      "relationship": "dependency"
-    },
-    {
-      "id": "calendar:WeekView:35",
-      "label": "WeekView",
-      "relationship": "dependency"
-    },
-    {
-      "id": "calendar:CalendarEvent:45",
-      "label": "CalendarEvent",
-      "relationship": "dependency"
+      "relationship": "imports"
     }
   ]
 }

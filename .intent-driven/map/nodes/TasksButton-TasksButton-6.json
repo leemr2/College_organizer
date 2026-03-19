@@ -2,7 +2,7 @@
   "id": "TasksButton:TasksButton:6",
   "label": "TasksButton",
   "file": "C:/Users/drlee/College_organizer/src/components/dashboard/TasksButton.tsx",
-  "type": "generic_function",
+  "type": "react_component",
   "procedures": {
     "mutations": [],
     "queries": []

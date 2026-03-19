@@ -1,0 +1,16 @@
+{
+  "id": "WelcomeStep:WelcomeStep:9",
+  "label": "WelcomeStep",
+  "file": "C:/Users/drlee/College_organizer/src/components/onboarding/WelcomeStep.tsx",
+  "type": "react_component",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "WelcomeStep"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

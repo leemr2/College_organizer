@@ -1,0 +1,16 @@
+{
+  "id": "schema:model:Conversation:0",
+  "label": "Conversation",
+  "file": "C:/Users/drlee/College_organizer/prisma/schema.prisma",
+  "type": "orm_model",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "Conversation"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

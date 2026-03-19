@@ -1,0 +1,24 @@
+{
+  "id": "SchedulePreview:SchedulePreview:12",
+  "label": "SchedulePreview",
+  "file": "C:/Users/drlee/College_organizer/src/components/chat/SchedulePreview.tsx",
+  "type": "react_component",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "SchedulePreview"
+  ],
+  "uses": [
+    "types:ScheduleSuggestion:152"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "types:ScheduleSuggestion:152",
+      "label": "ScheduleSuggestion",
+      "relationship": "imports"
+    }
+  ]
+}

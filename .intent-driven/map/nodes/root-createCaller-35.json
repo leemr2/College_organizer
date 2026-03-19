@@ -10,7 +10,63 @@
   "exports": [
     "createCaller"
   ],
-  "uses": [],
+  "uses": [
+    "trpc:createCallerFactory:62",
+    "trpc:createTRPCRouter:76",
+    "studentRouter:studentRouter:8",
+    "taskRouter:taskRouter:7",
+    "chatRouter:chatRouter:405",
+    "adminRouter:adminRouter:8",
+    "toolRouter:toolRouter:13",
+    "scheduleRouter:scheduleRouter:8",
+    "authRouter:authRouter:7"
+  ],
   "constraint_check": {},
-  "adjacent": []
+  "adjacent": [
+    {
+      "id": "trpc:createCallerFactory:62",
+      "label": "createCallerFactory",
+      "relationship": "imports"
+    },
+    {
+      "id": "trpc:createTRPCRouter:76",
+      "label": "createTRPCRouter",
+      "relationship": "imports"
+    },
+    {
+      "id": "studentRouter:studentRouter:8",
+      "label": "studentRouter",
+      "relationship": "imports"
+    },
+    {
+      "id": "taskRouter:taskRouter:7",
+      "label": "taskRouter",
+      "relationship": "imports"
+    },
+    {
+      "id": "chatRouter:chatRouter:405",
+      "label": "chatRouter",
+      "relationship": "imports"
+    },
+    {
+      "id": "adminRouter:adminRouter:8",
+      "label": "adminRouter",
+      "relationship": "imports"
+    },
+    {
+      "id": "toolRouter:toolRouter:13",
+      "label": "toolRouter",
+      "relationship": "imports"
+    },
+    {
+      "id": "scheduleRouter:scheduleRouter:8",
+      "label": "scheduleRouter",
+      "relationship": "imports"
+    },
+    {
+      "id": "authRouter:authRouter:7",
+      "label": "authRouter",
+      "relationship": "imports"
+    }
+  ]
 }

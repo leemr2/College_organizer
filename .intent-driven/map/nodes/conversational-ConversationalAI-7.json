@@ -10,7 +10,14 @@
   "exports": [
     "ConversationalAI"
   ],
-  "uses": [],
+  "uses": [
+    "discoveryQuestions:discoveryQuestionsService:177",
+    "toolOptimization:ToolOptimizationResult:19",
+    "toolOptimization:toolOptimizationService:242",
+    "toolRecommendation:ToolRecommendation:12",
+    "toolRecommendation:InefficiencyDetection:22",
+    "toolRecommendation:toolRecommendationService:362"
+  ],
   "constraint_check": {},
   "adjacent": []
 }

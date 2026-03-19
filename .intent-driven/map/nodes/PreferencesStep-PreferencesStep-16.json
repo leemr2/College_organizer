@@ -1,0 +1,16 @@
+{
+  "id": "PreferencesStep:PreferencesStep:16",
+  "label": "PreferencesStep",
+  "file": "C:/Users/drlee/College_organizer/src/components/onboarding/PreferencesStep.tsx",
+  "type": "react_component",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "PreferencesStep"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

@@ -1,0 +1,16 @@
+{
+  "id": "schema:model:Student:0",
+  "label": "Student",
+  "file": "C:/Users/drlee/College_organizer/prisma/schema.prisma",
+  "type": "orm_model",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "Student"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

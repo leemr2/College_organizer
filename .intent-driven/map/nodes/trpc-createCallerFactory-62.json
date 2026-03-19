@@ -2,7 +2,7 @@
   "id": "trpc:createCallerFactory:62",
   "label": "createCallerFactory",
   "file": "C:/Users/drlee/College_organizer/src/lib/api/trpc.ts",
-  "type": "generic_function",
+  "type": "trpc_infrastructure",
   "procedures": {
     "mutations": [],
     "queries": []

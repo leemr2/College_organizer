@@ -4,10 +4,12 @@
   "layer": "presentation",
   "patterns": [
     "app_router_page",
+    "nextjs_metadata_export",
     "server_component",
+    "react_component",
     "react_hook",
+    "storybook_story",
     "auth_gate",
-    "generic_function",
     "input_validation",
     "pii_handling"
   ],
@@ -93,6 +95,12 @@
       "ref": "nodes/page-DashboardPage-15.json"
     },
     {
+      "id": "layout:metadata:10",
+      "label": "metadata",
+      "type": "nextjs_metadata_export",
+      "ref": "nodes/layout-metadata-10.json"
+    },
+    {
       "id": "layout:RootLayout:18",
       "label": "RootLayout",
       "type": "server_component",
@@ -114,7 +122,7 @@
     {
       "id": "page:dynamic:8",
       "label": "dynamic",
-      "type": "generic_function",
+      "type": "constant",
       "ref": "nodes/page-dynamic-8.json"
     },
     {
@@ -160,28 +168,28 @@
     {
       "id": "Button:Button:11",
       "label": "Button",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "small",
       "ref": "nodes/Button-Button-11.json"
     },
     {
       "id": "TimeBlock:TimeBlock:30",
       "label": "TimeBlock",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "small",
       "ref": "nodes/TimeBlock-TimeBlock-30.json"
     },
     {
       "id": "TimeBlockEditor:TimeBlockEditor:33",
       "label": "TimeBlockEditor",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/TimeBlockEditor-TimeBlockEditor-33.json"
     },
     {
       "id": "WeekCalendar:WeekCalendar:22",
       "label": "WeekCalendar",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/WeekCalendar-WeekCalendar-22.json"
     },
@@ -195,93 +203,93 @@
     {
       "id": "DraftTaskPreview:DraftTaskPreview:11",
       "label": "DraftTaskPreview",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "small",
       "ref": "nodes/DraftTaskPreview-DraftTaskPreview-11.json"
     },
     {
       "id": "MessageBubble:MessageBubble:14",
       "label": "MessageBubble",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/MessageBubble-MessageBubble-14.json"
     },
     {
       "id": "MessageList:MessageList:12",
       "label": "MessageList",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "small",
       "ref": "nodes/MessageList-MessageList-12.json"
     },
     {
       "id": "SchedulePreview:SchedulePreview:12",
       "label": "SchedulePreview",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "small",
       "ref": "nodes/SchedulePreview-SchedulePreview-12.json"
     },
     {
       "id": "VoiceInput:VoiceInput:13",
       "label": "VoiceInput",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "small",
       "ref": "nodes/VoiceInput-VoiceInput-13.json"
     },
     {
       "id": "ClientProvider:ClientProvider:6",
       "label": "ClientProvider",
-      "type": "generic_function",
+      "type": "react_component",
       "ref": "nodes/ClientProvider-ClientProvider-6.json"
     },
     {
       "id": "Clock:Clock:13",
       "label": "Clock",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/Clock-Clock-13.json"
     },
     {
       "id": "DailyGreeting:DailyGreeting:9",
       "label": "DailyGreeting",
-      "type": "generic_function",
+      "type": "react_component",
       "ref": "nodes/DailyGreeting-DailyGreeting-9.json"
     },
     {
       "id": "DailyPlanningButton:DailyPlanningButton:6",
       "label": "DailyPlanningButton",
-      "type": "generic_function",
+      "type": "react_component",
       "ref": "nodes/DailyPlanningButton-DailyPlanningButton-6.json"
     },
     {
       "id": "ScheduleSection:ScheduleSection:6",
       "label": "ScheduleSection",
-      "type": "generic_function",
+      "type": "react_component",
       "ref": "nodes/ScheduleSection-ScheduleSection-6.json"
     },
     {
       "id": "TasksButton:TasksButton:6",
       "label": "TasksButton",
-      "type": "generic_function",
+      "type": "react_component",
       "ref": "nodes/TasksButton-TasksButton-6.json"
     },
     {
       "id": "TodayStats:TodayStats:8",
       "label": "TodayStats",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/TodayStats-TodayStats-8.json"
     },
     {
       "id": "ToolsSection:ToolsSection:8",
       "label": "ToolsSection",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/ToolsSection-ToolsSection-8.json"
     },
     {
       "id": "WeekCalendarView:WeekCalendarView:13",
       "label": "WeekCalendarView",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "small",
       "ref": "nodes/WeekCalendarView-WeekCalendarView-13.json"
     },
@@ -295,62 +303,62 @@
     {
       "id": "ClassScheduleStep:ClassScheduleStep:23",
       "label": "ClassScheduleStep",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/ClassScheduleStep-ClassScheduleStep-23.json"
     },
     {
       "id": "OnboardingFlow:OnboardingFlow:13",
       "label": "OnboardingFlow",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/OnboardingFlow-OnboardingFlow-13.json"
     },
     {
       "id": "PersonalizationStep:PersonalizationStep:11",
       "label": "PersonalizationStep",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/PersonalizationStep-PersonalizationStep-11.json"
     },
     {
       "id": "PreferencesStep:PreferencesStep:16",
       "label": "PreferencesStep",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "small",
       "ref": "nodes/PreferencesStep-PreferencesStep-16.json"
     },
     {
       "id": "WelcomeStep:WelcomeStep:9",
       "label": "WelcomeStep",
-      "type": "generic_function",
+      "type": "react_component",
       "ref": "nodes/WelcomeStep-WelcomeStep-9.json"
     },
     {
       "id": "ClassScheduleEditor:ClassScheduleEditor:12",
       "label": "ClassScheduleEditor",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/ClassScheduleEditor-ClassScheduleEditor-12.json"
     },
     {
       "id": "PersonalInfoEditor:PersonalInfoEditor:8",
       "label": "PersonalInfoEditor",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/PersonalInfoEditor-PersonalInfoEditor-8.json"
     },
     {
       "id": "PreferencesEditor:PreferencesEditor:40",
       "label": "PreferencesEditor",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "small",
       "ref": "nodes/PreferencesEditor-PreferencesEditor-40.json"
     },
     {
       "id": "ProfileEditor:ProfileEditor:12",
       "label": "ProfileEditor",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "small",
       "ref": "nodes/ProfileEditor-ProfileEditor-12.json"
     },
@@ -364,42 +372,42 @@
     {
       "id": "ToolsPreferenceEditor:ToolsPreferenceEditor:10",
       "label": "ToolsPreferenceEditor",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/ToolsPreferenceEditor-ToolsPreferenceEditor-10.json"
     },
     {
       "id": "ScheduleBlock:ScheduleBlock:31",
       "label": "ScheduleBlock",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/ScheduleBlock-ScheduleBlock-31.json"
     },
     {
       "id": "ScheduleGenerationPrompt:ScheduleGenerationPrompt:13",
       "label": "ScheduleGenerationPrompt",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/ScheduleGenerationPrompt-ScheduleGenerationPrompt-13.json"
     },
     {
       "id": "ScheduleView:DraggableScheduleBlock:37",
       "label": "DraggableScheduleBlock",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "small",
       "ref": "nodes/ScheduleView-DraggableScheduleBlock-37.json"
     },
     {
       "id": "ScheduleView:ScheduleView:68",
       "label": "ScheduleView",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/ScheduleView-ScheduleView-68.json"
     },
     {
       "id": "SpeechToTextArea:SpeechToTextAreaRef:28",
       "label": "SpeechToTextAreaRef",
-      "type": "generic_function",
+      "type": "react_component",
       "ref": "nodes/SpeechToTextArea-SpeechToTextAreaRef-28.json"
     },
     {
@@ -412,75 +420,75 @@
     {
       "id": "TaskCard:TaskCard:24",
       "label": "TaskCard",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/TaskCard-TaskCard-24.json"
     },
     {
       "id": "TaskChat:TaskChat:17",
       "label": "TaskChat",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/TaskChat-TaskChat-17.json"
     },
     {
       "id": "TaskClarification:TaskClarification:13",
       "label": "TaskClarification",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/TaskClarification-TaskClarification-13.json"
     },
     {
       "id": "TaskCompletion:TaskCompletion:16",
       "label": "TaskCompletion",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/TaskCompletion-TaskCompletion-16.json"
     },
     {
       "id": "TaskList:TaskList:8",
       "label": "TaskList",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/TaskList-TaskList-8.json"
     },
     {
       "id": "ToolOptimizationCard:ToolOptimizationCard:12",
       "label": "ToolOptimizationCard",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "small",
       "ref": "nodes/ToolOptimizationCard-ToolOptimizationCard-12.json"
     },
     {
       "id": "ToolOptimizationCard:FeatureCard:96",
       "label": "FeatureCard",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "small",
       "ref": "nodes/ToolOptimizationCard-FeatureCard-96.json"
     },
     {
       "id": "ToolRecommendation:ToolRecommendation:21",
       "label": "ToolRecommendation",
-      "type": "generic_function",
+      "type": "react_component",
       "size": "medium",
       "ref": "nodes/ToolRecommendation-ToolRecommendation-21.json"
     },
     {
       "id": "ThemeAwareToast:ThemeAwareToast:6",
       "label": "ThemeAwareToast",
-      "type": "generic_function",
+      "type": "react_component",
       "ref": "nodes/ThemeAwareToast-ThemeAwareToast-6.json"
     },
     {
       "id": "ThemeProvider:ThemeProvider:14",
       "label": "ThemeProvider",
-      "type": "generic_function",
+      "type": "react_component",
       "ref": "nodes/ThemeProvider-ThemeProvider-14.json"
     },
     {
       "id": "button:ButtonProps:38",
       "label": "ButtonProps",
-      "type": "generic_function",
+      "type": "react_component",
       "ref": "nodes/button-ButtonProps-38.json"
     },
     {
@@ -488,32 +496,55 @@
       "label": "useExampleQuery",
       "type": "react_hook",
       "ref": "nodes/useQueryHooks-useExampleQuery-3.json"
+    },
+    {
+      "id": "Button.stories:Primary:42",
+      "label": "Primary",
+      "type": "storybook_story",
+      "ref": "nodes/Button.stories-Primary-42.json"
+    },
+    {
+      "id": "Button.stories:Secondary:51",
+      "label": "Secondary",
+      "type": "storybook_story",
+      "ref": "nodes/Button.stories-Secondary-51.json"
+    },
+    {
+      "id": "Button.stories:Small:60",
+      "label": "Small",
+      "type": "storybook_story",
+      "ref": "nodes/Button.stories-Small-60.json"
+    },
+    {
+      "id": "Button.stories:Large:69",
+      "label": "Large",
+      "type": "storybook_story",
+      "ref": "nodes/Button.stories-Large-69.json"
+    },
+    {
+      "id": "Button.stories:AllVariants:78",
+      "label": "AllVariants",
+      "type": "storybook_story",
+      "size": "small",
+      "ref": "nodes/Button.stories-AllVariants-78.json"
     }
   ],
   "adjacent_domains": [
     {
-      "id": "data",
-      "relationship": "Data Access — cross-domain dependency"
-    },
-    {
       "id": "auth",
       "relationship": "Authentication — cross-domain dependency"
-    },
-    {
-      "id": "business",
-      "relationship": "Business Logic — cross-domain dependency"
     },
     {
       "id": "infrastructure",
       "relationship": "Infrastructure — cross-domain dependency"
     },
     {
-      "id": "misc",
-      "relationship": "Miscellaneous — upstream dependency"
-    },
-    {
       "id": "types",
       "relationship": "Type Contracts — cross-domain dependency"
+    },
+    {
+      "id": "business",
+      "relationship": "Business Logic — cross-domain dependency"
     }
   ]
 }

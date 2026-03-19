@@ -1,0 +1,16 @@
+{
+  "id": "inngest.config:AppEvents:5",
+  "label": "AppEvents",
+  "file": "C:/Users/drlee/College_organizer/inngest.config.ts",
+  "type": "pii_handling",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "AppEvents"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

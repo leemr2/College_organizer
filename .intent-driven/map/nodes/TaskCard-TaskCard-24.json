@@ -1,0 +1,26 @@
+{
+  "id": "TaskCard:TaskCard:24",
+  "label": "TaskCard",
+  "file": "C:/Users/drlee/College_organizer/src/components/tasks/TaskCard.tsx",
+  "type": "react_component",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "TaskCard"
+  ],
+  "uses": [
+    "react:api:29",
+    "TaskCompletion:TaskCompletion:16",
+    "TaskChat:TaskChat:17"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "react:api:29",
+      "label": "api",
+      "relationship": "imports"
+    }
+  ]
+}

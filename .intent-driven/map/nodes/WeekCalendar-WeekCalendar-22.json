@@ -2,7 +2,7 @@
   "id": "WeekCalendar:WeekCalendar:22",
   "label": "WeekCalendar",
   "file": "C:/Users/drlee/College_organizer/src/components/calendar/WeekCalendar.tsx",
-  "type": "generic_function",
+  "type": "react_component",
   "procedures": {
     "mutations": [],
     "queries": []
@@ -11,69 +11,32 @@
     "WeekCalendar"
   ],
   "uses": [
-    "calendar:TimeBlockType:1",
-    "calendar:MeetingTime:9",
     "calendar:TimeBlock:15",
-    "calendar:RecurringPattern:29",
-    "calendar:WeekView:35",
     "calendar:CalendarEvent:45",
-    "shared:formatTime:4",
-    "shared:getDayName:18",
     "shared:getShortDayName:25",
-    "shared:getStartOfWeek:32",
-    "button:ButtonProps:38"
+    "shared:getStartOfWeek:32"
   ],
   "constraint_check": {},
   "adjacent": [
     {
-      "id": "calendar:TimeBlockType:1",
-      "label": "TimeBlockType",
-      "relationship": "dependency"
-    },
-    {
-      "id": "calendar:MeetingTime:9",
-      "label": "MeetingTime",
-      "relationship": "dependency"
-    },
-    {
       "id": "calendar:TimeBlock:15",
       "label": "TimeBlock",
-      "relationship": "dependency"
-    },
-    {
-      "id": "calendar:RecurringPattern:29",
-      "label": "RecurringPattern",
-      "relationship": "dependency"
-    },
-    {
-      "id": "calendar:WeekView:35",
-      "label": "WeekView",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "calendar:CalendarEvent:45",
       "label": "CalendarEvent",
-      "relationship": "dependency"
-    },
-    {
-      "id": "shared:formatTime:4",
-      "label": "formatTime",
-      "relationship": "dependency"
-    },
-    {
-      "id": "shared:getDayName:18",
-      "label": "getDayName",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "shared:getShortDayName:25",
       "label": "getShortDayName",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "shared:getStartOfWeek:32",
       "label": "getStartOfWeek",
-      "relationship": "dependency"
+      "relationship": "imports"
     }
   ]
 }

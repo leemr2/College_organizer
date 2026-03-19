@@ -15,67 +15,6 @@
       "ref": "nodes/inngest.config-AppEvents-5.json"
     },
     {
-      "id": "inngest.config:inngest:23",
-      "label": "inngest",
-      "type": "generic_function",
-      "ref": "nodes/inngest.config-inngest-23.json"
-    },
-    {
-      "id": "inngest.config:userRegisteredFn:30",
-      "label": "userRegisteredFn",
-      "type": "pii_handling",
-      "ref": "nodes/inngest.config-userRegisteredFn-30.json"
-    },
-    {
-      "id": "inngest.config:messageHandlerFn:46",
-      "label": "messageHandlerFn",
-      "type": "generic_function",
-      "ref": "nodes/inngest.config-messageHandlerFn-46.json"
-    },
-    {
-      "id": "inngest.config:serveInngest:60",
-      "label": "serveInngest",
-      "type": "generic_function",
-      "ref": "nodes/inngest.config-serveInngest-60.json"
-    },
-    {
-      "id": "layout:metadata:10",
-      "label": "metadata",
-      "type": "generic_function",
-      "ref": "nodes/layout-metadata-10.json"
-    },
-    {
-      "id": "Button.stories:Primary:42",
-      "label": "Primary",
-      "type": "generic_function",
-      "ref": "nodes/Button.stories-Primary-42.json"
-    },
-    {
-      "id": "Button.stories:Secondary:51",
-      "label": "Secondary",
-      "type": "generic_function",
-      "ref": "nodes/Button.stories-Secondary-51.json"
-    },
-    {
-      "id": "Button.stories:Small:60",
-      "label": "Small",
-      "type": "generic_function",
-      "ref": "nodes/Button.stories-Small-60.json"
-    },
-    {
-      "id": "Button.stories:Large:69",
-      "label": "Large",
-      "type": "generic_function",
-      "ref": "nodes/Button.stories-Large-69.json"
-    },
-    {
-      "id": "Button.stories:AllVariants:78",
-      "label": "AllVariants",
-      "type": "generic_function",
-      "size": "small",
-      "ref": "nodes/Button.stories-AllVariants-78.json"
-    },
-    {
       "id": "Button:ButtonProps:5",
       "label": "ButtonProps",
       "type": "generic_function",
@@ -89,14 +28,5 @@
       "ref": "nodes/Button-Button-19.json"
     }
   ],
-  "adjacent_domains": [
-    {
-      "id": "business",
-      "relationship": "Business Logic — cross-domain dependency"
-    },
-    {
-      "id": "presentation",
-      "relationship": "Presentation — cross-domain dependency"
-    }
-  ]
+  "adjacent_domains": []
 }

@@ -3,26 +3,116 @@
   "label": "Data Access",
   "layer": "data_access",
   "patterns": [
-    "prisma_query"
+    "prisma_mutation",
+    "orm_model"
   ],
-  "active_violations": [
-    "SEC-001"
-  ],
+  "active_violations": [],
   "nodes": [
     {
       "id": "index:authOptions:62",
       "label": "authOptions",
-      "type": "prisma_query",
+      "type": "prisma_mutation",
       "size": "medium",
-      "violation": "SEC-001",
       "ref": "nodes/index-authOptions-62.json"
+    },
+    {
+      "id": "schema:model:User:0",
+      "label": "User",
+      "type": "orm_model",
+      "ref": "nodes/schema-model-User-0.json"
+    },
+    {
+      "id": "schema:model:Account:0",
+      "label": "Account",
+      "type": "orm_model",
+      "ref": "nodes/schema-model-Account-0.json"
+    },
+    {
+      "id": "schema:model:Session:0",
+      "label": "Session",
+      "type": "orm_model",
+      "ref": "nodes/schema-model-Session-0.json"
+    },
+    {
+      "id": "schema:model:Allowlist:0",
+      "label": "Allowlist",
+      "type": "orm_model",
+      "ref": "nodes/schema-model-Allowlist-0.json"
+    },
+    {
+      "id": "schema:model:AccessRequest:0",
+      "label": "AccessRequest",
+      "type": "orm_model",
+      "ref": "nodes/schema-model-AccessRequest-0.json"
+    },
+    {
+      "id": "schema:model:VerificationToken:0",
+      "label": "VerificationToken",
+      "type": "orm_model",
+      "ref": "nodes/schema-model-VerificationToken-0.json"
+    },
+    {
+      "id": "schema:model:Student:0",
+      "label": "Student",
+      "type": "orm_model",
+      "ref": "nodes/schema-model-Student-0.json"
+    },
+    {
+      "id": "schema:model:Task:0",
+      "label": "Task",
+      "type": "orm_model",
+      "ref": "nodes/schema-model-Task-0.json"
+    },
+    {
+      "id": "schema:model:Conversation:0",
+      "label": "Conversation",
+      "type": "orm_model",
+      "ref": "nodes/schema-model-Conversation-0.json"
+    },
+    {
+      "id": "schema:model:StudentPreferences:0",
+      "label": "StudentPreferences",
+      "type": "orm_model",
+      "ref": "nodes/schema-model-StudentPreferences-0.json"
+    },
+    {
+      "id": "schema:model:ClassSchedule:0",
+      "label": "ClassSchedule",
+      "type": "orm_model",
+      "ref": "nodes/schema-model-ClassSchedule-0.json"
+    },
+    {
+      "id": "schema:model:ScheduleBlock:0",
+      "label": "ScheduleBlock",
+      "type": "orm_model",
+      "ref": "nodes/schema-model-ScheduleBlock-0.json"
+    },
+    {
+      "id": "schema:model:Tool:0",
+      "label": "Tool",
+      "type": "orm_model",
+      "ref": "nodes/schema-model-Tool-0.json"
+    },
+    {
+      "id": "schema:model:StudentTool:0",
+      "label": "StudentTool",
+      "type": "orm_model",
+      "ref": "nodes/schema-model-StudentTool-0.json"
+    },
+    {
+      "id": "schema:model:ToolSuggestion:0",
+      "label": "ToolSuggestion",
+      "type": "orm_model",
+      "ref": "nodes/schema-model-ToolSuggestion-0.json"
+    },
+    {
+      "id": "schema:model:EffectivenessLog:0",
+      "label": "EffectivenessLog",
+      "type": "orm_model",
+      "ref": "nodes/schema-model-EffectivenessLog-0.json"
     }
   ],
   "adjacent_domains": [
-    {
-      "id": "presentation",
-      "relationship": "Presentation — upstream dependency"
-    },
     {
       "id": "infrastructure",
       "relationship": "Infrastructure — cross-domain dependency"

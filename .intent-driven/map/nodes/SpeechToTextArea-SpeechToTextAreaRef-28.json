@@ -2,7 +2,7 @@
   "id": "SpeechToTextArea:SpeechToTextAreaRef:28",
   "label": "SpeechToTextAreaRef",
   "file": "C:/Users/drlee/College_organizer/src/components/SpeechToTextArea.tsx",
-  "type": "generic_function",
+  "type": "react_component",
   "procedures": {
     "mutations": [],
     "queries": []

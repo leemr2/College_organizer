@@ -1,0 +1,27 @@
+{
+  "id": "TaskCompletion:TaskCompletion:16",
+  "label": "TaskCompletion",
+  "file": "C:/Users/drlee/College_organizer/src/components/tasks/TaskCompletion.tsx",
+  "type": "react_component",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "TaskCompletion"
+  ],
+  "uses": [
+    "react:api:29",
+    "ToolRecommendation:ToolRecommendation:21",
+    "SpeechToTextArea:SpeechToTextAreaRef:28",
+    "SpeechToTextArea:SpeechToTextArea:33"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "react:api:29",
+      "label": "api",
+      "relationship": "imports"
+    }
+  ]
+}

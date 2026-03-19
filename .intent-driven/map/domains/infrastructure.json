@@ -3,25 +3,98 @@
   "label": "Infrastructure",
   "layer": "infrastructure",
   "patterns": [
-    "env_access"
+    "inngest_function",
+    "trpc_infrastructure",
+    "prisma_client_init"
   ],
   "active_violations": [],
   "nodes": [
     {
+      "id": "inngest.config:inngest:23",
+      "label": "inngest",
+      "type": "inngest_function",
+      "ref": "nodes/inngest.config-inngest-23.json"
+    },
+    {
+      "id": "inngest.config:userRegisteredFn:30",
+      "label": "userRegisteredFn",
+      "type": "inngest_function",
+      "ref": "nodes/inngest.config-userRegisteredFn-30.json"
+    },
+    {
+      "id": "inngest.config:messageHandlerFn:46",
+      "label": "messageHandlerFn",
+      "type": "inngest_function",
+      "ref": "nodes/inngest.config-messageHandlerFn-46.json"
+    },
+    {
+      "id": "inngest.config:serveInngest:60",
+      "label": "serveInngest",
+      "type": "inngest_function",
+      "ref": "nodes/inngest.config-serveInngest-60.json"
+    },
+    {
+      "id": "trpc:createTRPCContext:27",
+      "label": "createTRPCContext",
+      "type": "trpc_infrastructure",
+      "ref": "nodes/trpc-createTRPCContext-27.json"
+    },
+    {
+      "id": "trpc:createCallerFactory:62",
+      "label": "createCallerFactory",
+      "type": "trpc_infrastructure",
+      "ref": "nodes/trpc-createCallerFactory-62.json"
+    },
+    {
+      "id": "trpc:createTRPCRouter:76",
+      "label": "createTRPCRouter",
+      "type": "trpc_infrastructure",
+      "ref": "nodes/trpc-createTRPCRouter-76.json"
+    },
+    {
       "id": "db:prisma:20",
       "label": "prisma",
-      "type": "env_access",
+      "type": "prisma_client_init",
       "ref": "nodes/db-prisma-20.json"
+    },
+    {
+      "id": "client:trpc:4",
+      "label": "trpc",
+      "type": "trpc_infrastructure",
+      "ref": "nodes/client-trpc-4.json"
+    },
+    {
+      "id": "react:api:29",
+      "label": "api",
+      "type": "trpc_infrastructure",
+      "ref": "nodes/react-api-29.json"
+    },
+    {
+      "id": "react:TRPCReactProvider:52",
+      "label": "TRPCReactProvider",
+      "type": "trpc_infrastructure",
+      "size": "medium",
+      "ref": "nodes/react-TRPCReactProvider-52.json"
+    },
+    {
+      "id": "server:api:22",
+      "label": "api",
+      "type": "trpc_infrastructure",
+      "ref": "nodes/server-api-22.json"
     }
   ],
   "adjacent_domains": [
+    {
+      "id": "api",
+      "relationship": "API Routes — upstream dependency"
+    },
     {
       "id": "presentation",
       "relationship": "Presentation — upstream dependency"
     },
     {
-      "id": "api",
-      "relationship": "API Routes — upstream dependency"
+      "id": "business",
+      "relationship": "Business Logic — upstream dependency"
     },
     {
       "id": "data",

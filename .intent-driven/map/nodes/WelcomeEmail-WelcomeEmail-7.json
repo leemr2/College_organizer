@@ -1,0 +1,16 @@
+{
+  "id": "WelcomeEmail:WelcomeEmail:7",
+  "label": "WelcomeEmail",
+  "file": "C:/Users/drlee/College_organizer/src/lib/email/templates/WelcomeEmail.tsx",
+  "type": "generic_function",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "WelcomeEmail"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

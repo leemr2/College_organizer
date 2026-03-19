@@ -14,25 +14,15 @@
   ],
   "uses": [
     "db:prisma:20",
-    "conversational:ConversationalAI:7",
     "conversational:conversationalAI:548",
-    "scheduling:SchedulingService:13",
     "scheduling:schedulingService:578",
     "timezone:getUserTimezone:10",
     "timezone:getTodayStartInTimezone:27",
     "timezone:getTodayEndInTimezone:79",
     "timezone:getDateStartInTimezone:95",
     "timezone:getDateEndInTimezone:169",
-    "timezone:formatDateInTimezone:180",
-    "timezone:isTodayInTimezone:194",
-    "timezone:parseAIDateInTimezone:220",
-    "timezone:createDateAtTimeInTimezone:352",
-    "types:MessageRole:5",
     "types:Message:7",
-    "types:MessageArray:13",
-    "types:NotificationSettings:19",
     "types:StudentPreferences:26",
-    "types:MeetingTime:41",
     "types:ClassScheduleData:47",
     "types:TaskSummary:61",
     "types:TaskContext:67",
@@ -42,177 +32,109 @@
     "types:ConversationMode:103",
     "types:StudentContext:111",
     "types:ScheduleBlockData:131",
-    "types:SchedulingContext:143",
-    "types:ScheduleSuggestion:152",
-    "types:RescheduleOptions:158",
-    "types:OnboardingData:172"
+    "types:SchedulingContext:143"
   ],
   "constraint_check": {},
   "adjacent": [
     {
       "id": "db:prisma:20",
       "label": "prisma",
-      "relationship": "dependency"
-    },
-    {
-      "id": "conversational:ConversationalAI:7",
-      "label": "ConversationalAI",
-      "relationship": "ai_service"
+      "relationship": "imports"
     },
     {
       "id": "conversational:conversationalAI:548",
       "label": "conversationalAI",
-      "relationship": "ai_service"
-    },
-    {
-      "id": "scheduling:SchedulingService:13",
-      "label": "SchedulingService",
-      "relationship": "ai_service"
+      "relationship": "imports"
     },
     {
       "id": "scheduling:schedulingService:578",
       "label": "schedulingService",
-      "relationship": "ai_service"
+      "relationship": "imports"
     },
     {
       "id": "timezone:getUserTimezone:10",
       "label": "getUserTimezone",
-      "relationship": "auth_guard"
+      "relationship": "imports"
     },
     {
       "id": "timezone:getTodayStartInTimezone:27",
       "label": "getTodayStartInTimezone",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "timezone:getTodayEndInTimezone:79",
       "label": "getTodayEndInTimezone",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "timezone:getDateStartInTimezone:95",
       "label": "getDateStartInTimezone",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "timezone:getDateEndInTimezone:169",
       "label": "getDateEndInTimezone",
-      "relationship": "dependency"
-    },
-    {
-      "id": "timezone:formatDateInTimezone:180",
-      "label": "formatDateInTimezone",
-      "relationship": "dependency"
-    },
-    {
-      "id": "timezone:isTodayInTimezone:194",
-      "label": "isTodayInTimezone",
-      "relationship": "dependency"
-    },
-    {
-      "id": "timezone:parseAIDateInTimezone:220",
-      "label": "parseAIDateInTimezone",
-      "relationship": "dependency"
-    },
-    {
-      "id": "timezone:createDateAtTimeInTimezone:352",
-      "label": "createDateAtTimeInTimezone",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:MessageRole:5",
-      "label": "MessageRole",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "types:Message:7",
       "label": "Message",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:MessageArray:13",
-      "label": "MessageArray",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:NotificationSettings:19",
-      "label": "NotificationSettings",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "types:StudentPreferences:26",
       "label": "StudentPreferences",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:MeetingTime:41",
-      "label": "MeetingTime",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "types:ClassScheduleData:47",
       "label": "ClassScheduleData",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "types:TaskSummary:61",
       "label": "TaskSummary",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "types:TaskContext:67",
       "label": "TaskContext",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "types:DiscoveryQuestion:76",
       "label": "DiscoveryQuestion",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "types:DraftTask:85",
       "label": "DraftTask",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "types:PlanningSessionState:96",
       "label": "PlanningSessionState",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "types:ConversationMode:103",
       "label": "ConversationMode",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "types:StudentContext:111",
       "label": "StudentContext",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "types:ScheduleBlockData:131",
       "label": "ScheduleBlockData",
-      "relationship": "dependency"
+      "relationship": "imports"
     },
     {
       "id": "types:SchedulingContext:143",
       "label": "SchedulingContext",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:ScheduleSuggestion:152",
-      "label": "ScheduleSuggestion",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:RescheduleOptions:158",
-      "label": "RescheduleOptions",
-      "relationship": "dependency"
-    },
-    {
-      "id": "types:OnboardingData:172",
-      "label": "OnboardingData",
-      "relationship": "dependency"
+      "relationship": "imports"
     }
   ],
   "decisions": {

@@ -2,7 +2,7 @@
   "id": "ScheduleGenerationPrompt:ScheduleGenerationPrompt:13",
   "label": "ScheduleGenerationPrompt",
   "file": "C:/Users/drlee/College_organizer/src/components/schedule/ScheduleGenerationPrompt.tsx",
-  "type": "generic_function",
+  "type": "react_component",
   "procedures": {
     "mutations": [],
     "queries": []
@@ -11,20 +11,14 @@
     "ScheduleGenerationPrompt"
   ],
   "uses": [
-    "react:api:29",
-    "react:TRPCReactProvider:52"
+    "react:api:29"
   ],
   "constraint_check": {},
   "adjacent": [
     {
       "id": "react:api:29",
       "label": "api",
-      "relationship": "dependency"
-    },
-    {
-      "id": "react:TRPCReactProvider:52",
-      "label": "TRPCReactProvider",
-      "relationship": "dependency"
+      "relationship": "imports"
     }
   ]
 }

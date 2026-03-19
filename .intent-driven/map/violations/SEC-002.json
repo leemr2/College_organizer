@@ -1,6 +1,6 @@
 {
   "id": "SEC-002",
-  "rule": "\"adminRouter\" contains a publicProcedure mutation — mutations should use protectedProcedure to prevent unauthorized access.",
+  "rule": "\"adminRouter\" imports publicProcedure and is a tRPC router — use protectedProcedure for all mutations to prevent unauthorized access.",
   "severity": "critical",
   "category": "security",
   "affected_nodes": [
@@ -8,12 +8,12 @@
       "node_id": "adminRouter:adminRouter:8",
       "status": "failing",
       "file": "C:/Users/drlee/College_organizer/src/lib/api/routers/adminRouter.ts",
-      "detail": "\"adminRouter\" contains a publicProcedure mutation — mutations should use protectedProcedure to prevent unauthorized access."
+      "detail": "\"adminRouter\" imports publicProcedure and is a tRPC router — use protectedProcedure for all mutations to prevent unauthorized access."
     }
   ],
   "remediation": "Replace publicProcedure with protectedProcedure, or add explicit authorization logic.",
   "referenced_by_templates": [
     "new_mutation"
   ],
-  "first_detected": "2026-03-15"
+  "first_detected": "2026-03-18"
 }

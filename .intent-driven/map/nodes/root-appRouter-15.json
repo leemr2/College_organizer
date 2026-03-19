@@ -10,9 +10,30 @@
   "exports": [
     "appRouter"
   ],
-  "uses": [],
+  "uses": [
+    "trpc:createCallerFactory:62",
+    "trpc:createTRPCRouter:76",
+    "studentRouter:studentRouter:8",
+    "taskRouter:taskRouter:7",
+    "chatRouter:chatRouter:405",
+    "adminRouter:adminRouter:8",
+    "toolRouter:toolRouter:13",
+    "scheduleRouter:scheduleRouter:8",
+    "authRouter:authRouter:7"
+  ],
   "constraint_check": {},
-  "adjacent": [],
+  "adjacent": [
+    {
+      "id": "trpc:createCallerFactory:62",
+      "label": "createCallerFactory",
+      "relationship": "imports"
+    },
+    {
+      "id": "trpc:createTRPCRouter:76",
+      "label": "createTRPCRouter",
+      "relationship": "imports"
+    }
+  ],
   "decisions": {
     "api": "tRPC procedures"
   }

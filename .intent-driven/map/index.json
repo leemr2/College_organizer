@@ -2,9 +2,9 @@
   "schema_version": "2.0",
   "project": {
     "name": "College_organizer",
-    "stack": "security,+nextjs,+trpc,+prisma",
+    "stack": "security,+inngest,+nextjs,+ai_client,+trpc,+prisma,+storybook",
     "file_count": 111,
-    "node_count": 201
+    "node_count": 217
   },
   "decisions": {
     "api": {
@@ -34,16 +34,24 @@
     }
   },
   "violations": {
-    "total": 2,
+    "total": 7,
     "critical": 2,
     "violation_index": {
+      "WARN-AI-001": {
+        "severity": "warning",
+        "ref": "violations/WARN-AI-001.json"
+      },
+      "WARN-AI-002": {
+        "severity": "warning",
+        "ref": "violations/WARN-AI-002.json"
+      },
       "SEC-002": {
         "severity": "critical",
         "ref": "violations/SEC-002.json"
       },
-      "SEC-001": {
+      "SEC-PRISMA-001": {
         "severity": "critical",
-        "ref": "violations/SEC-001.json"
+        "ref": "violations/SEC-PRISMA-001.json"
       }
     }
   },
@@ -62,7 +70,7 @@
     {
       "id": "presentation",
       "label": "Presentation",
-      "node_count": 70,
+      "node_count": 76,
       "active_violations": [],
       "ref": "domains/presentation.json"
     },
@@ -71,7 +79,8 @@
       "label": "API Routes",
       "node_count": 13,
       "active_violations": [
-        "SEC-002"
+        "SEC-002",
+        "SEC-PRISMA-001"
       ],
       "ref": "domains/api.json"
     },
@@ -85,24 +94,25 @@
     {
       "id": "data",
       "label": "Data Access",
-      "node_count": 1,
-      "active_violations": [
-        "SEC-001"
-      ],
+      "node_count": 17,
+      "active_violations": [],
       "ref": "domains/data.json"
     },
     {
       "id": "infrastructure",
       "label": "Infrastructure",
-      "node_count": 1,
+      "node_count": 12,
       "active_violations": [],
       "ref": "domains/infrastructure.json"
     },
     {
       "id": "business",
       "label": "Business Logic",
-      "node_count": 77,
-      "active_violations": [],
+      "node_count": 70,
+      "active_violations": [
+        "WARN-AI-001",
+        "WARN-AI-002"
+      ],
       "ref": "domains/business.json"
     },
     {
@@ -115,7 +125,7 @@
     {
       "id": "misc",
       "label": "Miscellaneous",
-      "node_count": 13,
+      "node_count": 3,
       "active_violations": [],
       "ref": "domains/misc.json"
     }
@@ -130,7 +140,7 @@
     "scope_boundary": "domains listed in this index only — justify any addition"
   },
   "ai_context": {
-    "summary": "TypeScript codebase with 201 semantic nodes across 8 domain(s): Presentation, API Routes, Authentication, Data Access, Infrastructure, Business Logic, Type Contracts, Miscellaneous. Frameworks detected: security, nextjs, trpc, prisma. 2 critical constraint violation(s) require attention.",
-    "token_estimate": 140
+    "summary": "TypeScript codebase with 212 semantic nodes across 8 domain(s): Presentation, API Routes, Authentication, Data Access, Infrastructure, Business Logic, Type Contracts, Miscellaneous. Frameworks detected: security, inngest, nextjs, ai_client, trpc, prisma. 2 critical constraint violation(s) require attention.",
+    "token_estimate": 234
   }
 }

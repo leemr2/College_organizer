@@ -1,0 +1,44 @@
+{
+  "id": "ClassScheduleEditor:ClassScheduleEditor:12",
+  "label": "ClassScheduleEditor",
+  "file": "C:/Users/drlee/College_organizer/src/components/profile/ClassScheduleEditor.tsx",
+  "type": "react_component",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "ClassScheduleEditor"
+  ],
+  "uses": [
+    "react:api:29",
+    "WeekCalendar:WeekCalendar:22",
+    "TimeBlockEditor:TimeBlockEditor:33",
+    "calendar:TimeBlockType:1",
+    "calendar:MeetingTime:9",
+    "calendar:TimeBlock:15"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "react:api:29",
+      "label": "api",
+      "relationship": "imports"
+    },
+    {
+      "id": "calendar:TimeBlockType:1",
+      "label": "TimeBlockType",
+      "relationship": "imports"
+    },
+    {
+      "id": "calendar:MeetingTime:9",
+      "label": "MeetingTime",
+      "relationship": "imports"
+    },
+    {
+      "id": "calendar:TimeBlock:15",
+      "label": "TimeBlock",
+      "relationship": "imports"
+    }
+  ]
+}

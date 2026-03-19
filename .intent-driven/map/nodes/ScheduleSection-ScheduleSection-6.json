@@ -2,7 +2,7 @@
   "id": "ScheduleSection:ScheduleSection:6",
   "label": "ScheduleSection",
   "file": "C:/Users/drlee/College_organizer/src/components/dashboard/ScheduleSection.tsx",
-  "type": "generic_function",
+  "type": "react_component",
   "procedures": {
     "mutations": [],
     "queries": []
@@ -11,7 +11,6 @@
     "ScheduleSection"
   ],
   "uses": [
-    "ScheduleView:DraggableScheduleBlock:37",
     "ScheduleView:ScheduleView:68"
   ],
   "constraint_check": {},

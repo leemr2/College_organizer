@@ -2,7 +2,7 @@
   "id": "ClientProvider:ClientProvider:6",
   "label": "ClientProvider",
   "file": "C:/Users/drlee/College_organizer/src/components/ClientProvider.tsx",
-  "type": "generic_function",
+  "type": "react_component",
   "procedures": {
     "mutations": [],
     "queries": []

@@ -1,0 +1,24 @@
+{
+  "id": "PersonalInfoEditor:PersonalInfoEditor:8",
+  "label": "PersonalInfoEditor",
+  "file": "C:/Users/drlee/College_organizer/src/components/profile/PersonalInfoEditor.tsx",
+  "type": "react_component",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "PersonalInfoEditor"
+  ],
+  "uses": [
+    "react:api:29"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "react:api:29",
+      "label": "api",
+      "relationship": "imports"
+    }
+  ]
+}

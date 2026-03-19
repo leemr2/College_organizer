@@ -2,7 +2,7 @@
   "id": "ThemeAwareToast:ThemeAwareToast:6",
   "label": "ThemeAwareToast",
   "file": "C:/Users/drlee/College_organizer/src/components/theme/ThemeAwareToast.tsx",
-  "type": "generic_function",
+  "type": "react_component",
   "procedures": {
     "mutations": [],
     "queries": []

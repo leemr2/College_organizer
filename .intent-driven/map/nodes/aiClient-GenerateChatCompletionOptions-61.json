@@ -2,7 +2,7 @@
   "id": "aiClient:GenerateChatCompletionOptions:61",
   "label": "GenerateChatCompletionOptions",
   "file": "C:/Users/drlee/College_organizer/src/lib/aiClient.ts",
-  "type": "generic_function",
+  "type": "ai_provider_client",
   "procedures": {
     "mutations": [],
     "queries": []
@@ -11,6 +11,8 @@
     "GenerateChatCompletionOptions"
   ],
   "uses": [],
-  "constraint_check": {},
+  "constraint_check": {
+    "WARN-AI-001": "failing — AI input passed to provider without validation"
+  },
   "adjacent": []
 }

@@ -1,0 +1,16 @@
+{
+  "id": "schema:model:ToolSuggestion:0",
+  "label": "ToolSuggestion",
+  "file": "C:/Users/drlee/College_organizer/prisma/schema.prisma",
+  "type": "orm_model",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "ToolSuggestion"
+  ],
+  "uses": [],
+  "constraint_check": {},
+  "adjacent": []
+}

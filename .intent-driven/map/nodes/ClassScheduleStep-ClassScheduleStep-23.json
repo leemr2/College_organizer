@@ -1,0 +1,24 @@
+{
+  "id": "ClassScheduleStep:ClassScheduleStep:23",
+  "label": "ClassScheduleStep",
+  "file": "C:/Users/drlee/College_organizer/src/components/onboarding/ClassScheduleStep.tsx",
+  "type": "react_component",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "ClassScheduleStep"
+  ],
+  "uses": [
+    "types:ClassScheduleData:47"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "types:ClassScheduleData:47",
+      "label": "ClassScheduleData",
+      "relationship": "imports"
+    }
+  ]
+}

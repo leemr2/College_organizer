@@ -1,0 +1,31 @@
+{
+  "id": "TaskChat:TaskChat:17",
+  "label": "TaskChat",
+  "file": "C:/Users/drlee/College_organizer/src/components/tasks/TaskChat.tsx",
+  "type": "react_component",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "TaskChat"
+  ],
+  "uses": [
+    "react:api:29",
+    "ToolRecommendation:ToolRecommendation:21",
+    "types:Message:7"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "react:api:29",
+      "label": "api",
+      "relationship": "imports"
+    },
+    {
+      "id": "types:Message:7",
+      "label": "Message",
+      "relationship": "imports"
+    }
+  ]
+}

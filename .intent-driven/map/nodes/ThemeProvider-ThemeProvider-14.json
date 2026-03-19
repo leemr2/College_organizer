@@ -2,7 +2,7 @@
   "id": "ThemeProvider:ThemeProvider:14",
   "label": "ThemeProvider",
   "file": "C:/Users/drlee/College_organizer/src/components/theme/ThemeProvider.tsx",
-  "type": "generic_function",
+  "type": "react_component",
   "procedures": {
     "mutations": [],
     "queries": []

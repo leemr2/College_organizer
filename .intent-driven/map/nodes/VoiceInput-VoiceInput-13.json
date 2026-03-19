@@ -1,0 +1,19 @@
+{
+  "id": "VoiceInput:VoiceInput:13",
+  "label": "VoiceInput",
+  "file": "C:/Users/drlee/College_organizer/src/components/chat/VoiceInput.tsx",
+  "type": "react_component",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "VoiceInput"
+  ],
+  "uses": [
+    "SpeechToTextArea:SpeechToTextAreaRef:28",
+    "SpeechToTextArea:SpeechToTextArea:33"
+  ],
+  "constraint_check": {},
+  "adjacent": []
+}

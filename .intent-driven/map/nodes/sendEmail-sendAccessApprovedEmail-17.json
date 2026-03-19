@@ -10,7 +10,10 @@
   "exports": [
     "sendAccessApprovedEmail"
   ],
-  "uses": [],
+  "uses": [
+    "WelcomeEmail:WelcomeEmail:7",
+    "AccessApprovedEmail:AccessApprovedEmail:7"
+  ],
   "constraint_check": {},
   "adjacent": []
 }

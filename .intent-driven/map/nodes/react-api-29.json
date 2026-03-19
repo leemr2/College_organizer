@@ -2,7 +2,7 @@
   "id": "react:api:29",
   "label": "api",
   "file": "C:/Users/drlee/College_organizer/src/lib/trpc/react.tsx",
-  "type": "generic_function",
+  "type": "trpc_infrastructure",
   "procedures": {
     "mutations": [],
     "queries": []
@@ -11,16 +11,14 @@
     "api"
   ],
   "uses": [
-    "root:appRouter:15",
-    "root:AppRouter:26",
-    "root:createCaller:35"
+    "root:AppRouter:26"
   ],
   "constraint_check": {},
   "adjacent": [
     {
-      "id": "root:appRouter:15",
-      "label": "appRouter",
-      "relationship": "router_instance"
+      "id": "root:AppRouter:26",
+      "label": "AppRouter",
+      "relationship": "imports"
     }
   ]
 }

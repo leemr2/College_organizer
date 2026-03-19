@@ -9,46 +9,16 @@
   },
   "uses": [
     "root:appRouter:15",
-    "root:AppRouter:26",
-    "root:createCaller:35",
-    "trpc:createTRPCContext:27",
-    "trpc:createCallerFactory:62",
-    "trpc:createTRPCRouter:76",
-    "trpc:publicProcedure:85",
-    "trpc:protectedProcedure:95",
-    "trpc:adminProcedure:118"
+    "trpc:createTRPCContext:27"
   ],
-  "constraint_check": {},
+  "constraint_check": {
+    "SEC-PRISMA-001": "failing — Prisma mutation accessRequest.update is reachable without an auth check."
+  },
   "adjacent": [
-    {
-      "id": "root:AppRouter:26",
-      "label": "AppRouter",
-      "relationship": "dependency"
-    },
-    {
-      "id": "root:createCaller:35",
-      "label": "createCaller",
-      "relationship": "dependency"
-    },
     {
       "id": "trpc:createTRPCContext:27",
       "label": "createTRPCContext",
-      "relationship": "dependency"
-    },
-    {
-      "id": "trpc:createCallerFactory:62",
-      "label": "createCallerFactory",
-      "relationship": "dependency"
-    },
-    {
-      "id": "trpc:createTRPCRouter:76",
-      "label": "createTRPCRouter",
-      "relationship": "dependency"
-    },
-    {
-      "id": "trpc:adminProcedure:118",
-      "label": "adminProcedure",
-      "relationship": "auth_guard"
+      "relationship": "imports"
     }
   ]
 }

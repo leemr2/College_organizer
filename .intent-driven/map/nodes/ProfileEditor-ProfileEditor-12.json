@@ -2,7 +2,7 @@
   "id": "ProfileEditor:ProfileEditor:12",
   "label": "ProfileEditor",
   "file": "C:/Users/drlee/College_organizer/src/components/profile/ProfileEditor.tsx",
-  "type": "generic_function",
+  "type": "react_component",
   "procedures": {
     "mutations": [],
     "queries": []
@@ -10,7 +10,12 @@
   "exports": [
     "ProfileEditor"
   ],
-  "uses": [],
+  "uses": [
+    "PersonalInfoEditor:PersonalInfoEditor:8",
+    "ClassScheduleEditor:ClassScheduleEditor:12",
+    "PreferencesEditor:PreferencesEditor:40",
+    "SecurityEditor:SecurityEditor:8"
+  ],
   "constraint_check": {},
   "adjacent": []
 }

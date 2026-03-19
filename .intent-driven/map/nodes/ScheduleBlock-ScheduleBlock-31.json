@@ -1,0 +1,24 @@
+{
+  "id": "ScheduleBlock:ScheduleBlock:31",
+  "label": "ScheduleBlock",
+  "file": "C:/Users/drlee/College_organizer/src/components/schedule/ScheduleBlock.tsx",
+  "type": "react_component",
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "ScheduleBlock"
+  ],
+  "uses": [
+    "types:ScheduleBlockData:131"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "types:ScheduleBlockData:131",
+      "label": "ScheduleBlockData",
+      "relationship": "imports"
+    }
+  ]
+}

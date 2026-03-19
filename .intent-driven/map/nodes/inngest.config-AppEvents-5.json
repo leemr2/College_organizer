@@ -3,6 +3,9 @@
   "label": "AppEvents",
   "file": "C:/Users/drlee/College_organizer/inngest.config.ts",
   "type": "pii_handling",
+  "layer": "business_logic",
+  "has_auth_gate": null,
+  "has_pii": true,
   "procedures": {
     "mutations": [],
     "queries": []

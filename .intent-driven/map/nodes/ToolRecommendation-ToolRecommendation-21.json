@@ -3,6 +3,9 @@
   "label": "ToolRecommendation",
   "file": "C:/Users/drlee/College_organizer/src/components/tasks/ToolRecommendation.tsx",
   "type": "react_component",
+  "layer": "presentation",
+  "has_auth_gate": false,
+  "has_pii": false,
   "procedures": {
     "mutations": [],
     "queries": []

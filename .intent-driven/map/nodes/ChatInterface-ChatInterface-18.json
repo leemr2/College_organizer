@@ -3,6 +3,9 @@
   "label": "ChatInterface",
   "file": "C:/Users/drlee/College_organizer/src/components/chat/ChatInterface.tsx",
   "type": "input_validation",
+  "layer": "presentation",
+  "has_auth_gate": null,
+  "has_pii": null,
   "procedures": {
     "mutations": [],
     "queries": []

@@ -3,6 +3,9 @@
   "label": "ThemeAwareToast",
   "file": "C:/Users/drlee/College_organizer/src/components/theme/ThemeAwareToast.tsx",
   "type": "react_component",
+  "layer": "presentation",
+  "has_auth_gate": false,
+  "has_pii": false,
   "procedures": {
     "mutations": [],
     "queries": []

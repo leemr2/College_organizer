@@ -3,6 +3,9 @@
   "label": "SecurityEditor",
   "file": "C:/Users/drlee/College_organizer/src/components/profile/SecurityEditor.tsx",
   "type": "pii_handling",
+  "layer": "presentation",
+  "has_auth_gate": null,
+  "has_pii": true,
   "procedures": {
     "mutations": [],
     "queries": []

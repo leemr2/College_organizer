@@ -3,6 +3,9 @@
   "label": "authOptions",
   "file": "C:/Users/drlee/College_organizer/src/lib/auth/index.ts",
   "type": "prisma_mutation",
+  "layer": "data_access",
+  "has_auth_gate": null,
+  "has_pii": null,
   "procedures": {
     "mutations": [],
     "queries": []

@@ -3,6 +3,9 @@
   "label": "api",
   "file": "C:/Users/drlee/College_organizer/src/lib/trpc/react.tsx",
   "type": "trpc_infrastructure",
+  "layer": "infrastructure",
+  "has_auth_gate": null,
+  "has_pii": null,
   "procedures": {
     "mutations": [],
     "queries": []

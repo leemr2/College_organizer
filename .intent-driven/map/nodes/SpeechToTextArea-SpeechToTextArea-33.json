@@ -3,6 +3,9 @@
   "label": "SpeechToTextArea",
   "file": "C:/Users/drlee/College_organizer/src/components/SpeechToTextArea.tsx",
   "type": "auth_gate",
+  "layer": "presentation",
+  "has_auth_gate": true,
+  "has_pii": false,
   "procedures": {
     "mutations": [],
     "queries": []

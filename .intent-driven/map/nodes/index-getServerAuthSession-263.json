@@ -3,6 +3,9 @@
   "label": "getServerAuthSession",
   "file": "C:/Users/drlee/College_organizer/src/lib/auth/index.ts",
   "type": "auth_utility",
+  "layer": "business_logic",
+  "has_auth_gate": false,
+  "has_pii": false,
   "procedures": {
     "mutations": [],
     "queries": []

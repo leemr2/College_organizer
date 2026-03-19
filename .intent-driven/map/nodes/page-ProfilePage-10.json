@@ -1,0 +1,39 @@
+{
+  "id": "page:ProfilePage:10",
+  "label": "ProfilePage",
+  "file": "C:/Users/drlee/College_organizer/src/app/profile/page.tsx",
+  "type": "app_router_page",
+  "layer": "presentation",
+  "has_auth_gate": true,
+  "has_pii": false,
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "ProfilePage"
+  ],
+  "uses": [
+    "index:getServerAuthSession:263",
+    "db:prisma:20",
+    "NavigationBar:NavigationBar:9",
+    "ProfileEditor:ProfileEditor:12",
+    "ClientProvider:ClientProvider:6"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "index:getServerAuthSession:263",
+      "label": "getServerAuthSession",
+      "relationship": "imports"
+    },
+    {
+      "id": "db:prisma:20",
+      "label": "prisma",
+      "relationship": "imports"
+    }
+  ],
+  "decisions": {
+    "auth_gate": "protectedProcedure"
+  }
+}

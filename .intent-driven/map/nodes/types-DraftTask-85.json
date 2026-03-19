@@ -3,6 +3,9 @@
   "label": "DraftTask",
   "file": "C:/Users/drlee/College_organizer/src/lib/types.ts",
   "type": "type_definition",
+  "layer": "business_logic",
+  "has_auth_gate": null,
+  "has_pii": null,
   "procedures": {
     "mutations": [],
     "queries": []

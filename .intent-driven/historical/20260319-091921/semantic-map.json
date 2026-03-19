@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-03-17T20:06:55.054Z",
+  "generated_at": "2026-03-19T16:14:58.158Z",
   "project": {
     "name": "College_organizer",
     "root": "C:\\Users\\drlee\\College_organizer",
-    "framework": "security, nextjs, trpc, prisma",
+    "framework": "security, inngest, nextjs, ai_client, trpc, prisma, storybook",
     "file_count": 111,
     "node_count": 217
   },
@@ -12,7 +12,7 @@
     {
       "id": "presentation",
       "name": "Presentation",
-      "nodeCount": 71,
+      "nodeCount": 76,
       "nodeIds": [
         "page:dynamic:6",
         "page:AdminPage:8",
@@ -35,13 +35,10 @@
         "page:ProfilePage:10",
         "page:dynamic:7",
         "page:TasksPage:9",
-        "useQueryHooks:useExampleQuery:3",
-        "AdminDashboard:AdminDashboard:20",
         "Button:Button:11",
         "TimeBlock:TimeBlock:30",
         "TimeBlockEditor:TimeBlockEditor:33",
         "WeekCalendar:WeekCalendar:22",
-        "ChatInterface:ChatInterface:18",
         "DraftTaskPreview:DraftTaskPreview:11",
         "MessageBubble:MessageBubble:14",
         "MessageList:MessageList:12",
@@ -56,7 +53,6 @@
         "TodayStats:TodayStats:8",
         "ToolsSection:ToolsSection:8",
         "WeekCalendarView:WeekCalendarView:13",
-        "NavigationBar:NavigationBar:9",
         "ClassScheduleStep:ClassScheduleStep:23",
         "OnboardingFlow:OnboardingFlow:13",
         "PersonalizationStep:PersonalizationStep:11",
@@ -66,14 +62,12 @@
         "PersonalInfoEditor:PersonalInfoEditor:8",
         "PreferencesEditor:PreferencesEditor:40",
         "ProfileEditor:ProfileEditor:12",
-        "SecurityEditor:SecurityEditor:8",
         "ToolsPreferenceEditor:ToolsPreferenceEditor:10",
         "ScheduleBlock:ScheduleBlock:31",
         "ScheduleGenerationPrompt:ScheduleGenerationPrompt:13",
         "ScheduleView:DraggableScheduleBlock:37",
         "ScheduleView:ScheduleView:68",
         "SpeechToTextArea:SpeechToTextAreaRef:28",
-        "SpeechToTextArea:SpeechToTextArea:33",
         "TaskCard:TaskCard:24",
         "TaskChat:TaskChat:17",
         "TaskClarification:TaskClarification:13",
@@ -84,15 +78,27 @@
         "ToolRecommendation:ToolRecommendation:21",
         "ThemeAwareToast:ThemeAwareToast:6",
         "ThemeProvider:ThemeProvider:14",
-        "button:ButtonProps:38"
+        "button:ButtonProps:38",
+        "useQueryHooks:useExampleQuery:3",
+        "Button.stories:Primary:42",
+        "Button.stories:Secondary:51",
+        "Button.stories:Small:60",
+        "Button.stories:Large:69",
+        "Button.stories:AllVariants:78",
+        "AdminDashboard:AdminDashboard:20",
+        "ChatInterface:ChatInterface:18",
+        "NavigationBar:NavigationBar:9",
+        "SecurityEditor:SecurityEditor:8",
+        "SpeechToTextArea:SpeechToTextArea:33"
       ],
       "patterns": [
         "app_router_page",
         "nextjs_metadata_export",
         "server_component",
+        "react_component",
         "react_hook",
+        "storybook_story",
         "auth_gate",
-        "generic_function",
         "input_validation",
         "pii_handling"
       ],
@@ -169,11 +175,24 @@
     {
       "id": "infrastructure",
       "name": "Infrastructure",
-      "nodeCount": 1,
+      "nodeCount": 12,
       "nodeIds": [
-        "db:prisma:20"
+        "inngest.config:inngest:23",
+        "inngest.config:userRegisteredFn:30",
+        "inngest.config:messageHandlerFn:46",
+        "inngest.config:serveInngest:60",
+        "trpc:createTRPCContext:27",
+        "trpc:createCallerFactory:62",
+        "trpc:createTRPCRouter:76",
+        "db:prisma:20",
+        "client:trpc:4",
+        "react:api:29",
+        "react:TRPCReactProvider:52",
+        "server:api:22"
       ],
       "patterns": [
+        "inngest_function",
+        "trpc_infrastructure",
         "prisma_client_init"
       ],
       "layer": "infrastructure"
@@ -181,7 +200,7 @@
     {
       "id": "business",
       "name": "Business Logic",
-      "nodeCount": 77,
+      "nodeCount": 70,
       "nodeIds": [
         "conversational:ConversationalAI:7",
         "conversational:conversationalAI:548",
@@ -213,9 +232,6 @@
         "aiClient:generateChatCompletion:198",
         "root:AppRouter:26",
         "root:createCaller:35",
-        "trpc:createTRPCContext:27",
-        "trpc:createCallerFactory:62",
-        "trpc:createTRPCRouter:76",
         "trpc:adminProcedure:118",
         "sendEmail:sendWelcomeEmail:8",
         "sendEmail:sendAccessApprovedEmail:17",
@@ -223,10 +239,6 @@
         "WelcomeEmail:WelcomeEmail:7",
         "inngest:userRegistered:3",
         "storage:uploadFile:11",
-        "client:trpc:4",
-        "react:api:29",
-        "react:TRPCReactProvider:52",
-        "server:api:22",
         "types:NotificationSettings:19",
         "dailyDetection:isToday:8",
         "dailyDetection:getTodayStart:25",
@@ -263,6 +275,7 @@
       ],
       "patterns": [
         "ai_service",
+        "ai_provider_client",
         "generic_function",
         "input_validation",
         "auth_gate",
@@ -309,18 +322,9 @@
     {
       "id": "misc",
       "name": "Miscellaneous",
-      "nodeCount": 12,
+      "nodeCount": 3,
       "nodeIds": [
         "inngest.config:AppEvents:5",
-        "inngest.config:inngest:23",
-        "inngest.config:userRegisteredFn:30",
-        "inngest.config:messageHandlerFn:46",
-        "inngest.config:serveInngest:60",
-        "Button.stories:Primary:42",
-        "Button.stories:Secondary:51",
-        "Button.stories:Small:60",
-        "Button.stories:Large:69",
-        "Button.stories:AllVariants:78",
         "Button:ButtonProps:5",
         "Button:Button:19"
       ],
@@ -406,12 +410,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
-      "framework": "generic",
+      "semanticPattern": "inngest_function",
+      "layer": "infrastructure",
+      "confidence": 0.9,
+      "framework": "inngest",
       "tags": [
-        "generic_function",
+        "inngest_function",
         "exported"
       ],
       "dataAccess": false,
@@ -450,12 +454,15 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "pii_handling",
-      "layer": "business_logic",
-      "confidence": 0.85,
-      "framework": "security",
+      "semanticPattern": "inngest_function",
+      "secondaryPatterns": [
+        "pii_handling"
+      ],
+      "layer": "infrastructure",
+      "confidence": 0.9,
+      "framework": "inngest",
       "tags": [
-        "pii_handling",
+        "inngest_function",
         "exported",
         "pii_aware"
       ],
@@ -495,12 +502,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
-      "framework": "generic",
+      "semanticPattern": "inngest_function",
+      "layer": "infrastructure",
+      "confidence": 0.9,
+      "framework": "inngest",
       "tags": [
-        "generic_function",
+        "inngest_function",
         "exported"
       ],
       "dataAccess": false,
@@ -539,12 +546,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
-      "framework": "generic",
+      "semanticPattern": "inngest_function",
+      "layer": "infrastructure",
+      "confidence": 0.9,
+      "framework": "inngest",
       "tags": [
-        "generic_function",
+        "inngest_function",
         "exported"
       ],
       "dataAccess": false,
@@ -1969,12 +1976,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
+      "semanticPattern": "constant",
       "layer": "business_logic",
-      "confidence": 0,
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "constant",
         "exported"
       ],
       "dataAccess": false,
@@ -2462,12 +2469,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -2507,12 +2514,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -2569,12 +2576,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -2649,12 +2656,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -2789,12 +2796,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -2849,12 +2856,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -2902,12 +2909,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -2946,12 +2953,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -2988,12 +2995,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -3032,12 +3039,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -3079,12 +3086,12 @@
         "param"
       ],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported",
         "documented"
       ],
@@ -3117,12 +3124,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -3161,12 +3168,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -3205,12 +3212,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -3249,12 +3256,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -3310,12 +3317,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -3370,12 +3377,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -3431,12 +3438,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -3565,12 +3572,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -3665,12 +3672,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -3709,12 +3716,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -3753,12 +3760,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -3789,12 +3796,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -3886,12 +3893,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -3947,12 +3954,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -4016,12 +4023,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -4095,12 +4102,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -4238,12 +4245,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -4285,12 +4292,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -4339,12 +4346,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -4457,12 +4464,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function"
+        "react_component"
       ],
       "dataAccess": false,
       "hasPII": false,
@@ -4574,12 +4581,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -4647,12 +4654,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -4809,12 +4816,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -4904,12 +4911,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -4964,12 +4971,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -5047,12 +5054,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -5107,12 +5114,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -5163,12 +5170,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -5219,12 +5226,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function"
+        "react_component"
       ],
       "dataAccess": false,
       "hasPII": false,
@@ -5288,12 +5295,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -5332,12 +5339,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -5368,12 +5375,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -5427,12 +5434,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
+      "semanticPattern": "react_component",
+      "layer": "presentation",
+      "confidence": 0.75,
       "framework": "generic",
       "tags": [
-        "generic_function",
+        "react_component",
         "exported"
       ],
       "dataAccess": false,
@@ -5465,7 +5472,7 @@
       "fileHasUseServer": false,
       "semanticPattern": "react_hook",
       "layer": "presentation",
-      "confidence": 0.6,
+      "confidence": 0.7,
       "framework": "generic",
       "tags": [
         "react_hook",
@@ -6700,12 +6707,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
+      "semanticPattern": "ai_provider_client",
       "layer": "business_logic",
-      "confidence": 0,
-      "framework": "generic",
+      "confidence": 0.9,
+      "framework": "ai_client",
       "tags": [
-        "generic_function",
+        "ai_provider_client",
         "exported"
       ],
       "dataAccess": false,
@@ -6713,7 +6720,12 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "aiProviders": [
+        "openai",
+        "@google/generative-ai",
+        "@anthropic-ai/sdk"
+      ]
     },
     {
       "id": "aiClient:AIModel:57",
@@ -6750,7 +6762,7 @@
       "fileHasUseServer": false,
       "semanticPattern": "generic_function",
       "layer": "business_logic",
-      "confidence": 0,
+      "confidence": 0.1,
       "framework": "generic",
       "tags": [
         "generic_function",
@@ -6796,12 +6808,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
+      "semanticPattern": "ai_provider_client",
       "layer": "business_logic",
-      "confidence": 0,
-      "framework": "generic",
+      "confidence": 0.9,
+      "framework": "ai_client",
       "tags": [
-        "generic_function",
+        "ai_provider_client",
         "exported"
       ],
       "dataAccess": false,
@@ -6809,7 +6821,12 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "aiProviders": [
+        "openai",
+        "@google/generative-ai",
+        "@anthropic-ai/sdk"
+      ]
     },
     {
       "id": "aiClient:generateGeminiWebResponse:142",
@@ -6849,12 +6866,12 @@
         "returns"
       ],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
+      "semanticPattern": "ai_provider_client",
       "layer": "business_logic",
-      "confidence": 0,
-      "framework": "generic",
+      "confidence": 0.9,
+      "framework": "ai_client",
       "tags": [
-        "generic_function",
+        "ai_provider_client",
         "exported",
         "documented"
       ],
@@ -6863,7 +6880,12 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "aiProviders": [
+        "openai",
+        "@google/generative-ai",
+        "@anthropic-ai/sdk"
+      ]
     },
     {
       "id": "aiClient:parseJsonResponse:177",
@@ -6946,12 +6968,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
+      "semanticPattern": "ai_provider_client",
       "layer": "business_logic",
-      "confidence": 0,
-      "framework": "generic",
+      "confidence": 0.9,
+      "framework": "ai_client",
       "tags": [
-        "generic_function",
+        "ai_provider_client",
         "exported"
       ],
       "dataAccess": false,
@@ -6959,7 +6981,12 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "aiProviders": [
+        "openai",
+        "@google/generative-ai",
+        "@anthropic-ai/sdk"
+      ]
     },
     {
       "id": "root:appRouter:15",
@@ -7134,7 +7161,7 @@
       "fileHasUseServer": false,
       "semanticPattern": "generic_function",
       "layer": "business_logic",
-      "confidence": 0,
+      "confidence": 0.1,
       "framework": "generic",
       "tags": [
         "generic_function",
@@ -7227,7 +7254,7 @@
       "fileHasUseServer": false,
       "semanticPattern": "generic_function",
       "layer": "business_logic",
-      "confidence": 0,
+      "confidence": 0.1,
       "framework": "generic",
       "tags": [
         "generic_function",
@@ -7955,12 +7982,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
-      "framework": "generic",
+      "semanticPattern": "trpc_infrastructure",
+      "layer": "infrastructure",
+      "confidence": 0.95,
+      "framework": "trpc",
       "tags": [
-        "generic_function",
+        "trpc_infrastructure",
         "exported"
       ],
       "dataAccess": false,
@@ -8015,12 +8042,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
-      "framework": "generic",
+      "semanticPattern": "trpc_infrastructure",
+      "layer": "infrastructure",
+      "confidence": 0.95,
+      "framework": "trpc",
       "tags": [
-        "generic_function",
+        "trpc_infrastructure",
         "exported"
       ],
       "dataAccess": false,
@@ -8075,12 +8102,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
-      "framework": "generic",
+      "semanticPattern": "trpc_infrastructure",
+      "layer": "infrastructure",
+      "confidence": 0.95,
+      "framework": "trpc",
       "tags": [
-        "generic_function",
+        "trpc_infrastructure",
         "exported"
       ],
       "dataAccess": false,
@@ -8511,7 +8538,7 @@
       "fileHasUseServer": false,
       "semanticPattern": "generic_function",
       "layer": "business_logic",
-      "confidence": 0,
+      "confidence": 0.1,
       "framework": "generic",
       "tags": [
         "generic_function",
@@ -8641,7 +8668,7 @@
       "fileHasUseServer": false,
       "semanticPattern": "generic_function",
       "layer": "business_logic",
-      "confidence": 0,
+      "confidence": 0.1,
       "framework": "generic",
       "tags": [
         "generic_function",
@@ -8677,7 +8704,7 @@
       "fileHasUseServer": false,
       "semanticPattern": "generic_function",
       "layer": "business_logic",
-      "confidence": 0,
+      "confidence": 0.1,
       "framework": "generic",
       "tags": [
         "generic_function",
@@ -8714,7 +8741,7 @@
       "fileHasUseServer": false,
       "semanticPattern": "generic_function",
       "layer": "business_logic",
-      "confidence": 0,
+      "confidence": 0.1,
       "framework": "generic",
       "tags": [
         "generic_function",
@@ -8756,12 +8783,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
-      "framework": "generic",
+      "semanticPattern": "trpc_infrastructure",
+      "layer": "infrastructure",
+      "confidence": 0.95,
+      "framework": "trpc",
       "tags": [
-        "generic_function",
+        "trpc_infrastructure",
         "exported"
       ],
       "dataAccess": false,
@@ -8835,12 +8862,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
-      "framework": "generic",
+      "semanticPattern": "trpc_infrastructure",
+      "layer": "infrastructure",
+      "confidence": 0.95,
+      "framework": "trpc",
       "tags": [
-        "generic_function",
+        "trpc_infrastructure",
         "exported"
       ],
       "dataAccess": false,
@@ -8914,12 +8941,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
-      "framework": "generic",
+      "semanticPattern": "trpc_infrastructure",
+      "layer": "infrastructure",
+      "confidence": 0.95,
+      "framework": "trpc",
       "tags": [
-        "generic_function",
+        "trpc_infrastructure",
         "exported"
       ],
       "dataAccess": false,
@@ -8980,12 +9007,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
-      "framework": "generic",
+      "semanticPattern": "trpc_infrastructure",
+      "layer": "infrastructure",
+      "confidence": 0.95,
+      "framework": "trpc",
       "tags": [
-        "generic_function",
+        "trpc_infrastructure",
         "exported"
       ],
       "dataAccess": false,
@@ -10602,7 +10629,7 @@
       "fileHasUseServer": false,
       "semanticPattern": "generic_function",
       "layer": "business_logic",
-      "confidence": 0,
+      "confidence": 0.1,
       "framework": "generic",
       "tags": [
         "generic_function",
@@ -10689,12 +10716,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
-      "framework": "generic",
+      "semanticPattern": "storybook_story",
+      "layer": "presentation",
+      "confidence": 0.99,
+      "framework": "storybook",
       "tags": [
-        "generic_function",
+        "storybook_story",
         "exported"
       ],
       "dataAccess": false,
@@ -10702,7 +10729,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "isDevOnly": true
     },
     {
       "id": "Button.stories:Secondary:51",
@@ -10742,12 +10770,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
-      "framework": "generic",
+      "semanticPattern": "storybook_story",
+      "layer": "presentation",
+      "confidence": 0.99,
+      "framework": "storybook",
       "tags": [
-        "generic_function",
+        "storybook_story",
         "exported"
       ],
       "dataAccess": false,
@@ -10755,7 +10783,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "isDevOnly": true
     },
     {
       "id": "Button.stories:Small:60",
@@ -10795,12 +10824,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
-      "framework": "generic",
+      "semanticPattern": "storybook_story",
+      "layer": "presentation",
+      "confidence": 0.99,
+      "framework": "storybook",
       "tags": [
-        "generic_function",
+        "storybook_story",
         "exported"
       ],
       "dataAccess": false,
@@ -10808,7 +10837,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "isDevOnly": true
     },
     {
       "id": "Button.stories:Large:69",
@@ -10848,12 +10878,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
-      "framework": "generic",
+      "semanticPattern": "storybook_story",
+      "layer": "presentation",
+      "confidence": 0.99,
+      "framework": "storybook",
       "tags": [
-        "generic_function",
+        "storybook_story",
         "exported"
       ],
       "dataAccess": false,
@@ -10861,7 +10891,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "isDevOnly": true
     },
     {
       "id": "Button.stories:AllVariants:78",
@@ -10901,12 +10932,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0,
-      "framework": "generic",
+      "semanticPattern": "storybook_story",
+      "layer": "presentation",
+      "confidence": 0.99,
+      "framework": "storybook",
       "tags": [
-        "generic_function",
+        "storybook_story",
         "exported"
       ],
       "dataAccess": false,
@@ -10914,7 +10945,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "isDevOnly": true
     },
     {
       "id": "Button:ButtonProps:5",
@@ -10943,7 +10975,7 @@
       "fileHasUseServer": false,
       "semanticPattern": "generic_function",
       "layer": "business_logic",
-      "confidence": 0,
+      "confidence": 0.1,
       "framework": "generic",
       "tags": [
         "generic_function",
@@ -10983,7 +11015,7 @@
       "fileHasUseServer": false,
       "semanticPattern": "generic_function",
       "layer": "business_logic",
-      "confidence": 0,
+      "confidence": 0.1,
       "framework": "generic",
       "tags": [
         "generic_function",
@@ -13826,13 +13858,63 @@
     }
   ],
   "violations": {
-    "total": 2,
+    "total": 7,
     "critical": 2,
-    "warning": 0,
+    "warning": 5,
     "info": 0,
-    "passing": 4119,
-    "failing": 2,
+    "passing": 4867,
+    "failing": 7,
     "violations": [
+      {
+        "ruleId": "WARN-AI-001",
+        "severity": "warning",
+        "category": "security",
+        "message": "AI input passed to provider without validation",
+        "affectedNodeIds": [
+          "aiClient:AI_MODELS:43"
+        ],
+        "fixSuggestion": "Add input validation (e.g. Zod schema.parse) before calling the AI provider."
+      },
+      {
+        "ruleId": "WARN-AI-001",
+        "severity": "warning",
+        "category": "security",
+        "message": "AI input passed to provider without validation",
+        "affectedNodeIds": [
+          "aiClient:GenerateChatCompletionOptions:61"
+        ],
+        "fixSuggestion": "Add input validation (e.g. Zod schema.parse) before calling the AI provider."
+      },
+      {
+        "ruleId": "WARN-AI-001",
+        "severity": "warning",
+        "category": "security",
+        "message": "AI input passed to provider without validation",
+        "affectedNodeIds": [
+          "aiClient:generateGeminiWebResponse:142"
+        ],
+        "fixSuggestion": "Add input validation (e.g. Zod schema.parse) before calling the AI provider."
+      },
+      {
+        "ruleId": "WARN-AI-001",
+        "severity": "warning",
+        "category": "security",
+        "message": "AI input passed to provider without validation",
+        "affectedNodeIds": [
+          "aiClient:generateChatCompletion:198"
+        ],
+        "fixSuggestion": "Add input validation (e.g. Zod schema.parse) before calling the AI provider."
+      },
+      {
+        "ruleId": "WARN-AI-002",
+        "severity": "warning",
+        "category": "security",
+        "message": "Raw API key access — use a config module to centralize secret management",
+        "affectedNodeIds": [
+          "aiClient:generateChatCompletion:198"
+        ],
+        "fixSuggestion": "Move API keys to a config module or environment abstraction; avoid process.env in provider call sites."
+      },
       {
         "ruleId": "SEC-002",
         "severity": "critical",
@@ -13862,24 +13944,33 @@
     ]
   },
   "ai_context": {
-    "summary": "TypeScript codebase with 217 semantic nodes across 8 domain(s): Presentation, API Routes, Authentication, Data Access, Infrastructure, Business Logic, Type Contracts, Miscellaneous. Frameworks detected: security, nextjs, trpc, prisma. 2 critical constraint violation(s) require attention.",
-    "token_estimate": 159,
+    "summary": "TypeScript codebase with 212 semantic nodes across 8 domain(s): Presentation, API Routes, Authentication, Data Access, Infrastructure, Business Logic, Type Contracts, Miscellaneous. Frameworks detected: security, inngest, nextjs, ai_client, trpc, prisma. 2 critical constraint violation(s) require attention.",
+    "token_estimate": 234,
     "patterns": [
       "Next.js App Router + tRPC + Prisma stack",
       "Protected procedures use protectedProcedure; admin uses adminProcedure",
       "AI service layer detected: ConversationalAI, conversationalAI, DiscoveryQuestionsService",
       "269 edge(s) traced across 142 node(s) (269 import(s))",
       "2 critical constraint violation(s) detected",
+      "react_component: 44 node(s)",
       "utility: 29 node(s)",
-      "type_definition: 24 node(s)",
-      "ai_service: 22 node(s)"
+      "type_definition: 24 node(s)"
     ],
     "active_constraints": [
+      "[WARNING] WARN-AI-001 (aiClient:AI_MODELS:43): AI input passed to provider without validation",
+      "[WARNING] WARN-AI-001 (aiClient:GenerateChatCompletionOptions:61): AI input passed to provider without validation",
+      "[WARNING] WARN-AI-001 (aiClient:generateGeminiWebResponse:142): AI input passed to provider without validation",
+      "[WARNING] WARN-AI-001 (aiClient:generateChatCompletion:198): AI input passed to provider without validation",
+      "[WARNING] WARN-AI-002 (aiClient:generateChatCompletion:198): Raw API key access — use a config module to centralize secret management",
       "[CRITICAL] SEC-002 (adminRouter:adminRouter:8): \"adminRouter\" imports publicProcedure and is a tRPC router — use protectedProcedure for all mutations to prevent unauthorized access.",
       "[CRITICAL] SEC-PRISMA-001 (adminRouter:adminRouter:8): Prisma mutation accessRequest.update is reachable without an auth check.",
       "[CRITICAL] SEC-PRISMA-001 (route:handler:19): Prisma mutation accessRequest.update is reachable without an auth check."
     ],
     "focus_nodes": [
+      "aiClient:AI_MODELS:43",
+      "aiClient:GenerateChatCompletionOptions:61",
+      "aiClient:generateGeminiWebResponse:142",
+      "aiClient:generateChatCompletion:198",
       "adminRouter:adminRouter:8",
       "route:handler:19"
     ],
@@ -13897,6 +13988,966 @@
       },
       "data_access_paths": 0,
       "unguarded_mutations": 0
+    }
+  },
+  "routeMap": {
+    "meta": {
+      "scannedAt": "2026-03-19T16:14:57.929Z",
+      "routingMode": "app",
+      "repoRoot": "C:\\Users\\drlee\\College_organizer",
+      "totalRoutes": 14,
+      "totalEdges": 28,
+      "totalElements": 21,
+      "unresolvedEdges": 5,
+      "authInference": {
+        "protected": 7,
+        "public": 6,
+        "admin": 0,
+        "unknown": 3,
+        "authored": 0
+      }
+    },
+    "nodes": [
+      {
+        "id": "route::index::page",
+        "type": "page",
+        "routePath": "/",
+        "filePath": "src/app/page.tsx",
+        "routingMode": "app",
+        "isDynamic": false,
+        "dynamicParams": [],
+        "isApiRoute": false,
+        "elements": [
+          {
+            "id": "el::route::index::page::link::get-started",
+            "routeId": "route::index::page",
+            "elementType": "link",
+            "label": "Get Started",
+            "handlerRef": "",
+            "lineNumber": 30,
+            "isFlowEntry": false,
+            "href": "/auth/signin"
+          },
+          {
+            "id": "el::route::index::page::link::privacy-policy",
+            "routeId": "route::index::page",
+            "elementType": "link",
+            "label": "Privacy Policy",
+            "handlerRef": "",
+            "lineNumber": 50,
+            "isFlowEntry": false,
+            "href": "/privacy"
+          },
+          {
+            "id": "el::route::index::page::link::terms-of-service",
+            "routeId": "route::index::page",
+            "elementType": "link",
+            "label": "Terms of Service",
+            "handlerRef": "",
+            "lineNumber": 56,
+            "isFlowEntry": false,
+            "href": "/terms"
+          },
+          {
+            "id": "el::route::index::page::link::contact",
+            "routeId": "route::index::page",
+            "elementType": "link",
+            "label": "Contact",
+            "handlerRef": "",
+            "lineNumber": 62,
+            "isFlowEntry": false,
+            "href": "/contact"
+          }
+        ],
+        "auth_requirement": {
+          "type": "protected",
+          "authoring_mode": "inferred",
+          "inference_source": "server_session_call",
+          "confidence": 0.95
+        },
+        "findings": [],
+        "hasAuthGate": true
+      },
+      {
+        "id": "route::admin::page",
+        "type": "page",
+        "routePath": "/admin",
+        "filePath": "src/app/admin/page.tsx",
+        "routingMode": "app",
+        "isDynamic": false,
+        "dynamicParams": [],
+        "isApiRoute": false,
+        "elements": [],
+        "auth_requirement": {
+          "type": "protected",
+          "authoring_mode": "inferred",
+          "inference_source": "server_session_call",
+          "confidence": 0.95
+        },
+        "findings": [
+          "finding::NAV-001::admin",
+          "finding::NAV-004::admin"
+        ],
+        "hasAuthGate": true
+      },
+      {
+        "id": "route::chat::page",
+        "type": "page",
+        "routePath": "/chat",
+        "filePath": "src/app/chat/page.tsx",
+        "routingMode": "app",
+        "isDynamic": false,
+        "dynamicParams": [],
+        "isApiRoute": false,
+        "elements": [],
+        "auth_requirement": {
+          "type": "protected",
+          "authoring_mode": "inferred",
+          "inference_source": "server_session_call",
+          "confidence": 0.95
+        },
+        "findings": [],
+        "hasAuthGate": true
+      },
+      {
+        "id": "route::dashboard::page",
+        "type": "page",
+        "routePath": "/dashboard",
+        "filePath": "src/app/dashboard/page.tsx",
+        "routingMode": "app",
+        "isDynamic": false,
+        "dynamicParams": [],
+        "isApiRoute": false,
+        "elements": [],
+        "auth_requirement": {
+          "type": "protected",
+          "authoring_mode": "inferred",
+          "inference_source": "server_session_call",
+          "confidence": 0.95
+        },
+        "findings": [],
+        "hasAuthGate": true
+      },
+      {
+        "id": "route::onboarding::page",
+        "type": "page",
+        "routePath": "/onboarding",
+        "filePath": "src/app/onboarding/page.tsx",
+        "routingMode": "app",
+        "isDynamic": false,
+        "dynamicParams": [],
+        "isApiRoute": false,
+        "elements": [],
+        "auth_requirement": {
+          "type": "protected",
+          "authoring_mode": "inferred",
+          "inference_source": "server_session_call",
+          "confidence": 0.95
+        },
+        "findings": [],
+        "hasAuthGate": true
+      },
+      {
+        "id": "route::profile::page",
+        "type": "page",
+        "routePath": "/profile",
+        "filePath": "src/app/profile/page.tsx",
+        "routingMode": "app",
+        "isDynamic": false,
+        "dynamicParams": [],
+        "isApiRoute": false,
+        "elements": [],
+        "auth_requirement": {
+          "type": "protected",
+          "authoring_mode": "inferred",
+          "inference_source": "server_session_call",
+          "confidence": 0.95
+        },
+        "findings": [],
+        "hasAuthGate": true
+      },
+      {
+        "id": "route::tasks::page",
+        "type": "page",
+        "routePath": "/tasks",
+        "filePath": "src/app/tasks/page.tsx",
+        "routingMode": "app",
+        "isDynamic": false,
+        "dynamicParams": [],
+        "isApiRoute": false,
+        "elements": [],
+        "auth_requirement": {
+          "type": "protected",
+          "authoring_mode": "inferred",
+          "inference_source": "server_session_call",
+          "confidence": 0.95
+        },
+        "findings": [
+          "finding::NAV-001::tasks",
+          "finding::NAV-004::tasks"
+        ],
+        "hasAuthGate": true
+      },
+      {
+        "id": "route::api::transcribe::api",
+        "type": "api",
+        "routePath": "/api/transcribe",
+        "filePath": "src/app/api/transcribe/route.ts",
+        "routingMode": "app",
+        "isDynamic": false,
+        "dynamicParams": [],
+        "isApiRoute": true,
+        "elements": [],
+        "auth_requirement": {
+          "type": "public",
+          "authoring_mode": "inferred",
+          "inference_source": "none",
+          "confidence": 0.6
+        },
+        "findings": [],
+        "hasAuthGate": false
+      },
+      {
+        "id": "route::api::upload::api",
+        "type": "api",
+        "routePath": "/api/upload",
+        "filePath": "src/app/api/upload/route.ts",
+        "routingMode": "app",
+        "isDynamic": false,
+        "dynamicParams": [],
+        "isApiRoute": true,
+        "elements": [],
+        "auth_requirement": {
+          "type": "public",
+          "authoring_mode": "inferred",
+          "inference_source": "none",
+          "confidence": 0.6
+        },
+        "findings": [],
+        "hasAuthGate": false
+      },
+      {
+        "id": "route::auth::error::page",
+        "type": "page",
+        "routePath": "/auth/error",
+        "filePath": "src/app/auth/error/page.tsx",
+        "routingMode": "app",
+        "isDynamic": false,
+        "dynamicParams": [],
+        "isApiRoute": false,
+        "elements": [
+          {
+            "id": "el::route::auth::error::page::link::back",
+            "routeId": "route::auth::error::page",
+            "elementType": "link",
+            "label": "Back",
+            "handlerRef": "",
+            "lineNumber": 14,
+            "isFlowEntry": false,
+            "href": "/"
+          },
+          {
+            "id": "el::route::auth::error::page::link::try-again",
+            "routeId": "route::auth::error::page",
+            "elementType": "link",
+            "label": "Try Again",
+            "handlerRef": "",
+            "lineNumber": 35,
+            "isFlowEntry": false,
+            "href": "/auth/signin"
+          }
+        ],
+        "auth_requirement": {
+          "type": "public",
+          "authoring_mode": "inferred",
+          "inference_source": "auth_page_pattern",
+          "confidence": 0.95
+        },
+        "findings": [
+          "finding::NAV-001::auth-error",
+          "finding::NAV-004::auth-error"
+        ],
+        "hasAuthGate": false
+      },
+      {
+        "id": "route::auth::signin::page",
+        "type": "page",
+        "routePath": "/auth/signin",
+        "filePath": "src/app/auth/signin/page.tsx",
+        "routingMode": "app",
+        "isDynamic": false,
+        "dynamicParams": [],
+        "isApiRoute": false,
+        "elements": [
+          {
+            "id": "el::route::auth::signin::page::link::back",
+            "routeId": "route::auth::signin::page",
+            "elementType": "link",
+            "label": "Back",
+            "handlerRef": "",
+            "lineNumber": 121,
+            "isFlowEntry": false,
+            "href": "/"
+          },
+          {
+            "id": "el::route::auth::signin::page::form::L145",
+            "routeId": "route::auth::signin::page",
+            "elementType": "form",
+            "label": "",
+            "handlerRef": "",
+            "lineNumber": 145,
+            "isFlowEntry": true
+          },
+          {
+            "id": "el::route::auth::signin::page::link::profile-settings",
+            "routeId": "route::auth::signin::page",
+            "elementType": "link",
+            "label": "profile settings",
+            "handlerRef": "",
+            "lineNumber": 196,
+            "isFlowEntry": false,
+            "href": "/profile"
+          },
+          {
+            "id": "el::route::auth::signin::page::button::L210",
+            "routeId": "route::auth::signin::page",
+            "elementType": "button",
+            "label": "",
+            "handlerRef": "",
+            "lineNumber": 210,
+            "isFlowEntry": false
+          },
+          {
+            "id": "el::route::auth::signin::page::link::privacy-policy",
+            "routeId": "route::auth::signin::page",
+            "elementType": "link",
+            "label": "Privacy Policy",
+            "handlerRef": "",
+            "lineNumber": 232,
+            "isFlowEntry": false,
+            "href": "https://example.com/legal"
+          },
+          {
+            "id": "el::route::auth::signin::page::button::request-access",
+            "routeId": "route::auth::signin::page",
+            "elementType": "button",
+            "label": "Request Access",
+            "handlerRef": "setShowRequestAccess",
+            "lineNumber": 242,
+            "isFlowEntry": true
+          },
+          {
+            "id": "el::route::auth::signin::page::button::setShowRequestAccess",
+            "routeId": "route::auth::signin::page",
+            "elementType": "button",
+            "label": "",
+            "handlerRef": "setShowRequestAccess",
+            "lineNumber": 261,
+            "isFlowEntry": true
+          },
+          {
+            "id": "el::route::auth::signin::page::form::L281",
+            "routeId": "route::auth::signin::page",
+            "elementType": "form",
+            "label": "",
+            "handlerRef": "async",
+            "lineNumber": 281,
+            "isFlowEntry": true
+          },
+          {
+            "id": "el::route::auth::signin::page::button::cancel",
+            "routeId": "route::auth::signin::page",
+            "elementType": "button",
+            "label": "Cancel",
+            "handlerRef": "setShowRequestAccess",
+            "lineNumber": 316,
+            "isFlowEntry": true
+          },
+          {
+            "id": "el::route::auth::signin::page::button::L326",
+            "routeId": "route::auth::signin::page",
+            "elementType": "button",
+            "label": "",
+            "handlerRef": "",
+            "lineNumber": 326,
+            "isFlowEntry": false
+          }
+        ],
+        "auth_requirement": {
+          "type": "public",
+          "authoring_mode": "inferred",
+          "inference_source": "auth_page_pattern",
+          "confidence": 0.95
+        },
+        "findings": [],
+        "hasAuthGate": false
+      },
+      {
+        "id": "route::auth::signout::page",
+        "type": "page",
+        "routePath": "/auth/signout",
+        "filePath": "src/app/auth/signout/page.tsx",
+        "routingMode": "app",
+        "isDynamic": false,
+        "dynamicParams": [],
+        "isApiRoute": false,
+        "elements": [
+          {
+            "id": "el::route::auth::signout::page::link::back",
+            "routeId": "route::auth::signout::page",
+            "elementType": "link",
+            "label": "Back",
+            "handlerRef": "",
+            "lineNumber": 18,
+            "isFlowEntry": false,
+            "href": "/"
+          },
+          {
+            "id": "el::route::auth::signout::page::button::L41",
+            "routeId": "route::auth::signout::page",
+            "elementType": "button",
+            "label": "",
+            "handlerRef": "",
+            "lineNumber": 41,
+            "isFlowEntry": false
+          },
+          {
+            "id": "el::route::auth::signout::page::link::cancel",
+            "routeId": "route::auth::signout::page",
+            "elementType": "link",
+            "label": "Cancel",
+            "handlerRef": "",
+            "lineNumber": 50,
+            "isFlowEntry": false,
+            "href": "/"
+          }
+        ],
+        "auth_requirement": {
+          "type": "public",
+          "authoring_mode": "inferred",
+          "inference_source": "auth_page_pattern",
+          "confidence": 0.95
+        },
+        "findings": [
+          "finding::NAV-001::auth-signout",
+          "finding::NAV-004::auth-signout"
+        ],
+        "hasAuthGate": false
+      },
+      {
+        "id": "route::auth::verify::page",
+        "type": "page",
+        "routePath": "/auth/verify",
+        "filePath": "src/app/auth/verify/page.tsx",
+        "routingMode": "app",
+        "isDynamic": false,
+        "dynamicParams": [],
+        "isApiRoute": false,
+        "elements": [
+          {
+            "id": "el::route::auth::verify::page::link::back",
+            "routeId": "route::auth::verify::page",
+            "elementType": "link",
+            "label": "Back",
+            "handlerRef": "",
+            "lineNumber": 10,
+            "isFlowEntry": false,
+            "href": "/"
+          },
+          {
+            "id": "el::route::auth::verify::page::link::try-signing-in-again",
+            "routeId": "route::auth::verify::page",
+            "elementType": "link",
+            "label": "try signing in again",
+            "handlerRef": "",
+            "lineNumber": 43,
+            "isFlowEntry": false,
+            "href": "/auth/signin"
+          }
+        ],
+        "auth_requirement": {
+          "type": "public",
+          "authoring_mode": "inferred",
+          "inference_source": "auth_page_pattern",
+          "confidence": 0.95
+        },
+        "findings": [],
+        "hasAuthGate": false
+      },
+      {
+        "id": "route::api::trpc::[trpc]::api",
+        "type": "api",
+        "routePath": "/api/trpc/[trpc]",
+        "filePath": "src/app/api/trpc/[trpc]/route.ts",
+        "routingMode": "app",
+        "isDynamic": true,
+        "dynamicParams": [
+          "trpc"
+        ],
+        "isApiRoute": true,
+        "elements": [],
+        "auth_requirement": {
+          "type": "unknown",
+          "authoring_mode": "inferred",
+          "inference_source": "none",
+          "confidence": 0.5
+        },
+        "findings": [],
+        "hasAuthGate": false
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge::route::index::page::route::auth::signin::page",
+        "source": "route::index::page",
+        "target": "route::auth::signin::page",
+        "triggerElement": "el::route::index::page::link::get-started",
+        "linkType": "Link",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::index::page::route::onboarding::page",
+        "source": "route::index::page",
+        "target": "route::onboarding::page",
+        "triggerElement": "el::route::index::page::function::L83",
+        "linkType": "redirect",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::index::page::route::dashboard::page",
+        "source": "route::index::page",
+        "target": "route::dashboard::page",
+        "triggerElement": "el::route::index::page::function::L87",
+        "linkType": "redirect",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::admin::page::route::auth::signin::page",
+        "source": "route::admin::page",
+        "target": "route::auth::signin::page",
+        "triggerElement": "el::route::admin::page::function::L12",
+        "linkType": "redirect",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::admin::page::route::dashboard::page",
+        "source": "route::admin::page",
+        "target": "route::dashboard::page",
+        "triggerElement": "el::route::admin::page::function::L17",
+        "linkType": "redirect",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::chat::page::route::auth::signin::page",
+        "source": "route::chat::page",
+        "target": "route::auth::signin::page",
+        "triggerElement": "el::route::chat::page::function::L13",
+        "linkType": "redirect",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::chat::page::route::onboarding::page",
+        "source": "route::chat::page",
+        "target": "route::onboarding::page",
+        "triggerElement": "el::route::chat::page::function::L23",
+        "linkType": "redirect",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::chat::page::route::onboarding::page",
+        "source": "route::chat::page",
+        "target": "route::onboarding::page",
+        "triggerElement": "el::route::chat::page::function::L27",
+        "linkType": "redirect",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::dashboard::page::route::auth::signin::page",
+        "source": "route::dashboard::page",
+        "target": "route::auth::signin::page",
+        "triggerElement": "el::route::dashboard::page::function::L19",
+        "linkType": "redirect",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::dashboard::page::route::onboarding::page",
+        "source": "route::dashboard::page",
+        "target": "route::onboarding::page",
+        "triggerElement": "el::route::dashboard::page::function::L29",
+        "linkType": "redirect",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::dashboard::page::route::onboarding::page",
+        "source": "route::dashboard::page",
+        "target": "route::onboarding::page",
+        "triggerElement": "el::route::dashboard::page::function::L33",
+        "linkType": "redirect",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::onboarding::page::route::auth::signin::page",
+        "source": "route::onboarding::page",
+        "target": "route::auth::signin::page",
+        "triggerElement": "el::route::onboarding::page::function::L12",
+        "linkType": "redirect",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::onboarding::page::route::chat::page",
+        "source": "route::onboarding::page",
+        "target": "route::chat::page",
+        "triggerElement": "el::route::onboarding::page::function::L22",
+        "linkType": "redirect",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::profile::page::route::auth::signin::page",
+        "source": "route::profile::page",
+        "target": "route::auth::signin::page",
+        "triggerElement": "el::route::profile::page::function::L14",
+        "linkType": "redirect",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::profile::page::route::onboarding::page",
+        "source": "route::profile::page",
+        "target": "route::onboarding::page",
+        "triggerElement": "el::route::profile::page::function::L24",
+        "linkType": "redirect",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::profile::page::route::onboarding::page",
+        "source": "route::profile::page",
+        "target": "route::onboarding::page",
+        "triggerElement": "el::route::profile::page::function::L28",
+        "linkType": "redirect",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::tasks::page::route::auth::signin::page",
+        "source": "route::tasks::page",
+        "target": "route::auth::signin::page",
+        "triggerElement": "el::route::tasks::page::function::L13",
+        "linkType": "redirect",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::tasks::page::route::onboarding::page",
+        "source": "route::tasks::page",
+        "target": "route::onboarding::page",
+        "triggerElement": "el::route::tasks::page::function::L23",
+        "linkType": "redirect",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::tasks::page::route::onboarding::page",
+        "source": "route::tasks::page",
+        "target": "route::onboarding::page",
+        "triggerElement": "el::route::tasks::page::function::L27",
+        "linkType": "redirect",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::auth::error::page::route::index::page",
+        "source": "route::auth::error::page",
+        "target": "route::index::page",
+        "triggerElement": "el::route::auth::error::page::link::back",
+        "linkType": "Link",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::auth::error::page::route::auth::signin::page",
+        "source": "route::auth::error::page",
+        "target": "route::auth::signin::page",
+        "triggerElement": "el::route::auth::error::page::link::try-again",
+        "linkType": "Link",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::auth::signin::page::route::index::page",
+        "source": "route::auth::signin::page",
+        "target": "route::index::page",
+        "triggerElement": "el::route::auth::signin::page::link::back",
+        "linkType": "Link",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::auth::signin::page::route::profile::page",
+        "source": "route::auth::signin::page",
+        "target": "route::profile::page",
+        "triggerElement": "el::route::auth::signin::page::link::profile-settings",
+        "linkType": "Link",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::auth::signin::page::route::auth::verify::page",
+        "source": "route::auth::signin::page",
+        "target": "route::auth::verify::page",
+        "triggerElement": "el::route::auth::signin::page::function::L99",
+        "linkType": "router.push",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 0.95,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::auth::signout::page::route::index::page",
+        "source": "route::auth::signout::page",
+        "target": "route::index::page",
+        "triggerElement": "el::route::auth::signout::page::link::back",
+        "linkType": "Link",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::auth::signout::page::route::index::page",
+        "source": "route::auth::signout::page",
+        "target": "route::index::page",
+        "triggerElement": "el::route::auth::signout::page::link::cancel",
+        "linkType": "Link",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::auth::verify::page::route::index::page",
+        "source": "route::auth::verify::page",
+        "target": "route::index::page",
+        "triggerElement": "el::route::auth::verify::page::link::back",
+        "linkType": "Link",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::auth::verify::page::route::auth::signin::page",
+        "source": "route::auth::verify::page",
+        "target": "route::auth::signin::page",
+        "triggerElement": "el::route::auth::verify::page::link::try-signing-in-again",
+        "linkType": "Link",
+        "isConditional": false,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      }
+    ],
+    "unresolved": [
+      {
+        "filePath": "C:/Users/drlee/College_organizer/src/app/page.tsx",
+        "lineNumber": 50,
+        "rawValue": "/privacy",
+        "reason": "missing_route"
+      },
+      {
+        "filePath": "C:/Users/drlee/College_organizer/src/app/page.tsx",
+        "lineNumber": 56,
+        "rawValue": "/terms",
+        "reason": "missing_route"
+      },
+      {
+        "filePath": "C:/Users/drlee/College_organizer/src/app/page.tsx",
+        "lineNumber": 62,
+        "rawValue": "/contact",
+        "reason": "missing_route"
+      },
+      {
+        "filePath": "C:/Users/drlee/College_organizer/src/app/auth/signin/page.tsx",
+        "lineNumber": 232,
+        "rawValue": "https://example.com/legal",
+        "reason": "external_url"
+      },
+      {
+        "filePath": "C:/Users/drlee/College_organizer/src/app/auth/signin/page.tsx",
+        "lineNumber": 77,
+        "rawValue": "callbackUrl",
+        "reason": "dynamic_expression"
+      }
+    ],
+    "findings": [
+      {
+        "id": "finding::NAV-001::admin",
+        "type": "NAV-001",
+        "severity": "warning",
+        "affectedNodes": [
+          "route::admin::page"
+        ],
+        "affectedEdges": [],
+        "title": "Orphaned route",
+        "detail": "/admin has no inbound edges. Nothing in the app navigates to this page.",
+        "suggestedFix": "Add a navigation element pointing to /admin, or remove the route if no longer needed.",
+        "detectedAt": "2026-03-19T16:14:57.930Z"
+      },
+      {
+        "id": "finding::NAV-001::tasks",
+        "type": "NAV-001",
+        "severity": "warning",
+        "affectedNodes": [
+          "route::tasks::page"
+        ],
+        "affectedEdges": [],
+        "title": "Orphaned route",
+        "detail": "/tasks has no inbound edges. Nothing in the app navigates to this page.",
+        "suggestedFix": "Add a navigation element pointing to /tasks, or remove the route if no longer needed.",
+        "detectedAt": "2026-03-19T16:14:57.930Z"
+      },
+      {
+        "id": "finding::NAV-001::auth-error",
+        "type": "NAV-001",
+        "severity": "warning",
+        "affectedNodes": [
+          "route::auth::error::page"
+        ],
+        "affectedEdges": [],
+        "title": "Orphaned route",
+        "detail": "/auth/error has no inbound edges. Nothing in the app navigates to this page.",
+        "suggestedFix": "Add a navigation element pointing to /auth/error, or remove the route if no longer needed.",
+        "detectedAt": "2026-03-19T16:14:57.930Z"
+      },
+      {
+        "id": "finding::NAV-001::auth-signout",
+        "type": "NAV-001",
+        "severity": "warning",
+        "affectedNodes": [
+          "route::auth::signout::page"
+        ],
+        "affectedEdges": [],
+        "title": "Orphaned route",
+        "detail": "/auth/signout has no inbound edges. Nothing in the app navigates to this page.",
+        "suggestedFix": "Add a navigation element pointing to /auth/signout, or remove the route if no longer needed.",
+        "detectedAt": "2026-03-19T16:14:57.930Z"
+      },
+      {
+        "id": "finding::NAV-004::admin",
+        "type": "NAV-004",
+        "severity": "critical",
+        "affectedNodes": [
+          "route::admin::page"
+        ],
+        "affectedEdges": [],
+        "title": "Unreachable route",
+        "detail": "/admin cannot be reached from the entry point (/).",
+        "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
+        "detectedAt": "2026-03-19T16:14:57.930Z"
+      },
+      {
+        "id": "finding::NAV-004::tasks",
+        "type": "NAV-004",
+        "severity": "critical",
+        "affectedNodes": [
+          "route::tasks::page"
+        ],
+        "affectedEdges": [],
+        "title": "Unreachable route",
+        "detail": "/tasks cannot be reached from the entry point (/).",
+        "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
+        "detectedAt": "2026-03-19T16:14:57.930Z"
+      },
+      {
+        "id": "finding::NAV-004::auth-error",
+        "type": "NAV-004",
+        "severity": "critical",
+        "affectedNodes": [
+          "route::auth::error::page"
+        ],
+        "affectedEdges": [],
+        "title": "Unreachable route",
+        "detail": "/auth/error cannot be reached from the entry point (/).",
+        "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
+        "detectedAt": "2026-03-19T16:14:57.930Z"
+      },
+      {
+        "id": "finding::NAV-004::auth-signout",
+        "type": "NAV-004",
+        "severity": "critical",
+        "affectedNodes": [
+          "route::auth::signout::page"
+        ],
+        "affectedEdges": [],
+        "title": "Unreachable route",
+        "detail": "/auth/signout cannot be reached from the entry point (/).",
+        "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
+        "detectedAt": "2026-03-19T16:14:57.930Z"
+      }
+    ],
+    "findingSummary": {
+      "critical": 4,
+      "warning": 4,
+      "info": 0
     }
   }
 }

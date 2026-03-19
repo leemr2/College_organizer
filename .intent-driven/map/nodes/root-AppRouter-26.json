@@ -3,6 +3,9 @@
   "label": "AppRouter",
   "file": "C:/Users/drlee/College_organizer/src/lib/api/root.ts",
   "type": "generic_function",
+  "layer": "business_logic",
+  "has_auth_gate": null,
+  "has_pii": null,
   "procedures": {
     "mutations": [],
     "queries": []

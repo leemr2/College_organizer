@@ -3,6 +3,9 @@
   "label": "studentRouter",
   "file": "C:/Users/drlee/College_organizer/src/lib/api/routers/studentRouter.ts",
   "type": "trpc_router",
+  "layer": "business_logic",
+  "has_auth_gate": true,
+  "has_pii": true,
   "procedures": {
     "mutations": [],
     "queries": []

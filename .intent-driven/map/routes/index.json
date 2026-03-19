@@ -1,0 +1,282 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-03-19T16:27:28.183Z",
+  "summary": {
+    "total": 22,
+    "pages": 12,
+    "api_routes": 3,
+    "trpc_routers": 7,
+    "unprotected_entry_points": 2
+  },
+  "routes": [
+    {
+      "id": "adminRouter:adminRouter:8",
+      "path": null,
+      "method": null,
+      "type": "trpc_router",
+      "domain": "api",
+      "layer": "business_logic",
+      "has_auth_gate": false,
+      "has_pii": false,
+      "active_violations": [
+        "SEC-002",
+        "SEC-PRISMA-001"
+      ],
+      "node_ref": "nodes/adminRouter-adminRouter-8.json"
+    },
+    {
+      "id": "authRouter:authRouter:7",
+      "path": null,
+      "method": null,
+      "type": "trpc_router",
+      "domain": "api",
+      "layer": "business_logic",
+      "has_auth_gate": false,
+      "has_pii": false,
+      "active_violations": [],
+      "node_ref": "nodes/authRouter-authRouter-7.json"
+    },
+    {
+      "id": "chatRouter:chatRouter:405",
+      "path": null,
+      "method": null,
+      "type": "trpc_router",
+      "domain": "api",
+      "layer": "business_logic",
+      "has_auth_gate": true,
+      "has_pii": false,
+      "active_violations": [],
+      "node_ref": "nodes/chatRouter-chatRouter-405.json"
+    },
+    {
+      "id": "page:AdminPage:8",
+      "path": "/admin",
+      "method": null,
+      "type": "page",
+      "domain": "presentation",
+      "layer": "presentation",
+      "has_auth_gate": true,
+      "has_pii": false,
+      "active_violations": [],
+      "node_ref": "nodes/page-AdminPage-8.json"
+    },
+    {
+      "id": "page:ChatPage:9",
+      "path": "/chat",
+      "method": null,
+      "type": "page",
+      "domain": "presentation",
+      "layer": "presentation",
+      "has_auth_gate": true,
+      "has_pii": false,
+      "active_violations": [],
+      "node_ref": "nodes/page-ChatPage-9.json"
+    },
+    {
+      "id": "page:DashboardPage:15",
+      "path": "/dashboard",
+      "method": null,
+      "type": "page",
+      "domain": "presentation",
+      "layer": "presentation",
+      "has_auth_gate": true,
+      "has_pii": false,
+      "active_violations": [],
+      "node_ref": "nodes/page-DashboardPage-15.json"
+    },
+    {
+      "id": "page:ErrorContent:8",
+      "path": "/auth/error",
+      "method": null,
+      "type": "page",
+      "domain": "presentation",
+      "layer": "presentation",
+      "has_auth_gate": false,
+      "has_pii": false,
+      "active_violations": [],
+      "node_ref": "nodes/page-ErrorContent-8.json"
+    },
+    {
+      "id": "page:ErrorPage:47",
+      "path": "/auth/error",
+      "method": null,
+      "type": "page",
+      "domain": "presentation",
+      "layer": "presentation",
+      "has_auth_gate": false,
+      "has_pii": false,
+      "active_violations": [],
+      "node_ref": "nodes/page-ErrorPage-47.json"
+    },
+    {
+      "id": "page:OnboardingPage:8",
+      "path": "/onboarding",
+      "method": null,
+      "type": "page",
+      "domain": "presentation",
+      "layer": "presentation",
+      "has_auth_gate": true,
+      "has_pii": false,
+      "active_violations": [],
+      "node_ref": "nodes/page-OnboardingPage-8.json"
+    },
+    {
+      "id": "page:ProfilePage:10",
+      "path": "/profile",
+      "method": null,
+      "type": "page",
+      "domain": "presentation",
+      "layer": "presentation",
+      "has_auth_gate": true,
+      "has_pii": false,
+      "active_violations": [],
+      "node_ref": "nodes/page-ProfilePage-10.json"
+    },
+    {
+      "id": "page:SignIn:342",
+      "path": "/auth/signin",
+      "method": null,
+      "type": "page",
+      "domain": "presentation",
+      "layer": "presentation",
+      "has_auth_gate": false,
+      "has_pii": false,
+      "active_violations": [],
+      "node_ref": "nodes/page-SignIn-342.json"
+    },
+    {
+      "id": "page:SignInContent:11",
+      "path": "/auth/signin",
+      "method": null,
+      "type": "page",
+      "domain": "presentation",
+      "layer": "presentation",
+      "has_auth_gate": false,
+      "has_pii": false,
+      "active_violations": [],
+      "node_ref": "nodes/page-SignInContent-11.json"
+    },
+    {
+      "id": "page:SignOut:8",
+      "path": "/auth/signout",
+      "method": null,
+      "type": "page",
+      "domain": "presentation",
+      "layer": "presentation",
+      "has_auth_gate": false,
+      "has_pii": false,
+      "active_violations": [],
+      "node_ref": "nodes/page-SignOut-8.json"
+    },
+    {
+      "id": "page:TasksPage:9",
+      "path": "/tasks",
+      "method": null,
+      "type": "page",
+      "domain": "presentation",
+      "layer": "presentation",
+      "has_auth_gate": true,
+      "has_pii": false,
+      "active_violations": [],
+      "node_ref": "nodes/page-TasksPage-9.json"
+    },
+    {
+      "id": "page:VerifyRequest:7",
+      "path": "/auth/verify",
+      "method": null,
+      "type": "page",
+      "domain": "presentation",
+      "layer": "presentation",
+      "has_auth_gate": false,
+      "has_pii": false,
+      "active_violations": [],
+      "node_ref": "nodes/page-VerifyRequest-7.json"
+    },
+    {
+      "id": "route:api-transcribe:POST:8",
+      "path": "/api/transcribe",
+      "method": "POST",
+      "type": "api_route",
+      "domain": "api",
+      "layer": "business_logic",
+      "has_auth_gate": false,
+      "has_pii": false,
+      "active_violations": [],
+      "node_ref": "nodes/route-api-transcribe-POST-8.json"
+    },
+    {
+      "id": "route:api-upload:POST:4",
+      "path": "/api/upload",
+      "method": "POST",
+      "type": "api_route",
+      "domain": "api",
+      "layer": "business_logic",
+      "has_auth_gate": false,
+      "has_pii": false,
+      "active_violations": [],
+      "node_ref": "nodes/route-api-upload-POST-4.json"
+    },
+    {
+      "id": "route:handler:19",
+      "path": "/api/trpc/[trpc]",
+      "method": null,
+      "type": "api_route",
+      "domain": "api",
+      "layer": "business_logic",
+      "has_auth_gate": false,
+      "has_pii": false,
+      "active_violations": [
+        "SEC-PRISMA-001"
+      ],
+      "node_ref": "nodes/route-handler-19.json"
+    },
+    {
+      "id": "scheduleRouter:scheduleRouter:8",
+      "path": null,
+      "method": null,
+      "type": "trpc_router",
+      "domain": "api",
+      "layer": "business_logic",
+      "has_auth_gate": true,
+      "has_pii": false,
+      "active_violations": [],
+      "node_ref": "nodes/scheduleRouter-scheduleRouter-8.json"
+    },
+    {
+      "id": "studentRouter:studentRouter:8",
+      "path": null,
+      "method": null,
+      "type": "trpc_router",
+      "domain": "api",
+      "layer": "business_logic",
+      "has_auth_gate": true,
+      "has_pii": false,
+      "active_violations": [],
+      "node_ref": "nodes/studentRouter-studentRouter-8.json"
+    },
+    {
+      "id": "taskRouter:taskRouter:7",
+      "path": null,
+      "method": null,
+      "type": "trpc_router",
+      "domain": "api",
+      "layer": "business_logic",
+      "has_auth_gate": false,
+      "has_pii": false,
+      "active_violations": [],
+      "node_ref": "nodes/taskRouter-taskRouter-7.json"
+    },
+    {
+      "id": "toolRouter:toolRouter:13",
+      "path": null,
+      "method": null,
+      "type": "trpc_router",
+      "domain": "api",
+      "layer": "business_logic",
+      "has_auth_gate": true,
+      "has_pii": false,
+      "active_violations": [],
+      "node_ref": "nodes/toolRouter-toolRouter-13.json"
+    }
+  ]
+}

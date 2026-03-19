@@ -3,6 +3,9 @@
   "label": "ProfileEditor",
   "file": "C:/Users/drlee/College_organizer/src/components/profile/ProfileEditor.tsx",
   "type": "react_component",
+  "layer": "presentation",
+  "has_auth_gate": false,
+  "has_pii": true,
   "procedures": {
     "mutations": [],
     "queries": []

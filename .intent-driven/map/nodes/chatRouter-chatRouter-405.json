@@ -3,6 +3,9 @@
   "label": "chatRouter",
   "file": "C:/Users/drlee/College_organizer/src/lib/api/routers/chatRouter.ts",
   "type": "trpc_router",
+  "layer": "business_logic",
+  "has_auth_gate": true,
+  "has_pii": false,
   "procedures": {
     "mutations": [],
     "queries": [

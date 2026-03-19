@@ -3,6 +3,9 @@
   "label": "POST",
   "file": "C:/Users/drlee/College_organizer/src/app/api/upload/route.ts",
   "type": "api_route_handler",
+  "layer": "business_logic",
+  "has_auth_gate": false,
+  "has_pii": false,
   "procedures": {
     "mutations": [],
     "queries": []

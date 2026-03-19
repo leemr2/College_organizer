@@ -3,6 +3,9 @@
   "label": "Tool",
   "file": "C:/Users/drlee/College_organizer/src/lib/utils/toolDatabase.ts",
   "type": "utility",
+  "layer": "business_logic",
+  "has_auth_gate": null,
+  "has_pii": null,
   "procedures": {
     "mutations": [],
     "queries": []

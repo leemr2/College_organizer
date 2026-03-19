@@ -3,6 +3,9 @@
   "label": "parseJsonResponse",
   "file": "C:/Users/drlee/College_organizer/src/lib/aiClient.ts",
   "type": "input_validation",
+  "layer": "business_logic",
+  "has_auth_gate": null,
+  "has_pii": null,
   "procedures": {
     "mutations": [],
     "queries": []

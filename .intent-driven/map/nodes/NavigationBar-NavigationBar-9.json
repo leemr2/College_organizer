@@ -3,6 +3,9 @@
   "label": "NavigationBar",
   "file": "C:/Users/drlee/College_organizer/src/components/NavigationBar.tsx",
   "type": "auth_gate",
+  "layer": "presentation",
+  "has_auth_gate": true,
+  "has_pii": false,
   "procedures": {
     "mutations": [],
     "queries": []

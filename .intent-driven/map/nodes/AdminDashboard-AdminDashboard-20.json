@@ -3,6 +3,9 @@
   "label": "AdminDashboard",
   "file": "C:/Users/drlee/College_organizer/src/components/admin/AdminDashboard.tsx",
   "type": "auth_gate",
+  "layer": "presentation",
+  "has_auth_gate": true,
+  "has_pii": false,
   "procedures": {
     "mutations": [],
     "queries": []

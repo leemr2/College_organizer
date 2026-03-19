@@ -1,0 +1,37 @@
+{
+  "id": "page:OnboardingPage:8",
+  "label": "OnboardingPage",
+  "file": "C:/Users/drlee/College_organizer/src/app/onboarding/page.tsx",
+  "type": "app_router_page",
+  "layer": "presentation",
+  "has_auth_gate": true,
+  "has_pii": false,
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "OnboardingPage"
+  ],
+  "uses": [
+    "index:getServerAuthSession:263",
+    "db:prisma:20",
+    "OnboardingFlow:OnboardingFlow:13"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "index:getServerAuthSession:263",
+      "label": "getServerAuthSession",
+      "relationship": "imports"
+    },
+    {
+      "id": "db:prisma:20",
+      "label": "prisma",
+      "relationship": "imports"
+    }
+  ],
+  "decisions": {
+    "auth_gate": "protectedProcedure"
+  }
+}

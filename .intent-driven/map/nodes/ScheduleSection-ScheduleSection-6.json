@@ -3,6 +3,9 @@
   "label": "ScheduleSection",
   "file": "C:/Users/drlee/College_organizer/src/components/dashboard/ScheduleSection.tsx",
   "type": "react_component",
+  "layer": "presentation",
+  "has_auth_gate": false,
+  "has_pii": false,
   "procedures": {
     "mutations": [],
     "queries": []

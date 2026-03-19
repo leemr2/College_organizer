@@ -3,6 +3,9 @@
   "label": "User",
   "file": "C:/Users/drlee/College_organizer/prisma/schema.prisma",
   "type": "orm_model",
+  "layer": "data_access",
+  "has_auth_gate": null,
+  "has_pii": null,
   "procedures": {
     "mutations": [],
     "queries": []

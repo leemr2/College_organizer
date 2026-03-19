@@ -3,6 +3,9 @@
   "label": "adminRouter",
   "file": "C:/Users/drlee/College_organizer/src/lib/api/routers/adminRouter.ts",
   "type": "trpc_router",
+  "layer": "business_logic",
+  "has_auth_gate": false,
+  "has_pii": true,
   "procedures": {
     "mutations": [
       "async"

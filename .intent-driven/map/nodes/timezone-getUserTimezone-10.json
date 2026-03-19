@@ -3,6 +3,9 @@
   "label": "getUserTimezone",
   "file": "C:/Users/drlee/College_organizer/src/lib/utils/timezone.ts",
   "type": "auth_gate",
+  "layer": "business_logic",
+  "has_auth_gate": true,
+  "has_pii": false,
   "procedures": {
     "mutations": [],
     "queries": []

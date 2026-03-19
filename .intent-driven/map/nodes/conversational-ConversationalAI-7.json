@@ -3,6 +3,9 @@
   "label": "ConversationalAI",
   "file": "C:/Users/drlee/College_organizer/src/lib/ai/conversational.ts",
   "type": "ai_service",
+  "layer": "business_logic",
+  "has_auth_gate": false,
+  "has_pii": false,
   "procedures": {
     "mutations": [],
     "queries": []

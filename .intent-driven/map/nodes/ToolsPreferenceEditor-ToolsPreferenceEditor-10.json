@@ -3,6 +3,9 @@
   "label": "ToolsPreferenceEditor",
   "file": "C:/Users/drlee/College_organizer/src/components/profile/ToolsPreferenceEditor.tsx",
   "type": "react_component",
+  "layer": "presentation",
+  "has_auth_gate": false,
+  "has_pii": false,
   "procedures": {
     "mutations": [],
     "queries": []

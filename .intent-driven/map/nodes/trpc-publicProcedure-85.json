@@ -3,6 +3,9 @@
   "label": "publicProcedure",
   "file": "C:/Users/drlee/College_organizer/src/lib/api/trpc.ts",
   "type": "public_procedure",
+  "layer": "business_logic",
+  "has_auth_gate": false,
+  "has_pii": false,
   "procedures": {
     "mutations": [],
     "queries": []

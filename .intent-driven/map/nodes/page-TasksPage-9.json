@@ -1,0 +1,38 @@
+{
+  "id": "page:TasksPage:9",
+  "label": "TasksPage",
+  "file": "C:/Users/drlee/College_organizer/src/app/tasks/page.tsx",
+  "type": "app_router_page",
+  "layer": "presentation",
+  "has_auth_gate": true,
+  "has_pii": false,
+  "procedures": {
+    "mutations": [],
+    "queries": []
+  },
+  "exports": [
+    "TasksPage"
+  ],
+  "uses": [
+    "index:getServerAuthSession:263",
+    "db:prisma:20",
+    "TaskList:TaskList:8",
+    "NavigationBar:NavigationBar:9"
+  ],
+  "constraint_check": {},
+  "adjacent": [
+    {
+      "id": "index:getServerAuthSession:263",
+      "label": "getServerAuthSession",
+      "relationship": "imports"
+    },
+    {
+      "id": "db:prisma:20",
+      "label": "prisma",
+      "relationship": "imports"
+    }
+  ],
+  "decisions": {
+    "auth_gate": "protectedProcedure"
+  }
+}

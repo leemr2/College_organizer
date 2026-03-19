@@ -3,6 +3,9 @@
   "label": "generateChatCompletion",
   "file": "C:/Users/drlee/College_organizer/src/lib/aiClient.ts",
   "type": "ai_provider_client",
+  "layer": "business_logic",
+  "has_auth_gate": false,
+  "has_pii": false,
   "procedures": {
     "mutations": [],
     "queries": []

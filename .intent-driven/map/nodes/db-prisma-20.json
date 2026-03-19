@@ -3,6 +3,9 @@
   "label": "prisma",
   "file": "C:/Users/drlee/College_organizer/src/lib/db.ts",
   "type": "prisma_client_init",
+  "layer": "infrastructure",
+  "has_auth_gate": null,
+  "has_pii": null,
   "procedures": {
     "mutations": [],
     "queries": []

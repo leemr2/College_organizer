@@ -3,6 +3,9 @@
   "label": "WeekCalendar",
   "file": "C:/Users/drlee/College_organizer/src/components/calendar/WeekCalendar.tsx",
   "type": "react_component",
+  "layer": "presentation",
+  "has_auth_gate": false,
+  "has_pii": false,
   "procedures": {
     "mutations": [],
     "queries": []

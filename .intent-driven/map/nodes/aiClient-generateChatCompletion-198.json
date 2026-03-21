@@ -1,7 +1,7 @@
 {
   "id": "aiClient:generateChatCompletion:198",
   "label": "generateChatCompletion",
-  "file": "C:/Users/drlee/College_organizer/src/lib/aiClient.ts",
+  "file": "C:/Users/drlee/College_Organizer/src/lib/aiClient.ts",
   "type": "ai_provider_client",
   "layer": "business_logic",
   "has_auth_gate": false,
@@ -23,7 +23,7 @@
     "source": "pre_idd",
     "confidence": 0.9,
     "design_ref": null,
-    "first_scanned": "2026-03-19",
-    "last_confirmed": "2026-03-19"
+    "first_scanned": "2026-03-21",
+    "last_confirmed": "2026-03-21"
   }
 }

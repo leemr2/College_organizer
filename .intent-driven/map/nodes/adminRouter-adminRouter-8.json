@@ -1,7 +1,7 @@
 {
   "id": "adminRouter:adminRouter:8",
   "label": "adminRouter",
-  "file": "C:/Users/drlee/College_organizer/src/lib/api/routers/adminRouter.ts",
+  "file": "C:/Users/drlee/College_Organizer/src/lib/api/routers/adminRouter.ts",
   "type": "trpc_router",
   "layer": "business_logic",
   "has_auth_gate": false,
@@ -39,8 +39,8 @@
     "source": "pre_idd",
     "confidence": 0.95,
     "design_ref": null,
-    "first_scanned": "2026-03-19",
-    "last_confirmed": "2026-03-19"
+    "first_scanned": "2026-03-21",
+    "last_confirmed": "2026-03-21"
   },
   "decisions": {
     "api": "tRPC procedures"

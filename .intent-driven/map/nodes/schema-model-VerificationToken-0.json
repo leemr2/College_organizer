@@ -1,7 +1,7 @@
 {
   "id": "schema:model:VerificationToken:0",
   "label": "VerificationToken",
-  "file": "C:/Users/drlee/College_organizer/prisma/schema.prisma",
+  "file": "C:/Users/drlee/College_Organizer/prisma/schema.prisma",
   "type": "orm_model",
   "layer": "data_access",
   "has_auth_gate": null,
@@ -20,7 +20,7 @@
     "source": "pre_idd",
     "confidence": 0.98,
     "design_ref": null,
-    "first_scanned": "2026-03-19",
-    "last_confirmed": "2026-03-19"
+    "first_scanned": "2026-03-21",
+    "last_confirmed": "2026-03-21"
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "NavigationBar:NavigationBar:9",
   "label": "NavigationBar",
-  "file": "C:/Users/drlee/College_organizer/src/components/NavigationBar.tsx",
+  "file": "C:/Users/drlee/College_Organizer/src/components/NavigationBar.tsx",
   "type": "auth_gate",
   "layer": "presentation",
   "has_auth_gate": true,
@@ -22,8 +22,8 @@
     "source": "pre_idd",
     "confidence": 0.9,
     "design_ref": null,
-    "first_scanned": "2026-03-19",
-    "last_confirmed": "2026-03-19"
+    "first_scanned": "2026-03-21",
+    "last_confirmed": "2026-03-21"
   },
   "decisions": {
     "auth_gate": "protectedProcedure"

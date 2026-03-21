@@ -1,7 +1,7 @@
 {
   "id": "ChatInterface:ChatInterface:18",
   "label": "ChatInterface",
-  "file": "C:/Users/drlee/College_organizer/src/components/chat/ChatInterface.tsx",
+  "file": "C:/Users/drlee/College_Organizer/src/components/chat/ChatInterface.tsx",
   "type": "input_validation",
   "layer": "presentation",
   "has_auth_gate": null,
@@ -57,7 +57,7 @@
     "source": "pre_idd",
     "confidence": 0.92,
     "design_ref": null,
-    "first_scanned": "2026-03-19",
-    "last_confirmed": "2026-03-19"
+    "first_scanned": "2026-03-21",
+    "last_confirmed": "2026-03-21"
   }
 }

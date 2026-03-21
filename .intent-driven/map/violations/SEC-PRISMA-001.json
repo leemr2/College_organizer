@@ -7,17 +7,17 @@
     {
       "node_id": "adminRouter:adminRouter:8",
       "status": "failing",
-      "file": "C:/Users/drlee/College_organizer/src/lib/api/routers/adminRouter.ts",
+      "file": "C:/Users/drlee/College_Organizer/src/lib/api/routers/adminRouter.ts",
       "detail": "Prisma mutation accessRequest.update is reachable without an auth check."
     },
     {
       "node_id": "route:handler:19",
       "status": "failing",
-      "file": "C:/Users/drlee/College_organizer/src/app/api/trpc/[trpc]/route.ts",
+      "file": "C:/Users/drlee/College_Organizer/src/app/api/trpc/[trpc]/route.ts",
       "detail": "Prisma mutation accessRequest.update is reachable without an auth check."
     }
   ],
   "remediation": "Add getServerSession(), auth.check(), or similar before calling the mutation from the server action or API route.",
   "referenced_by_templates": [],
-  "first_detected": "2026-03-19"
+  "first_detected": "2026-03-21"
 }

@@ -1,7 +1,7 @@
 {
   "id": "inngest.config:AppEvents:5",
   "label": "AppEvents",
-  "file": "C:/Users/drlee/College_organizer/inngest.config.ts",
+  "file": "C:/Users/drlee/College_Organizer/inngest.config.ts",
   "type": "pii_handling",
   "layer": "business_logic",
   "has_auth_gate": null,
@@ -20,7 +20,7 @@
     "source": "pre_idd",
     "confidence": 0.85,
     "design_ref": null,
-    "first_scanned": "2026-03-19",
-    "last_confirmed": "2026-03-19"
+    "first_scanned": "2026-03-21",
+    "last_confirmed": "2026-03-21"
   }
 }

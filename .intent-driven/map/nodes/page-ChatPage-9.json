@@ -1,7 +1,7 @@
 {
   "id": "page:ChatPage:9",
   "label": "ChatPage",
-  "file": "C:/Users/drlee/College_organizer/src/app/chat/page.tsx",
+  "file": "C:/Users/drlee/College_Organizer/src/app/chat/page.tsx",
   "type": "app_router_page",
   "layer": "presentation",
   "has_auth_gate": true,
@@ -36,8 +36,8 @@
     "source": "pre_idd",
     "confidence": 0.98,
     "design_ref": null,
-    "first_scanned": "2026-03-19",
-    "last_confirmed": "2026-03-19"
+    "first_scanned": "2026-03-21",
+    "last_confirmed": "2026-03-21"
   },
   "decisions": {
     "auth_gate": "protectedProcedure"

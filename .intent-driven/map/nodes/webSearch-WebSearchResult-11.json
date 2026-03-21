@@ -1,7 +1,7 @@
 {
   "id": "webSearch:WebSearchResult:11",
   "label": "WebSearchResult",
-  "file": "C:/Users/drlee/College_organizer/src/lib/ai/webSearch.ts",
+  "file": "C:/Users/drlee/College_Organizer/src/lib/ai/webSearch.ts",
   "type": "ai_service",
   "layer": "business_logic",
   "has_auth_gate": false,
@@ -20,7 +20,7 @@
     "source": "pre_idd",
     "confidence": 0.6,
     "design_ref": null,
-    "first_scanned": "2026-03-19",
-    "last_confirmed": "2026-03-19"
+    "first_scanned": "2026-03-21",
+    "last_confirmed": "2026-03-21"
   }
 }

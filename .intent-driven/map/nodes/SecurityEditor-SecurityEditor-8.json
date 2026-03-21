@@ -1,7 +1,7 @@
 {
   "id": "SecurityEditor:SecurityEditor:8",
   "label": "SecurityEditor",
-  "file": "C:/Users/drlee/College_organizer/src/components/profile/SecurityEditor.tsx",
+  "file": "C:/Users/drlee/College_Organizer/src/components/profile/SecurityEditor.tsx",
   "type": "pii_handling",
   "layer": "presentation",
   "has_auth_gate": null,
@@ -28,7 +28,7 @@
     "source": "pre_idd",
     "confidence": 0.85,
     "design_ref": null,
-    "first_scanned": "2026-03-19",
-    "last_confirmed": "2026-03-19"
+    "first_scanned": "2026-03-21",
+    "last_confirmed": "2026-03-21"
   }
 }

@@ -1,7 +1,7 @@
 {
   "schema_version": "2.0",
   "project": {
-    "name": "College_organizer",
+    "name": "College_Organizer",
     "stack": "security,+inngest,+nextjs,+ai_client,+trpc,+prisma,+storybook",
     "file_count": 111,
     "node_count": 217

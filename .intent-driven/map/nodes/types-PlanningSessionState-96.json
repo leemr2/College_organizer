@@ -1,7 +1,7 @@
 {
   "id": "types:PlanningSessionState:96",
   "label": "PlanningSessionState",
-  "file": "C:/Users/drlee/College_organizer/src/lib/types.ts",
+  "file": "C:/Users/drlee/College_Organizer/src/lib/types.ts",
   "type": "type_definition",
   "layer": "business_logic",
   "has_auth_gate": null,
@@ -20,7 +20,7 @@
     "source": "pre_idd",
     "confidence": 0.6,
     "design_ref": null,
-    "first_scanned": "2026-03-19",
-    "last_confirmed": "2026-03-19"
+    "first_scanned": "2026-03-21",
+    "last_confirmed": "2026-03-21"
   }
 }

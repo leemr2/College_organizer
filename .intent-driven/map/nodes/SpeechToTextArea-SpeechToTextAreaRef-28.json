@@ -1,7 +1,7 @@
 {
   "id": "SpeechToTextArea:SpeechToTextAreaRef:28",
   "label": "SpeechToTextAreaRef",
-  "file": "C:/Users/drlee/College_organizer/src/components/SpeechToTextArea.tsx",
+  "file": "C:/Users/drlee/College_Organizer/src/components/SpeechToTextArea.tsx",
   "type": "react_component",
   "layer": "presentation",
   "has_auth_gate": false,
@@ -20,7 +20,7 @@
     "source": "pre_idd",
     "confidence": 0.75,
     "design_ref": null,
-    "first_scanned": "2026-03-19",
-    "last_confirmed": "2026-03-19"
+    "first_scanned": "2026-03-21",
+    "last_confirmed": "2026-03-21"
   }
 }

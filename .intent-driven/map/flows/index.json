@@ -1,0 +1,930 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-03-22T00:04:13.627Z",
+  "summary": {
+    "total_paths": 37,
+    "confirmed_paths": 0,
+    "inferred_paths": 37,
+    "paths_with_cycles": 26,
+    "mean_confidence": 0.943243243243243
+  },
+  "paths": [
+    {
+      "id": "flow:page-AdminPage-8-to-page-DashboardPage-15:001",
+      "name": "Admin → Dashboard",
+      "entry_node": "page:AdminPage:8",
+      "terminal_node": "page:DashboardPage:15",
+      "steps": [
+        "page:AdminPage:8",
+        "page:DashboardPage:15"
+      ],
+      "edges": [
+        "edge:page-AdminPage-8:page-DashboardPage-15:redirect:001"
+      ],
+      "confidence": 0.95,
+      "has_cycle": false,
+      "step_count": 2,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-ErrorPage-47-to-page-ChatPage-9:001",
+      "name": "Error → Chat",
+      "entry_node": "page:ErrorPage:47",
+      "terminal_node": "page:ChatPage:9",
+      "steps": [
+        "page:ErrorPage:47",
+        "page:SignIn:342",
+        "page:VerifyRequest:7",
+        "page:Page:10",
+        "page:OnboardingPage:8",
+        "page:ChatPage:9"
+      ],
+      "edges": [
+        "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
+        "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
+        "edge:page-VerifyRequest-7:page-Page-10:Link:001",
+        "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
+        "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+      ],
+      "confidence": 0.9,
+      "has_cycle": true,
+      "step_count": 6,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-ErrorPage-47-to-page-ChatPage-9:005",
+      "name": "Error → Chat",
+      "entry_node": "page:ErrorPage:47",
+      "terminal_node": "page:ChatPage:9",
+      "steps": [
+        "page:ErrorPage:47",
+        "page:SignIn:342",
+        "page:Page:10",
+        "page:OnboardingPage:8",
+        "page:ChatPage:9"
+      ],
+      "edges": [
+        "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
+        "edge:page-SignIn-342:page-Page-10:Link:001",
+        "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
+        "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+      ],
+      "confidence": 0.9,
+      "has_cycle": true,
+      "step_count": 5,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-ErrorPage-47-to-page-ChatPage-9:007",
+      "name": "Error → Chat",
+      "entry_node": "page:ErrorPage:47",
+      "terminal_node": "page:ChatPage:9",
+      "steps": [
+        "page:ErrorPage:47",
+        "page:SignIn:342",
+        "page:ProfilePage:10",
+        "page:OnboardingPage:8",
+        "page:ChatPage:9"
+      ],
+      "edges": [
+        "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
+        "edge:page-SignIn-342:page-ProfilePage-10:Link:001",
+        "edge:page-ProfilePage-10:page-OnboardingPage-8:redirect:001",
+        "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+      ],
+      "confidence": 0.85,
+      "has_cycle": true,
+      "step_count": 5,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-ErrorPage-47-to-page-ChatPage-9:011",
+      "name": "Error → Chat",
+      "entry_node": "page:ErrorPage:47",
+      "terminal_node": "page:ChatPage:9",
+      "steps": [
+        "page:ErrorPage:47",
+        "page:Page:10",
+        "page:SignIn:342",
+        "page:ProfilePage:10",
+        "page:OnboardingPage:8",
+        "page:ChatPage:9"
+      ],
+      "edges": [
+        "edge:page-ErrorPage-47:page-Page-10:Link:001",
+        "edge:page-Page-10:page-SignIn-342:Link:001",
+        "edge:page-SignIn-342:page-ProfilePage-10:Link:001",
+        "edge:page-ProfilePage-10:page-OnboardingPage-8:redirect:001",
+        "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+      ],
+      "confidence": 0.8,
+      "has_cycle": true,
+      "step_count": 6,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-ErrorPage-47-to-page-ChatPage-9:015",
+      "name": "Error → Chat",
+      "entry_node": "page:ErrorPage:47",
+      "terminal_node": "page:ChatPage:9",
+      "steps": [
+        "page:ErrorPage:47",
+        "page:Page:10",
+        "page:OnboardingPage:8",
+        "page:ChatPage:9"
+      ],
+      "edges": [
+        "edge:page-ErrorPage-47:page-Page-10:Link:001",
+        "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
+        "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+      ],
+      "confidence": 0.9,
+      "has_cycle": true,
+      "step_count": 4,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-ErrorPage-47-to-page-DashboardPage-15:001",
+      "name": "Error → Dashboard",
+      "entry_node": "page:ErrorPage:47",
+      "terminal_node": "page:DashboardPage:15",
+      "steps": [
+        "page:ErrorPage:47",
+        "page:SignIn:342",
+        "page:VerifyRequest:7",
+        "page:Page:10",
+        "page:DashboardPage:15"
+      ],
+      "edges": [
+        "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
+        "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
+        "edge:page-VerifyRequest-7:page-Page-10:Link:001",
+        "edge:page-Page-10:page-DashboardPage-15:redirect:001"
+      ],
+      "confidence": 1,
+      "has_cycle": false,
+      "step_count": 5,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-ErrorPage-47-to-page-DashboardPage-15:003",
+      "name": "Error → Dashboard",
+      "entry_node": "page:ErrorPage:47",
+      "terminal_node": "page:DashboardPage:15",
+      "steps": [
+        "page:ErrorPage:47",
+        "page:SignIn:342",
+        "page:Page:10",
+        "page:DashboardPage:15"
+      ],
+      "edges": [
+        "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
+        "edge:page-SignIn-342:page-Page-10:Link:001",
+        "edge:page-Page-10:page-DashboardPage-15:redirect:001"
+      ],
+      "confidence": 1,
+      "has_cycle": false,
+      "step_count": 4,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-ErrorPage-47-to-page-DashboardPage-15:004",
+      "name": "Error → Dashboard",
+      "entry_node": "page:ErrorPage:47",
+      "terminal_node": "page:DashboardPage:15",
+      "steps": [
+        "page:ErrorPage:47",
+        "page:Page:10",
+        "page:DashboardPage:15"
+      ],
+      "edges": [
+        "edge:page-ErrorPage-47:page-Page-10:Link:001",
+        "edge:page-Page-10:page-DashboardPage-15:redirect:001"
+      ],
+      "confidence": 1,
+      "has_cycle": false,
+      "step_count": 3,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-ErrorPage-47-to-page-Page-10:001",
+      "name": "Error → Landing",
+      "entry_node": "page:ErrorPage:47",
+      "terminal_node": "page:Page:10",
+      "steps": [
+        "page:ErrorPage:47",
+        "page:SignIn:342",
+        "page:VerifyRequest:7",
+        "page:Page:10"
+      ],
+      "edges": [
+        "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
+        "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
+        "edge:page-VerifyRequest-7:page-Page-10:Link:001"
+      ],
+      "confidence": 1,
+      "has_cycle": true,
+      "step_count": 4,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-ErrorPage-47-to-page-Page-10:003",
+      "name": "Error → Landing",
+      "entry_node": "page:ErrorPage:47",
+      "terminal_node": "page:Page:10",
+      "steps": [
+        "page:ErrorPage:47",
+        "page:SignIn:342",
+        "page:Page:10"
+      ],
+      "edges": [
+        "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
+        "edge:page-SignIn-342:page-Page-10:Link:001"
+      ],
+      "confidence": 1,
+      "has_cycle": true,
+      "step_count": 3,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-ErrorPage-47-to-page-SignIn-342:001",
+      "name": "Error → Signin",
+      "entry_node": "page:ErrorPage:47",
+      "terminal_node": "page:SignIn:342",
+      "steps": [
+        "page:ErrorPage:47",
+        "page:Page:10",
+        "page:SignIn:342"
+      ],
+      "edges": [
+        "edge:page-ErrorPage-47:page-Page-10:Link:001",
+        "edge:page-Page-10:page-SignIn-342:Link:001"
+      ],
+      "confidence": 0.95,
+      "has_cycle": true,
+      "step_count": 3,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-ErrorPage-47-to-page-VerifyRequest-7:001",
+      "name": "Error → Verify",
+      "entry_node": "page:ErrorPage:47",
+      "terminal_node": "page:VerifyRequest:7",
+      "steps": [
+        "page:ErrorPage:47",
+        "page:SignIn:342",
+        "page:VerifyRequest:7"
+      ],
+      "edges": [
+        "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
+        "edge:page-SignIn-342:page-VerifyRequest-7:Link:001"
+      ],
+      "confidence": 1,
+      "has_cycle": true,
+      "step_count": 3,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-ErrorPage-47-to-page-VerifyRequest-7:003",
+      "name": "Error → Verify",
+      "entry_node": "page:ErrorPage:47",
+      "terminal_node": "page:VerifyRequest:7",
+      "steps": [
+        "page:ErrorPage:47",
+        "page:Page:10",
+        "page:SignIn:342",
+        "page:VerifyRequest:7"
+      ],
+      "edges": [
+        "edge:page-ErrorPage-47:page-Page-10:Link:001",
+        "edge:page-Page-10:page-SignIn-342:Link:001",
+        "edge:page-SignIn-342:page-VerifyRequest-7:Link:001"
+      ],
+      "confidence": 0.95,
+      "has_cycle": true,
+      "step_count": 4,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-OnboardingPage-8-to-page-ChatPage-9:001",
+      "name": "Onboarding → Chat",
+      "entry_node": "page:OnboardingPage:8",
+      "terminal_node": "page:ChatPage:9",
+      "steps": [
+        "page:OnboardingPage:8",
+        "page:ChatPage:9"
+      ],
+      "edges": [
+        "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+      ],
+      "confidence": 0.95,
+      "has_cycle": true,
+      "step_count": 2,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-Page-10-to-page-ChatPage-9:001",
+      "name": "Landing → Chat",
+      "entry_node": "page:Page:10",
+      "terminal_node": "page:ChatPage:9",
+      "steps": [
+        "page:Page:10",
+        "page:SignIn:342",
+        "page:ProfilePage:10",
+        "page:OnboardingPage:8",
+        "page:ChatPage:9"
+      ],
+      "edges": [
+        "edge:page-Page-10:page-SignIn-342:Link:001",
+        "edge:page-SignIn-342:page-ProfilePage-10:Link:001",
+        "edge:page-ProfilePage-10:page-OnboardingPage-8:redirect:001",
+        "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+      ],
+      "confidence": 0.8,
+      "has_cycle": true,
+      "step_count": 5,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-Page-10-to-page-ChatPage-9:005",
+      "name": "Landing → Chat",
+      "entry_node": "page:Page:10",
+      "terminal_node": "page:ChatPage:9",
+      "steps": [
+        "page:Page:10",
+        "page:OnboardingPage:8",
+        "page:ChatPage:9"
+      ],
+      "edges": [
+        "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
+        "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+      ],
+      "confidence": 0.9,
+      "has_cycle": true,
+      "step_count": 3,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-Page-10-to-page-DashboardPage-15:001",
+      "name": "Landing → Dashboard",
+      "entry_node": "page:Page:10",
+      "terminal_node": "page:DashboardPage:15",
+      "steps": [
+        "page:Page:10",
+        "page:DashboardPage:15"
+      ],
+      "edges": [
+        "edge:page-Page-10:page-DashboardPage-15:redirect:001"
+      ],
+      "confidence": 1,
+      "has_cycle": false,
+      "step_count": 2,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-Page-10-to-page-SignIn-342:001",
+      "name": "Landing → Signin",
+      "entry_node": "page:Page:10",
+      "terminal_node": "page:SignIn:342",
+      "steps": [
+        "page:Page:10",
+        "page:SignIn:342"
+      ],
+      "edges": [
+        "edge:page-Page-10:page-SignIn-342:Link:001"
+      ],
+      "confidence": 0.95,
+      "has_cycle": true,
+      "step_count": 2,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-Page-10-to-page-VerifyRequest-7:001",
+      "name": "Landing → Verify",
+      "entry_node": "page:Page:10",
+      "terminal_node": "page:VerifyRequest:7",
+      "steps": [
+        "page:Page:10",
+        "page:SignIn:342",
+        "page:VerifyRequest:7"
+      ],
+      "edges": [
+        "edge:page-Page-10:page-SignIn-342:Link:001",
+        "edge:page-SignIn-342:page-VerifyRequest-7:Link:001"
+      ],
+      "confidence": 0.95,
+      "has_cycle": true,
+      "step_count": 3,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-SignIn-342-to-page-ChatPage-9:001",
+      "name": "Signin → Chat",
+      "entry_node": "page:SignIn:342",
+      "terminal_node": "page:ChatPage:9",
+      "steps": [
+        "page:SignIn:342",
+        "page:VerifyRequest:7",
+        "page:Page:10",
+        "page:OnboardingPage:8",
+        "page:ChatPage:9"
+      ],
+      "edges": [
+        "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
+        "edge:page-VerifyRequest-7:page-Page-10:Link:001",
+        "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
+        "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+      ],
+      "confidence": 0.9,
+      "has_cycle": true,
+      "step_count": 5,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-SignIn-342-to-page-ChatPage-9:005",
+      "name": "Signin → Chat",
+      "entry_node": "page:SignIn:342",
+      "terminal_node": "page:ChatPage:9",
+      "steps": [
+        "page:SignIn:342",
+        "page:Page:10",
+        "page:OnboardingPage:8",
+        "page:ChatPage:9"
+      ],
+      "edges": [
+        "edge:page-SignIn-342:page-Page-10:Link:001",
+        "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
+        "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+      ],
+      "confidence": 0.9,
+      "has_cycle": true,
+      "step_count": 4,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-SignIn-342-to-page-ChatPage-9:007",
+      "name": "Signin → Chat",
+      "entry_node": "page:SignIn:342",
+      "terminal_node": "page:ChatPage:9",
+      "steps": [
+        "page:SignIn:342",
+        "page:ProfilePage:10",
+        "page:OnboardingPage:8",
+        "page:ChatPage:9"
+      ],
+      "edges": [
+        "edge:page-SignIn-342:page-ProfilePage-10:Link:001",
+        "edge:page-ProfilePage-10:page-OnboardingPage-8:redirect:001",
+        "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+      ],
+      "confidence": 0.85,
+      "has_cycle": true,
+      "step_count": 4,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-SignIn-342-to-page-DashboardPage-15:001",
+      "name": "Signin → Dashboard",
+      "entry_node": "page:SignIn:342",
+      "terminal_node": "page:DashboardPage:15",
+      "steps": [
+        "page:SignIn:342",
+        "page:VerifyRequest:7",
+        "page:Page:10",
+        "page:DashboardPage:15"
+      ],
+      "edges": [
+        "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
+        "edge:page-VerifyRequest-7:page-Page-10:Link:001",
+        "edge:page-Page-10:page-DashboardPage-15:redirect:001"
+      ],
+      "confidence": 1,
+      "has_cycle": false,
+      "step_count": 4,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-SignIn-342-to-page-DashboardPage-15:003",
+      "name": "Signin → Dashboard",
+      "entry_node": "page:SignIn:342",
+      "terminal_node": "page:DashboardPage:15",
+      "steps": [
+        "page:SignIn:342",
+        "page:Page:10",
+        "page:DashboardPage:15"
+      ],
+      "edges": [
+        "edge:page-SignIn-342:page-Page-10:Link:001",
+        "edge:page-Page-10:page-DashboardPage-15:redirect:001"
+      ],
+      "confidence": 1,
+      "has_cycle": false,
+      "step_count": 3,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-SignIn-342-to-page-Page-10:001",
+      "name": "Signin → Landing",
+      "entry_node": "page:SignIn:342",
+      "terminal_node": "page:Page:10",
+      "steps": [
+        "page:SignIn:342",
+        "page:VerifyRequest:7",
+        "page:Page:10"
+      ],
+      "edges": [
+        "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
+        "edge:page-VerifyRequest-7:page-Page-10:Link:001"
+      ],
+      "confidence": 1,
+      "has_cycle": true,
+      "step_count": 3,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-SignIn-342-to-page-Page-10:003",
+      "name": "Signin → Landing",
+      "entry_node": "page:SignIn:342",
+      "terminal_node": "page:Page:10",
+      "steps": [
+        "page:SignIn:342",
+        "page:Page:10"
+      ],
+      "edges": [
+        "edge:page-SignIn-342:page-Page-10:Link:001"
+      ],
+      "confidence": 1,
+      "has_cycle": true,
+      "step_count": 2,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-SignIn-342-to-page-VerifyRequest-7:001",
+      "name": "Signin → Verify",
+      "entry_node": "page:SignIn:342",
+      "terminal_node": "page:VerifyRequest:7",
+      "steps": [
+        "page:SignIn:342",
+        "page:VerifyRequest:7"
+      ],
+      "edges": [
+        "edge:page-SignIn-342:page-VerifyRequest-7:Link:001"
+      ],
+      "confidence": 1,
+      "has_cycle": true,
+      "step_count": 2,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-SignOut-8-to-page-ChatPage-9:001",
+      "name": "Signout → Chat",
+      "entry_node": "page:SignOut:8",
+      "terminal_node": "page:ChatPage:9",
+      "steps": [
+        "page:SignOut:8",
+        "page:Page:10",
+        "page:SignIn:342",
+        "page:ProfilePage:10",
+        "page:OnboardingPage:8",
+        "page:ChatPage:9"
+      ],
+      "edges": [
+        "edge:page-SignOut-8:page-Page-10:Link:001",
+        "edge:page-Page-10:page-SignIn-342:Link:001",
+        "edge:page-SignIn-342:page-ProfilePage-10:Link:001",
+        "edge:page-ProfilePage-10:page-OnboardingPage-8:redirect:001",
+        "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+      ],
+      "confidence": 0.8,
+      "has_cycle": true,
+      "step_count": 6,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-SignOut-8-to-page-ChatPage-9:005",
+      "name": "Signout → Chat",
+      "entry_node": "page:SignOut:8",
+      "terminal_node": "page:ChatPage:9",
+      "steps": [
+        "page:SignOut:8",
+        "page:Page:10",
+        "page:OnboardingPage:8",
+        "page:ChatPage:9"
+      ],
+      "edges": [
+        "edge:page-SignOut-8:page-Page-10:Link:001",
+        "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
+        "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+      ],
+      "confidence": 0.9,
+      "has_cycle": true,
+      "step_count": 4,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-SignOut-8-to-page-DashboardPage-15:001",
+      "name": "Signout → Dashboard",
+      "entry_node": "page:SignOut:8",
+      "terminal_node": "page:DashboardPage:15",
+      "steps": [
+        "page:SignOut:8",
+        "page:Page:10",
+        "page:DashboardPage:15"
+      ],
+      "edges": [
+        "edge:page-SignOut-8:page-Page-10:Link:001",
+        "edge:page-Page-10:page-DashboardPage-15:redirect:001"
+      ],
+      "confidence": 1,
+      "has_cycle": false,
+      "step_count": 3,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-SignOut-8-to-page-SignIn-342:001",
+      "name": "Signout → Signin",
+      "entry_node": "page:SignOut:8",
+      "terminal_node": "page:SignIn:342",
+      "steps": [
+        "page:SignOut:8",
+        "page:Page:10",
+        "page:SignIn:342"
+      ],
+      "edges": [
+        "edge:page-SignOut-8:page-Page-10:Link:001",
+        "edge:page-Page-10:page-SignIn-342:Link:001"
+      ],
+      "confidence": 0.95,
+      "has_cycle": true,
+      "step_count": 3,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-SignOut-8-to-page-VerifyRequest-7:001",
+      "name": "Signout → Verify",
+      "entry_node": "page:SignOut:8",
+      "terminal_node": "page:VerifyRequest:7",
+      "steps": [
+        "page:SignOut:8",
+        "page:Page:10",
+        "page:SignIn:342",
+        "page:VerifyRequest:7"
+      ],
+      "edges": [
+        "edge:page-SignOut-8:page-Page-10:Link:001",
+        "edge:page-Page-10:page-SignIn-342:Link:001",
+        "edge:page-SignIn-342:page-VerifyRequest-7:Link:001"
+      ],
+      "confidence": 0.95,
+      "has_cycle": true,
+      "step_count": 4,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:page-TasksPage-9-to-page-ChatPage-9:001",
+      "name": "Tasks → Chat",
+      "entry_node": "page:TasksPage:9",
+      "terminal_node": "page:ChatPage:9",
+      "steps": [
+        "page:TasksPage:9",
+        "page:OnboardingPage:8",
+        "page:ChatPage:9"
+      ],
+      "edges": [
+        "edge:page-TasksPage-9:page-OnboardingPage-8:redirect:001",
+        "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+      ],
+      "confidence": 0.9,
+      "has_cycle": true,
+      "step_count": 3,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:route-api-transcribe-POST-8-to-route-api-transcribe-POST-8:001",
+      "name": "Transcribe",
+      "entry_node": "route:api-transcribe:POST:8",
+      "terminal_node": "route:api-transcribe:POST:8",
+      "steps": [
+        "route:api-transcribe:POST:8"
+      ],
+      "edges": [],
+      "confidence": 1,
+      "has_cycle": false,
+      "step_count": 1,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:route-api-upload-POST-4-to-route-api-upload-POST-4:001",
+      "name": "Upload",
+      "entry_node": "route:api-upload:POST:4",
+      "terminal_node": "route:api-upload:POST:4",
+      "steps": [
+        "route:api-upload:POST:4"
+      ],
+      "edges": [],
+      "confidence": 1,
+      "has_cycle": false,
+      "step_count": 1,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "flow:route-handler-19-to-route-handler-19:001",
+      "name": "[trpc]",
+      "entry_node": "route:handler:19",
+      "terminal_node": "route:handler:19",
+      "steps": [
+        "route:handler:19"
+      ],
+      "edges": [],
+      "confidence": 1,
+      "has_cycle": false,
+      "step_count": 1,
+      "provenance": {
+        "source": "inferred",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    }
+  ]
+}

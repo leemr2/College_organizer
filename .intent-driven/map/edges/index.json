@@ -1,0 +1,480 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-03-22T00:04:13.627Z",
+  "summary": {
+    "total_edges": 29,
+    "by_type": {
+      "redirect": 18,
+      "Link": 10,
+      "router.push": 1
+    },
+    "conditional_edges": 20,
+    "mean_confidence": 0.9982758620689655
+  },
+  "edges": [
+    {
+      "id": "edge:page-AdminPage-8:page-DashboardPage-15:redirect:001",
+      "source": "page:AdminPage:8",
+      "target": "page:DashboardPage:15",
+      "linkType": "redirect",
+      "isConditional": true,
+      "confidence": 1,
+      "triggerElement": null,
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-AdminPage-8:page-SignIn-342:redirect:001",
+      "source": "page:AdminPage:8",
+      "target": "page:SignIn:342",
+      "linkType": "redirect",
+      "isConditional": true,
+      "confidence": 1,
+      "triggerElement": null,
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-ChatPage-9:page-OnboardingPage-8:redirect:001",
+      "source": "page:ChatPage:9",
+      "target": "page:OnboardingPage:8",
+      "linkType": "redirect",
+      "isConditional": true,
+      "confidence": 1,
+      "triggerElement": null,
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-ChatPage-9:page-OnboardingPage-8:redirect:002",
+      "source": "page:ChatPage:9",
+      "target": "page:OnboardingPage:8",
+      "linkType": "redirect",
+      "isConditional": true,
+      "confidence": 1,
+      "triggerElement": null,
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-ChatPage-9:page-SignIn-342:redirect:001",
+      "source": "page:ChatPage:9",
+      "target": "page:SignIn:342",
+      "linkType": "redirect",
+      "isConditional": true,
+      "confidence": 1,
+      "triggerElement": null,
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-DashboardPage-15:page-OnboardingPage-8:redirect:001",
+      "source": "page:DashboardPage:15",
+      "target": "page:OnboardingPage:8",
+      "linkType": "redirect",
+      "isConditional": true,
+      "confidence": 1,
+      "triggerElement": null,
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-DashboardPage-15:page-OnboardingPage-8:redirect:002",
+      "source": "page:DashboardPage:15",
+      "target": "page:OnboardingPage:8",
+      "linkType": "redirect",
+      "isConditional": true,
+      "confidence": 1,
+      "triggerElement": null,
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-DashboardPage-15:page-SignIn-342:redirect:001",
+      "source": "page:DashboardPage:15",
+      "target": "page:SignIn:342",
+      "linkType": "redirect",
+      "isConditional": true,
+      "confidence": 1,
+      "triggerElement": null,
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-ErrorPage-47:page-Page-10:Link:001",
+      "source": "page:ErrorPage:47",
+      "target": "page:Page:10",
+      "linkType": "Link",
+      "isConditional": false,
+      "confidence": 1,
+      "triggerElement": "el::route::auth::error::page::link::back",
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
+      "source": "page:ErrorPage:47",
+      "target": "page:SignIn:342",
+      "linkType": "Link",
+      "isConditional": false,
+      "confidence": 1,
+      "triggerElement": "el::route::auth::error::page::link::try-again",
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001",
+      "source": "page:OnboardingPage:8",
+      "target": "page:ChatPage:9",
+      "linkType": "redirect",
+      "isConditional": true,
+      "confidence": 1,
+      "triggerElement": null,
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-OnboardingPage-8:page-SignIn-342:redirect:001",
+      "source": "page:OnboardingPage:8",
+      "target": "page:SignIn:342",
+      "linkType": "redirect",
+      "isConditional": true,
+      "confidence": 1,
+      "triggerElement": null,
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-Page-10:page-DashboardPage-15:redirect:001",
+      "source": "page:Page:10",
+      "target": "page:DashboardPage:15",
+      "linkType": "redirect",
+      "isConditional": false,
+      "confidence": 1,
+      "triggerElement": null,
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
+      "source": "page:Page:10",
+      "target": "page:OnboardingPage:8",
+      "linkType": "redirect",
+      "isConditional": true,
+      "confidence": 1,
+      "triggerElement": null,
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-Page-10:page-SignIn-342:Link:001",
+      "source": "page:Page:10",
+      "target": "page:SignIn:342",
+      "linkType": "Link",
+      "isConditional": true,
+      "confidence": 1,
+      "triggerElement": "el::route::index::page::link::get-started",
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-ProfilePage-10:page-OnboardingPage-8:redirect:001",
+      "source": "page:ProfilePage:10",
+      "target": "page:OnboardingPage:8",
+      "linkType": "redirect",
+      "isConditional": true,
+      "confidence": 1,
+      "triggerElement": null,
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-ProfilePage-10:page-OnboardingPage-8:redirect:002",
+      "source": "page:ProfilePage:10",
+      "target": "page:OnboardingPage:8",
+      "linkType": "redirect",
+      "isConditional": true,
+      "confidence": 1,
+      "triggerElement": null,
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-ProfilePage-10:page-SignIn-342:redirect:001",
+      "source": "page:ProfilePage:10",
+      "target": "page:SignIn:342",
+      "linkType": "redirect",
+      "isConditional": true,
+      "confidence": 1,
+      "triggerElement": null,
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-SignIn-342:page-Page-10:Link:001",
+      "source": "page:SignIn:342",
+      "target": "page:Page:10",
+      "linkType": "Link",
+      "isConditional": false,
+      "confidence": 1,
+      "triggerElement": "el::route::auth::signin::page::link::back",
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-SignIn-342:page-ProfilePage-10:Link:001",
+      "source": "page:SignIn:342",
+      "target": "page:ProfilePage:10",
+      "linkType": "Link",
+      "isConditional": true,
+      "confidence": 1,
+      "triggerElement": "el::route::auth::signin::page::link::profile-settings",
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
+      "source": "page:SignIn:342",
+      "target": "page:VerifyRequest:7",
+      "linkType": "Link",
+      "isConditional": false,
+      "confidence": 1,
+      "triggerElement": "el::route::auth::signin::page::function::handlesubmit-L99",
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-SignIn-342:page-VerifyRequest-7:router.push:001",
+      "source": "page:SignIn:342",
+      "target": "page:VerifyRequest:7",
+      "linkType": "router.push",
+      "isConditional": true,
+      "confidence": 0.95,
+      "triggerElement": "el::route::auth::signin::page::function::handlesubmit-L99",
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-SignOut-8:page-Page-10:Link:001",
+      "source": "page:SignOut:8",
+      "target": "page:Page:10",
+      "linkType": "Link",
+      "isConditional": false,
+      "confidence": 1,
+      "triggerElement": "el::route::auth::signout::page::link::back",
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-SignOut-8:page-Page-10:Link:002",
+      "source": "page:SignOut:8",
+      "target": "page:Page:10",
+      "linkType": "Link",
+      "isConditional": false,
+      "confidence": 1,
+      "triggerElement": "el::route::auth::signout::page::link::cancel",
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-TasksPage-9:page-OnboardingPage-8:redirect:001",
+      "source": "page:TasksPage:9",
+      "target": "page:OnboardingPage:8",
+      "linkType": "redirect",
+      "isConditional": true,
+      "confidence": 1,
+      "triggerElement": null,
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-TasksPage-9:page-OnboardingPage-8:redirect:002",
+      "source": "page:TasksPage:9",
+      "target": "page:OnboardingPage:8",
+      "linkType": "redirect",
+      "isConditional": true,
+      "confidence": 1,
+      "triggerElement": null,
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-TasksPage-9:page-SignIn-342:redirect:001",
+      "source": "page:TasksPage:9",
+      "target": "page:SignIn:342",
+      "linkType": "redirect",
+      "isConditional": true,
+      "confidence": 1,
+      "triggerElement": null,
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-VerifyRequest-7:page-Page-10:Link:001",
+      "source": "page:VerifyRequest:7",
+      "target": "page:Page:10",
+      "linkType": "Link",
+      "isConditional": false,
+      "confidence": 1,
+      "triggerElement": "el::route::auth::verify::page::link::back",
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    },
+    {
+      "id": "edge:page-VerifyRequest-7:page-SignIn-342:Link:001",
+      "source": "page:VerifyRequest:7",
+      "target": "page:SignIn:342",
+      "linkType": "Link",
+      "isConditional": false,
+      "confidence": 1,
+      "triggerElement": "el::route::auth::verify::page::link::try-signing-in-again",
+      "provenance": {
+        "source": "inferred",
+        "inference_method": "static_import_graph",
+        "first_detected": "2026-03-22",
+        "last_confirmed": "2026-03-22",
+        "design_ref": null
+      }
+    }
+  ]
+}

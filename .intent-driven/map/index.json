@@ -142,5 +142,12 @@
   "ai_context": {
     "summary": "TypeScript codebase with 212 semantic nodes across 8 domain(s): Presentation, API Routes, Authentication, Data Access, Infrastructure, Business Logic, Type Contracts, Miscellaneous. Frameworks detected: security, inngest, nextjs, ai_client, trpc, prisma. 2 critical constraint violation(s) require attention.",
     "token_estimate": 234
+  },
+  "flows": {
+    "total_paths": 37,
+    "confirmed_paths": 0,
+    "total_edges": 29,
+    "ref": "flows/index.json",
+    "edges_ref": "edges/index.json"
   }
 }

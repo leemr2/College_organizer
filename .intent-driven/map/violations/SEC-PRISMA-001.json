@@ -19,5 +19,5 @@
   ],
   "remediation": "Add getServerSession(), auth.check(), or similar before calling the mutation from the server action or API route.",
   "referenced_by_templates": [],
-  "first_detected": "2026-03-21"
+  "first_detected": "2026-03-22"
 }

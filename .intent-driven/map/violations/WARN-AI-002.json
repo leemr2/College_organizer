@@ -13,5 +13,5 @@
   ],
   "remediation": "Move API keys to a config module or environment abstraction; avoid process.env in provider call sites.",
   "referenced_by_templates": [],
-  "first_detected": "2026-03-21"
+  "first_detected": "2026-03-22"
 }

@@ -58,6 +58,12 @@
       "ref": "nodes/db-prisma-20.json"
     },
     {
+      "id": "inngest:userRegistered:3",
+      "label": "userRegistered",
+      "type": "inngest_function",
+      "ref": "nodes/inngest-userRegistered-3.json"
+    },
+    {
       "id": "client:trpc:4",
       "label": "trpc",
       "type": "trpc_infrastructure",

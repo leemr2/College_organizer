@@ -1,7 +1,7 @@
 {
   "id": "db:prisma:20",
   "label": "prisma",
-  "file": "C:/Users/drlee/College_Organizer/src/lib/db.ts",
+  "file": "C:/Users/drlee/College_organizer/src/lib/db.ts",
   "type": "prisma_client_init",
   "layer": "infrastructure",
   "has_auth_gate": null,
@@ -20,7 +20,7 @@
     "source": "pre_idd",
     "confidence": 0.97,
     "design_ref": null,
-    "first_scanned": "2026-03-22",
-    "last_confirmed": "2026-03-22"
+    "first_scanned": "2026-04-01",
+    "last_confirmed": "2026-04-01"
   }
 }

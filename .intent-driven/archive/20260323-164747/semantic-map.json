@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-03-19T21:18:06.509Z",
+  "generated_at": "2026-03-22T13:48:33.336Z",
   "project": {
     "name": "College_organizer",
     "root": "C:\\Users\\drlee\\College_organizer",
@@ -379,7 +379,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "pii_handling"
     },
     {
       "id": "inngest.config:inngest:23",
@@ -423,7 +424,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "inngest_function"
     },
     {
       "id": "inngest.config:userRegisteredFn:30",
@@ -471,7 +473,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "inngest_function"
     },
     {
       "id": "inngest.config:messageHandlerFn:46",
@@ -515,7 +518,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "inngest_function"
     },
     {
       "id": "inngest.config:serveInngest:60",
@@ -559,7 +563,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "inngest_function"
     },
     {
       "id": "page:dynamic:6",
@@ -619,7 +624,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": true
+      "isServerComponent": true,
+      "pattern": "app_router_page"
     },
     {
       "id": "page:AdminPage:8",
@@ -683,7 +689,8 @@
       "hasAuthGate": true,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": true
+      "isServerComponent": true,
+      "pattern": "app_router_page"
     },
     {
       "id": "route:api-transcribe:POST:8",
@@ -726,7 +733,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "api_route_handler"
     },
     {
       "id": "route:handler:19",
@@ -785,7 +793,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "api_route_handler"
     },
     {
       "id": "route:api-upload:POST:4",
@@ -829,7 +838,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "api_route_handler"
     },
     {
       "id": "page:ErrorContent:8",
@@ -886,7 +896,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": true
+      "isServerComponent": true,
+      "pattern": "app_router_page"
     },
     {
       "id": "page:ErrorPage:47",
@@ -944,7 +955,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": true
+      "isServerComponent": true,
+      "pattern": "app_router_page"
     },
     {
       "id": "page:SignInContent:11",
@@ -1035,7 +1047,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": true
+      "isServerComponent": true,
+      "pattern": "app_router_page"
     },
     {
       "id": "page:SignIn:342",
@@ -1123,7 +1136,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": true
+      "isServerComponent": true,
+      "pattern": "app_router_page"
     },
     {
       "id": "page:SignOut:8",
@@ -1180,7 +1194,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": true
+      "isServerComponent": true,
+      "pattern": "app_router_page"
     },
     {
       "id": "page:VerifyRequest:7",
@@ -1234,7 +1249,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": true
+      "isServerComponent": true,
+      "pattern": "app_router_page"
     },
     {
       "id": "page:dynamic:7",
@@ -1302,7 +1318,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": true
+      "isServerComponent": true,
+      "pattern": "app_router_page"
     },
     {
       "id": "page:ChatPage:9",
@@ -1380,7 +1397,8 @@
       "operation": "findUnique",
       "includesRelations": false,
       "isRawSQL": false,
-      "hasWhere": false
+      "hasWhere": false,
+      "pattern": "app_router_page"
     },
     {
       "id": "page:dynamic:13",
@@ -1494,7 +1512,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": true
+      "isServerComponent": true,
+      "pattern": "app_router_page"
     },
     {
       "id": "page:DashboardPage:15",
@@ -1618,7 +1637,8 @@
       "operation": "findUnique",
       "includesRelations": false,
       "isRawSQL": false,
-      "hasWhere": false
+      "hasWhere": false,
+      "pattern": "app_router_page"
     },
     {
       "id": "layout:metadata:10",
@@ -1703,7 +1723,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "nextjs_metadata_export"
     },
     {
       "id": "layout:RootLayout:18",
@@ -1787,7 +1808,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": true
+      "isServerComponent": true,
+      "pattern": "server_component"
     },
     {
       "id": "page:dynamic:6",
@@ -1847,7 +1869,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": true
+      "isServerComponent": true,
+      "pattern": "app_router_page"
     },
     {
       "id": "page:OnboardingPage:8",
@@ -1917,7 +1940,8 @@
       "operation": "findUnique",
       "includesRelations": false,
       "isRawSQL": false,
-      "hasWhere": false
+      "hasWhere": false,
+      "pattern": "app_router_page"
     },
     {
       "id": "page:dynamic:8",
@@ -1989,7 +2013,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "constant"
     },
     {
       "id": "page:Page:10",
@@ -2065,7 +2090,8 @@
       "hasAuthGate": true,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": true
+      "isServerComponent": true,
+      "pattern": "server_component"
     },
     {
       "id": "page:dynamic:8",
@@ -2139,7 +2165,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": true
+      "isServerComponent": true,
+      "pattern": "app_router_page"
     },
     {
       "id": "page:ProfilePage:10",
@@ -2223,7 +2250,8 @@
       "operation": "findUnique",
       "includesRelations": false,
       "isRawSQL": false,
-      "hasWhere": false
+      "hasWhere": false,
+      "pattern": "app_router_page"
     },
     {
       "id": "page:dynamic:7",
@@ -2291,7 +2319,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": true
+      "isServerComponent": true,
+      "pattern": "app_router_page"
     },
     {
       "id": "page:TasksPage:9",
@@ -2369,7 +2398,8 @@
       "operation": "findUnique",
       "includesRelations": false,
       "isRawSQL": false,
-      "hasWhere": false
+      "hasWhere": false,
+      "pattern": "app_router_page"
     },
     {
       "id": "AdminDashboard:AdminDashboard:20",
@@ -2448,7 +2478,8 @@
       "hasAuthGate": true,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "auth_gate"
     },
     {
       "id": "Button:Button:11",
@@ -2482,7 +2513,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "TimeBlock:TimeBlock:30",
@@ -2527,7 +2559,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "TimeBlockEditor:TimeBlockEditor:33",
@@ -2589,7 +2622,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "WeekCalendar:WeekCalendar:22",
@@ -2669,7 +2703,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "ChatInterface:ChatInterface:18",
@@ -2773,7 +2808,8 @@
       "hasAuthGate": false,
       "hasInputValidation": true,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "input_validation"
     },
     {
       "id": "DraftTaskPreview:DraftTaskPreview:11",
@@ -2809,7 +2845,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "MessageBubble:MessageBubble:14",
@@ -2869,7 +2906,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "MessageList:MessageList:12",
@@ -2922,7 +2960,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "SchedulePreview:SchedulePreview:12",
@@ -2966,7 +3005,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "VoiceInput:VoiceInput:13",
@@ -3008,7 +3048,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "ClientProvider:ClientProvider:6",
@@ -3052,7 +3093,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "Clock:Clock:13",
@@ -3100,7 +3142,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "DailyGreeting:DailyGreeting:9",
@@ -3137,7 +3180,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "DailyPlanningButton:DailyPlanningButton:6",
@@ -3181,7 +3225,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "ScheduleSection:ScheduleSection:6",
@@ -3225,7 +3270,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "TasksButton:TasksButton:6",
@@ -3269,7 +3315,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "TodayStats:TodayStats:8",
@@ -3330,7 +3377,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "ToolsSection:ToolsSection:8",
@@ -3390,7 +3438,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "WeekCalendarView:WeekCalendarView:13",
@@ -3451,7 +3500,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "NavigationBar:NavigationBar:9",
@@ -3524,7 +3574,8 @@
       "hasAuthGate": true,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "auth_gate"
     },
     {
       "id": "ClassScheduleStep:ClassScheduleStep:23",
@@ -3585,7 +3636,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "OnboardingFlow:OnboardingFlow:13",
@@ -3685,7 +3737,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "PersonalizationStep:PersonalizationStep:11",
@@ -3729,7 +3782,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "PreferencesStep:PreferencesStep:16",
@@ -3773,7 +3827,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "WelcomeStep:WelcomeStep:9",
@@ -3809,7 +3864,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "ClassScheduleEditor:ClassScheduleEditor:12",
@@ -3906,7 +3962,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "PersonalInfoEditor:PersonalInfoEditor:8",
@@ -3967,7 +4024,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "PreferencesEditor:PreferencesEditor:40",
@@ -4036,7 +4094,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "ProfileEditor:ProfileEditor:12",
@@ -4115,7 +4174,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "SecurityEditor:SecurityEditor:8",
@@ -4178,7 +4238,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "pii_handling"
     },
     {
       "id": "ToolsPreferenceEditor:ToolsPreferenceEditor:10",
@@ -4258,7 +4319,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "ScheduleBlock:ScheduleBlock:31",
@@ -4305,7 +4367,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "ScheduleGenerationPrompt:ScheduleGenerationPrompt:13",
@@ -4359,7 +4422,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "ScheduleView:DraggableScheduleBlock:37",
@@ -4476,7 +4540,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "ScheduleView:ScheduleView:68",
@@ -4594,7 +4659,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "SpeechToTextArea:SpeechToTextAreaRef:28",
@@ -4667,7 +4733,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "SpeechToTextArea:SpeechToTextArea:33",
@@ -4741,7 +4808,8 @@
       "hasAuthGate": true,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "auth_gate"
     },
     {
       "id": "TaskCard:TaskCard:24",
@@ -4829,7 +4897,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "TaskChat:TaskChat:17",
@@ -4924,7 +4993,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "TaskClarification:TaskClarification:13",
@@ -4984,7 +5054,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "TaskCompletion:TaskCompletion:16",
@@ -5067,7 +5138,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "TaskList:TaskList:8",
@@ -5127,7 +5199,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "ToolOptimizationCard:ToolOptimizationCard:12",
@@ -5183,7 +5256,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "ToolOptimizationCard:FeatureCard:96",
@@ -5238,7 +5312,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "ToolRecommendation:ToolRecommendation:21",
@@ -5308,7 +5383,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "ThemeAwareToast:ThemeAwareToast:6",
@@ -5352,7 +5428,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "ThemeProvider:ThemeProvider:14",
@@ -5388,7 +5465,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "button:ButtonProps:38",
@@ -5447,7 +5525,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_component"
     },
     {
       "id": "useQueryHooks:useExampleQuery:3",
@@ -5483,7 +5562,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "react_hook"
     },
     {
       "id": "conversational:ConversationalAI:7",
@@ -5560,7 +5640,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "conversational:conversationalAI:548",
@@ -5637,7 +5718,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "discoveryQuestions:DiscoveryQuestionsService:11",
@@ -5684,7 +5766,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "discoveryQuestions:discoveryQuestionsService:177",
@@ -5731,7 +5814,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "scheduling:SchedulingService:13",
@@ -5788,7 +5872,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "scheduling:schedulingService:578",
@@ -5845,7 +5930,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "toolOptimization:Feature:12",
@@ -5900,7 +5986,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "toolOptimization:ToolOptimizationResult:19",
@@ -5955,7 +6042,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "toolOptimization:ToolOptimizationService:27",
@@ -6010,7 +6098,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "toolOptimization:toolOptimizationService:242",
@@ -6065,7 +6154,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "toolRecommendation:ToolRecommendation:12",
@@ -6122,7 +6212,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "toolRecommendation:InefficiencyDetection:22",
@@ -6179,7 +6270,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "toolRecommendation:ToolSearchQuery:29",
@@ -6236,7 +6328,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "toolRecommendation:ToolRecommendationService:37",
@@ -6293,7 +6386,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "toolRecommendation:toolRecommendationService:362",
@@ -6350,7 +6444,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "webSearch:WebSearchResult:11",
@@ -6396,7 +6491,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "webSearch:SearchProvider:17",
@@ -6442,7 +6538,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "webSearch:searchWeb:22",
@@ -6488,7 +6585,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "webSearch:searchToolOptimization:70",
@@ -6534,7 +6632,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "webSearch:searchStudyMethod:81",
@@ -6580,7 +6679,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "webSearch:searchBestPractices:92",
@@ -6626,7 +6726,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "webSearch:searchToolFeature:102",
@@ -6672,7 +6773,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "ai_service"
     },
     {
       "id": "aiClient:AI_MODELS:43",
@@ -6725,7 +6827,8 @@
         "openai",
         "@google/generative-ai",
         "@anthropic-ai/sdk"
-      ]
+      ],
+      "pattern": "ai_provider_client"
     },
     {
       "id": "aiClient:AIModel:57",
@@ -6773,7 +6876,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "generic_function"
     },
     {
       "id": "aiClient:GenerateChatCompletionOptions:61",
@@ -6826,7 +6930,8 @@
         "openai",
         "@google/generative-ai",
         "@anthropic-ai/sdk"
-      ]
+      ],
+      "pattern": "ai_provider_client"
     },
     {
       "id": "aiClient:generateGeminiWebResponse:142",
@@ -6885,7 +6990,8 @@
         "openai",
         "@google/generative-ai",
         "@anthropic-ai/sdk"
-      ]
+      ],
+      "pattern": "ai_provider_client"
     },
     {
       "id": "aiClient:parseJsonResponse:177",
@@ -6933,7 +7039,8 @@
       "hasAuthGate": false,
       "hasInputValidation": true,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "input_validation"
     },
     {
       "id": "aiClient:generateChatCompletion:198",
@@ -6986,7 +7093,8 @@
         "openai",
         "@google/generative-ai",
         "@anthropic-ai/sdk"
-      ]
+      ],
+      "pattern": "ai_provider_client"
     },
     {
       "id": "root:appRouter:15",
@@ -7079,7 +7187,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "trpc_router"
     },
     {
       "id": "root:AppRouter:26",
@@ -7172,7 +7281,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "generic_function"
     },
     {
       "id": "root:createCaller:35",
@@ -7265,7 +7375,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "generic_function"
     },
     {
       "id": "adminRouter:adminRouter:8",
@@ -7350,7 +7461,8 @@
       "operation": "update",
       "includesRelations": false,
       "isRawSQL": false,
-      "hasWhere": false
+      "hasWhere": false,
+      "pattern": "trpc_router"
     },
     {
       "id": "authRouter:authRouter:7",
@@ -7427,7 +7539,8 @@
       "operation": "findUnique",
       "includesRelations": false,
       "isRawSQL": false,
-      "hasWhere": false
+      "hasWhere": false,
+      "pattern": "trpc_router"
     },
     {
       "id": "chatRouter:chatRouter:405",
@@ -7545,7 +7658,8 @@
       "operation": "create",
       "includesRelations": false,
       "isRawSQL": false,
-      "hasWhere": false
+      "hasWhere": false,
+      "pattern": "trpc_router"
     },
     {
       "id": "scheduleRouter:scheduleRouter:8",
@@ -7638,7 +7752,8 @@
       "operation": "findUnique",
       "includesRelations": false,
       "isRawSQL": false,
-      "hasWhere": false
+      "hasWhere": false,
+      "pattern": "trpc_router"
     },
     {
       "id": "studentRouter:studentRouter:8",
@@ -7725,7 +7840,8 @@
       "operation": "update",
       "includesRelations": false,
       "isRawSQL": false,
-      "hasWhere": false
+      "hasWhere": false,
+      "pattern": "trpc_router"
     },
     {
       "id": "taskRouter:taskRouter:7",
@@ -7805,7 +7921,8 @@
       "operation": "findUnique",
       "includesRelations": false,
       "isRawSQL": false,
-      "hasWhere": false
+      "hasWhere": false,
+      "pattern": "trpc_router"
     },
     {
       "id": "toolRouter:toolRouter:13",
@@ -7935,7 +8052,8 @@
       "operation": "findUnique",
       "includesRelations": false,
       "isRawSQL": false,
-      "hasWhere": false
+      "hasWhere": false,
+      "pattern": "trpc_router"
     },
     {
       "id": "trpc:createTRPCContext:27",
@@ -7995,7 +8113,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "trpc_infrastructure"
     },
     {
       "id": "trpc:createCallerFactory:62",
@@ -8055,7 +8174,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "trpc_infrastructure"
     },
     {
       "id": "trpc:createTRPCRouter:76",
@@ -8115,7 +8235,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "trpc_infrastructure"
     },
     {
       "id": "trpc:publicProcedure:85",
@@ -8175,7 +8296,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "public_procedure"
     },
     {
       "id": "trpc:protectedProcedure:95",
@@ -8235,7 +8357,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "protected_procedure"
     },
     {
       "id": "trpc:adminProcedure:118",
@@ -8296,7 +8419,8 @@
       "hasAuthGate": true,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "auth_gate"
     },
     {
       "id": "index:authOptions:62",
@@ -8377,7 +8501,8 @@
       "operation": "create",
       "includesRelations": false,
       "isRawSQL": false,
-      "hasWhere": false
+      "hasWhere": false,
+      "pattern": "prisma_mutation"
     },
     {
       "id": "index:getServerAuthSession:263",
@@ -8449,7 +8574,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "auth_utility"
     },
     {
       "id": "db:prisma:20",
@@ -8489,7 +8615,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "prisma_client_init"
     },
     {
       "id": "sendEmail:sendWelcomeEmail:8",
@@ -8549,7 +8676,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "generic_function"
     },
     {
       "id": "sendEmail:sendAccessApprovedEmail:17",
@@ -8610,7 +8738,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "pii_handling"
     },
     {
       "id": "AccessApprovedEmail:AccessApprovedEmail:7",
@@ -8645,7 +8774,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "pii_handling"
     },
     {
       "id": "WelcomeEmail:WelcomeEmail:7",
@@ -8679,7 +8809,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "generic_function"
     },
     {
       "id": "inngest:userRegistered:3",
@@ -8715,7 +8846,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "generic_function"
     },
     {
       "id": "storage:uploadFile:11",
@@ -8752,7 +8884,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "generic_function"
     },
     {
       "id": "client:trpc:4",
@@ -8796,7 +8929,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "trpc_infrastructure"
     },
     {
       "id": "react:api:29",
@@ -8875,7 +9009,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "trpc_infrastructure"
     },
     {
       "id": "react:TRPCReactProvider:52",
@@ -8954,7 +9089,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "trpc_infrastructure"
     },
     {
       "id": "server:api:22",
@@ -9020,7 +9156,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "trpc_infrastructure"
     },
     {
       "id": "calendar:TimeBlockType:1",
@@ -9047,7 +9184,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "calendar:MeetingTime:9",
@@ -9074,7 +9212,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "calendar:TimeBlock:15",
@@ -9101,7 +9240,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "calendar:RecurringPattern:29",
@@ -9128,7 +9268,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "calendar:WeekView:35",
@@ -9155,7 +9296,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "calendar:CalendarEvent:45",
@@ -9182,7 +9324,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "types:MessageRole:5",
@@ -9209,7 +9352,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "types:Message:7",
@@ -9236,7 +9380,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "types:MessageArray:13",
@@ -9263,7 +9408,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "types:NotificationSettings:19",
@@ -9291,7 +9437,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "pii_handling"
     },
     {
       "id": "types:StudentPreferences:26",
@@ -9318,7 +9465,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "types:MeetingTime:41",
@@ -9345,7 +9493,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "types:ClassScheduleData:47",
@@ -9372,7 +9521,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "types:TaskSummary:61",
@@ -9399,7 +9549,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "types:TaskContext:67",
@@ -9426,7 +9577,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "types:DiscoveryQuestion:76",
@@ -9453,7 +9605,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "types:DraftTask:85",
@@ -9480,7 +9633,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "types:PlanningSessionState:96",
@@ -9507,7 +9661,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "types:ConversationMode:103",
@@ -9534,7 +9689,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "types:StudentContext:111",
@@ -9561,7 +9717,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "types:ScheduleBlockData:131",
@@ -9588,7 +9745,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "types:SchedulingContext:143",
@@ -9615,7 +9773,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "types:ScheduleSuggestion:152",
@@ -9642,7 +9801,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "types:RescheduleOptions:158",
@@ -9669,7 +9829,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "types:OnboardingData:172",
@@ -9696,7 +9857,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "type_definition"
     },
     {
       "id": "dailyDetection:isToday:8",
@@ -9723,7 +9885,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "dailyDetection:getTodayStart:25",
@@ -9750,7 +9913,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "dailyDetection:getTodayEnd:34",
@@ -9777,7 +9941,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "dailyDetection:isConversationFromToday:43",
@@ -9804,7 +9969,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "dailyDetection:formatDateForDailyConversation:52",
@@ -9831,7 +9997,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "dailyGreetings:getDailyGreeting:5",
@@ -9858,7 +10025,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "dailyGreetings:getCurrentDayOfWeek:34",
@@ -9885,7 +10053,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "shared:formatTime:4",
@@ -9912,7 +10081,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "shared:getDayName:18",
@@ -9939,7 +10109,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "shared:getShortDayName:25",
@@ -9966,7 +10137,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "shared:getStartOfWeek:32",
@@ -9993,7 +10165,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "timezone:getUserTimezone:10",
@@ -10021,7 +10194,8 @@
       "hasAuthGate": true,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "auth_gate"
     },
     {
       "id": "timezone:getTodayStartInTimezone:27",
@@ -10048,7 +10222,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "timezone:getTodayEndInTimezone:79",
@@ -10075,7 +10250,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "timezone:getDateStartInTimezone:95",
@@ -10107,7 +10283,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "timezone:getDateEndInTimezone:169",
@@ -10134,7 +10311,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "timezone:formatDateInTimezone:180",
@@ -10161,7 +10339,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "timezone:isTodayInTimezone:194",
@@ -10188,7 +10367,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "timezone:parseAIDateInTimezone:220",
@@ -10221,7 +10401,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "timezone:createDateAtTimeInTimezone:352",
@@ -10255,7 +10436,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "toolDatabase:Tool:10",
@@ -10289,7 +10471,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "toolDatabase:ToolSearchQuery:30",
@@ -10323,7 +10506,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "toolDatabase:getAllTools:41",
@@ -10357,7 +10541,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "toolDatabase:getToolById:48",
@@ -10391,7 +10576,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "toolDatabase:searchTools:55",
@@ -10425,7 +10611,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "toolDatabase:getToolsByCategory:103",
@@ -10459,7 +10646,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "toolDatabase:getToolsForTaskType:110",
@@ -10493,7 +10681,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "toolDatabase:getToolsByLearningCurve:123",
@@ -10527,7 +10716,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "toolDatabase:getFreeTools:130",
@@ -10561,7 +10751,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "toolDatabase:getBudgetFriendlyTools:139",
@@ -10595,7 +10786,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "utility"
     },
     {
       "id": "utils:cn:4",
@@ -10640,7 +10832,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "generic_function"
     },
     {
       "id": "userSchemas:userRegistrationSchema:3",
@@ -10676,7 +10869,8 @@
       "hasAuthGate": false,
       "hasInputValidation": true,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "input_validation"
     },
     {
       "id": "Button.stories:Primary:42",
@@ -10730,7 +10924,8 @@
       "hasInputValidation": false,
       "isClientComponent": false,
       "isServerComponent": false,
-      "isDevOnly": true
+      "isDevOnly": true,
+      "pattern": "storybook_story"
     },
     {
       "id": "Button.stories:Secondary:51",
@@ -10784,7 +10979,8 @@
       "hasInputValidation": false,
       "isClientComponent": false,
       "isServerComponent": false,
-      "isDevOnly": true
+      "isDevOnly": true,
+      "pattern": "storybook_story"
     },
     {
       "id": "Button.stories:Small:60",
@@ -10838,7 +11034,8 @@
       "hasInputValidation": false,
       "isClientComponent": false,
       "isServerComponent": false,
-      "isDevOnly": true
+      "isDevOnly": true,
+      "pattern": "storybook_story"
     },
     {
       "id": "Button.stories:Large:69",
@@ -10892,7 +11089,8 @@
       "hasInputValidation": false,
       "isClientComponent": false,
       "isServerComponent": false,
-      "isDevOnly": true
+      "isDevOnly": true,
+      "pattern": "storybook_story"
     },
     {
       "id": "Button.stories:AllVariants:78",
@@ -10946,7 +11144,8 @@
       "hasInputValidation": false,
       "isClientComponent": false,
       "isServerComponent": false,
-      "isDevOnly": true
+      "isDevOnly": true,
+      "pattern": "storybook_story"
     },
     {
       "id": "Button:ButtonProps:5",
@@ -10986,7 +11185,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "generic_function"
     },
     {
       "id": "Button:Button:19",
@@ -11026,7 +11226,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "generic_function"
     },
     {
       "id": "schema:model:User:0",
@@ -11052,7 +11253,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "orm_model"
     },
     {
       "id": "schema:model:Account:0",
@@ -11078,7 +11280,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "orm_model"
     },
     {
       "id": "schema:model:Session:0",
@@ -11104,7 +11307,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "orm_model"
     },
     {
       "id": "schema:model:Allowlist:0",
@@ -11130,7 +11334,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "orm_model"
     },
     {
       "id": "schema:model:AccessRequest:0",
@@ -11156,7 +11361,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "orm_model"
     },
     {
       "id": "schema:model:VerificationToken:0",
@@ -11182,7 +11388,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "orm_model"
     },
     {
       "id": "schema:model:Student:0",
@@ -11208,7 +11415,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "orm_model"
     },
     {
       "id": "schema:model:Task:0",
@@ -11234,7 +11442,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "orm_model"
     },
     {
       "id": "schema:model:Conversation:0",
@@ -11260,7 +11469,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "orm_model"
     },
     {
       "id": "schema:model:StudentPreferences:0",
@@ -11286,7 +11496,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "orm_model"
     },
     {
       "id": "schema:model:ClassSchedule:0",
@@ -11312,7 +11523,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "orm_model"
     },
     {
       "id": "schema:model:ScheduleBlock:0",
@@ -11338,7 +11550,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "orm_model"
     },
     {
       "id": "schema:model:Tool:0",
@@ -11364,7 +11577,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "orm_model"
     },
     {
       "id": "schema:model:StudentTool:0",
@@ -11390,7 +11604,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "orm_model"
     },
     {
       "id": "schema:model:ToolSuggestion:0",
@@ -11416,7 +11631,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "orm_model"
     },
     {
       "id": "schema:model:EffectivenessLog:0",
@@ -11442,7 +11658,8 @@
       "hasAuthGate": false,
       "hasInputValidation": false,
       "isClientComponent": false,
-      "isServerComponent": false
+      "isServerComponent": false,
+      "pattern": "orm_model"
     }
   ],
   "edges": [
@@ -13986,18 +14203,18 @@
       "by_type": {
         "imports": 269
       },
-      "data_access_paths": 0,
+      "data_access_paths": 18,
       "unguarded_mutations": 0
     }
   },
   "routeMap": {
     "meta": {
-      "scannedAt": "2026-03-19T21:18:06.285Z",
+      "scannedAt": "2026-03-22T13:48:33.042Z",
       "routingMode": "app",
       "repoRoot": "C:\\Users\\drlee\\College_organizer",
       "totalRoutes": 14,
-      "totalEdges": 28,
-      "totalElements": 21,
+      "totalEdges": 29,
+      "totalElements": 23,
       "unresolvedEdges": 5,
       "authInference": {
         "protected": 7,
@@ -14022,6 +14239,7 @@
             "id": "el::route::index::page::link::get-started",
             "routeId": "route::index::page",
             "elementType": "link",
+            "triggerType": "navigation",
             "label": "Get Started",
             "handlerRef": "",
             "lineNumber": 30,
@@ -14032,6 +14250,7 @@
             "id": "el::route::index::page::link::privacy-policy",
             "routeId": "route::index::page",
             "elementType": "link",
+            "triggerType": "navigation",
             "label": "Privacy Policy",
             "handlerRef": "",
             "lineNumber": 50,
@@ -14042,6 +14261,7 @@
             "id": "el::route::index::page::link::terms-of-service",
             "routeId": "route::index::page",
             "elementType": "link",
+            "triggerType": "navigation",
             "label": "Terms of Service",
             "handlerRef": "",
             "lineNumber": 56,
@@ -14052,6 +14272,7 @@
             "id": "el::route::index::page::link::contact",
             "routeId": "route::index::page",
             "elementType": "link",
+            "triggerType": "navigation",
             "label": "Contact",
             "handlerRef": "",
             "lineNumber": 62,
@@ -14240,6 +14461,7 @@
             "id": "el::route::auth::error::page::link::back",
             "routeId": "route::auth::error::page",
             "elementType": "link",
+            "triggerType": "navigation",
             "label": "Back",
             "handlerRef": "",
             "lineNumber": 14,
@@ -14250,6 +14472,7 @@
             "id": "el::route::auth::error::page::link::try-again",
             "routeId": "route::auth::error::page",
             "elementType": "link",
+            "triggerType": "navigation",
             "label": "Try Again",
             "handlerRef": "",
             "lineNumber": 35,
@@ -14283,6 +14506,7 @@
             "id": "el::route::auth::signin::page::link::back",
             "routeId": "route::auth::signin::page",
             "elementType": "link",
+            "triggerType": "navigation",
             "label": "Back",
             "handlerRef": "",
             "lineNumber": 121,
@@ -14293,6 +14517,7 @@
             "id": "el::route::auth::signin::page::form::L145",
             "routeId": "route::auth::signin::page",
             "elementType": "form",
+            "triggerType": "form_submit",
             "label": "",
             "handlerRef": "",
             "lineNumber": 145,
@@ -14302,6 +14527,7 @@
             "id": "el::route::auth::signin::page::link::profile-settings",
             "routeId": "route::auth::signin::page",
             "elementType": "link",
+            "triggerType": "navigation",
             "label": "profile settings",
             "handlerRef": "",
             "lineNumber": 196,
@@ -14312,6 +14538,7 @@
             "id": "el::route::auth::signin::page::button::L210",
             "routeId": "route::auth::signin::page",
             "elementType": "button",
+            "triggerType": "action",
             "label": "",
             "handlerRef": "",
             "lineNumber": 210,
@@ -14321,6 +14548,7 @@
             "id": "el::route::auth::signin::page::link::privacy-policy",
             "routeId": "route::auth::signin::page",
             "elementType": "link",
+            "triggerType": "navigation",
             "label": "Privacy Policy",
             "handlerRef": "",
             "lineNumber": 232,
@@ -14331,6 +14559,7 @@
             "id": "el::route::auth::signin::page::button::request-access",
             "routeId": "route::auth::signin::page",
             "elementType": "button",
+            "triggerType": "action",
             "label": "Request Access",
             "handlerRef": "setShowRequestAccess",
             "lineNumber": 242,
@@ -14340,6 +14569,7 @@
             "id": "el::route::auth::signin::page::button::setShowRequestAccess",
             "routeId": "route::auth::signin::page",
             "elementType": "button",
+            "triggerType": "action",
             "label": "",
             "handlerRef": "setShowRequestAccess",
             "lineNumber": 261,
@@ -14349,6 +14579,7 @@
             "id": "el::route::auth::signin::page::form::L281",
             "routeId": "route::auth::signin::page",
             "elementType": "form",
+            "triggerType": "form_submit",
             "label": "",
             "handlerRef": "async",
             "lineNumber": 281,
@@ -14358,6 +14589,7 @@
             "id": "el::route::auth::signin::page::button::cancel",
             "routeId": "route::auth::signin::page",
             "elementType": "button",
+            "triggerType": "action",
             "label": "Cancel",
             "handlerRef": "setShowRequestAccess",
             "lineNumber": 316,
@@ -14367,10 +14599,32 @@
             "id": "el::route::auth::signin::page::button::L326",
             "routeId": "route::auth::signin::page",
             "elementType": "button",
+            "triggerType": "action",
             "label": "",
             "handlerRef": "",
             "lineNumber": 326,
             "isFlowEntry": false
+          },
+          {
+            "id": "el::route::auth::signin::page::function::handlesubmit-L77",
+            "routeId": "route::auth::signin::page",
+            "elementType": "function",
+            "triggerType": "navigation",
+            "label": "handleSubmit",
+            "handlerRef": "",
+            "lineNumber": 77,
+            "isFlowEntry": true
+          },
+          {
+            "id": "el::route::auth::signin::page::function::handlesubmit-L99",
+            "routeId": "route::auth::signin::page",
+            "elementType": "function",
+            "triggerType": "navigation",
+            "label": "handleSubmit",
+            "handlerRef": "",
+            "lineNumber": 99,
+            "isFlowEntry": true,
+            "href": "/auth/verify"
           }
         ],
         "auth_requirement": {
@@ -14396,6 +14650,7 @@
             "id": "el::route::auth::signout::page::link::back",
             "routeId": "route::auth::signout::page",
             "elementType": "link",
+            "triggerType": "navigation",
             "label": "Back",
             "handlerRef": "",
             "lineNumber": 18,
@@ -14406,6 +14661,7 @@
             "id": "el::route::auth::signout::page::button::L41",
             "routeId": "route::auth::signout::page",
             "elementType": "button",
+            "triggerType": "action",
             "label": "",
             "handlerRef": "",
             "lineNumber": 41,
@@ -14415,6 +14671,7 @@
             "id": "el::route::auth::signout::page::link::cancel",
             "routeId": "route::auth::signout::page",
             "elementType": "link",
+            "triggerType": "navigation",
             "label": "Cancel",
             "handlerRef": "",
             "lineNumber": 50,
@@ -14448,6 +14705,7 @@
             "id": "el::route::auth::verify::page::link::back",
             "routeId": "route::auth::verify::page",
             "elementType": "link",
+            "triggerType": "navigation",
             "label": "Back",
             "handlerRef": "",
             "lineNumber": 10,
@@ -14458,6 +14716,7 @@
             "id": "el::route::auth::verify::page::link::try-signing-in-again",
             "routeId": "route::auth::verify::page",
             "elementType": "link",
+            "triggerType": "navigation",
             "label": "try signing in again",
             "handlerRef": "",
             "lineNumber": 43,
@@ -14503,7 +14762,7 @@
         "target": "route::auth::signin::page",
         "triggerElement": "el::route::index::page::link::get-started",
         "linkType": "Link",
-        "isConditional": false,
+        "isConditional": true,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14512,9 +14771,9 @@
         "id": "edge::route::index::page::route::onboarding::page",
         "source": "route::index::page",
         "target": "route::onboarding::page",
-        "triggerElement": "el::route::index::page::function::L83",
+        "triggerElement": null,
         "linkType": "redirect",
-        "isConditional": false,
+        "isConditional": true,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14523,7 +14782,7 @@
         "id": "edge::route::index::page::route::dashboard::page",
         "source": "route::index::page",
         "target": "route::dashboard::page",
-        "triggerElement": "el::route::index::page::function::L87",
+        "triggerElement": null,
         "linkType": "redirect",
         "isConditional": false,
         "authoring_mode": "inferred",
@@ -14534,9 +14793,9 @@
         "id": "edge::route::admin::page::route::auth::signin::page",
         "source": "route::admin::page",
         "target": "route::auth::signin::page",
-        "triggerElement": "el::route::admin::page::function::L12",
+        "triggerElement": null,
         "linkType": "redirect",
-        "isConditional": false,
+        "isConditional": true,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14545,9 +14804,9 @@
         "id": "edge::route::admin::page::route::dashboard::page",
         "source": "route::admin::page",
         "target": "route::dashboard::page",
-        "triggerElement": "el::route::admin::page::function::L17",
+        "triggerElement": null,
         "linkType": "redirect",
-        "isConditional": false,
+        "isConditional": true,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14556,9 +14815,9 @@
         "id": "edge::route::chat::page::route::auth::signin::page",
         "source": "route::chat::page",
         "target": "route::auth::signin::page",
-        "triggerElement": "el::route::chat::page::function::L13",
+        "triggerElement": null,
         "linkType": "redirect",
-        "isConditional": false,
+        "isConditional": true,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14567,9 +14826,9 @@
         "id": "edge::route::chat::page::route::onboarding::page",
         "source": "route::chat::page",
         "target": "route::onboarding::page",
-        "triggerElement": "el::route::chat::page::function::L23",
+        "triggerElement": null,
         "linkType": "redirect",
-        "isConditional": false,
+        "isConditional": true,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14578,9 +14837,9 @@
         "id": "edge::route::chat::page::route::onboarding::page",
         "source": "route::chat::page",
         "target": "route::onboarding::page",
-        "triggerElement": "el::route::chat::page::function::L27",
+        "triggerElement": null,
         "linkType": "redirect",
-        "isConditional": false,
+        "isConditional": true,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14589,9 +14848,9 @@
         "id": "edge::route::dashboard::page::route::auth::signin::page",
         "source": "route::dashboard::page",
         "target": "route::auth::signin::page",
-        "triggerElement": "el::route::dashboard::page::function::L19",
+        "triggerElement": null,
         "linkType": "redirect",
-        "isConditional": false,
+        "isConditional": true,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14600,9 +14859,9 @@
         "id": "edge::route::dashboard::page::route::onboarding::page",
         "source": "route::dashboard::page",
         "target": "route::onboarding::page",
-        "triggerElement": "el::route::dashboard::page::function::L29",
+        "triggerElement": null,
         "linkType": "redirect",
-        "isConditional": false,
+        "isConditional": true,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14611,9 +14870,9 @@
         "id": "edge::route::dashboard::page::route::onboarding::page",
         "source": "route::dashboard::page",
         "target": "route::onboarding::page",
-        "triggerElement": "el::route::dashboard::page::function::L33",
+        "triggerElement": null,
         "linkType": "redirect",
-        "isConditional": false,
+        "isConditional": true,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14622,9 +14881,9 @@
         "id": "edge::route::onboarding::page::route::auth::signin::page",
         "source": "route::onboarding::page",
         "target": "route::auth::signin::page",
-        "triggerElement": "el::route::onboarding::page::function::L12",
+        "triggerElement": null,
         "linkType": "redirect",
-        "isConditional": false,
+        "isConditional": true,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14633,9 +14892,9 @@
         "id": "edge::route::onboarding::page::route::chat::page",
         "source": "route::onboarding::page",
         "target": "route::chat::page",
-        "triggerElement": "el::route::onboarding::page::function::L22",
+        "triggerElement": null,
         "linkType": "redirect",
-        "isConditional": false,
+        "isConditional": true,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14644,9 +14903,9 @@
         "id": "edge::route::profile::page::route::auth::signin::page",
         "source": "route::profile::page",
         "target": "route::auth::signin::page",
-        "triggerElement": "el::route::profile::page::function::L14",
+        "triggerElement": null,
         "linkType": "redirect",
-        "isConditional": false,
+        "isConditional": true,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14655,9 +14914,9 @@
         "id": "edge::route::profile::page::route::onboarding::page",
         "source": "route::profile::page",
         "target": "route::onboarding::page",
-        "triggerElement": "el::route::profile::page::function::L24",
+        "triggerElement": null,
         "linkType": "redirect",
-        "isConditional": false,
+        "isConditional": true,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14666,9 +14925,9 @@
         "id": "edge::route::profile::page::route::onboarding::page",
         "source": "route::profile::page",
         "target": "route::onboarding::page",
-        "triggerElement": "el::route::profile::page::function::L28",
+        "triggerElement": null,
         "linkType": "redirect",
-        "isConditional": false,
+        "isConditional": true,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14677,9 +14936,9 @@
         "id": "edge::route::tasks::page::route::auth::signin::page",
         "source": "route::tasks::page",
         "target": "route::auth::signin::page",
-        "triggerElement": "el::route::tasks::page::function::L13",
+        "triggerElement": null,
         "linkType": "redirect",
-        "isConditional": false,
+        "isConditional": true,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14688,9 +14947,9 @@
         "id": "edge::route::tasks::page::route::onboarding::page",
         "source": "route::tasks::page",
         "target": "route::onboarding::page",
-        "triggerElement": "el::route::tasks::page::function::L23",
+        "triggerElement": null,
         "linkType": "redirect",
-        "isConditional": false,
+        "isConditional": true,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14699,9 +14958,9 @@
         "id": "edge::route::tasks::page::route::onboarding::page",
         "source": "route::tasks::page",
         "target": "route::onboarding::page",
-        "triggerElement": "el::route::tasks::page::function::L27",
+        "triggerElement": null,
         "linkType": "redirect",
-        "isConditional": false,
+        "isConditional": true,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14745,6 +15004,17 @@
         "target": "route::profile::page",
         "triggerElement": "el::route::auth::signin::page::link::profile-settings",
         "linkType": "Link",
+        "isConditional": true,
+        "authoring_mode": "inferred",
+        "confidence": 1,
+        "low_confidence": false
+      },
+      {
+        "id": "edge::route::auth::signin::page::route::auth::verify::page",
+        "source": "route::auth::signin::page",
+        "target": "route::auth::verify::page",
+        "triggerElement": "el::route::auth::signin::page::function::handlesubmit-L99",
+        "linkType": "Link",
         "isConditional": false,
         "authoring_mode": "inferred",
         "confidence": 1,
@@ -14754,9 +15024,9 @@
         "id": "edge::route::auth::signin::page::route::auth::verify::page",
         "source": "route::auth::signin::page",
         "target": "route::auth::verify::page",
-        "triggerElement": "el::route::auth::signin::page::function::L99",
+        "triggerElement": "el::route::auth::signin::page::function::handlesubmit-L99",
         "linkType": "router.push",
-        "isConditional": false,
+        "isConditional": true,
         "authoring_mode": "inferred",
         "confidence": 0.95,
         "low_confidence": false
@@ -14850,7 +15120,7 @@
         "title": "Orphaned route",
         "detail": "/admin has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /admin, or remove the route if no longer needed.",
-        "detectedAt": "2026-03-19T21:18:06.286Z"
+        "detectedAt": "2026-03-22T13:48:33.043Z"
       },
       {
         "id": "finding::NAV-001::tasks",
@@ -14863,7 +15133,7 @@
         "title": "Orphaned route",
         "detail": "/tasks has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /tasks, or remove the route if no longer needed.",
-        "detectedAt": "2026-03-19T21:18:06.286Z"
+        "detectedAt": "2026-03-22T13:48:33.043Z"
       },
       {
         "id": "finding::NAV-001::auth-error",
@@ -14876,7 +15146,7 @@
         "title": "Orphaned route",
         "detail": "/auth/error has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /auth/error, or remove the route if no longer needed.",
-        "detectedAt": "2026-03-19T21:18:06.286Z"
+        "detectedAt": "2026-03-22T13:48:33.043Z"
       },
       {
         "id": "finding::NAV-001::auth-signout",
@@ -14889,7 +15159,7 @@
         "title": "Orphaned route",
         "detail": "/auth/signout has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /auth/signout, or remove the route if no longer needed.",
-        "detectedAt": "2026-03-19T21:18:06.286Z"
+        "detectedAt": "2026-03-22T13:48:33.043Z"
       },
       {
         "id": "finding::NAV-004::admin",
@@ -14902,7 +15172,7 @@
         "title": "Unreachable route",
         "detail": "/admin cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-03-19T21:18:06.286Z"
+        "detectedAt": "2026-03-22T13:48:33.043Z"
       },
       {
         "id": "finding::NAV-004::tasks",
@@ -14915,7 +15185,7 @@
         "title": "Unreachable route",
         "detail": "/tasks cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-03-19T21:18:06.286Z"
+        "detectedAt": "2026-03-22T13:48:33.043Z"
       },
       {
         "id": "finding::NAV-004::auth-error",
@@ -14928,7 +15198,7 @@
         "title": "Unreachable route",
         "detail": "/auth/error cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-03-19T21:18:06.286Z"
+        "detectedAt": "2026-03-22T13:48:33.043Z"
       },
       {
         "id": "finding::NAV-004::auth-signout",
@@ -14941,7 +15211,7 @@
         "title": "Unreachable route",
         "detail": "/auth/signout cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-03-19T21:18:06.286Z"
+        "detectedAt": "2026-03-22T13:48:33.043Z"
       }
     ],
     "findingSummary": {
@@ -14949,5 +15219,1392 @@
       "warning": 4,
       "info": 0
     }
+  },
+  "flowAnalysis": {
+    "edges": [
+      {
+        "id": "edge:page-AdminPage-8:page-DashboardPage-15:redirect:001",
+        "source": "page:AdminPage:8",
+        "target": "page:DashboardPage:15",
+        "linkType": "redirect",
+        "isConditional": true,
+        "edge_confidence": 1,
+        "triggerElement": null,
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-AdminPage-8:page-SignIn-342:redirect:001",
+        "source": "page:AdminPage:8",
+        "target": "page:SignIn:342",
+        "linkType": "redirect",
+        "isConditional": true,
+        "edge_confidence": 1,
+        "triggerElement": null,
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-ChatPage-9:page-OnboardingPage-8:redirect:001",
+        "source": "page:ChatPage:9",
+        "target": "page:OnboardingPage:8",
+        "linkType": "redirect",
+        "isConditional": true,
+        "edge_confidence": 1,
+        "triggerElement": null,
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-ChatPage-9:page-OnboardingPage-8:redirect:002",
+        "source": "page:ChatPage:9",
+        "target": "page:OnboardingPage:8",
+        "linkType": "redirect",
+        "isConditional": true,
+        "edge_confidence": 1,
+        "triggerElement": null,
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-ChatPage-9:page-SignIn-342:redirect:001",
+        "source": "page:ChatPage:9",
+        "target": "page:SignIn:342",
+        "linkType": "redirect",
+        "isConditional": true,
+        "edge_confidence": 1,
+        "triggerElement": null,
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-DashboardPage-15:page-OnboardingPage-8:redirect:001",
+        "source": "page:DashboardPage:15",
+        "target": "page:OnboardingPage:8",
+        "linkType": "redirect",
+        "isConditional": true,
+        "edge_confidence": 1,
+        "triggerElement": null,
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-DashboardPage-15:page-OnboardingPage-8:redirect:002",
+        "source": "page:DashboardPage:15",
+        "target": "page:OnboardingPage:8",
+        "linkType": "redirect",
+        "isConditional": true,
+        "edge_confidence": 1,
+        "triggerElement": null,
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-DashboardPage-15:page-SignIn-342:redirect:001",
+        "source": "page:DashboardPage:15",
+        "target": "page:SignIn:342",
+        "linkType": "redirect",
+        "isConditional": true,
+        "edge_confidence": 1,
+        "triggerElement": null,
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-ErrorPage-47:page-Page-10:Link:001",
+        "source": "page:ErrorPage:47",
+        "target": "page:Page:10",
+        "linkType": "Link",
+        "isConditional": false,
+        "edge_confidence": 1,
+        "triggerElement": "el::route::auth::error::page::link::back",
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
+        "source": "page:ErrorPage:47",
+        "target": "page:SignIn:342",
+        "linkType": "Link",
+        "isConditional": false,
+        "edge_confidence": 1,
+        "triggerElement": "el::route::auth::error::page::link::try-again",
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001",
+        "source": "page:OnboardingPage:8",
+        "target": "page:ChatPage:9",
+        "linkType": "redirect",
+        "isConditional": true,
+        "edge_confidence": 1,
+        "triggerElement": null,
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-OnboardingPage-8:page-SignIn-342:redirect:001",
+        "source": "page:OnboardingPage:8",
+        "target": "page:SignIn:342",
+        "linkType": "redirect",
+        "isConditional": true,
+        "edge_confidence": 1,
+        "triggerElement": null,
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-Page-10:page-DashboardPage-15:redirect:001",
+        "source": "page:Page:10",
+        "target": "page:DashboardPage:15",
+        "linkType": "redirect",
+        "isConditional": false,
+        "edge_confidence": 1,
+        "triggerElement": null,
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
+        "source": "page:Page:10",
+        "target": "page:OnboardingPage:8",
+        "linkType": "redirect",
+        "isConditional": true,
+        "edge_confidence": 1,
+        "triggerElement": null,
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-Page-10:page-SignIn-342:Link:001",
+        "source": "page:Page:10",
+        "target": "page:SignIn:342",
+        "linkType": "Link",
+        "isConditional": true,
+        "edge_confidence": 1,
+        "triggerElement": "el::route::index::page::link::get-started",
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-ProfilePage-10:page-OnboardingPage-8:redirect:001",
+        "source": "page:ProfilePage:10",
+        "target": "page:OnboardingPage:8",
+        "linkType": "redirect",
+        "isConditional": true,
+        "edge_confidence": 1,
+        "triggerElement": null,
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-ProfilePage-10:page-OnboardingPage-8:redirect:002",
+        "source": "page:ProfilePage:10",
+        "target": "page:OnboardingPage:8",
+        "linkType": "redirect",
+        "isConditional": true,
+        "edge_confidence": 1,
+        "triggerElement": null,
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-ProfilePage-10:page-SignIn-342:redirect:001",
+        "source": "page:ProfilePage:10",
+        "target": "page:SignIn:342",
+        "linkType": "redirect",
+        "isConditional": true,
+        "edge_confidence": 1,
+        "triggerElement": null,
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-SignIn-342:page-Page-10:Link:001",
+        "source": "page:SignIn:342",
+        "target": "page:Page:10",
+        "linkType": "Link",
+        "isConditional": false,
+        "edge_confidence": 1,
+        "triggerElement": "el::route::auth::signin::page::link::back",
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-SignIn-342:page-ProfilePage-10:Link:001",
+        "source": "page:SignIn:342",
+        "target": "page:ProfilePage:10",
+        "linkType": "Link",
+        "isConditional": true,
+        "edge_confidence": 1,
+        "triggerElement": "el::route::auth::signin::page::link::profile-settings",
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
+        "source": "page:SignIn:342",
+        "target": "page:VerifyRequest:7",
+        "linkType": "Link",
+        "isConditional": false,
+        "edge_confidence": 1,
+        "triggerElement": "el::route::auth::signin::page::function::handlesubmit-L99",
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-SignIn-342:page-VerifyRequest-7:router.push:001",
+        "source": "page:SignIn:342",
+        "target": "page:VerifyRequest:7",
+        "linkType": "router.push",
+        "isConditional": true,
+        "edge_confidence": 0.95,
+        "triggerElement": "el::route::auth::signin::page::function::handlesubmit-L99",
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-SignOut-8:page-Page-10:Link:001",
+        "source": "page:SignOut:8",
+        "target": "page:Page:10",
+        "linkType": "Link",
+        "isConditional": false,
+        "edge_confidence": 1,
+        "triggerElement": "el::route::auth::signout::page::link::back",
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-SignOut-8:page-Page-10:Link:002",
+        "source": "page:SignOut:8",
+        "target": "page:Page:10",
+        "linkType": "Link",
+        "isConditional": false,
+        "edge_confidence": 1,
+        "triggerElement": "el::route::auth::signout::page::link::cancel",
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-TasksPage-9:page-OnboardingPage-8:redirect:001",
+        "source": "page:TasksPage:9",
+        "target": "page:OnboardingPage:8",
+        "linkType": "redirect",
+        "isConditional": true,
+        "edge_confidence": 1,
+        "triggerElement": null,
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-TasksPage-9:page-OnboardingPage-8:redirect:002",
+        "source": "page:TasksPage:9",
+        "target": "page:OnboardingPage:8",
+        "linkType": "redirect",
+        "isConditional": true,
+        "edge_confidence": 1,
+        "triggerElement": null,
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-TasksPage-9:page-SignIn-342:redirect:001",
+        "source": "page:TasksPage:9",
+        "target": "page:SignIn:342",
+        "linkType": "redirect",
+        "isConditional": true,
+        "edge_confidence": 1,
+        "triggerElement": null,
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-VerifyRequest-7:page-Page-10:Link:001",
+        "source": "page:VerifyRequest:7",
+        "target": "page:Page:10",
+        "linkType": "Link",
+        "isConditional": false,
+        "edge_confidence": 1,
+        "triggerElement": "el::route::auth::verify::page::link::back",
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "edge:page-VerifyRequest-7:page-SignIn-342:Link:001",
+        "source": "page:VerifyRequest:7",
+        "target": "page:SignIn:342",
+        "linkType": "Link",
+        "isConditional": false,
+        "edge_confidence": 1,
+        "triggerElement": "el::route::auth::verify::page::link::try-signing-in-again",
+        "provenance": {
+          "source": "inferred",
+          "inference_method": "static_import_graph",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      }
+    ],
+    "paths": [
+      {
+        "id": "flow:page-AdminPage-8-to-page-DashboardPage-15:001",
+        "name": "Admin → Dashboard",
+        "entry_node": "page:AdminPage:8",
+        "terminal_node": "page:DashboardPage:15",
+        "steps": [
+          "page:AdminPage:8",
+          "page:DashboardPage:15"
+        ],
+        "edges": [
+          "edge:page-AdminPage-8:page-DashboardPage-15:redirect:001"
+        ],
+        "path_confidence": 0.95,
+        "has_cycle": false,
+        "step_count": 2,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-ErrorPage-47-to-page-ChatPage-9:001",
+        "name": "Error → Chat",
+        "entry_node": "page:ErrorPage:47",
+        "terminal_node": "page:ChatPage:9",
+        "steps": [
+          "page:ErrorPage:47",
+          "page:SignIn:342",
+          "page:VerifyRequest:7",
+          "page:Page:10",
+          "page:OnboardingPage:8",
+          "page:ChatPage:9"
+        ],
+        "edges": [
+          "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
+          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
+          "edge:page-VerifyRequest-7:page-Page-10:Link:001",
+          "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
+          "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+        ],
+        "path_confidence": 0.9,
+        "has_cycle": true,
+        "step_count": 6,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-ErrorPage-47-to-page-ChatPage-9:005",
+        "name": "Error → Chat",
+        "entry_node": "page:ErrorPage:47",
+        "terminal_node": "page:ChatPage:9",
+        "steps": [
+          "page:ErrorPage:47",
+          "page:SignIn:342",
+          "page:Page:10",
+          "page:OnboardingPage:8",
+          "page:ChatPage:9"
+        ],
+        "edges": [
+          "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
+          "edge:page-SignIn-342:page-Page-10:Link:001",
+          "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
+          "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+        ],
+        "path_confidence": 0.9,
+        "has_cycle": true,
+        "step_count": 5,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-ErrorPage-47-to-page-ChatPage-9:007",
+        "name": "Error → Chat",
+        "entry_node": "page:ErrorPage:47",
+        "terminal_node": "page:ChatPage:9",
+        "steps": [
+          "page:ErrorPage:47",
+          "page:SignIn:342",
+          "page:ProfilePage:10",
+          "page:OnboardingPage:8",
+          "page:ChatPage:9"
+        ],
+        "edges": [
+          "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
+          "edge:page-SignIn-342:page-ProfilePage-10:Link:001",
+          "edge:page-ProfilePage-10:page-OnboardingPage-8:redirect:001",
+          "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+        ],
+        "path_confidence": 0.85,
+        "has_cycle": true,
+        "step_count": 5,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-ErrorPage-47-to-page-ChatPage-9:011",
+        "name": "Error → Chat",
+        "entry_node": "page:ErrorPage:47",
+        "terminal_node": "page:ChatPage:9",
+        "steps": [
+          "page:ErrorPage:47",
+          "page:Page:10",
+          "page:SignIn:342",
+          "page:ProfilePage:10",
+          "page:OnboardingPage:8",
+          "page:ChatPage:9"
+        ],
+        "edges": [
+          "edge:page-ErrorPage-47:page-Page-10:Link:001",
+          "edge:page-Page-10:page-SignIn-342:Link:001",
+          "edge:page-SignIn-342:page-ProfilePage-10:Link:001",
+          "edge:page-ProfilePage-10:page-OnboardingPage-8:redirect:001",
+          "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+        ],
+        "path_confidence": 0.8,
+        "has_cycle": true,
+        "step_count": 6,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-ErrorPage-47-to-page-ChatPage-9:015",
+        "name": "Error → Chat",
+        "entry_node": "page:ErrorPage:47",
+        "terminal_node": "page:ChatPage:9",
+        "steps": [
+          "page:ErrorPage:47",
+          "page:Page:10",
+          "page:OnboardingPage:8",
+          "page:ChatPage:9"
+        ],
+        "edges": [
+          "edge:page-ErrorPage-47:page-Page-10:Link:001",
+          "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
+          "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+        ],
+        "path_confidence": 0.9,
+        "has_cycle": true,
+        "step_count": 4,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-ErrorPage-47-to-page-DashboardPage-15:001",
+        "name": "Error → Dashboard",
+        "entry_node": "page:ErrorPage:47",
+        "terminal_node": "page:DashboardPage:15",
+        "steps": [
+          "page:ErrorPage:47",
+          "page:SignIn:342",
+          "page:VerifyRequest:7",
+          "page:Page:10",
+          "page:DashboardPage:15"
+        ],
+        "edges": [
+          "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
+          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
+          "edge:page-VerifyRequest-7:page-Page-10:Link:001",
+          "edge:page-Page-10:page-DashboardPage-15:redirect:001"
+        ],
+        "path_confidence": 1,
+        "has_cycle": false,
+        "step_count": 5,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-ErrorPage-47-to-page-DashboardPage-15:003",
+        "name": "Error → Dashboard",
+        "entry_node": "page:ErrorPage:47",
+        "terminal_node": "page:DashboardPage:15",
+        "steps": [
+          "page:ErrorPage:47",
+          "page:SignIn:342",
+          "page:Page:10",
+          "page:DashboardPage:15"
+        ],
+        "edges": [
+          "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
+          "edge:page-SignIn-342:page-Page-10:Link:001",
+          "edge:page-Page-10:page-DashboardPage-15:redirect:001"
+        ],
+        "path_confidence": 1,
+        "has_cycle": false,
+        "step_count": 4,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-ErrorPage-47-to-page-DashboardPage-15:004",
+        "name": "Error → Dashboard",
+        "entry_node": "page:ErrorPage:47",
+        "terminal_node": "page:DashboardPage:15",
+        "steps": [
+          "page:ErrorPage:47",
+          "page:Page:10",
+          "page:DashboardPage:15"
+        ],
+        "edges": [
+          "edge:page-ErrorPage-47:page-Page-10:Link:001",
+          "edge:page-Page-10:page-DashboardPage-15:redirect:001"
+        ],
+        "path_confidence": 1,
+        "has_cycle": false,
+        "step_count": 3,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-ErrorPage-47-to-page-Page-10:001",
+        "name": "Error → Landing",
+        "entry_node": "page:ErrorPage:47",
+        "terminal_node": "page:Page:10",
+        "steps": [
+          "page:ErrorPage:47",
+          "page:SignIn:342",
+          "page:VerifyRequest:7",
+          "page:Page:10"
+        ],
+        "edges": [
+          "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
+          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
+          "edge:page-VerifyRequest-7:page-Page-10:Link:001"
+        ],
+        "path_confidence": 1,
+        "has_cycle": true,
+        "step_count": 4,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-ErrorPage-47-to-page-Page-10:003",
+        "name": "Error → Landing",
+        "entry_node": "page:ErrorPage:47",
+        "terminal_node": "page:Page:10",
+        "steps": [
+          "page:ErrorPage:47",
+          "page:SignIn:342",
+          "page:Page:10"
+        ],
+        "edges": [
+          "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
+          "edge:page-SignIn-342:page-Page-10:Link:001"
+        ],
+        "path_confidence": 1,
+        "has_cycle": true,
+        "step_count": 3,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-ErrorPage-47-to-page-SignIn-342:001",
+        "name": "Error → Signin",
+        "entry_node": "page:ErrorPage:47",
+        "terminal_node": "page:SignIn:342",
+        "steps": [
+          "page:ErrorPage:47",
+          "page:Page:10",
+          "page:SignIn:342"
+        ],
+        "edges": [
+          "edge:page-ErrorPage-47:page-Page-10:Link:001",
+          "edge:page-Page-10:page-SignIn-342:Link:001"
+        ],
+        "path_confidence": 0.95,
+        "has_cycle": true,
+        "step_count": 3,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-ErrorPage-47-to-page-VerifyRequest-7:001",
+        "name": "Error → Verify",
+        "entry_node": "page:ErrorPage:47",
+        "terminal_node": "page:VerifyRequest:7",
+        "steps": [
+          "page:ErrorPage:47",
+          "page:SignIn:342",
+          "page:VerifyRequest:7"
+        ],
+        "edges": [
+          "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
+          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001"
+        ],
+        "path_confidence": 1,
+        "has_cycle": true,
+        "step_count": 3,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-ErrorPage-47-to-page-VerifyRequest-7:003",
+        "name": "Error → Verify",
+        "entry_node": "page:ErrorPage:47",
+        "terminal_node": "page:VerifyRequest:7",
+        "steps": [
+          "page:ErrorPage:47",
+          "page:Page:10",
+          "page:SignIn:342",
+          "page:VerifyRequest:7"
+        ],
+        "edges": [
+          "edge:page-ErrorPage-47:page-Page-10:Link:001",
+          "edge:page-Page-10:page-SignIn-342:Link:001",
+          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001"
+        ],
+        "path_confidence": 0.95,
+        "has_cycle": true,
+        "step_count": 4,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-OnboardingPage-8-to-page-ChatPage-9:001",
+        "name": "Onboarding → Chat",
+        "entry_node": "page:OnboardingPage:8",
+        "terminal_node": "page:ChatPage:9",
+        "steps": [
+          "page:OnboardingPage:8",
+          "page:ChatPage:9"
+        ],
+        "edges": [
+          "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+        ],
+        "path_confidence": 0.95,
+        "has_cycle": true,
+        "step_count": 2,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-Page-10-to-page-ChatPage-9:001",
+        "name": "Landing → Chat",
+        "entry_node": "page:Page:10",
+        "terminal_node": "page:ChatPage:9",
+        "steps": [
+          "page:Page:10",
+          "page:SignIn:342",
+          "page:ProfilePage:10",
+          "page:OnboardingPage:8",
+          "page:ChatPage:9"
+        ],
+        "edges": [
+          "edge:page-Page-10:page-SignIn-342:Link:001",
+          "edge:page-SignIn-342:page-ProfilePage-10:Link:001",
+          "edge:page-ProfilePage-10:page-OnboardingPage-8:redirect:001",
+          "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+        ],
+        "path_confidence": 0.8,
+        "has_cycle": true,
+        "step_count": 5,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-Page-10-to-page-ChatPage-9:005",
+        "name": "Landing → Chat",
+        "entry_node": "page:Page:10",
+        "terminal_node": "page:ChatPage:9",
+        "steps": [
+          "page:Page:10",
+          "page:OnboardingPage:8",
+          "page:ChatPage:9"
+        ],
+        "edges": [
+          "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
+          "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+        ],
+        "path_confidence": 0.9,
+        "has_cycle": true,
+        "step_count": 3,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-Page-10-to-page-DashboardPage-15:001",
+        "name": "Landing → Dashboard",
+        "entry_node": "page:Page:10",
+        "terminal_node": "page:DashboardPage:15",
+        "steps": [
+          "page:Page:10",
+          "page:DashboardPage:15"
+        ],
+        "edges": [
+          "edge:page-Page-10:page-DashboardPage-15:redirect:001"
+        ],
+        "path_confidence": 1,
+        "has_cycle": false,
+        "step_count": 2,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-Page-10-to-page-SignIn-342:001",
+        "name": "Landing → Signin",
+        "entry_node": "page:Page:10",
+        "terminal_node": "page:SignIn:342",
+        "steps": [
+          "page:Page:10",
+          "page:SignIn:342"
+        ],
+        "edges": [
+          "edge:page-Page-10:page-SignIn-342:Link:001"
+        ],
+        "path_confidence": 0.95,
+        "has_cycle": true,
+        "step_count": 2,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-Page-10-to-page-VerifyRequest-7:001",
+        "name": "Landing → Verify",
+        "entry_node": "page:Page:10",
+        "terminal_node": "page:VerifyRequest:7",
+        "steps": [
+          "page:Page:10",
+          "page:SignIn:342",
+          "page:VerifyRequest:7"
+        ],
+        "edges": [
+          "edge:page-Page-10:page-SignIn-342:Link:001",
+          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001"
+        ],
+        "path_confidence": 0.95,
+        "has_cycle": true,
+        "step_count": 3,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-SignIn-342-to-page-ChatPage-9:001",
+        "name": "Signin → Chat",
+        "entry_node": "page:SignIn:342",
+        "terminal_node": "page:ChatPage:9",
+        "steps": [
+          "page:SignIn:342",
+          "page:VerifyRequest:7",
+          "page:Page:10",
+          "page:OnboardingPage:8",
+          "page:ChatPage:9"
+        ],
+        "edges": [
+          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
+          "edge:page-VerifyRequest-7:page-Page-10:Link:001",
+          "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
+          "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+        ],
+        "path_confidence": 0.9,
+        "has_cycle": true,
+        "step_count": 5,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-SignIn-342-to-page-ChatPage-9:005",
+        "name": "Signin → Chat",
+        "entry_node": "page:SignIn:342",
+        "terminal_node": "page:ChatPage:9",
+        "steps": [
+          "page:SignIn:342",
+          "page:Page:10",
+          "page:OnboardingPage:8",
+          "page:ChatPage:9"
+        ],
+        "edges": [
+          "edge:page-SignIn-342:page-Page-10:Link:001",
+          "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
+          "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+        ],
+        "path_confidence": 0.9,
+        "has_cycle": true,
+        "step_count": 4,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-SignIn-342-to-page-ChatPage-9:007",
+        "name": "Signin → Chat",
+        "entry_node": "page:SignIn:342",
+        "terminal_node": "page:ChatPage:9",
+        "steps": [
+          "page:SignIn:342",
+          "page:ProfilePage:10",
+          "page:OnboardingPage:8",
+          "page:ChatPage:9"
+        ],
+        "edges": [
+          "edge:page-SignIn-342:page-ProfilePage-10:Link:001",
+          "edge:page-ProfilePage-10:page-OnboardingPage-8:redirect:001",
+          "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+        ],
+        "path_confidence": 0.85,
+        "has_cycle": true,
+        "step_count": 4,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-SignIn-342-to-page-DashboardPage-15:001",
+        "name": "Signin → Dashboard",
+        "entry_node": "page:SignIn:342",
+        "terminal_node": "page:DashboardPage:15",
+        "steps": [
+          "page:SignIn:342",
+          "page:VerifyRequest:7",
+          "page:Page:10",
+          "page:DashboardPage:15"
+        ],
+        "edges": [
+          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
+          "edge:page-VerifyRequest-7:page-Page-10:Link:001",
+          "edge:page-Page-10:page-DashboardPage-15:redirect:001"
+        ],
+        "path_confidence": 1,
+        "has_cycle": false,
+        "step_count": 4,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-SignIn-342-to-page-DashboardPage-15:003",
+        "name": "Signin → Dashboard",
+        "entry_node": "page:SignIn:342",
+        "terminal_node": "page:DashboardPage:15",
+        "steps": [
+          "page:SignIn:342",
+          "page:Page:10",
+          "page:DashboardPage:15"
+        ],
+        "edges": [
+          "edge:page-SignIn-342:page-Page-10:Link:001",
+          "edge:page-Page-10:page-DashboardPage-15:redirect:001"
+        ],
+        "path_confidence": 1,
+        "has_cycle": false,
+        "step_count": 3,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-SignIn-342-to-page-Page-10:001",
+        "name": "Signin → Landing",
+        "entry_node": "page:SignIn:342",
+        "terminal_node": "page:Page:10",
+        "steps": [
+          "page:SignIn:342",
+          "page:VerifyRequest:7",
+          "page:Page:10"
+        ],
+        "edges": [
+          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
+          "edge:page-VerifyRequest-7:page-Page-10:Link:001"
+        ],
+        "path_confidence": 1,
+        "has_cycle": true,
+        "step_count": 3,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-SignIn-342-to-page-Page-10:003",
+        "name": "Signin → Landing",
+        "entry_node": "page:SignIn:342",
+        "terminal_node": "page:Page:10",
+        "steps": [
+          "page:SignIn:342",
+          "page:Page:10"
+        ],
+        "edges": [
+          "edge:page-SignIn-342:page-Page-10:Link:001"
+        ],
+        "path_confidence": 1,
+        "has_cycle": true,
+        "step_count": 2,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-SignIn-342-to-page-VerifyRequest-7:001",
+        "name": "Signin → Verify",
+        "entry_node": "page:SignIn:342",
+        "terminal_node": "page:VerifyRequest:7",
+        "steps": [
+          "page:SignIn:342",
+          "page:VerifyRequest:7"
+        ],
+        "edges": [
+          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001"
+        ],
+        "path_confidence": 1,
+        "has_cycle": true,
+        "step_count": 2,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-SignOut-8-to-page-ChatPage-9:001",
+        "name": "Signout → Chat",
+        "entry_node": "page:SignOut:8",
+        "terminal_node": "page:ChatPage:9",
+        "steps": [
+          "page:SignOut:8",
+          "page:Page:10",
+          "page:SignIn:342",
+          "page:ProfilePage:10",
+          "page:OnboardingPage:8",
+          "page:ChatPage:9"
+        ],
+        "edges": [
+          "edge:page-SignOut-8:page-Page-10:Link:001",
+          "edge:page-Page-10:page-SignIn-342:Link:001",
+          "edge:page-SignIn-342:page-ProfilePage-10:Link:001",
+          "edge:page-ProfilePage-10:page-OnboardingPage-8:redirect:001",
+          "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+        ],
+        "path_confidence": 0.8,
+        "has_cycle": true,
+        "step_count": 6,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-SignOut-8-to-page-ChatPage-9:005",
+        "name": "Signout → Chat",
+        "entry_node": "page:SignOut:8",
+        "terminal_node": "page:ChatPage:9",
+        "steps": [
+          "page:SignOut:8",
+          "page:Page:10",
+          "page:OnboardingPage:8",
+          "page:ChatPage:9"
+        ],
+        "edges": [
+          "edge:page-SignOut-8:page-Page-10:Link:001",
+          "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
+          "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+        ],
+        "path_confidence": 0.9,
+        "has_cycle": true,
+        "step_count": 4,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-SignOut-8-to-page-DashboardPage-15:001",
+        "name": "Signout → Dashboard",
+        "entry_node": "page:SignOut:8",
+        "terminal_node": "page:DashboardPage:15",
+        "steps": [
+          "page:SignOut:8",
+          "page:Page:10",
+          "page:DashboardPage:15"
+        ],
+        "edges": [
+          "edge:page-SignOut-8:page-Page-10:Link:001",
+          "edge:page-Page-10:page-DashboardPage-15:redirect:001"
+        ],
+        "path_confidence": 1,
+        "has_cycle": false,
+        "step_count": 3,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-SignOut-8-to-page-SignIn-342:001",
+        "name": "Signout → Signin",
+        "entry_node": "page:SignOut:8",
+        "terminal_node": "page:SignIn:342",
+        "steps": [
+          "page:SignOut:8",
+          "page:Page:10",
+          "page:SignIn:342"
+        ],
+        "edges": [
+          "edge:page-SignOut-8:page-Page-10:Link:001",
+          "edge:page-Page-10:page-SignIn-342:Link:001"
+        ],
+        "path_confidence": 0.95,
+        "has_cycle": true,
+        "step_count": 3,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-SignOut-8-to-page-VerifyRequest-7:001",
+        "name": "Signout → Verify",
+        "entry_node": "page:SignOut:8",
+        "terminal_node": "page:VerifyRequest:7",
+        "steps": [
+          "page:SignOut:8",
+          "page:Page:10",
+          "page:SignIn:342",
+          "page:VerifyRequest:7"
+        ],
+        "edges": [
+          "edge:page-SignOut-8:page-Page-10:Link:001",
+          "edge:page-Page-10:page-SignIn-342:Link:001",
+          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001"
+        ],
+        "path_confidence": 0.95,
+        "has_cycle": true,
+        "step_count": 4,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:page-TasksPage-9-to-page-ChatPage-9:001",
+        "name": "Tasks → Chat",
+        "entry_node": "page:TasksPage:9",
+        "terminal_node": "page:ChatPage:9",
+        "steps": [
+          "page:TasksPage:9",
+          "page:OnboardingPage:8",
+          "page:ChatPage:9"
+        ],
+        "edges": [
+          "edge:page-TasksPage-9:page-OnboardingPage-8:redirect:001",
+          "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
+        ],
+        "path_confidence": 0.9,
+        "has_cycle": true,
+        "step_count": 3,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:route-api-transcribe-POST-8-to-route-api-transcribe-POST-8:001",
+        "name": "Transcribe",
+        "entry_node": "route:api-transcribe:POST:8",
+        "terminal_node": "route:api-transcribe:POST:8",
+        "steps": [
+          "route:api-transcribe:POST:8"
+        ],
+        "edges": [],
+        "path_confidence": 1,
+        "has_cycle": false,
+        "step_count": 1,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:route-api-upload-POST-4-to-route-api-upload-POST-4:001",
+        "name": "Upload",
+        "entry_node": "route:api-upload:POST:4",
+        "terminal_node": "route:api-upload:POST:4",
+        "steps": [
+          "route:api-upload:POST:4"
+        ],
+        "edges": [],
+        "path_confidence": 1,
+        "has_cycle": false,
+        "step_count": 1,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      },
+      {
+        "id": "flow:route-handler-19-to-route-handler-19:001",
+        "name": "[trpc]",
+        "entry_node": "route:handler:19",
+        "terminal_node": "route:handler:19",
+        "steps": [
+          "route:handler:19"
+        ],
+        "edges": [],
+        "path_confidence": 1,
+        "has_cycle": false,
+        "step_count": 1,
+        "provenance": {
+          "source": "inferred",
+          "first_detected": "2026-03-22",
+          "last_confirmed": "2026-03-22",
+          "design_ref": null
+        }
+      }
+    ]
   }
 }

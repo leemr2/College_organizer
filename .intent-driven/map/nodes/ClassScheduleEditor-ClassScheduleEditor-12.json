@@ -1,7 +1,7 @@
 {
   "id": "ClassScheduleEditor:ClassScheduleEditor:12",
   "label": "ClassScheduleEditor",
-  "file": "C:/Users/drlee/College_Organizer/src/components/profile/ClassScheduleEditor.tsx",
+  "file": "C:/Users/drlee/College_organizer/src/components/profile/ClassScheduleEditor.tsx",
   "type": "react_component",
   "layer": "presentation",
   "has_auth_gate": false,
@@ -48,7 +48,7 @@
     "source": "pre_idd",
     "confidence": 0.75,
     "design_ref": null,
-    "first_scanned": "2026-03-22",
-    "last_confirmed": "2026-03-22"
+    "first_scanned": "2026-04-01",
+    "last_confirmed": "2026-04-01"
   }
 }

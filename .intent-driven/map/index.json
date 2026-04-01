@@ -1,7 +1,7 @@
 {
   "schema_version": "2.0",
   "project": {
-    "name": "College_Organizer",
+    "name": "College_organizer",
     "stack": "security,+inngest,+nextjs,+ai_client,+trpc,+prisma,+storybook",
     "file_count": 111,
     "node_count": 217
@@ -34,7 +34,7 @@
     }
   },
   "violations": {
-    "total": 7,
+    "total": 5,
     "critical": 2,
     "violation_index": {
       "WARN-AI-001": {
@@ -101,14 +101,14 @@
     {
       "id": "infrastructure",
       "label": "Infrastructure",
-      "node_count": 12,
+      "node_count": 13,
       "active_violations": [],
       "ref": "domains/infrastructure.json"
     },
     {
       "id": "business",
       "label": "Business Logic",
-      "node_count": 70,
+      "node_count": 69,
       "active_violations": [
         "WARN-AI-001",
         "WARN-AI-002"
@@ -140,8 +140,8 @@
     "scope_boundary": "domains listed in this index only — justify any addition"
   },
   "ai_context": {
-    "summary": "TypeScript codebase with 212 semantic nodes across 8 domain(s): Presentation, API Routes, Authentication, Data Access, Infrastructure, Business Logic, Type Contracts, Miscellaneous. Frameworks detected: security, inngest, nextjs, ai_client, trpc, prisma. 2 critical constraint violation(s) require attention.",
-    "token_estimate": 234
+    "summary": "TypeScript codebase with 212 semantic nodes across 8 domain(s): Presentation, API Routes, Authentication, Data Access, Infrastructure, Business Logic, Type Contracts, Miscellaneous. Frameworks detected: security, inngest, nextjs, ai_client, trpc, prisma, storybook. 2 critical constraint violation(s) require attention.",
+    "token_estimate": 210
   },
   "flows": {
     "total_paths": 37,

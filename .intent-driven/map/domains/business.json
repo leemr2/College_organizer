@@ -5,8 +5,8 @@
   "patterns": [
     "ai_service",
     "ai_provider_client",
-    "generic_function",
     "input_validation",
+    "generic_function",
     "auth_gate",
     "pii_handling",
     "utility"
@@ -158,20 +158,18 @@
       "id": "aiClient:AI_MODELS:43",
       "label": "AI_MODELS",
       "type": "ai_provider_client",
-      "violation": "WARN-AI-001",
       "ref": "nodes/aiClient-AI_MODELS-43.json"
     },
     {
       "id": "aiClient:AIModel:57",
       "label": "AIModel",
-      "type": "generic_function",
+      "type": "ai_provider_client",
       "ref": "nodes/aiClient-AIModel-57.json"
     },
     {
       "id": "aiClient:GenerateChatCompletionOptions:61",
       "label": "GenerateChatCompletionOptions",
       "type": "ai_provider_client",
-      "violation": "WARN-AI-001",
       "ref": "nodes/aiClient-GenerateChatCompletionOptions-61.json"
     },
     {
@@ -240,12 +238,6 @@
       "label": "WelcomeEmail",
       "type": "generic_function",
       "ref": "nodes/WelcomeEmail-WelcomeEmail-7.json"
-    },
-    {
-      "id": "inngest:userRegistered:3",
-      "label": "userRegistered",
-      "type": "generic_function",
-      "ref": "nodes/inngest-userRegistered-3.json"
     },
     {
       "id": "storage:uploadFile:11",

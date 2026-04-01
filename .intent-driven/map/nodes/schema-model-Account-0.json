@@ -1,7 +1,7 @@
 {
   "id": "schema:model:Account:0",
   "label": "Account",
-  "file": "C:/Users/drlee/College_Organizer/prisma/schema.prisma",
+  "file": "C:/Users/drlee/College_organizer/prisma/schema.prisma",
   "type": "orm_model",
   "layer": "data_access",
   "has_auth_gate": null,
@@ -20,7 +20,7 @@
     "source": "pre_idd",
     "confidence": 0.98,
     "design_ref": null,
-    "first_scanned": "2026-03-22",
-    "last_confirmed": "2026-03-22"
+    "first_scanned": "2026-04-01",
+    "last_confirmed": "2026-04-01"
   }
 }

@@ -7,11 +7,11 @@
     {
       "node_id": "aiClient:generateChatCompletion:198",
       "status": "failing",
-      "file": "C:/Users/drlee/College_Organizer/src/lib/aiClient.ts",
+      "file": "C:/Users/drlee/College_organizer/src/lib/aiClient.ts",
       "detail": "Raw API key access — use a config module to centralize secret management"
     }
   ],
   "remediation": "Move API keys to a config module or environment abstraction; avoid process.env in provider call sites.",
   "referenced_by_templates": [],
-  "first_detected": "2026-03-22"
+  "first_detected": "2026-04-01"
 }

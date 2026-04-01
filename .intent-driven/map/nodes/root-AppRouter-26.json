@@ -1,7 +1,7 @@
 {
   "id": "root:AppRouter:26",
   "label": "AppRouter",
-  "file": "C:/Users/drlee/College_Organizer/src/lib/api/root.ts",
+  "file": "C:/Users/drlee/College_organizer/src/lib/api/root.ts",
   "type": "generic_function",
   "layer": "business_logic",
   "has_auth_gate": null,
@@ -76,7 +76,7 @@
     "source": "pre_idd",
     "confidence": 0.1,
     "design_ref": null,
-    "first_scanned": "2026-03-22",
-    "last_confirmed": "2026-03-22"
+    "first_scanned": "2026-04-01",
+    "last_confirmed": "2026-04-01"
   }
 }

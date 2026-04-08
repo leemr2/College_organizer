@@ -6,7 +6,8 @@
     "filename": "ChatInterface.tsx",
     "relative_path": "src/components/chat/ChatInterface.tsx"
   },
-  "type": "input_validation",
+  "nodeKind": "unknown",
+  "nodeSubtype": "unknown",
   "layer": "presentation",
   "auth": {
     "required": null,
@@ -29,7 +30,6 @@
     "input_validated": null,
     "error_handling": "unknown"
   },
-  "has_auth_gate": null,
   "has_pii": null,
   "procedures": {
     "mutations": [],
@@ -50,10 +50,12 @@
     "types:ConversationMode:103",
     "types:ScheduleSuggestion:152"
   ],
-  "constraint_check": {},
   "violations": {
     "active": []
   },
+  "patterns": [
+    "input_validation"
+  ],
   "adjacent": [
     {
       "id": "react:api:29",
@@ -87,5 +89,8 @@
     "design_ref": null,
     "first_scanned": "2026-04-08",
     "last_confirmed": "2026-04-08"
-  }
+  },
+  "domains": [
+    "presentation"
+  ]
 }

@@ -6,7 +6,8 @@
     "filename": "webSearch.ts",
     "relative_path": "src/lib/ai/webSearch.ts"
   },
-  "type": "ai_service",
+  "nodeKind": "service",
+  "nodeSubtype": "generic_service",
   "layer": "business_logic",
   "auth": {
     "required": null,
@@ -22,7 +23,6 @@
     "input_validated": false,
     "error_handling": "absent"
   },
-  "has_auth_gate": false,
   "has_pii": false,
   "procedures": {
     "mutations": [],
@@ -32,10 +32,12 @@
     "searchBestPractices"
   ],
   "uses": [],
-  "constraint_check": {},
   "violations": {
     "active": []
   },
+  "patterns": [
+    "ai_service"
+  ],
   "adjacent": [],
   "provenance": {
     "source": "pre_idd",
@@ -43,5 +45,8 @@
     "design_ref": null,
     "first_scanned": "2026-04-08",
     "last_confirmed": "2026-04-08"
-  }
+  },
+  "domains": [
+    "business"
+  ]
 }

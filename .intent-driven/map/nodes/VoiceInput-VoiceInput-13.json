@@ -6,7 +6,8 @@
     "filename": "VoiceInput.tsx",
     "relative_path": "src/components/chat/VoiceInput.tsx"
   },
-  "type": "react_component",
+  "nodeKind": "utility",
+  "nodeSubtype": "utility",
   "layer": "presentation",
   "auth": {
     "required": null,
@@ -22,7 +23,6 @@
     "input_validated": false,
     "error_handling": "absent"
   },
-  "has_auth_gate": false,
   "has_pii": false,
   "procedures": {
     "mutations": [],
@@ -35,10 +35,12 @@
     "SpeechToTextArea:SpeechToTextAreaRef:28",
     "SpeechToTextArea:SpeechToTextArea:33"
   ],
-  "constraint_check": {},
   "violations": {
     "active": []
   },
+  "patterns": [
+    "react_component"
+  ],
   "adjacent": [],
   "provenance": {
     "source": "pre_idd",
@@ -46,5 +48,8 @@
     "design_ref": null,
     "first_scanned": "2026-04-08",
     "last_confirmed": "2026-04-08"
-  }
+  },
+  "domains": [
+    "presentation"
+  ]
 }

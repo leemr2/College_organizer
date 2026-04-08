@@ -1,6 +1,6 @@
 {
   "schema_version": "1.1",
-  "generated_at": "2026-04-08T04:41:02.809Z",
+  "generated_at": "2026-04-08T12:59:53.802Z",
   "project": {
     "name": "College_organizer",
     "root": "D:\\drlee\\College_organizer",
@@ -14268,7 +14268,7 @@
   },
   "routeMap": {
     "meta": {
-      "scannedAt": "2026-04-08T04:41:02.506Z",
+      "scannedAt": "2026-04-08T12:59:53.258Z",
       "routingMode": "app",
       "repoRoot": "D:\\drlee\\College_organizer",
       "totalRoutes": 14,
@@ -15278,7 +15278,7 @@
         "title": "Orphaned route",
         "detail": "/admin has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /admin, or remove the route if no longer needed.",
-        "detectedAt": "2026-04-08T04:41:02.506Z"
+        "detectedAt": "2026-04-08T12:59:53.259Z"
       },
       {
         "id": "finding::NAV-001::tasks",
@@ -15291,7 +15291,7 @@
         "title": "Orphaned route",
         "detail": "/tasks has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /tasks, or remove the route if no longer needed.",
-        "detectedAt": "2026-04-08T04:41:02.506Z"
+        "detectedAt": "2026-04-08T12:59:53.259Z"
       },
       {
         "id": "finding::NAV-001::auth-error",
@@ -15304,7 +15304,7 @@
         "title": "Orphaned route",
         "detail": "/auth/error has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /auth/error, or remove the route if no longer needed.",
-        "detectedAt": "2026-04-08T04:41:02.506Z"
+        "detectedAt": "2026-04-08T12:59:53.259Z"
       },
       {
         "id": "finding::NAV-001::auth-signout",
@@ -15317,7 +15317,7 @@
         "title": "Orphaned route",
         "detail": "/auth/signout has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /auth/signout, or remove the route if no longer needed.",
-        "detectedAt": "2026-04-08T04:41:02.506Z"
+        "detectedAt": "2026-04-08T12:59:53.259Z"
       },
       {
         "id": "finding::NAV-004::admin",
@@ -15330,7 +15330,7 @@
         "title": "Unreachable route",
         "detail": "/admin cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-04-08T04:41:02.506Z"
+        "detectedAt": "2026-04-08T12:59:53.259Z"
       },
       {
         "id": "finding::NAV-004::tasks",
@@ -15343,7 +15343,7 @@
         "title": "Unreachable route",
         "detail": "/tasks cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-04-08T04:41:02.506Z"
+        "detectedAt": "2026-04-08T12:59:53.259Z"
       },
       {
         "id": "finding::NAV-004::auth-error",
@@ -15356,7 +15356,7 @@
         "title": "Unreachable route",
         "detail": "/auth/error cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-04-08T04:41:02.506Z"
+        "detectedAt": "2026-04-08T12:59:53.259Z"
       },
       {
         "id": "finding::NAV-004::auth-signout",
@@ -15369,7 +15369,7 @@
         "title": "Unreachable route",
         "detail": "/auth/signout cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-04-08T04:41:02.506Z"
+        "detectedAt": "2026-04-08T12:59:53.259Z"
       }
     ],
     "findingSummary": {
@@ -16865,7 +16865,7 @@
     "unreachable_nodes": 0
   },
   "scan_meta": {
-    "scan_timestamp": "2026-04-08T04:41:02.809Z",
-    "scan_duration_ms": 408
+    "scan_timestamp": "2026-04-08T12:59:53.802Z",
+    "scan_duration_ms": 698
   }
 }

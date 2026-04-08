@@ -6,7 +6,8 @@
     "filename": "sendEmail.ts",
     "relative_path": "src/lib/email/sendEmail.ts"
   },
-  "type": "pii_handling",
+  "nodeKind": "unknown",
+  "nodeSubtype": "unknown",
   "layer": "business_logic",
   "auth": {
     "required": null,
@@ -22,7 +23,6 @@
     "input_validated": null,
     "error_handling": "unknown"
   },
-  "has_auth_gate": null,
   "has_pii": true,
   "procedures": {
     "mutations": [],
@@ -35,10 +35,12 @@
     "WelcomeEmail:WelcomeEmail:7",
     "AccessApprovedEmail:AccessApprovedEmail:7"
   ],
-  "constraint_check": {},
   "violations": {
     "active": []
   },
+  "patterns": [
+    "pii_handling"
+  ],
   "adjacent": [],
   "provenance": {
     "source": "pre_idd",
@@ -46,5 +48,8 @@
     "design_ref": null,
     "first_scanned": "2026-04-08",
     "last_confirmed": "2026-04-08"
-  }
+  },
+  "domains": [
+    "business"
+  ]
 }

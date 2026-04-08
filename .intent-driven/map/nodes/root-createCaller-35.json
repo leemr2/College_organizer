@@ -6,7 +6,8 @@
     "filename": "root.ts",
     "relative_path": "src/lib/api/root.ts"
   },
-  "type": "generic_function",
+  "nodeKind": "utility",
+  "nodeSubtype": "utility",
   "layer": "business_logic",
   "auth": {
     "required": null,
@@ -22,7 +23,6 @@
     "input_validated": null,
     "error_handling": "unknown"
   },
-  "has_auth_gate": null,
   "has_pii": null,
   "procedures": {
     "mutations": [],
@@ -42,10 +42,12 @@
     "scheduleRouter:scheduleRouter:8",
     "authRouter:authRouter:7"
   ],
-  "constraint_check": {},
   "violations": {
     "active": []
   },
+  "patterns": [
+    "generic_function"
+  ],
   "adjacent": [
     {
       "id": "trpc:createCallerFactory:62",
@@ -99,5 +101,8 @@
     "design_ref": null,
     "first_scanned": "2026-04-08",
     "last_confirmed": "2026-04-08"
-  }
+  },
+  "domains": [
+    "business"
+  ]
 }

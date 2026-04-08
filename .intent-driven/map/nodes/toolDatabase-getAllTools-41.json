@@ -6,7 +6,8 @@
     "filename": "toolDatabase.ts",
     "relative_path": "src/lib/utils/toolDatabase.ts"
   },
-  "type": "utility",
+  "nodeKind": "utility",
+  "nodeSubtype": "utility",
   "layer": "business_logic",
   "auth": {
     "required": null,
@@ -22,7 +23,6 @@
     "input_validated": null,
     "error_handling": "unknown"
   },
-  "has_auth_gate": null,
   "has_pii": null,
   "procedures": {
     "mutations": [],
@@ -32,10 +32,12 @@
     "getAllTools"
   ],
   "uses": [],
-  "constraint_check": {},
   "violations": {
     "active": []
   },
+  "patterns": [
+    "utility"
+  ],
   "adjacent": [],
   "provenance": {
     "source": "pre_idd",
@@ -43,5 +45,8 @@
     "design_ref": null,
     "first_scanned": "2026-04-08",
     "last_confirmed": "2026-04-08"
-  }
+  },
+  "domains": [
+    "business"
+  ]
 }

@@ -6,7 +6,8 @@
     "filename": "SecurityEditor.tsx",
     "relative_path": "src/components/profile/SecurityEditor.tsx"
   },
-  "type": "pii_handling",
+  "nodeKind": "unknown",
+  "nodeSubtype": "unknown",
   "layer": "presentation",
   "auth": {
     "required": null,
@@ -22,7 +23,6 @@
     "input_validated": null,
     "error_handling": "unknown"
   },
-  "has_auth_gate": null,
   "has_pii": true,
   "procedures": {
     "mutations": [],
@@ -34,10 +34,12 @@
   "uses": [
     "react:api:29"
   ],
-  "constraint_check": {},
   "violations": {
     "active": []
   },
+  "patterns": [
+    "pii_handling"
+  ],
   "adjacent": [
     {
       "id": "react:api:29",
@@ -51,5 +53,8 @@
     "design_ref": null,
     "first_scanned": "2026-04-08",
     "last_confirmed": "2026-04-08"
-  }
+  },
+  "domains": [
+    "presentation"
+  ]
 }

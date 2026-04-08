@@ -6,7 +6,8 @@
     "filename": "trpc.ts",
     "relative_path": "src/lib/api/trpc.ts"
   },
-  "type": "public_procedure",
+  "nodeKind": "service",
+  "nodeSubtype": "generic_service",
   "layer": "business_logic",
   "auth": {
     "required": false,
@@ -22,7 +23,6 @@
     "input_validated": false,
     "error_handling": "absent"
   },
-  "has_auth_gate": false,
   "has_pii": false,
   "procedures": {
     "mutations": [],
@@ -32,10 +32,12 @@
     "publicProcedure"
   ],
   "uses": [],
-  "constraint_check": {},
   "violations": {
     "active": []
   },
+  "patterns": [
+    "public_procedure"
+  ],
   "adjacent": [],
   "provenance": {
     "source": "pre_idd",
@@ -43,5 +45,8 @@
     "design_ref": null,
     "first_scanned": "2026-04-08",
     "last_confirmed": "2026-04-08"
-  }
+  },
+  "domains": [
+    "api"
+  ]
 }

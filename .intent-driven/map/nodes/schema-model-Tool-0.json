@@ -6,7 +6,8 @@
     "filename": "schema.prisma",
     "relative_path": "prisma/schema.prisma"
   },
-  "type": "orm_model",
+  "nodeKind": "repository",
+  "nodeSubtype": "repository",
   "layer": "data_access",
   "auth": {
     "required": null,
@@ -22,7 +23,6 @@
     "input_validated": null,
     "error_handling": "unknown"
   },
-  "has_auth_gate": null,
   "has_pii": null,
   "procedures": {
     "mutations": [],
@@ -32,10 +32,12 @@
     "Tool"
   ],
   "uses": [],
-  "constraint_check": {},
   "violations": {
     "active": []
   },
+  "patterns": [
+    "orm_model"
+  ],
   "adjacent": [],
   "provenance": {
     "source": "pre_idd",
@@ -43,5 +45,8 @@
     "design_ref": null,
     "first_scanned": "2026-04-08",
     "last_confirmed": "2026-04-08"
-  }
+  },
+  "domains": [
+    "data"
+  ]
 }

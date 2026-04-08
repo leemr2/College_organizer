@@ -6,7 +6,8 @@
     "filename": "aiClient.ts",
     "relative_path": "src/lib/aiClient.ts"
   },
-  "type": "ai_provider_client",
+  "nodeKind": "unknown",
+  "nodeSubtype": "unknown",
   "layer": "business_logic",
   "auth": {
     "required": null,
@@ -29,7 +30,6 @@
     "input_validated": false,
     "error_handling": "absent"
   },
-  "has_auth_gate": false,
   "has_pii": false,
   "procedures": {
     "mutations": [],
@@ -39,10 +39,6 @@
     "generateChatCompletion"
   ],
   "uses": [],
-  "constraint_check": {
-    "WARN-AI-001": "failing — AI input passed to provider without validation",
-    "WARN-AI-002": "failing — Raw API key access — use a config module to centralize secret management"
-  },
   "violations": {
     "active": [
       {
@@ -71,6 +67,10 @@
       }
     ]
   },
+  "patterns": [
+    "ai_call",
+    "ai_provider_client"
+  ],
   "adjacent": [],
   "provenance": {
     "source": "pre_idd",
@@ -78,5 +78,8 @@
     "design_ref": null,
     "first_scanned": "2026-04-08",
     "last_confirmed": "2026-04-08"
-  }
+  },
+  "domains": [
+    "business"
+  ]
 }

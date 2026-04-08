@@ -6,7 +6,8 @@
     "filename": "NavigationBar.tsx",
     "relative_path": "src/components/NavigationBar.tsx"
   },
-  "type": "auth_gate",
+  "nodeKind": "unknown",
+  "nodeSubtype": "unknown",
   "layer": "presentation",
   "auth": {
     "required": true,
@@ -22,7 +23,6 @@
     "input_validated": false,
     "error_handling": "absent"
   },
-  "has_auth_gate": true,
   "has_pii": false,
   "procedures": {
     "mutations": [],
@@ -34,10 +34,12 @@
   "uses": [
     "Clock:Clock:13"
   ],
-  "constraint_check": {},
   "violations": {
     "active": []
   },
+  "patterns": [
+    "auth_gate"
+  ],
   "adjacent": [],
   "provenance": {
     "source": "pre_idd",
@@ -46,6 +48,9 @@
     "first_scanned": "2026-04-08",
     "last_confirmed": "2026-04-08"
   },
+  "domains": [
+    "presentation"
+  ],
   "decisions": {
     "auth_gate": "protectedProcedure"
   }

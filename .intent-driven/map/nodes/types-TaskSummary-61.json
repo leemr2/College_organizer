@@ -6,7 +6,8 @@
     "filename": "types.ts",
     "relative_path": "src/lib/types.ts"
   },
-  "type": "type_definition",
+  "nodeKind": "utility",
+  "nodeSubtype": "utility",
   "layer": "business_logic",
   "auth": {
     "required": null,
@@ -22,7 +23,6 @@
     "input_validated": null,
     "error_handling": "unknown"
   },
-  "has_auth_gate": null,
   "has_pii": null,
   "procedures": {
     "mutations": [],
@@ -32,10 +32,12 @@
     "TaskSummary"
   ],
   "uses": [],
-  "constraint_check": {},
   "violations": {
     "active": []
   },
+  "patterns": [
+    "type_definition"
+  ],
   "adjacent": [],
   "provenance": {
     "source": "pre_idd",
@@ -43,5 +45,8 @@
     "design_ref": null,
     "first_scanned": "2026-04-08",
     "last_confirmed": "2026-04-08"
-  }
+  },
+  "domains": [
+    "types"
+  ]
 }

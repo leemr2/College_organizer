@@ -6,7 +6,8 @@
     "filename": "trpc.ts",
     "relative_path": "src/lib/api/trpc.ts"
   },
-  "type": "auth_gate",
+  "nodeKind": "unknown",
+  "nodeSubtype": "unknown",
   "layer": "business_logic",
   "auth": {
     "required": true,
@@ -22,7 +23,6 @@
     "input_validated": false,
     "error_handling": "absent"
   },
-  "has_auth_gate": true,
   "has_pii": false,
   "procedures": {
     "mutations": [],
@@ -32,10 +32,12 @@
     "adminProcedure"
   ],
   "uses": [],
-  "constraint_check": {},
   "violations": {
     "active": []
   },
+  "patterns": [
+    "auth_gate"
+  ],
   "adjacent": [],
   "provenance": {
     "source": "pre_idd",
@@ -44,6 +46,9 @@
     "first_scanned": "2026-04-08",
     "last_confirmed": "2026-04-08"
   },
+  "domains": [
+    "business"
+  ],
   "decisions": {
     "auth_gate": "protectedProcedure"
   }

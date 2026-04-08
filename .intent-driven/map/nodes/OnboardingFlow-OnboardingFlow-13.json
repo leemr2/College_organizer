@@ -6,7 +6,8 @@
     "filename": "OnboardingFlow.tsx",
     "relative_path": "src/components/onboarding/OnboardingFlow.tsx"
   },
-  "type": "react_component",
+  "nodeKind": "utility",
+  "nodeSubtype": "utility",
   "layer": "presentation",
   "auth": {
     "required": null,
@@ -22,7 +23,6 @@
     "input_validated": false,
     "error_handling": "absent"
   },
-  "has_auth_gate": false,
   "has_pii": false,
   "procedures": {
     "mutations": [],
@@ -39,10 +39,12 @@
     "react:api:29",
     "types:OnboardingData:172"
   ],
-  "constraint_check": {},
   "violations": {
     "active": []
   },
+  "patterns": [
+    "react_component"
+  ],
   "adjacent": [
     {
       "id": "react:api:29",
@@ -61,5 +63,8 @@
     "design_ref": null,
     "first_scanned": "2026-04-08",
     "last_confirmed": "2026-04-08"
-  }
+  },
+  "domains": [
+    "presentation"
+  ]
 }

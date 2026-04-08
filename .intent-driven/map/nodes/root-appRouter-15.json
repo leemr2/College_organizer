@@ -6,7 +6,8 @@
     "filename": "root.ts",
     "relative_path": "src/lib/api/root.ts"
   },
-  "type": "trpc_router",
+  "nodeKind": "unknown",
+  "nodeSubtype": "unknown",
   "layer": "business_logic",
   "auth": {
     "required": false,
@@ -22,7 +23,6 @@
     "input_validated": false,
     "error_handling": "absent"
   },
-  "has_auth_gate": false,
   "has_pii": false,
   "procedures": {
     "mutations": [],
@@ -42,10 +42,12 @@
     "scheduleRouter:scheduleRouter:8",
     "authRouter:authRouter:7"
   ],
-  "constraint_check": {},
   "violations": {
     "active": []
   },
+  "patterns": [
+    "trpc_router"
+  ],
   "adjacent": [
     {
       "id": "trpc:createCallerFactory:62",
@@ -65,6 +67,9 @@
     "first_scanned": "2026-04-08",
     "last_confirmed": "2026-04-08"
   },
+  "domains": [
+    "api"
+  ],
   "decisions": {
     "api": "tRPC procedures"
   }

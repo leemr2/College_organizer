@@ -6,7 +6,8 @@
     "filename": "index.ts",
     "relative_path": "src/lib/auth/index.ts"
   },
-  "type": "prisma_mutation",
+  "nodeKind": "repository",
+  "nodeSubtype": "repository",
   "layer": "data_access",
   "auth": {
     "required": null,
@@ -29,7 +30,6 @@
     "input_validated": null,
     "error_handling": "unknown"
   },
-  "has_auth_gate": null,
   "has_pii": null,
   "procedures": {
     "mutations": [],
@@ -41,10 +41,13 @@
   "uses": [
     "db:prisma:20"
   ],
-  "constraint_check": {},
   "violations": {
     "active": []
   },
+  "patterns": [
+    "pii_handling",
+    "prisma_mutation"
+  ],
   "adjacent": [
     {
       "id": "db:prisma:20",
@@ -58,5 +61,8 @@
     "design_ref": null,
     "first_scanned": "2026-04-08",
     "last_confirmed": "2026-04-08"
-  }
+  },
+  "domains": [
+    "data"
+  ]
 }

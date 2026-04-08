@@ -6,7 +6,8 @@
     "filename": "trpc.ts",
     "relative_path": "src/lib/api/trpc.ts"
   },
-  "type": "trpc_infrastructure",
+  "nodeKind": "unknown",
+  "nodeSubtype": "unknown",
   "layer": "infrastructure",
   "auth": {
     "required": null,
@@ -22,7 +23,6 @@
     "input_validated": null,
     "error_handling": "unknown"
   },
-  "has_auth_gate": null,
   "has_pii": null,
   "procedures": {
     "mutations": [],
@@ -32,10 +32,12 @@
     "createTRPCContext"
   ],
   "uses": [],
-  "constraint_check": {},
   "violations": {
     "active": []
   },
+  "patterns": [
+    "trpc_infrastructure"
+  ],
   "adjacent": [],
   "provenance": {
     "source": "pre_idd",
@@ -43,5 +45,8 @@
     "design_ref": null,
     "first_scanned": "2026-04-08",
     "last_confirmed": "2026-04-08"
-  }
+  },
+  "domains": [
+    "infrastructure"
+  ]
 }

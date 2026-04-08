@@ -2,7 +2,18 @@
   "id": "button:ButtonProps:38",
   "label": "ButtonProps",
   "file": "C:/Users/drlee/College_organizer/src/components/ui/button.tsx",
-  "type": "generic_function",
+  "type": "react_component",
+  "layer": "presentation",
+  "auth": {
+    "required": null,
+    "type": "unknown",
+    "method": "unknown",
+    "inference_source": "none",
+    "confidence": 0.75,
+    "authoring_mode": "inferred"
+  },
+  "has_auth_gate": false,
+  "has_pii": false,
   "procedures": {
     "mutations": [],
     "queries": []
@@ -18,7 +29,14 @@
     {
       "id": "utils:cn:4",
       "label": "cn",
-      "relationship": "dependency"
+      "relationship": "imports"
     }
-  ]
+  ],
+  "provenance": {
+    "source": "inferred",
+    "confidence": 0.75,
+    "design_ref": null,
+    "first_scanned": "2026-04-04",
+    "last_confirmed": "2026-04-04"
+  }
 }

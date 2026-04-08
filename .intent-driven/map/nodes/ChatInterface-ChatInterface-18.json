@@ -1,9 +1,34 @@
 {
   "id": "ChatInterface:ChatInterface:18",
   "label": "ChatInterface",
-  "file": "C:/Users/drlee/College_organizer/src/components/chat/ChatInterface.tsx",
+  "file": {
+    "path": "D:\\drlee\\College_organizer\\src\\components\\chat\\ChatInterface.tsx",
+    "filename": "ChatInterface.tsx",
+    "relative_path": "src/components/chat/ChatInterface.tsx"
+  },
   "type": "input_validation",
   "layer": "presentation",
+  "auth": {
+    "required": null,
+    "type": "unknown",
+    "method": "unknown",
+    "inference_source": "none",
+    "confidence": 0.92,
+    "authoring_mode": "inferred"
+  },
+  "elements": [
+    {
+      "id": "el::input_validator::detected",
+      "label": "Input validated",
+      "type": "input_validator",
+      "confidence": 0.9
+    }
+  ],
+  "risk": {
+    "rate_limited": null,
+    "input_validated": null,
+    "error_handling": "unknown"
+  },
   "has_auth_gate": null,
   "has_pii": null,
   "procedures": {
@@ -26,6 +51,9 @@
     "types:ScheduleSuggestion:152"
   ],
   "constraint_check": {},
+  "violations": {
+    "active": []
+  },
   "adjacent": [
     {
       "id": "react:api:29",
@@ -57,7 +85,7 @@
     "source": "pre_idd",
     "confidence": 0.92,
     "design_ref": null,
-    "first_scanned": "2026-04-01",
-    "last_confirmed": "2026-04-01"
+    "first_scanned": "2026-04-08",
+    "last_confirmed": "2026-04-08"
   }
 }

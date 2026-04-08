@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "total_domains": 8,
+  "domains": [
+    {
+      "id": "presentation",
+      "file": "presentation.json",
+      "label": "Presentation",
+      "node_count": 76,
+      "active_violations": []
+    },
+    {
+      "id": "api",
+      "file": "api.json",
+      "label": "API Routes",
+      "node_count": 13,
+      "active_violations": [
+        "SEC-002",
+        "SEC-PRISMA-001"
+      ]
+    },
+    {
+      "id": "auth",
+      "file": "auth.json",
+      "label": "Authentication",
+      "node_count": 1,
+      "active_violations": []
+    },
+    {
+      "id": "data",
+      "file": "data.json",
+      "label": "Data Access",
+      "node_count": 17,
+      "active_violations": []
+    },
+    {
+      "id": "infrastructure",
+      "file": "infrastructure.json",
+      "label": "Infrastructure",
+      "node_count": 13,
+      "active_violations": []
+    },
+    {
+      "id": "business",
+      "file": "business.json",
+      "label": "Business Logic",
+      "node_count": 69,
+      "active_violations": [
+        "WARN-AI-001",
+        "WARN-AI-002"
+      ]
+    },
+    {
+      "id": "types",
+      "file": "types.json",
+      "label": "Type Contracts",
+      "node_count": 24,
+      "active_violations": []
+    },
+    {
+      "id": "misc",
+      "file": "misc.json",
+      "label": "Miscellaneous",
+      "node_count": 3,
+      "active_violations": []
+    }
+  ]
+}

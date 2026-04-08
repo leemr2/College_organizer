@@ -1,9 +1,27 @@
 {
   "id": "trpc:createTRPCRouter:76",
   "label": "createTRPCRouter",
-  "file": "C:/Users/drlee/College_organizer/src/lib/api/trpc.ts",
+  "file": {
+    "path": "D:\\drlee\\College_organizer\\src\\lib\\api\\trpc.ts",
+    "filename": "trpc.ts",
+    "relative_path": "src/lib/api/trpc.ts"
+  },
   "type": "trpc_infrastructure",
   "layer": "infrastructure",
+  "auth": {
+    "required": null,
+    "type": "unknown",
+    "method": "unknown",
+    "inference_source": "none",
+    "confidence": 0.95,
+    "authoring_mode": "inferred"
+  },
+  "elements": [],
+  "risk": {
+    "rate_limited": null,
+    "input_validated": null,
+    "error_handling": "unknown"
+  },
   "has_auth_gate": null,
   "has_pii": null,
   "procedures": {
@@ -15,12 +33,15 @@
   ],
   "uses": [],
   "constraint_check": {},
+  "violations": {
+    "active": []
+  },
   "adjacent": [],
   "provenance": {
     "source": "pre_idd",
     "confidence": 0.95,
     "design_ref": null,
-    "first_scanned": "2026-04-01",
-    "last_confirmed": "2026-04-01"
+    "first_scanned": "2026-04-08",
+    "last_confirmed": "2026-04-08"
   }
 }

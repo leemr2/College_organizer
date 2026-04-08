@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.0",
-  "generated_at": "2026-03-22T13:48:33.336Z",
+  "schema_version": "1.1",
+  "generated_at": "2026-04-04T04:13:32.937Z",
   "project": {
     "name": "College_organizer",
     "root": "C:\\Users\\drlee\\College_organizer",
@@ -175,7 +175,7 @@
     {
       "id": "infrastructure",
       "name": "Infrastructure",
-      "nodeCount": 12,
+      "nodeCount": 13,
       "nodeIds": [
         "inngest.config:inngest:23",
         "inngest.config:userRegisteredFn:30",
@@ -185,6 +185,7 @@
         "trpc:createCallerFactory:62",
         "trpc:createTRPCRouter:76",
         "db:prisma:20",
+        "inngest:userRegistered:3",
         "client:trpc:4",
         "react:api:29",
         "react:TRPCReactProvider:52",
@@ -200,7 +201,7 @@
     {
       "id": "business",
       "name": "Business Logic",
-      "nodeCount": 70,
+      "nodeCount": 69,
       "nodeIds": [
         "conversational:ConversationalAI:7",
         "conversational:conversationalAI:548",
@@ -237,7 +238,6 @@
         "sendEmail:sendAccessApprovedEmail:17",
         "AccessApprovedEmail:AccessApprovedEmail:7",
         "WelcomeEmail:WelcomeEmail:7",
-        "inngest:userRegistered:3",
         "storage:uploadFile:11",
         "types:NotificationSettings:19",
         "dailyDetection:isToday:8",
@@ -276,8 +276,8 @@
       "patterns": [
         "ai_service",
         "ai_provider_client",
-        "generic_function",
         "input_validation",
+        "generic_function",
         "auth_gate",
         "pii_handling",
         "utility"
@@ -6863,12 +6863,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
+      "semanticPattern": "ai_provider_client",
       "layer": "business_logic",
-      "confidence": 0.1,
-      "framework": "generic",
+      "confidence": 0.8,
+      "framework": "ai_client",
       "tags": [
-        "generic_function",
+        "ai_provider_client",
         "exported"
       ],
       "dataAccess": false,
@@ -6877,7 +6877,12 @@
       "hasInputValidation": false,
       "isClientComponent": false,
       "isServerComponent": false,
-      "pattern": "generic_function"
+      "aiProviders": [
+        "openai",
+        "@google/generative-ai",
+        "@anthropic-ai/sdk"
+      ],
+      "pattern": "ai_provider_client"
     },
     {
       "id": "aiClient:GenerateChatCompletionOptions:61",
@@ -7462,6 +7467,7 @@
       "includesRelations": false,
       "isRawSQL": false,
       "hasWhere": false,
+      "subtype": "admin_action",
       "pattern": "trpc_router"
     },
     {
@@ -8502,6 +8508,7 @@
       "includesRelations": false,
       "isRawSQL": false,
       "hasWhere": false,
+      "subtype": "pre_auth_action",
       "pattern": "prisma_mutation"
     },
     {
@@ -8575,6 +8582,7 @@
       "hasInputValidation": false,
       "isClientComponent": false,
       "isServerComponent": false,
+      "subtype": "pre_auth_action",
       "pattern": "auth_utility"
     },
     {
@@ -8833,12 +8841,12 @@
       "decorators": [],
       "jsDocTags": [],
       "fileHasUseServer": false,
-      "semanticPattern": "generic_function",
-      "layer": "business_logic",
-      "confidence": 0.1,
-      "framework": "generic",
+      "semanticPattern": "inngest_function",
+      "layer": "infrastructure",
+      "confidence": 0.85,
+      "framework": "inngest",
       "tags": [
-        "generic_function",
+        "inngest_function",
         "exported"
       ],
       "dataAccess": false,
@@ -8847,7 +8855,7 @@
       "hasInputValidation": false,
       "isClientComponent": false,
       "isServerComponent": false,
-      "pattern": "generic_function"
+      "pattern": "inngest_function"
     },
     {
       "id": "storage:uploadFile:11",
@@ -14075,33 +14083,13 @@
     }
   ],
   "violations": {
-    "total": 7,
+    "total": 5,
     "critical": 2,
-    "warning": 5,
+    "warning": 3,
     "info": 0,
-    "passing": 4867,
-    "failing": 7,
+    "passing": 4869,
+    "failing": 5,
     "violations": [
-      {
-        "ruleId": "WARN-AI-001",
-        "severity": "warning",
-        "category": "security",
-        "message": "AI input passed to provider without validation",
-        "affectedNodeIds": [
-          "aiClient:AI_MODELS:43"
-        ],
-        "fixSuggestion": "Add input validation (e.g. Zod schema.parse) before calling the AI provider."
-      },
-      {
-        "ruleId": "WARN-AI-001",
-        "severity": "warning",
-        "category": "security",
-        "message": "AI input passed to provider without validation",
-        "affectedNodeIds": [
-          "aiClient:GenerateChatCompletionOptions:61"
-        ],
-        "fixSuggestion": "Add input validation (e.g. Zod schema.parse) before calling the AI provider."
-      },
       {
         "ruleId": "WARN-AI-001",
         "severity": "warning",
@@ -14110,7 +14098,14 @@
         "affectedNodeIds": [
           "aiClient:generateGeminiWebResponse:142"
         ],
-        "fixSuggestion": "Add input validation (e.g. Zod schema.parse) before calling the AI provider."
+        "fixSuggestion": "Add input validation (e.g. Zod schema.parse) before calling the AI provider.",
+        "confidence": 0.4,
+        "confidence_band": "medium",
+        "confidence_signals": [
+          "base score for WARN-AI-001: 0.40",
+          "route auth: no matching route (neutral)"
+        ],
+        "unconditional": false
       },
       {
         "ruleId": "WARN-AI-001",
@@ -14120,7 +14115,14 @@
         "affectedNodeIds": [
           "aiClient:generateChatCompletion:198"
         ],
-        "fixSuggestion": "Add input validation (e.g. Zod schema.parse) before calling the AI provider."
+        "fixSuggestion": "Add input validation (e.g. Zod schema.parse) before calling the AI provider.",
+        "confidence": 0.4,
+        "confidence_band": "medium",
+        "confidence_signals": [
+          "base score for WARN-AI-001: 0.40",
+          "route auth: no matching route (neutral)"
+        ],
+        "unconditional": false
       },
       {
         "ruleId": "WARN-AI-002",
@@ -14130,7 +14132,14 @@
         "affectedNodeIds": [
           "aiClient:generateChatCompletion:198"
         ],
-        "fixSuggestion": "Move API keys to a config module or environment abstraction; avoid process.env in provider call sites."
+        "fixSuggestion": "Move API keys to a config module or environment abstraction; avoid process.env in provider call sites.",
+        "confidence": 0.4,
+        "confidence_band": "medium",
+        "confidence_signals": [
+          "base score for WARN-AI-002: 0.40",
+          "route auth: no matching route (neutral)"
+        ],
+        "unconditional": false
       },
       {
         "ruleId": "SEC-002",
@@ -14140,7 +14149,15 @@
         "affectedNodeIds": [
           "adminRouter:adminRouter:8"
         ],
-        "fixSuggestion": "Replace publicProcedure with protectedProcedure, or add explicit authorization logic."
+        "fixSuggestion": "Replace publicProcedure with protectedProcedure, or add explicit authorization logic.",
+        "confidence": 0.72,
+        "confidence_band": "medium",
+        "confidence_signals": [
+          "base score for SEC-002: 0.60",
+          "route auth: no matching route (neutral)",
+          "path pattern: admin route (+20%)"
+        ],
+        "unconditional": false
       },
       {
         "ruleId": "SEC-PRISMA-001",
@@ -14151,18 +14168,64 @@
           "adminRouter:adminRouter:8",
           "route:handler:19"
         ],
-        "fixSuggestion": "Add getServerSession(), auth.check(), or similar before calling the mutation from the server action or API route."
+        "fixSuggestion": "Add getServerSession(), auth.check(), or similar before calling the mutation from the server action or API route.",
+        "confidence": 1,
+        "confidence_band": "high",
+        "confidence_signals": [
+          "base score for SEC-PRISMA-001: 0.65",
+          "route auth: no matching route (neutral)",
+          "node subtype: admin_action, rule SEC-PRISMA-001 (+40%)",
+          "path pattern: admin route (+20%)",
+          "headline band (≥0.8)"
+        ],
+        "unconditional": false
       }
     ],
     "suppressed": 2,
     "suppression_ids": [
       "FW-NEXTAUTH-003",
       "FW-AUTH-ROUTER-001"
-    ]
+    ],
+    "headline_count": 1,
+    "unconditional_count": 0,
+    "by_category": {
+      "security": {
+        "total": 5,
+        "headline": 1,
+        "by_severity": {
+          "critical": 2,
+          "warning": 3,
+          "info": 0
+        }
+      },
+      "data_integrity": {
+        "total": 0,
+        "headline": 0,
+        "by_severity": {
+          "critical": 0,
+          "warning": 0,
+          "info": 0
+        }
+      },
+      "architecture": {
+        "total": 0,
+        "headline": 0,
+        "by_severity": {
+          "critical": 0,
+          "warning": 0,
+          "info": 0
+        }
+      }
+    },
+    "by_band": {
+      "high": 1,
+      "medium": 4,
+      "low": 0
+    }
   },
   "ai_context": {
-    "summary": "TypeScript codebase with 212 semantic nodes across 8 domain(s): Presentation, API Routes, Authentication, Data Access, Infrastructure, Business Logic, Type Contracts, Miscellaneous. Frameworks detected: security, inngest, nextjs, ai_client, trpc, prisma. 2 critical constraint violation(s) require attention.",
-    "token_estimate": 234,
+    "summary": "TypeScript codebase with 212 semantic nodes across 8 domain(s): Presentation, API Routes, Authentication, Data Access, Infrastructure, Business Logic, Type Contracts, Miscellaneous. Frameworks detected: security, inngest, nextjs, ai_client, trpc, prisma, storybook. 2 critical constraint violation(s) require attention.",
+    "token_estimate": 210,
     "patterns": [
       "Next.js App Router + tRPC + Prisma stack",
       "Protected procedures use protectedProcedure; admin uses adminProcedure",
@@ -14174,8 +14237,6 @@
       "type_definition: 24 node(s)"
     ],
     "active_constraints": [
-      "[WARNING] WARN-AI-001 (aiClient:AI_MODELS:43): AI input passed to provider without validation",
-      "[WARNING] WARN-AI-001 (aiClient:GenerateChatCompletionOptions:61): AI input passed to provider without validation",
       "[WARNING] WARN-AI-001 (aiClient:generateGeminiWebResponse:142): AI input passed to provider without validation",
       "[WARNING] WARN-AI-001 (aiClient:generateChatCompletion:198): AI input passed to provider without validation",
       "[WARNING] WARN-AI-002 (aiClient:generateChatCompletion:198): Raw API key access — use a config module to centralize secret management",
@@ -14184,8 +14245,6 @@
       "[CRITICAL] SEC-PRISMA-001 (route:handler:19): Prisma mutation accessRequest.update is reachable without an auth check."
     ],
     "focus_nodes": [
-      "aiClient:AI_MODELS:43",
-      "aiClient:GenerateChatCompletionOptions:61",
       "aiClient:generateGeminiWebResponse:142",
       "aiClient:generateChatCompletion:198",
       "adminRouter:adminRouter:8",
@@ -14209,7 +14268,7 @@
   },
   "routeMap": {
     "meta": {
-      "scannedAt": "2026-03-22T13:48:33.042Z",
+      "scannedAt": "2026-04-04T04:13:32.633Z",
       "routingMode": "app",
       "repoRoot": "C:\\Users\\drlee\\College_organizer",
       "totalRoutes": 14,
@@ -14234,6 +14293,9 @@
         "isDynamic": false,
         "dynamicParams": [],
         "isApiRoute": false,
+        "nodeKind": "page",
+        "label": "Home",
+        "screen_group": null,
         "elements": [
           {
             "id": "el::route::index::page::link::get-started",
@@ -14280,14 +14342,16 @@
             "href": "/contact"
           }
         ],
-        "auth_requirement": {
+        "auth": {
+          "required": true,
           "type": "protected",
-          "authoring_mode": "inferred",
+          "method": "nextauth",
           "inference_source": "server_session_call",
-          "confidence": 0.95
+          "confidence": 0.95,
+          "authoring_mode": "inferred"
         },
-        "findings": [],
-        "hasAuthGate": true
+        "hasAuthGate": true,
+        "findings": []
       },
       {
         "id": "route::admin::page",
@@ -14298,18 +14362,23 @@
         "isDynamic": false,
         "dynamicParams": [],
         "isApiRoute": false,
+        "nodeKind": "page",
+        "label": "Admin",
+        "screen_group": null,
         "elements": [],
-        "auth_requirement": {
+        "auth": {
+          "required": true,
           "type": "protected",
-          "authoring_mode": "inferred",
+          "method": "nextauth",
           "inference_source": "server_session_call",
-          "confidence": 0.95
+          "confidence": 0.95,
+          "authoring_mode": "inferred"
         },
+        "hasAuthGate": true,
         "findings": [
           "finding::NAV-001::admin",
           "finding::NAV-004::admin"
-        ],
-        "hasAuthGate": true
+        ]
       },
       {
         "id": "route::chat::page",
@@ -14320,15 +14389,20 @@
         "isDynamic": false,
         "dynamicParams": [],
         "isApiRoute": false,
+        "nodeKind": "page",
+        "label": "Chat",
+        "screen_group": null,
         "elements": [],
-        "auth_requirement": {
+        "auth": {
+          "required": true,
           "type": "protected",
-          "authoring_mode": "inferred",
+          "method": "nextauth",
           "inference_source": "server_session_call",
-          "confidence": 0.95
+          "confidence": 0.95,
+          "authoring_mode": "inferred"
         },
-        "findings": [],
-        "hasAuthGate": true
+        "hasAuthGate": true,
+        "findings": []
       },
       {
         "id": "route::dashboard::page",
@@ -14339,15 +14413,20 @@
         "isDynamic": false,
         "dynamicParams": [],
         "isApiRoute": false,
+        "nodeKind": "page",
+        "label": "Dashboard",
+        "screen_group": null,
         "elements": [],
-        "auth_requirement": {
+        "auth": {
+          "required": true,
           "type": "protected",
-          "authoring_mode": "inferred",
+          "method": "nextauth",
           "inference_source": "server_session_call",
-          "confidence": 0.95
+          "confidence": 0.95,
+          "authoring_mode": "inferred"
         },
-        "findings": [],
-        "hasAuthGate": true
+        "hasAuthGate": true,
+        "findings": []
       },
       {
         "id": "route::onboarding::page",
@@ -14358,15 +14437,20 @@
         "isDynamic": false,
         "dynamicParams": [],
         "isApiRoute": false,
+        "nodeKind": "page",
+        "label": "Onboarding",
+        "screen_group": null,
         "elements": [],
-        "auth_requirement": {
+        "auth": {
+          "required": true,
           "type": "protected",
-          "authoring_mode": "inferred",
+          "method": "nextauth",
           "inference_source": "server_session_call",
-          "confidence": 0.95
+          "confidence": 0.95,
+          "authoring_mode": "inferred"
         },
-        "findings": [],
-        "hasAuthGate": true
+        "hasAuthGate": true,
+        "findings": []
       },
       {
         "id": "route::profile::page",
@@ -14377,15 +14461,20 @@
         "isDynamic": false,
         "dynamicParams": [],
         "isApiRoute": false,
+        "nodeKind": "page",
+        "label": "Profile",
+        "screen_group": null,
         "elements": [],
-        "auth_requirement": {
+        "auth": {
+          "required": true,
           "type": "protected",
-          "authoring_mode": "inferred",
+          "method": "nextauth",
           "inference_source": "server_session_call",
-          "confidence": 0.95
+          "confidence": 0.95,
+          "authoring_mode": "inferred"
         },
-        "findings": [],
-        "hasAuthGate": true
+        "hasAuthGate": true,
+        "findings": []
       },
       {
         "id": "route::tasks::page",
@@ -14396,18 +14485,23 @@
         "isDynamic": false,
         "dynamicParams": [],
         "isApiRoute": false,
+        "nodeKind": "page",
+        "label": "Tasks",
+        "screen_group": null,
         "elements": [],
-        "auth_requirement": {
+        "auth": {
+          "required": true,
           "type": "protected",
-          "authoring_mode": "inferred",
+          "method": "nextauth",
           "inference_source": "server_session_call",
-          "confidence": 0.95
+          "confidence": 0.95,
+          "authoring_mode": "inferred"
         },
+        "hasAuthGate": true,
         "findings": [
           "finding::NAV-001::tasks",
           "finding::NAV-004::tasks"
-        ],
-        "hasAuthGate": true
+        ]
       },
       {
         "id": "route::api::transcribe::api",
@@ -14418,15 +14512,20 @@
         "isDynamic": false,
         "dynamicParams": [],
         "isApiRoute": true,
+        "nodeKind": "api_handler",
+        "label": "Transcribe",
+        "screen_group": "api",
         "elements": [],
-        "auth_requirement": {
+        "auth": {
+          "required": false,
           "type": "public",
-          "authoring_mode": "inferred",
+          "method": "none",
           "inference_source": "none",
-          "confidence": 0.6
+          "confidence": 0.6,
+          "authoring_mode": "inferred"
         },
-        "findings": [],
-        "hasAuthGate": false
+        "hasAuthGate": false,
+        "findings": []
       },
       {
         "id": "route::api::upload::api",
@@ -14437,15 +14536,20 @@
         "isDynamic": false,
         "dynamicParams": [],
         "isApiRoute": true,
+        "nodeKind": "api_handler",
+        "label": "Upload",
+        "screen_group": "api",
         "elements": [],
-        "auth_requirement": {
+        "auth": {
+          "required": false,
           "type": "public",
-          "authoring_mode": "inferred",
+          "method": "none",
           "inference_source": "none",
-          "confidence": 0.6
+          "confidence": 0.6,
+          "authoring_mode": "inferred"
         },
-        "findings": [],
-        "hasAuthGate": false
+        "hasAuthGate": false,
+        "findings": []
       },
       {
         "id": "route::auth::error::page",
@@ -14456,6 +14560,9 @@
         "isDynamic": false,
         "dynamicParams": [],
         "isApiRoute": false,
+        "nodeKind": "page",
+        "label": "Error",
+        "screen_group": "auth",
         "elements": [
           {
             "id": "el::route::auth::error::page::link::back",
@@ -14480,17 +14587,19 @@
             "href": "/auth/signin"
           }
         ],
-        "auth_requirement": {
+        "auth": {
+          "required": false,
           "type": "public",
-          "authoring_mode": "inferred",
+          "method": "none",
           "inference_source": "auth_page_pattern",
-          "confidence": 0.95
+          "confidence": 0.95,
+          "authoring_mode": "inferred"
         },
+        "hasAuthGate": false,
         "findings": [
           "finding::NAV-001::auth-error",
           "finding::NAV-004::auth-error"
-        ],
-        "hasAuthGate": false
+        ]
       },
       {
         "id": "route::auth::signin::page",
@@ -14501,6 +14610,9 @@
         "isDynamic": false,
         "dynamicParams": [],
         "isApiRoute": false,
+        "nodeKind": "page",
+        "label": "Signin",
+        "screen_group": "auth",
         "elements": [
           {
             "id": "el::route::auth::signin::page::link::back",
@@ -14627,14 +14739,16 @@
             "href": "/auth/verify"
           }
         ],
-        "auth_requirement": {
+        "auth": {
+          "required": false,
           "type": "public",
-          "authoring_mode": "inferred",
+          "method": "none",
           "inference_source": "auth_page_pattern",
-          "confidence": 0.95
+          "confidence": 0.95,
+          "authoring_mode": "inferred"
         },
-        "findings": [],
-        "hasAuthGate": false
+        "hasAuthGate": false,
+        "findings": []
       },
       {
         "id": "route::auth::signout::page",
@@ -14645,6 +14759,9 @@
         "isDynamic": false,
         "dynamicParams": [],
         "isApiRoute": false,
+        "nodeKind": "page",
+        "label": "Signout",
+        "screen_group": "auth",
         "elements": [
           {
             "id": "el::route::auth::signout::page::link::back",
@@ -14679,17 +14796,19 @@
             "href": "/"
           }
         ],
-        "auth_requirement": {
+        "auth": {
+          "required": false,
           "type": "public",
-          "authoring_mode": "inferred",
+          "method": "none",
           "inference_source": "auth_page_pattern",
-          "confidence": 0.95
+          "confidence": 0.95,
+          "authoring_mode": "inferred"
         },
+        "hasAuthGate": false,
         "findings": [
           "finding::NAV-001::auth-signout",
           "finding::NAV-004::auth-signout"
-        ],
-        "hasAuthGate": false
+        ]
       },
       {
         "id": "route::auth::verify::page",
@@ -14700,6 +14819,9 @@
         "isDynamic": false,
         "dynamicParams": [],
         "isApiRoute": false,
+        "nodeKind": "page",
+        "label": "Verify",
+        "screen_group": "auth",
         "elements": [
           {
             "id": "el::route::auth::verify::page::link::back",
@@ -14724,14 +14846,16 @@
             "href": "/auth/signin"
           }
         ],
-        "auth_requirement": {
+        "auth": {
+          "required": false,
           "type": "public",
-          "authoring_mode": "inferred",
+          "method": "none",
           "inference_source": "auth_page_pattern",
-          "confidence": 0.95
+          "confidence": 0.95,
+          "authoring_mode": "inferred"
         },
-        "findings": [],
-        "hasAuthGate": false
+        "hasAuthGate": false,
+        "findings": []
       },
       {
         "id": "route::api::trpc::[trpc]::api",
@@ -14744,15 +14868,20 @@
           "trpc"
         ],
         "isApiRoute": true,
+        "nodeKind": "api_handler",
+        "label": "Trpc",
+        "screen_group": "api",
         "elements": [],
-        "auth_requirement": {
+        "auth": {
+          "required": null,
           "type": "unknown",
-          "authoring_mode": "inferred",
+          "method": "protectedProcedure",
           "inference_source": "none",
-          "confidence": 0.5
+          "confidence": 0.5,
+          "authoring_mode": "inferred"
         },
-        "findings": [],
-        "hasAuthGate": false
+        "hasAuthGate": false,
+        "findings": []
       }
     ],
     "edges": [
@@ -15120,7 +15249,7 @@
         "title": "Orphaned route",
         "detail": "/admin has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /admin, or remove the route if no longer needed.",
-        "detectedAt": "2026-03-22T13:48:33.043Z"
+        "detectedAt": "2026-04-04T04:13:32.633Z"
       },
       {
         "id": "finding::NAV-001::tasks",
@@ -15133,7 +15262,7 @@
         "title": "Orphaned route",
         "detail": "/tasks has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /tasks, or remove the route if no longer needed.",
-        "detectedAt": "2026-03-22T13:48:33.043Z"
+        "detectedAt": "2026-04-04T04:13:32.633Z"
       },
       {
         "id": "finding::NAV-001::auth-error",
@@ -15146,7 +15275,7 @@
         "title": "Orphaned route",
         "detail": "/auth/error has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /auth/error, or remove the route if no longer needed.",
-        "detectedAt": "2026-03-22T13:48:33.043Z"
+        "detectedAt": "2026-04-04T04:13:32.633Z"
       },
       {
         "id": "finding::NAV-001::auth-signout",
@@ -15159,7 +15288,7 @@
         "title": "Orphaned route",
         "detail": "/auth/signout has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /auth/signout, or remove the route if no longer needed.",
-        "detectedAt": "2026-03-22T13:48:33.043Z"
+        "detectedAt": "2026-04-04T04:13:32.633Z"
       },
       {
         "id": "finding::NAV-004::admin",
@@ -15172,7 +15301,7 @@
         "title": "Unreachable route",
         "detail": "/admin cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-03-22T13:48:33.043Z"
+        "detectedAt": "2026-04-04T04:13:32.633Z"
       },
       {
         "id": "finding::NAV-004::tasks",
@@ -15185,7 +15314,7 @@
         "title": "Unreachable route",
         "detail": "/tasks cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-03-22T13:48:33.043Z"
+        "detectedAt": "2026-04-04T04:13:32.633Z"
       },
       {
         "id": "finding::NAV-004::auth-error",
@@ -15198,7 +15327,7 @@
         "title": "Unreachable route",
         "detail": "/auth/error cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-03-22T13:48:33.043Z"
+        "detectedAt": "2026-04-04T04:13:32.633Z"
       },
       {
         "id": "finding::NAV-004::auth-signout",
@@ -15211,7 +15340,7 @@
         "title": "Unreachable route",
         "detail": "/auth/signout cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-03-22T13:48:33.043Z"
+        "detectedAt": "2026-04-04T04:13:32.633Z"
       }
     ],
     "findingSummary": {
@@ -15233,8 +15362,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15249,8 +15378,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15265,8 +15394,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15281,8 +15410,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15297,8 +15426,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15313,8 +15442,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15329,8 +15458,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15345,8 +15474,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15361,8 +15490,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15377,8 +15506,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15393,8 +15522,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15409,8 +15538,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15425,8 +15554,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15441,8 +15570,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15457,8 +15586,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15473,8 +15602,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15489,8 +15618,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15505,8 +15634,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15521,8 +15650,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15537,8 +15666,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15553,8 +15682,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15569,8 +15698,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15585,8 +15714,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15601,8 +15730,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15617,8 +15746,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15633,8 +15762,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15649,8 +15778,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15665,8 +15794,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15681,8 +15810,8 @@
         "provenance": {
           "source": "inferred",
           "inference_method": "static_import_graph",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       }
@@ -15705,8 +15834,8 @@
         "step_count": 2,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15735,8 +15864,8 @@
         "step_count": 6,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15763,8 +15892,8 @@
         "step_count": 5,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15791,8 +15920,8 @@
         "step_count": 5,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15821,8 +15950,8 @@
         "step_count": 6,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15847,8 +15976,8 @@
         "step_count": 4,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15875,8 +16004,8 @@
         "step_count": 5,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15901,8 +16030,8 @@
         "step_count": 4,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15925,8 +16054,8 @@
         "step_count": 3,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15951,8 +16080,8 @@
         "step_count": 4,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15975,8 +16104,8 @@
         "step_count": 3,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -15999,8 +16128,8 @@
         "step_count": 3,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16023,8 +16152,8 @@
         "step_count": 3,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16049,8 +16178,8 @@
         "step_count": 4,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16071,8 +16200,8 @@
         "step_count": 2,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16099,8 +16228,8 @@
         "step_count": 5,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16123,8 +16252,8 @@
         "step_count": 3,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16145,8 +16274,8 @@
         "step_count": 2,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16167,8 +16296,8 @@
         "step_count": 2,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16191,8 +16320,8 @@
         "step_count": 3,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16219,8 +16348,8 @@
         "step_count": 5,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16245,8 +16374,8 @@
         "step_count": 4,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16271,8 +16400,8 @@
         "step_count": 4,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16297,8 +16426,8 @@
         "step_count": 4,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16321,8 +16450,8 @@
         "step_count": 3,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16345,8 +16474,8 @@
         "step_count": 3,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16367,8 +16496,8 @@
         "step_count": 2,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16389,8 +16518,8 @@
         "step_count": 2,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16419,8 +16548,8 @@
         "step_count": 6,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16445,8 +16574,8 @@
         "step_count": 4,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16469,8 +16598,8 @@
         "step_count": 3,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16493,8 +16622,8 @@
         "step_count": 3,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16519,8 +16648,8 @@
         "step_count": 4,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16543,8 +16672,8 @@
         "step_count": 3,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16562,8 +16691,8 @@
         "step_count": 1,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16581,8 +16710,8 @@
         "step_count": 1,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       },
@@ -16600,8 +16729,8 @@
         "step_count": 1,
         "provenance": {
           "source": "inferred",
-          "first_detected": "2026-03-22",
-          "last_confirmed": "2026-03-22",
+          "first_detected": "2026-04-04",
+          "last_confirmed": "2026-04-04",
           "design_ref": null
         }
       }

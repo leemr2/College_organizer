@@ -1,9 +1,34 @@
 {
   "id": "aiClient:parseJsonResponse:177",
   "label": "parseJsonResponse",
-  "file": "C:/Users/drlee/College_organizer/src/lib/aiClient.ts",
+  "file": {
+    "path": "D:\\drlee\\College_organizer\\src\\lib\\aiClient.ts",
+    "filename": "aiClient.ts",
+    "relative_path": "src/lib/aiClient.ts"
+  },
   "type": "input_validation",
   "layer": "business_logic",
+  "auth": {
+    "required": null,
+    "type": "unknown",
+    "method": "unknown",
+    "inference_source": "none",
+    "confidence": 0.92,
+    "authoring_mode": "inferred"
+  },
+  "elements": [
+    {
+      "id": "el::input_validator::detected",
+      "label": "Input validated",
+      "type": "input_validator",
+      "confidence": 0.9
+    }
+  ],
+  "risk": {
+    "rate_limited": null,
+    "input_validated": null,
+    "error_handling": "unknown"
+  },
   "has_auth_gate": null,
   "has_pii": null,
   "procedures": {
@@ -15,12 +40,15 @@
   ],
   "uses": [],
   "constraint_check": {},
+  "violations": {
+    "active": []
+  },
   "adjacent": [],
   "provenance": {
     "source": "pre_idd",
     "confidence": 0.92,
     "design_ref": null,
-    "first_scanned": "2026-04-01",
-    "last_confirmed": "2026-04-01"
+    "first_scanned": "2026-04-08",
+    "last_confirmed": "2026-04-08"
   }
 }

@@ -3,15 +3,39 @@
   "rule": "Raw API key access — use a config module to centralize secret management",
   "severity": "warning",
   "category": "security",
+  "confidence": 0.4,
+  "confidence_band": "low",
+  "unconditional": false,
+  "translations": {
+    "technical": "Raw API key access — use a config module to centralize secret management",
+    "plain_language_single": "An API key in {label} is accessed directly from code rather than from a secure configuration. This increases the risk of accidental exposure.",
+    "plain_language_multi": "API keys are accessed directly from code in {N} places rather than from secure configuration.",
+    "short_label": "API key at risk",
+    "template_variant": "single"
+  },
+  "education": {
+    "why_it_matters": "API keys accessed directly in code (rather than through secure configuration) are easier to accidentally expose in error logs, version control, or shared environments.",
+    "what_could_happen": "During debugging or code sharing, the key is visible in plain text and can be copied and misused.",
+    "what_to_do": "Ask your developer to use environment variable configuration for all API keys."
+  },
+  "business_impact": "Keys in code are easier to leak through logs, shares, or screenshots.",
+  "consequence": "Leaked keys can be abused until they are rotated.",
+  "rule_status": "active",
   "affected_nodes": [
     {
       "node_id": "aiClient:generateChatCompletion:198",
+      "node_label": "generateChatCompletion",
       "status": "failing",
-      "file": "C:/Users/drlee/College_organizer/src/lib/aiClient.ts",
-      "detail": "Raw API key access — use a config module to centralize secret management"
+      "file": "D:/drlee/College_organizer/src/lib/aiClient.ts",
+      "detail": "Raw API key access — use a config module to centralize secret management",
+      "plain_language": "An API key in generateChatCompletion is accessed directly from code rather than from a secure configuration. This increases the risk of accidental exposure."
     }
   ],
   "remediation": "Move API keys to a config module or environment abstraction; avoid process.env in provider call sites.",
   "referenced_by_templates": [],
-  "first_detected": "2026-04-01"
+  "first_detected": "2026-04-08",
+  "confidence_signals": [
+    "base score for WARN-AI-002: 0.40",
+    "route auth: no matching route (neutral)"
+  ]
 }

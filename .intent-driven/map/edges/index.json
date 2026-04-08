@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.0",
-  "generated_at": "2026-04-01T04:31:51.186Z",
+  "schema_version": "1.1",
+  "generated_at": "2026-04-08T03:08:30.516Z",
   "summary": {
     "total_edges": 29,
     "by_type": {
@@ -18,13 +18,14 @@
       "target": "page:DashboardPage:15",
       "linkType": "redirect",
       "isConditional": true,
+      "semantic": "unknown",
       "confidence": 1,
       "triggerElement": null,
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -34,13 +35,14 @@
       "target": "page:SignIn:342",
       "linkType": "redirect",
       "isConditional": true,
+      "semantic": "auth_redirect",
       "confidence": 1,
       "triggerElement": null,
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -50,13 +52,14 @@
       "target": "page:OnboardingPage:8",
       "linkType": "redirect",
       "isConditional": true,
+      "semantic": "onboarding_redirect",
       "confidence": 1,
       "triggerElement": null,
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -66,13 +69,14 @@
       "target": "page:OnboardingPage:8",
       "linkType": "redirect",
       "isConditional": true,
+      "semantic": "onboarding_redirect",
       "confidence": 1,
       "triggerElement": null,
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -82,13 +86,14 @@
       "target": "page:SignIn:342",
       "linkType": "redirect",
       "isConditional": true,
+      "semantic": "auth_redirect",
       "confidence": 1,
       "triggerElement": null,
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -98,13 +103,14 @@
       "target": "page:OnboardingPage:8",
       "linkType": "redirect",
       "isConditional": true,
+      "semantic": "onboarding_redirect",
       "confidence": 1,
       "triggerElement": null,
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -114,13 +120,14 @@
       "target": "page:OnboardingPage:8",
       "linkType": "redirect",
       "isConditional": true,
+      "semantic": "onboarding_redirect",
       "confidence": 1,
       "triggerElement": null,
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -130,13 +137,14 @@
       "target": "page:SignIn:342",
       "linkType": "redirect",
       "isConditional": true,
+      "semantic": "auth_redirect",
       "confidence": 1,
       "triggerElement": null,
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -146,13 +154,14 @@
       "target": "page:Page:10",
       "linkType": "Link",
       "isConditional": false,
+      "semantic": "navigation",
       "confidence": 1,
       "triggerElement": "el::route::auth::error::page::link::back",
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -162,13 +171,14 @@
       "target": "page:SignIn:342",
       "linkType": "Link",
       "isConditional": false,
+      "semantic": "navigation",
       "confidence": 1,
       "triggerElement": "el::route::auth::error::page::link::try-again",
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -178,13 +188,14 @@
       "target": "page:ChatPage:9",
       "linkType": "redirect",
       "isConditional": true,
+      "semantic": "unknown",
       "confidence": 1,
       "triggerElement": null,
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -194,13 +205,14 @@
       "target": "page:SignIn:342",
       "linkType": "redirect",
       "isConditional": true,
+      "semantic": "auth_redirect",
       "confidence": 1,
       "triggerElement": null,
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -210,13 +222,14 @@
       "target": "page:DashboardPage:15",
       "linkType": "redirect",
       "isConditional": false,
+      "semantic": "unknown",
       "confidence": 1,
       "triggerElement": null,
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -226,13 +239,14 @@
       "target": "page:OnboardingPage:8",
       "linkType": "redirect",
       "isConditional": true,
+      "semantic": "onboarding_redirect",
       "confidence": 1,
       "triggerElement": null,
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -242,13 +256,14 @@
       "target": "page:SignIn:342",
       "linkType": "Link",
       "isConditional": true,
+      "semantic": "navigation",
       "confidence": 1,
       "triggerElement": "el::route::index::page::link::get-started",
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -258,13 +273,14 @@
       "target": "page:OnboardingPage:8",
       "linkType": "redirect",
       "isConditional": true,
+      "semantic": "onboarding_redirect",
       "confidence": 1,
       "triggerElement": null,
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -274,13 +290,14 @@
       "target": "page:OnboardingPage:8",
       "linkType": "redirect",
       "isConditional": true,
+      "semantic": "onboarding_redirect",
       "confidence": 1,
       "triggerElement": null,
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -290,13 +307,14 @@
       "target": "page:SignIn:342",
       "linkType": "redirect",
       "isConditional": true,
+      "semantic": "auth_redirect",
       "confidence": 1,
       "triggerElement": null,
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -306,13 +324,14 @@
       "target": "page:Page:10",
       "linkType": "Link",
       "isConditional": false,
+      "semantic": "navigation",
       "confidence": 1,
       "triggerElement": "el::route::auth::signin::page::link::back",
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -322,13 +341,14 @@
       "target": "page:ProfilePage:10",
       "linkType": "Link",
       "isConditional": true,
+      "semantic": "navigation",
       "confidence": 1,
       "triggerElement": "el::route::auth::signin::page::link::profile-settings",
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -338,13 +358,14 @@
       "target": "page:VerifyRequest:7",
       "linkType": "Link",
       "isConditional": false,
+      "semantic": "navigation",
       "confidence": 1,
       "triggerElement": "el::route::auth::signin::page::function::handlesubmit-L99",
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -354,13 +375,14 @@
       "target": "page:VerifyRequest:7",
       "linkType": "router.push",
       "isConditional": true,
+      "semantic": "unknown",
       "confidence": 0.95,
       "triggerElement": "el::route::auth::signin::page::function::handlesubmit-L99",
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -370,13 +392,14 @@
       "target": "page:Page:10",
       "linkType": "Link",
       "isConditional": false,
+      "semantic": "navigation",
       "confidence": 1,
       "triggerElement": "el::route::auth::signout::page::link::back",
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -386,13 +409,14 @@
       "target": "page:Page:10",
       "linkType": "Link",
       "isConditional": false,
+      "semantic": "navigation",
       "confidence": 1,
       "triggerElement": "el::route::auth::signout::page::link::cancel",
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -402,13 +426,14 @@
       "target": "page:OnboardingPage:8",
       "linkType": "redirect",
       "isConditional": true,
+      "semantic": "onboarding_redirect",
       "confidence": 1,
       "triggerElement": null,
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -418,13 +443,14 @@
       "target": "page:OnboardingPage:8",
       "linkType": "redirect",
       "isConditional": true,
+      "semantic": "onboarding_redirect",
       "confidence": 1,
       "triggerElement": null,
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -434,13 +460,14 @@
       "target": "page:SignIn:342",
       "linkType": "redirect",
       "isConditional": true,
+      "semantic": "auth_redirect",
       "confidence": 1,
       "triggerElement": null,
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -450,13 +477,14 @@
       "target": "page:Page:10",
       "linkType": "Link",
       "isConditional": false,
+      "semantic": "navigation",
       "confidence": 1,
       "triggerElement": "el::route::auth::verify::page::link::back",
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     },
@@ -466,13 +494,14 @@
       "target": "page:SignIn:342",
       "linkType": "Link",
       "isConditional": false,
+      "semantic": "navigation",
       "confidence": 1,
       "triggerElement": "el::route::auth::verify::page::link::try-signing-in-again",
       "provenance": {
         "source": "inferred",
         "inference_method": "static_import_graph",
-        "first_detected": "2026-04-01",
-        "last_confirmed": "2026-04-01",
+        "first_detected": "2026-04-08",
+        "last_confirmed": "2026-04-08",
         "design_ref": null
       }
     }

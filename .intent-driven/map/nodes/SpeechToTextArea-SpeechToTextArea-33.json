@@ -1,9 +1,27 @@
 {
   "id": "SpeechToTextArea:SpeechToTextArea:33",
   "label": "SpeechToTextArea",
-  "file": "C:/Users/drlee/College_organizer/src/components/SpeechToTextArea.tsx",
+  "file": {
+    "path": "D:\\drlee\\College_organizer\\src\\components\\SpeechToTextArea.tsx",
+    "filename": "SpeechToTextArea.tsx",
+    "relative_path": "src/components/SpeechToTextArea.tsx"
+  },
   "type": "auth_gate",
   "layer": "presentation",
+  "auth": {
+    "required": true,
+    "type": "unknown",
+    "method": "custom",
+    "inference_source": "none",
+    "confidence": 0.9,
+    "authoring_mode": "inferred"
+  },
+  "elements": [],
+  "risk": {
+    "rate_limited": false,
+    "input_validated": false,
+    "error_handling": "absent"
+  },
   "has_auth_gate": true,
   "has_pii": false,
   "procedures": {
@@ -15,13 +33,16 @@
   ],
   "uses": [],
   "constraint_check": {},
+  "violations": {
+    "active": []
+  },
   "adjacent": [],
   "provenance": {
     "source": "pre_idd",
     "confidence": 0.9,
     "design_ref": null,
-    "first_scanned": "2026-04-01",
-    "last_confirmed": "2026-04-01"
+    "first_scanned": "2026-04-08",
+    "last_confirmed": "2026-04-08"
   },
   "decisions": {
     "auth_gate": "protectedProcedure"

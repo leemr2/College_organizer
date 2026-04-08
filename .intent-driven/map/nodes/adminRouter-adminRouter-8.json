@@ -1,9 +1,27 @@
 {
   "id": "adminRouter:adminRouter:8",
   "label": "adminRouter",
-  "file": "C:/Users/drlee/College_organizer/src/lib/api/routers/adminRouter.ts",
+  "file": {
+    "path": "D:\\drlee\\College_organizer\\src\\lib\\api\\routers\\adminRouter.ts",
+    "filename": "adminRouter.ts",
+    "relative_path": "src/lib/api/routers/adminRouter.ts"
+  },
   "type": "trpc_router",
   "layer": "business_logic",
+  "auth": {
+    "required": false,
+    "type": "unknown",
+    "method": "unknown",
+    "inference_source": "none",
+    "confidence": 0.95,
+    "authoring_mode": "inferred"
+  },
+  "elements": [],
+  "risk": {
+    "rate_limited": false,
+    "input_validated": false,
+    "error_handling": "absent"
+  },
   "has_auth_gate": false,
   "has_pii": true,
   "procedures": {
@@ -23,6 +41,34 @@
     "SEC-002": "failing — \"adminRouter\" imports publicProcedure and is a tRPC router — use protectedProcedure for all mutations to prevent unauthorized access.",
     "SEC-PRISMA-001": "failing — Prisma mutation accessRequest.update is reachable without an auth check."
   },
+  "violations": {
+    "active": [
+      {
+        "id": "SEC-002",
+        "severity": "critical",
+        "category": "security",
+        "confidence": 0.72,
+        "confidence_band": "medium",
+        "unconditional": false,
+        "plain_language": "adminRouter has no login requirement. Anyone who knows the address could access it.",
+        "detail": "\"adminRouter\" imports publicProcedure and is a tRPC router — use protectedProcedure for all mutations to prevent unauthorized access.",
+        "remediation": "Replace publicProcedure with protectedProcedure, or add explicit authorization logic.",
+        "ref": "violations/SEC-002.json"
+      },
+      {
+        "id": "SEC-PRISMA-001",
+        "severity": "critical",
+        "category": "security",
+        "confidence": 1,
+        "confidence_band": "high",
+        "unconditional": false,
+        "plain_language": "Changes to your data in adminRouter can be made without verifying who the user is.",
+        "detail": "Prisma mutation accessRequest.update is reachable without an auth check.",
+        "remediation": "Add getServerSession(), auth.check(), or similar before calling the mutation from the server action or API route.",
+        "ref": "violations/SEC-PRISMA-001.json"
+      }
+    ]
+  },
   "adjacent": [
     {
       "id": "db:prisma:20",
@@ -39,8 +85,8 @@
     "source": "pre_idd",
     "confidence": 0.95,
     "design_ref": null,
-    "first_scanned": "2026-04-01",
-    "last_confirmed": "2026-04-01"
+    "first_scanned": "2026-04-08",
+    "last_confirmed": "2026-04-08"
   },
   "decisions": {
     "api": "tRPC procedures"

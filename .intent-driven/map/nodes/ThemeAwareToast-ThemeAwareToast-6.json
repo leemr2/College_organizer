@@ -1,9 +1,27 @@
 {
   "id": "ThemeAwareToast:ThemeAwareToast:6",
   "label": "ThemeAwareToast",
-  "file": "C:/Users/drlee/College_organizer/src/components/theme/ThemeAwareToast.tsx",
+  "file": {
+    "path": "D:\\drlee\\College_organizer\\src\\components\\theme\\ThemeAwareToast.tsx",
+    "filename": "ThemeAwareToast.tsx",
+    "relative_path": "src/components/theme/ThemeAwareToast.tsx"
+  },
   "type": "react_component",
   "layer": "presentation",
+  "auth": {
+    "required": null,
+    "type": "unknown",
+    "method": "unknown",
+    "inference_source": "none",
+    "confidence": 0.75,
+    "authoring_mode": "inferred"
+  },
+  "elements": [],
+  "risk": {
+    "rate_limited": false,
+    "input_validated": false,
+    "error_handling": "absent"
+  },
   "has_auth_gate": false,
   "has_pii": false,
   "procedures": {
@@ -15,12 +33,15 @@
   ],
   "uses": [],
   "constraint_check": {},
+  "violations": {
+    "active": []
+  },
   "adjacent": [],
   "provenance": {
     "source": "pre_idd",
     "confidence": 0.75,
     "design_ref": null,
-    "first_scanned": "2026-04-01",
-    "last_confirmed": "2026-04-01"
+    "first_scanned": "2026-04-08",
+    "last_confirmed": "2026-04-08"
   }
 }

@@ -1,9 +1,27 @@
 {
   "id": "WelcomeEmail:WelcomeEmail:7",
   "label": "WelcomeEmail",
-  "file": "C:/Users/drlee/College_organizer/src/lib/email/templates/WelcomeEmail.tsx",
+  "file": {
+    "path": "D:\\drlee\\College_organizer\\src\\lib\\email\\templates\\WelcomeEmail.tsx",
+    "filename": "WelcomeEmail.tsx",
+    "relative_path": "src/lib/email/templates/WelcomeEmail.tsx"
+  },
   "type": "generic_function",
   "layer": "business_logic",
+  "auth": {
+    "required": null,
+    "type": "unknown",
+    "method": "unknown",
+    "inference_source": "none",
+    "confidence": 0.6,
+    "authoring_mode": "inferred"
+  },
+  "elements": [],
+  "risk": {
+    "rate_limited": null,
+    "input_validated": null,
+    "error_handling": "unknown"
+  },
   "has_auth_gate": null,
   "has_pii": null,
   "procedures": {
@@ -15,12 +33,15 @@
   ],
   "uses": [],
   "constraint_check": {},
+  "violations": {
+    "active": []
+  },
   "adjacent": [],
   "provenance": {
     "source": "pre_idd",
     "confidence": 0.1,
     "design_ref": null,
-    "first_scanned": "2026-04-01",
-    "last_confirmed": "2026-04-01"
+    "first_scanned": "2026-04-08",
+    "last_confirmed": "2026-04-08"
   }
 }

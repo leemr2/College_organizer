@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.1",
+  "total_rules": 4,
+  "violations": [
+    {
+      "rule_id": "SEC-002",
+      "file": "SEC-002.json",
+      "severity": "critical",
+      "affected_node_count": 1
+    },
+    {
+      "rule_id": "SEC-PRISMA-001",
+      "file": "SEC-PRISMA-001.json",
+      "severity": "critical",
+      "affected_node_count": 2
+    },
+    {
+      "rule_id": "WARN-AI-001",
+      "file": "WARN-AI-001.json",
+      "severity": "warning",
+      "affected_node_count": 2
+    },
+    {
+      "rule_id": "WARN-AI-002",
+      "file": "WARN-AI-002.json",
+      "severity": "warning",
+      "affected_node_count": 1
+    }
+  ]
+}

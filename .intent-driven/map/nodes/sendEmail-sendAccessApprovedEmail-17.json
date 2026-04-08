@@ -1,9 +1,27 @@
 {
   "id": "sendEmail:sendAccessApprovedEmail:17",
   "label": "sendAccessApprovedEmail",
-  "file": "C:/Users/drlee/College_organizer/src/lib/email/sendEmail.ts",
+  "file": {
+    "path": "D:\\drlee\\College_organizer\\src\\lib\\email\\sendEmail.ts",
+    "filename": "sendEmail.ts",
+    "relative_path": "src/lib/email/sendEmail.ts"
+  },
   "type": "pii_handling",
   "layer": "business_logic",
+  "auth": {
+    "required": null,
+    "type": "unknown",
+    "method": "unknown",
+    "inference_source": "none",
+    "confidence": 0.85,
+    "authoring_mode": "inferred"
+  },
+  "elements": [],
+  "risk": {
+    "rate_limited": null,
+    "input_validated": null,
+    "error_handling": "unknown"
+  },
   "has_auth_gate": null,
   "has_pii": true,
   "procedures": {
@@ -18,12 +36,15 @@
     "AccessApprovedEmail:AccessApprovedEmail:7"
   ],
   "constraint_check": {},
+  "violations": {
+    "active": []
+  },
   "adjacent": [],
   "provenance": {
     "source": "pre_idd",
     "confidence": 0.85,
     "design_ref": null,
-    "first_scanned": "2026-04-01",
-    "last_confirmed": "2026-04-01"
+    "first_scanned": "2026-04-08",
+    "last_confirmed": "2026-04-08"
   }
 }

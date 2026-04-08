@@ -1,9 +1,27 @@
 {
   "id": "schema:model:ClassSchedule:0",
   "label": "ClassSchedule",
-  "file": "C:/Users/drlee/College_organizer/prisma/schema.prisma",
+  "file": {
+    "path": "D:\\drlee\\College_organizer\\prisma\\schema.prisma",
+    "filename": "schema.prisma",
+    "relative_path": "prisma/schema.prisma"
+  },
   "type": "orm_model",
   "layer": "data_access",
+  "auth": {
+    "required": null,
+    "type": "unknown",
+    "method": "unknown",
+    "inference_source": "none",
+    "confidence": 0.98,
+    "authoring_mode": "inferred"
+  },
+  "elements": [],
+  "risk": {
+    "rate_limited": null,
+    "input_validated": null,
+    "error_handling": "unknown"
+  },
   "has_auth_gate": null,
   "has_pii": null,
   "procedures": {
@@ -15,12 +33,15 @@
   ],
   "uses": [],
   "constraint_check": {},
+  "violations": {
+    "active": []
+  },
   "adjacent": [],
   "provenance": {
     "source": "pre_idd",
     "confidence": 0.98,
     "design_ref": null,
-    "first_scanned": "2026-04-01",
-    "last_confirmed": "2026-04-01"
+    "first_scanned": "2026-04-08",
+    "last_confirmed": "2026-04-08"
   }
 }

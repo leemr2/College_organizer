@@ -2,7 +2,18 @@
   "id": "aiClient:AIModel:57",
   "label": "AIModel",
   "file": "C:/Users/drlee/College_organizer/src/lib/aiClient.ts",
-  "type": "generic_function",
+  "type": "ai_provider_client",
+  "layer": "business_logic",
+  "auth": {
+    "required": null,
+    "type": "unknown",
+    "method": "unknown",
+    "inference_source": "none",
+    "confidence": 0.8,
+    "authoring_mode": "inferred"
+  },
+  "has_auth_gate": false,
+  "has_pii": false,
   "procedures": {
     "mutations": [],
     "queries": []
@@ -12,5 +23,12 @@
   ],
   "uses": [],
   "constraint_check": {},
-  "adjacent": []
+  "adjacent": [],
+  "provenance": {
+    "source": "inferred",
+    "confidence": 0.8,
+    "design_ref": null,
+    "first_scanned": "2026-04-04",
+    "last_confirmed": "2026-04-04"
+  }
 }

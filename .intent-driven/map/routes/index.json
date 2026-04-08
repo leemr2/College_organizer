@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.0",
-  "generated_at": "2026-04-01T04:31:51.338Z",
+  "schema_version": "1.3",
+  "generated_at": "2026-04-08T03:08:30.853Z",
   "summary": {
     "total": 22,
     "pages": 12,
@@ -16,14 +16,37 @@
       "type": "trpc_router",
       "domain": "api",
       "layer": "business_logic",
+      "auth": {
+        "required": false,
+        "type": "unknown",
+        "method": "unknown",
+        "inference_source": "none",
+        "confidence": 0.95,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": false,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.95,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [
         "SEC-002",
         "SEC-PRISMA-001"
       ],
-      "node_ref": "nodes/adminRouter-adminRouter-8.json"
+      "node_ref": "nodes/adminRouter-adminRouter-8.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "absent"
+      }
     },
     {
       "id": "authRouter:authRouter:7",
@@ -32,11 +55,34 @@
       "type": "trpc_router",
       "domain": "api",
       "layer": "business_logic",
+      "auth": {
+        "required": false,
+        "type": "unknown",
+        "method": "unknown",
+        "inference_source": "none",
+        "confidence": 0.95,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": false,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.95,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [],
-      "node_ref": "nodes/authRouter-authRouter-7.json"
+      "node_ref": "nodes/authRouter-authRouter-7.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "absent"
+      }
     },
     {
       "id": "chatRouter:chatRouter:405",
@@ -45,11 +91,34 @@
       "type": "trpc_router",
       "domain": "api",
       "layer": "business_logic",
+      "auth": {
+        "required": true,
+        "type": "unknown",
+        "method": "protectedProcedure",
+        "inference_source": "none",
+        "confidence": 0.95,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": true,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.95,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [],
-      "node_ref": "nodes/chatRouter-chatRouter-405.json"
+      "node_ref": "nodes/chatRouter-chatRouter-405.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "absent"
+      }
     },
     {
       "id": "page:AdminPage:8",
@@ -58,11 +127,41 @@
       "type": "page",
       "domain": "presentation",
       "layer": "presentation",
+      "auth": {
+        "required": true,
+        "type": "protected",
+        "method": "nextauth",
+        "inference_source": "server_session_call",
+        "confidence": 0.95,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": true,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.98,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [],
-      "node_ref": "nodes/page-AdminPage-8.json"
+      "node_ref": "nodes/page-AdminPage-8.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [
+        {
+          "id": "el::auth_guard::detected",
+          "label": "Auth required",
+          "type": "auth_guard",
+          "confidence": 0.95
+        }
+      ],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "absent"
+      }
     },
     {
       "id": "page:ChatPage:9",
@@ -71,11 +170,41 @@
       "type": "page",
       "domain": "presentation",
       "layer": "presentation",
+      "auth": {
+        "required": true,
+        "type": "protected",
+        "method": "nextauth",
+        "inference_source": "server_session_call",
+        "confidence": 0.95,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": true,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.98,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [],
-      "node_ref": "nodes/page-ChatPage-9.json"
+      "node_ref": "nodes/page-ChatPage-9.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [
+        {
+          "id": "el::auth_guard::detected",
+          "label": "Auth required",
+          "type": "auth_guard",
+          "confidence": 0.95
+        }
+      ],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "absent"
+      }
     },
     {
       "id": "page:DashboardPage:15",
@@ -84,11 +213,41 @@
       "type": "page",
       "domain": "presentation",
       "layer": "presentation",
+      "auth": {
+        "required": true,
+        "type": "protected",
+        "method": "nextauth",
+        "inference_source": "server_session_call",
+        "confidence": 0.95,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": true,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.98,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [],
-      "node_ref": "nodes/page-DashboardPage-15.json"
+      "node_ref": "nodes/page-DashboardPage-15.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [
+        {
+          "id": "el::auth_guard::detected",
+          "label": "Auth required",
+          "type": "auth_guard",
+          "confidence": 0.95
+        }
+      ],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "absent"
+      }
     },
     {
       "id": "page:ErrorContent:8",
@@ -97,11 +256,34 @@
       "type": "page",
       "domain": "presentation",
       "layer": "presentation",
+      "auth": {
+        "required": false,
+        "type": "public",
+        "method": "none",
+        "inference_source": "auth_page_pattern",
+        "confidence": 0.95,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": false,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.98,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [],
-      "node_ref": "nodes/page-ErrorContent-8.json"
+      "node_ref": "nodes/page-ErrorContent-8.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "absent"
+      }
     },
     {
       "id": "page:ErrorPage:47",
@@ -110,11 +292,34 @@
       "type": "page",
       "domain": "presentation",
       "layer": "presentation",
+      "auth": {
+        "required": false,
+        "type": "public",
+        "method": "none",
+        "inference_source": "auth_page_pattern",
+        "confidence": 0.95,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": false,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.98,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [],
-      "node_ref": "nodes/page-ErrorPage-47.json"
+      "node_ref": "nodes/page-ErrorPage-47.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "absent"
+      }
     },
     {
       "id": "page:OnboardingPage:8",
@@ -123,11 +328,41 @@
       "type": "page",
       "domain": "presentation",
       "layer": "presentation",
+      "auth": {
+        "required": true,
+        "type": "protected",
+        "method": "nextauth",
+        "inference_source": "server_session_call",
+        "confidence": 0.95,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": true,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.98,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [],
-      "node_ref": "nodes/page-OnboardingPage-8.json"
+      "node_ref": "nodes/page-OnboardingPage-8.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [
+        {
+          "id": "el::auth_guard::detected",
+          "label": "Auth required",
+          "type": "auth_guard",
+          "confidence": 0.95
+        }
+      ],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "absent"
+      }
     },
     {
       "id": "page:ProfilePage:10",
@@ -136,11 +371,41 @@
       "type": "page",
       "domain": "presentation",
       "layer": "presentation",
+      "auth": {
+        "required": true,
+        "type": "protected",
+        "method": "nextauth",
+        "inference_source": "server_session_call",
+        "confidence": 0.95,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": true,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.98,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [],
-      "node_ref": "nodes/page-ProfilePage-10.json"
+      "node_ref": "nodes/page-ProfilePage-10.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [
+        {
+          "id": "el::auth_guard::detected",
+          "label": "Auth required",
+          "type": "auth_guard",
+          "confidence": 0.95
+        }
+      ],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "absent"
+      }
     },
     {
       "id": "page:SignIn:342",
@@ -149,11 +414,34 @@
       "type": "page",
       "domain": "presentation",
       "layer": "presentation",
+      "auth": {
+        "required": false,
+        "type": "public",
+        "method": "none",
+        "inference_source": "auth_page_pattern",
+        "confidence": 0.95,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": false,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.98,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [],
-      "node_ref": "nodes/page-SignIn-342.json"
+      "node_ref": "nodes/page-SignIn-342.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "absent"
+      }
     },
     {
       "id": "page:SignInContent:11",
@@ -162,11 +450,34 @@
       "type": "page",
       "domain": "presentation",
       "layer": "presentation",
+      "auth": {
+        "required": false,
+        "type": "public",
+        "method": "none",
+        "inference_source": "auth_page_pattern",
+        "confidence": 0.95,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": false,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.98,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [],
-      "node_ref": "nodes/page-SignInContent-11.json"
+      "node_ref": "nodes/page-SignInContent-11.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "absent"
+      }
     },
     {
       "id": "page:SignOut:8",
@@ -175,11 +486,34 @@
       "type": "page",
       "domain": "presentation",
       "layer": "presentation",
+      "auth": {
+        "required": false,
+        "type": "public",
+        "method": "none",
+        "inference_source": "auth_page_pattern",
+        "confidence": 0.95,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": false,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.98,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [],
-      "node_ref": "nodes/page-SignOut-8.json"
+      "node_ref": "nodes/page-SignOut-8.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "absent"
+      }
     },
     {
       "id": "page:TasksPage:9",
@@ -188,11 +522,41 @@
       "type": "page",
       "domain": "presentation",
       "layer": "presentation",
+      "auth": {
+        "required": true,
+        "type": "protected",
+        "method": "nextauth",
+        "inference_source": "server_session_call",
+        "confidence": 0.95,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": true,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.98,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [],
-      "node_ref": "nodes/page-TasksPage-9.json"
+      "node_ref": "nodes/page-TasksPage-9.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [
+        {
+          "id": "el::auth_guard::detected",
+          "label": "Auth required",
+          "type": "auth_guard",
+          "confidence": 0.95
+        }
+      ],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "absent"
+      }
     },
     {
       "id": "page:VerifyRequest:7",
@@ -201,11 +565,34 @@
       "type": "page",
       "domain": "presentation",
       "layer": "presentation",
+      "auth": {
+        "required": false,
+        "type": "public",
+        "method": "none",
+        "inference_source": "auth_page_pattern",
+        "confidence": 0.95,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": false,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.98,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [],
-      "node_ref": "nodes/page-VerifyRequest-7.json"
+      "node_ref": "nodes/page-VerifyRequest-7.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "absent"
+      }
     },
     {
       "id": "route:api-transcribe:POST:8",
@@ -214,11 +601,41 @@
       "type": "api_route",
       "domain": "api",
       "layer": "business_logic",
+      "auth": {
+        "required": false,
+        "type": "public",
+        "method": "none",
+        "inference_source": "none",
+        "confidence": 0.6,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": false,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.97,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [],
-      "node_ref": "nodes/route-api-transcribe-POST-8.json"
+      "node_ref": "nodes/route-api-transcribe-POST-8.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [
+        {
+          "id": "el::error_boundary::try_catch",
+          "label": "Error handled",
+          "type": "error_boundary",
+          "confidence": 0.8
+        }
+      ],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "explicit"
+      }
     },
     {
       "id": "route:api-upload:POST:4",
@@ -227,11 +644,41 @@
       "type": "api_route",
       "domain": "api",
       "layer": "business_logic",
+      "auth": {
+        "required": false,
+        "type": "public",
+        "method": "none",
+        "inference_source": "none",
+        "confidence": 0.6,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": false,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.97,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [],
-      "node_ref": "nodes/route-api-upload-POST-4.json"
+      "node_ref": "nodes/route-api-upload-POST-4.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [
+        {
+          "id": "el::error_boundary::try_catch",
+          "label": "Error handled",
+          "type": "error_boundary",
+          "confidence": 0.8
+        }
+      ],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "explicit"
+      }
     },
     {
       "id": "route:handler:19",
@@ -240,13 +687,36 @@
       "type": "api_route",
       "domain": "api",
       "layer": "business_logic",
+      "auth": {
+        "required": null,
+        "type": "unknown",
+        "method": "protectedProcedure",
+        "inference_source": "none",
+        "confidence": 0.5,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": false,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.97,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [
         "SEC-PRISMA-001"
       ],
-      "node_ref": "nodes/route-handler-19.json"
+      "node_ref": "nodes/route-handler-19.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "absent"
+      }
     },
     {
       "id": "scheduleRouter:scheduleRouter:8",
@@ -255,11 +725,34 @@
       "type": "trpc_router",
       "domain": "api",
       "layer": "business_logic",
+      "auth": {
+        "required": true,
+        "type": "unknown",
+        "method": "protectedProcedure",
+        "inference_source": "none",
+        "confidence": 0.95,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": true,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.95,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [],
-      "node_ref": "nodes/scheduleRouter-scheduleRouter-8.json"
+      "node_ref": "nodes/scheduleRouter-scheduleRouter-8.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "absent"
+      }
     },
     {
       "id": "studentRouter:studentRouter:8",
@@ -268,11 +761,34 @@
       "type": "trpc_router",
       "domain": "api",
       "layer": "business_logic",
+      "auth": {
+        "required": true,
+        "type": "unknown",
+        "method": "protectedProcedure",
+        "inference_source": "none",
+        "confidence": 0.95,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": true,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.95,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [],
-      "node_ref": "nodes/studentRouter-studentRouter-8.json"
+      "node_ref": "nodes/studentRouter-studentRouter-8.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "absent"
+      }
     },
     {
       "id": "taskRouter:taskRouter:7",
@@ -281,11 +797,34 @@
       "type": "trpc_router",
       "domain": "api",
       "layer": "business_logic",
+      "auth": {
+        "required": false,
+        "type": "unknown",
+        "method": "unknown",
+        "inference_source": "none",
+        "confidence": 0.95,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": false,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.95,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [],
-      "node_ref": "nodes/taskRouter-taskRouter-7.json"
+      "node_ref": "nodes/taskRouter-taskRouter-7.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "absent"
+      }
     },
     {
       "id": "toolRouter:toolRouter:13",
@@ -294,11 +833,34 @@
       "type": "trpc_router",
       "domain": "api",
       "layer": "business_logic",
+      "auth": {
+        "required": true,
+        "type": "unknown",
+        "method": "protectedProcedure",
+        "inference_source": "none",
+        "confidence": 0.95,
+        "authoring_mode": "inferred"
+      },
       "has_auth_gate": true,
       "has_pii": false,
-      "provenance_source": "pre_idd",
+      "provenance": {
+        "source": "pre_idd",
+        "confidence": 0.95,
+        "design_ref": null,
+        "first_scanned": "2026-04-08",
+        "last_confirmed": "2026-04-08"
+      },
       "active_violations": [],
-      "node_ref": "nodes/toolRouter-toolRouter-13.json"
+      "node_ref": "nodes/toolRouter-toolRouter-13.json",
+      "isDynamic": false,
+      "dynamicParams": [],
+      "isApiRoute": false,
+      "elements": [],
+      "risk": {
+        "rate_limited": false,
+        "input_validated": false,
+        "error_handling": "absent"
+      }
     }
   ]
 }

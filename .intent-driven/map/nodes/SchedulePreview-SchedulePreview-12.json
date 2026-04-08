@@ -1,9 +1,27 @@
 {
   "id": "SchedulePreview:SchedulePreview:12",
   "label": "SchedulePreview",
-  "file": "C:/Users/drlee/College_organizer/src/components/chat/SchedulePreview.tsx",
+  "file": {
+    "path": "D:\\drlee\\College_organizer\\src\\components\\chat\\SchedulePreview.tsx",
+    "filename": "SchedulePreview.tsx",
+    "relative_path": "src/components/chat/SchedulePreview.tsx"
+  },
   "type": "react_component",
   "layer": "presentation",
+  "auth": {
+    "required": null,
+    "type": "unknown",
+    "method": "unknown",
+    "inference_source": "none",
+    "confidence": 0.75,
+    "authoring_mode": "inferred"
+  },
+  "elements": [],
+  "risk": {
+    "rate_limited": false,
+    "input_validated": false,
+    "error_handling": "absent"
+  },
   "has_auth_gate": false,
   "has_pii": false,
   "procedures": {
@@ -17,6 +35,9 @@
     "types:ScheduleSuggestion:152"
   ],
   "constraint_check": {},
+  "violations": {
+    "active": []
+  },
   "adjacent": [
     {
       "id": "types:ScheduleSuggestion:152",
@@ -28,7 +49,7 @@
     "source": "pre_idd",
     "confidence": 0.75,
     "design_ref": null,
-    "first_scanned": "2026-04-01",
-    "last_confirmed": "2026-04-01"
+    "first_scanned": "2026-04-08",
+    "last_confirmed": "2026-04-08"
   }
 }

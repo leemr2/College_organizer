@@ -1,9 +1,34 @@
 {
   "id": "index:authOptions:62",
   "label": "authOptions",
-  "file": "C:/Users/drlee/College_organizer/src/lib/auth/index.ts",
+  "file": {
+    "path": "D:\\drlee\\College_organizer\\src\\lib\\auth\\index.ts",
+    "filename": "index.ts",
+    "relative_path": "src/lib/auth/index.ts"
+  },
   "type": "prisma_mutation",
   "layer": "data_access",
+  "auth": {
+    "required": null,
+    "type": "unknown",
+    "method": "nextauth",
+    "inference_source": "none",
+    "confidence": 0.95,
+    "authoring_mode": "inferred"
+  },
+  "elements": [
+    {
+      "id": "el::pii_field::detected",
+      "label": "Handles PII",
+      "type": "pii_field",
+      "confidence": 0.9
+    }
+  ],
+  "risk": {
+    "rate_limited": null,
+    "input_validated": null,
+    "error_handling": "unknown"
+  },
   "has_auth_gate": null,
   "has_pii": null,
   "procedures": {
@@ -17,6 +42,9 @@
     "db:prisma:20"
   ],
   "constraint_check": {},
+  "violations": {
+    "active": []
+  },
   "adjacent": [
     {
       "id": "db:prisma:20",
@@ -28,7 +56,7 @@
     "source": "pre_idd",
     "confidence": 0.95,
     "design_ref": null,
-    "first_scanned": "2026-04-01",
-    "last_confirmed": "2026-04-01"
+    "first_scanned": "2026-04-08",
+    "last_confirmed": "2026-04-08"
   }
 }

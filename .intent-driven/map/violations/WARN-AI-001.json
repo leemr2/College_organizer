@@ -3,21 +3,47 @@
   "rule": "AI input passed to provider without validation",
   "severity": "warning",
   "category": "security",
+  "confidence": 0.4,
+  "confidence_band": "low",
+  "unconditional": false,
+  "translations": {
+    "technical": "AI input passed to provider without validation",
+    "plain_language_single": "Content from your users is sent directly to the AI in {label} without being checked first. Crafted inputs could manipulate the AI's behavior.",
+    "plain_language_multi": "User content is sent directly to the AI without being checked first in {N} places. Crafted inputs could manipulate the AI's behavior.",
+    "short_label": "AI prompt not validated",
+    "template_variant": "multi"
+  },
+  "education": {
+    "why_it_matters": "AI models process exactly what they're given. If user input goes directly to the AI without being checked, users can craft messages that make the AI behave in unintended ways.",
+    "what_could_happen": "A user writes a \"prompt injection\" — a cleverly worded message that makes the AI ignore its instructions and do something harmful or embarrassing.",
+    "what_to_do": "Ask your developer to add input validation before user content reaches the AI provider."
+  },
+  "business_impact": "Unvalidated user content to AI can produce unsafe or off-brand outputs.",
+  "consequence": "Users may manipulate AI behavior in ways you did not intend.",
+  "rule_status": "active",
   "affected_nodes": [
     {
       "node_id": "aiClient:generateGeminiWebResponse:142",
+      "node_label": "generateGeminiWebResponse",
       "status": "failing",
-      "file": "C:/Users/drlee/College_organizer/src/lib/aiClient.ts",
-      "detail": "AI input passed to provider without validation"
+      "file": "D:/drlee/College_organizer/src/lib/aiClient.ts",
+      "detail": "AI input passed to provider without validation",
+      "plain_language": "Content from your users is sent directly to the AI in generateGeminiWebResponse without being checked first. Crafted inputs could manipulate the AI's behavior."
     },
     {
       "node_id": "aiClient:generateChatCompletion:198",
+      "node_label": "generateChatCompletion",
       "status": "failing",
-      "file": "C:/Users/drlee/College_organizer/src/lib/aiClient.ts",
-      "detail": "AI input passed to provider without validation"
+      "file": "D:/drlee/College_organizer/src/lib/aiClient.ts",
+      "detail": "AI input passed to provider without validation",
+      "plain_language": "Content from your users is sent directly to the AI in generateChatCompletion without being checked first. Crafted inputs could manipulate the AI's behavior."
     }
   ],
   "remediation": "Add input validation (e.g. Zod schema.parse) before calling the AI provider.",
   "referenced_by_templates": [],
-  "first_detected": "2026-04-01"
+  "first_detected": "2026-04-08",
+  "confidence_signals": [
+    "base score for WARN-AI-001: 0.40",
+    "route auth: no matching route (neutral)"
+  ]
 }

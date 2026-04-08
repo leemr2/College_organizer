@@ -1,10 +1,48 @@
 {
-  "schema_version": "2.0",
+  "schema_version": "2.3",
   "project": {
     "name": "College_organizer",
     "stack": "security,+inngest,+nextjs,+ai_client,+trpc,+prisma,+storybook",
     "file_count": 111,
-    "node_count": 217
+    "node_count": 217,
+    "architecture": {
+      "auth_strategy": {
+        "method": "nextauth",
+        "confidence": 0.9500000000000001,
+        "session_type": "database",
+        "protected_route_count": 7,
+        "public_route_count": 6,
+        "unclassified_route_count": 1
+      },
+      "rate_limiting": {
+        "present": false,
+        "coverage": "none",
+        "protected_endpoints": 0
+      },
+      "error_handling": {
+        "strategy": "inconsistent"
+      },
+      "data_access": {
+        "orm": "prisma",
+        "database": "unknown",
+        "access_pattern": "layered",
+        "direct_access_violations": 0
+      },
+      "api_pattern": {
+        "type": "mixed",
+        "router_count": 11,
+        "unprotected_mutation_count": 2
+      },
+      "ai_integration": {
+        "present": true,
+        "providers": [
+          "@anthropic-ai/sdk",
+          "@google/generative-ai",
+          "openai"
+        ],
+        "input_validation": "present"
+      }
+    }
   },
   "decisions": {
     "api": {
@@ -147,6 +185,10 @@
     "total_paths": 37,
     "confirmed_paths": 0,
     "total_edges": 29,
+    "orphaned_nodes": 3,
+    "dead_ends": 0,
+    "logic_traps": 6,
+    "unreachable_nodes": 0,
     "ref": "flows/index.json",
     "edges_ref": "edges/index.json"
   }

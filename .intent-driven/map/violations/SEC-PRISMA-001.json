@@ -3,21 +3,50 @@
   "rule": "Prisma mutation accessRequest.update is reachable without an auth check.",
   "severity": "critical",
   "category": "security",
+  "confidence": 1,
+  "confidence_band": "high",
+  "unconditional": false,
+  "translations": {
+    "technical": "Prisma mutation accessRequest.update is reachable without an auth check.",
+    "plain_language_single": "Changes to your data in {label} can be made without verifying who the user is.",
+    "plain_language_multi": "Changes to your data can be made in {N} places without verifying who the user is.",
+    "short_label": "Unverified data changes",
+    "template_variant": "multi"
+  },
+  "education": {
+    "why_it_matters": "Your database is where everything important is stored. Writes to it should only happen after the app has confirmed who's making the request.",
+    "what_could_happen": "A malicious request — sent by a script, not a real user — could modify or delete records in your database.",
+    "what_to_do": "Ask your developer to add an authentication check before this data operation."
+  },
+  "business_impact": "Data changes without identity checks can be exploited by automated abuse.",
+  "consequence": "Records may be altered or deleted without a real user behind the action.",
+  "rule_status": "active",
   "affected_nodes": [
     {
       "node_id": "adminRouter:adminRouter:8",
+      "node_label": "adminRouter",
       "status": "failing",
-      "file": "C:/Users/drlee/College_organizer/src/lib/api/routers/adminRouter.ts",
-      "detail": "Prisma mutation accessRequest.update is reachable without an auth check."
+      "file": "D:/drlee/College_organizer/src/lib/api/routers/adminRouter.ts",
+      "detail": "Prisma mutation accessRequest.update is reachable without an auth check.",
+      "plain_language": "Changes to your data in adminRouter can be made without verifying who the user is."
     },
     {
       "node_id": "route:handler:19",
+      "node_label": "handler",
       "status": "failing",
-      "file": "C:/Users/drlee/College_organizer/src/app/api/trpc/[trpc]/route.ts",
-      "detail": "Prisma mutation accessRequest.update is reachable without an auth check."
+      "file": "D:/drlee/College_organizer/src/app/api/trpc/[trpc]/route.ts",
+      "detail": "Prisma mutation accessRequest.update is reachable without an auth check.",
+      "plain_language": "Changes to your data in handler can be made without verifying who the user is."
     }
   ],
   "remediation": "Add getServerSession(), auth.check(), or similar before calling the mutation from the server action or API route.",
   "referenced_by_templates": [],
-  "first_detected": "2026-04-01"
+  "first_detected": "2026-04-08",
+  "confidence_signals": [
+    "base score for SEC-PRISMA-001: 0.65",
+    "route auth: no matching route (neutral)",
+    "node subtype: admin_action, rule SEC-PRISMA-001 (+40%)",
+    "path pattern: admin route (+20%)",
+    "headline band (≥0.8)"
+  ]
 }

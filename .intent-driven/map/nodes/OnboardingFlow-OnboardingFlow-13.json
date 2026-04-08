@@ -1,9 +1,27 @@
 {
   "id": "OnboardingFlow:OnboardingFlow:13",
   "label": "OnboardingFlow",
-  "file": "C:/Users/drlee/College_organizer/src/components/onboarding/OnboardingFlow.tsx",
+  "file": {
+    "path": "D:\\drlee\\College_organizer\\src\\components\\onboarding\\OnboardingFlow.tsx",
+    "filename": "OnboardingFlow.tsx",
+    "relative_path": "src/components/onboarding/OnboardingFlow.tsx"
+  },
   "type": "react_component",
   "layer": "presentation",
+  "auth": {
+    "required": null,
+    "type": "unknown",
+    "method": "unknown",
+    "inference_source": "none",
+    "confidence": 0.75,
+    "authoring_mode": "inferred"
+  },
+  "elements": [],
+  "risk": {
+    "rate_limited": false,
+    "input_validated": false,
+    "error_handling": "absent"
+  },
   "has_auth_gate": false,
   "has_pii": false,
   "procedures": {
@@ -22,6 +40,9 @@
     "types:OnboardingData:172"
   ],
   "constraint_check": {},
+  "violations": {
+    "active": []
+  },
   "adjacent": [
     {
       "id": "react:api:29",
@@ -38,7 +59,7 @@
     "source": "pre_idd",
     "confidence": 0.75,
     "design_ref": null,
-    "first_scanned": "2026-04-01",
-    "last_confirmed": "2026-04-01"
+    "first_scanned": "2026-04-08",
+    "last_confirmed": "2026-04-08"
   }
 }

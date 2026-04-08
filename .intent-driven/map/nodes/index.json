@@ -1,0 +1,1462 @@
+{
+  "schema_version": "1.0",
+  "total_nodes": 182,
+  "nodes": [
+    {
+      "id": "AccessApprovedEmail:AccessApprovedEmail:7",
+      "file": "AccessApprovedEmail-AccessApprovedEmail-7.json",
+      "label": "AccessApprovedEmail",
+      "type": "pii_handling",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "AdminDashboard:AdminDashboard:20",
+      "file": "AdminDashboard-AdminDashboard-20.json",
+      "label": "AdminDashboard",
+      "type": "auth_gate",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "adminRouter:adminRouter:8",
+      "file": "adminRouter-adminRouter-8.json",
+      "label": "adminRouter",
+      "type": "trpc_router",
+      "layer": "business_logic",
+      "has_violations": true
+    },
+    {
+      "id": "aiClient:AI_MODELS:43",
+      "file": "aiClient-AI_MODELS-43.json",
+      "label": "AI_MODELS",
+      "type": "ai_provider_client",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "aiClient:AIModel:57",
+      "file": "aiClient-AIModel-57.json",
+      "label": "AIModel",
+      "type": "ai_provider_client",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "aiClient:generateChatCompletion:198",
+      "file": "aiClient-generateChatCompletion-198.json",
+      "label": "generateChatCompletion",
+      "type": "ai_provider_client",
+      "layer": "business_logic",
+      "has_violations": true
+    },
+    {
+      "id": "aiClient:GenerateChatCompletionOptions:61",
+      "file": "aiClient-GenerateChatCompletionOptions-61.json",
+      "label": "GenerateChatCompletionOptions",
+      "type": "ai_provider_client",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "aiClient:generateGeminiWebResponse:142",
+      "file": "aiClient-generateGeminiWebResponse-142.json",
+      "label": "generateGeminiWebResponse",
+      "type": "ai_provider_client",
+      "layer": "business_logic",
+      "has_violations": true
+    },
+    {
+      "id": "aiClient:parseJsonResponse:177",
+      "file": "aiClient-parseJsonResponse-177.json",
+      "label": "parseJsonResponse",
+      "type": "input_validation",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "authRouter:authRouter:7",
+      "file": "authRouter-authRouter-7.json",
+      "label": "authRouter",
+      "type": "trpc_router",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "Button:Button:19",
+      "file": "Button-Button-19.json",
+      "label": "Button",
+      "type": "generic_function",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "button:ButtonProps:38",
+      "file": "button-ButtonProps-38.json",
+      "label": "ButtonProps",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "Button:ButtonProps:5",
+      "file": "Button-ButtonProps-5.json",
+      "label": "ButtonProps",
+      "type": "generic_function",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "calendar:CalendarEvent:45",
+      "file": "calendar-CalendarEvent-45.json",
+      "label": "CalendarEvent",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "calendar:MeetingTime:9",
+      "file": "calendar-MeetingTime-9.json",
+      "label": "MeetingTime",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "calendar:RecurringPattern:29",
+      "file": "calendar-RecurringPattern-29.json",
+      "label": "RecurringPattern",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "calendar:TimeBlock:15",
+      "file": "calendar-TimeBlock-15.json",
+      "label": "TimeBlock",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "calendar:TimeBlockType:1",
+      "file": "calendar-TimeBlockType-1.json",
+      "label": "TimeBlockType",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "calendar:WeekView:35",
+      "file": "calendar-WeekView-35.json",
+      "label": "WeekView",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "ChatInterface:ChatInterface:18",
+      "file": "ChatInterface-ChatInterface-18.json",
+      "label": "ChatInterface",
+      "type": "input_validation",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "chatRouter:chatRouter:405",
+      "file": "chatRouter-chatRouter-405.json",
+      "label": "chatRouter",
+      "type": "trpc_router",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "ClassScheduleEditor:ClassScheduleEditor:12",
+      "file": "ClassScheduleEditor-ClassScheduleEditor-12.json",
+      "label": "ClassScheduleEditor",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "ClassScheduleStep:ClassScheduleStep:23",
+      "file": "ClassScheduleStep-ClassScheduleStep-23.json",
+      "label": "ClassScheduleStep",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "ClientProvider:ClientProvider:6",
+      "file": "ClientProvider-ClientProvider-6.json",
+      "label": "ClientProvider",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "Clock:Clock:13",
+      "file": "Clock-Clock-13.json",
+      "label": "Clock",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "conversational:conversationalAI:548",
+      "file": "conversational-conversationalAI-548.json",
+      "label": "conversationalAI",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "conversational:ConversationalAI:7",
+      "file": "conversational-ConversationalAI-7.json",
+      "label": "ConversationalAI",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "DailyGreeting:DailyGreeting:9",
+      "file": "DailyGreeting-DailyGreeting-9.json",
+      "label": "DailyGreeting",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "dailyGreetings:getCurrentDayOfWeek:34",
+      "file": "dailyGreetings-getCurrentDayOfWeek-34.json",
+      "label": "getCurrentDayOfWeek",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "dailyGreetings:getDailyGreeting:5",
+      "file": "dailyGreetings-getDailyGreeting-5.json",
+      "label": "getDailyGreeting",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "DailyPlanningButton:DailyPlanningButton:6",
+      "file": "DailyPlanningButton-DailyPlanningButton-6.json",
+      "label": "DailyPlanningButton",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "db:prisma:20",
+      "file": "db-prisma-20.json",
+      "label": "prisma",
+      "type": "prisma_client_init",
+      "layer": "infrastructure",
+      "has_violations": false
+    },
+    {
+      "id": "discoveryQuestions:DiscoveryQuestionsService:11",
+      "file": "discoveryQuestions-DiscoveryQuestionsService-11.json",
+      "label": "DiscoveryQuestionsService",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "discoveryQuestions:discoveryQuestionsService:177",
+      "file": "discoveryQuestions-discoveryQuestionsService-177.json",
+      "label": "discoveryQuestionsService",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "DraftTaskPreview:DraftTaskPreview:11",
+      "file": "DraftTaskPreview-DraftTaskPreview-11.json",
+      "label": "DraftTaskPreview",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "index:authOptions:62",
+      "file": "index-authOptions-62.json",
+      "label": "authOptions",
+      "type": "prisma_mutation",
+      "layer": "data_access",
+      "has_violations": false
+    },
+    {
+      "id": "index:getServerAuthSession:263",
+      "file": "index-getServerAuthSession-263.json",
+      "label": "getServerAuthSession",
+      "type": "auth_utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "inngest.config:AppEvents:5",
+      "file": "inngest.config-AppEvents-5.json",
+      "label": "AppEvents",
+      "type": "pii_handling",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "MessageBubble:MessageBubble:14",
+      "file": "MessageBubble-MessageBubble-14.json",
+      "label": "MessageBubble",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "MessageList:MessageList:12",
+      "file": "MessageList-MessageList-12.json",
+      "label": "MessageList",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "NavigationBar:NavigationBar:9",
+      "file": "NavigationBar-NavigationBar-9.json",
+      "label": "NavigationBar",
+      "type": "auth_gate",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "OnboardingFlow:OnboardingFlow:13",
+      "file": "OnboardingFlow-OnboardingFlow-13.json",
+      "label": "OnboardingFlow",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "page:AdminPage:8",
+      "file": "page-AdminPage-8.json",
+      "label": "AdminPage",
+      "type": "app_router_page",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "page:ChatPage:9",
+      "file": "page-ChatPage-9.json",
+      "label": "ChatPage",
+      "type": "app_router_page",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "page:DashboardPage:15",
+      "file": "page-DashboardPage-15.json",
+      "label": "DashboardPage",
+      "type": "app_router_page",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "page:ErrorContent:8",
+      "file": "page-ErrorContent-8.json",
+      "label": "ErrorContent",
+      "type": "app_router_page",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "page:ErrorPage:47",
+      "file": "page-ErrorPage-47.json",
+      "label": "ErrorPage",
+      "type": "app_router_page",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "page:OnboardingPage:8",
+      "file": "page-OnboardingPage-8.json",
+      "label": "OnboardingPage",
+      "type": "app_router_page",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "page:ProfilePage:10",
+      "file": "page-ProfilePage-10.json",
+      "label": "ProfilePage",
+      "type": "app_router_page",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "page:SignIn:342",
+      "file": "page-SignIn-342.json",
+      "label": "SignIn",
+      "type": "app_router_page",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "page:SignInContent:11",
+      "file": "page-SignInContent-11.json",
+      "label": "SignInContent",
+      "type": "app_router_page",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "page:SignOut:8",
+      "file": "page-SignOut-8.json",
+      "label": "SignOut",
+      "type": "app_router_page",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "page:TasksPage:9",
+      "file": "page-TasksPage-9.json",
+      "label": "TasksPage",
+      "type": "app_router_page",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "page:VerifyRequest:7",
+      "file": "page-VerifyRequest-7.json",
+      "label": "VerifyRequest",
+      "type": "app_router_page",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "PersonalInfoEditor:PersonalInfoEditor:8",
+      "file": "PersonalInfoEditor-PersonalInfoEditor-8.json",
+      "label": "PersonalInfoEditor",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "PersonalizationStep:PersonalizationStep:11",
+      "file": "PersonalizationStep-PersonalizationStep-11.json",
+      "label": "PersonalizationStep",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "PreferencesEditor:PreferencesEditor:40",
+      "file": "PreferencesEditor-PreferencesEditor-40.json",
+      "label": "PreferencesEditor",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "PreferencesStep:PreferencesStep:16",
+      "file": "PreferencesStep-PreferencesStep-16.json",
+      "label": "PreferencesStep",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "ProfileEditor:ProfileEditor:12",
+      "file": "ProfileEditor-ProfileEditor-12.json",
+      "label": "ProfileEditor",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "react:api:29",
+      "file": "react-api-29.json",
+      "label": "api",
+      "type": "trpc_infrastructure",
+      "layer": "infrastructure",
+      "has_violations": false
+    },
+    {
+      "id": "react:TRPCReactProvider:52",
+      "file": "react-TRPCReactProvider-52.json",
+      "label": "TRPCReactProvider",
+      "type": "trpc_infrastructure",
+      "layer": "infrastructure",
+      "has_violations": false
+    },
+    {
+      "id": "root:appRouter:15",
+      "file": "root-appRouter-15.json",
+      "label": "appRouter",
+      "type": "trpc_router",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "root:AppRouter:26",
+      "file": "root-AppRouter-26.json",
+      "label": "AppRouter",
+      "type": "generic_function",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "root:createCaller:35",
+      "file": "root-createCaller-35.json",
+      "label": "createCaller",
+      "type": "generic_function",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "route:api-transcribe:POST:8",
+      "file": "route-api-transcribe-POST-8.json",
+      "label": "POST",
+      "type": "api_route_handler",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "route:api-upload:POST:4",
+      "file": "route-api-upload-POST-4.json",
+      "label": "POST",
+      "type": "api_route_handler",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "route:handler:19",
+      "file": "route-handler-19.json",
+      "label": "handler",
+      "type": "api_route_handler",
+      "layer": "business_logic",
+      "has_violations": true
+    },
+    {
+      "id": "ScheduleBlock:ScheduleBlock:31",
+      "file": "ScheduleBlock-ScheduleBlock-31.json",
+      "label": "ScheduleBlock",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "ScheduleGenerationPrompt:ScheduleGenerationPrompt:13",
+      "file": "ScheduleGenerationPrompt-ScheduleGenerationPrompt-13.json",
+      "label": "ScheduleGenerationPrompt",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "SchedulePreview:SchedulePreview:12",
+      "file": "SchedulePreview-SchedulePreview-12.json",
+      "label": "SchedulePreview",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "scheduleRouter:scheduleRouter:8",
+      "file": "scheduleRouter-scheduleRouter-8.json",
+      "label": "scheduleRouter",
+      "type": "trpc_router",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "ScheduleSection:ScheduleSection:6",
+      "file": "ScheduleSection-ScheduleSection-6.json",
+      "label": "ScheduleSection",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "ScheduleView:DraggableScheduleBlock:37",
+      "file": "ScheduleView-DraggableScheduleBlock-37.json",
+      "label": "DraggableScheduleBlock",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "ScheduleView:ScheduleView:68",
+      "file": "ScheduleView-ScheduleView-68.json",
+      "label": "ScheduleView",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "scheduling:SchedulingService:13",
+      "file": "scheduling-SchedulingService-13.json",
+      "label": "SchedulingService",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "scheduling:schedulingService:578",
+      "file": "scheduling-schedulingService-578.json",
+      "label": "schedulingService",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "schema:model:AccessRequest:0",
+      "file": "schema-model-AccessRequest-0.json",
+      "label": "AccessRequest",
+      "type": "orm_model",
+      "layer": "data_access",
+      "has_violations": false
+    },
+    {
+      "id": "schema:model:Account:0",
+      "file": "schema-model-Account-0.json",
+      "label": "Account",
+      "type": "orm_model",
+      "layer": "data_access",
+      "has_violations": false
+    },
+    {
+      "id": "schema:model:Allowlist:0",
+      "file": "schema-model-Allowlist-0.json",
+      "label": "Allowlist",
+      "type": "orm_model",
+      "layer": "data_access",
+      "has_violations": false
+    },
+    {
+      "id": "schema:model:ClassSchedule:0",
+      "file": "schema-model-ClassSchedule-0.json",
+      "label": "ClassSchedule",
+      "type": "orm_model",
+      "layer": "data_access",
+      "has_violations": false
+    },
+    {
+      "id": "schema:model:Conversation:0",
+      "file": "schema-model-Conversation-0.json",
+      "label": "Conversation",
+      "type": "orm_model",
+      "layer": "data_access",
+      "has_violations": false
+    },
+    {
+      "id": "schema:model:EffectivenessLog:0",
+      "file": "schema-model-EffectivenessLog-0.json",
+      "label": "EffectivenessLog",
+      "type": "orm_model",
+      "layer": "data_access",
+      "has_violations": false
+    },
+    {
+      "id": "schema:model:ScheduleBlock:0",
+      "file": "schema-model-ScheduleBlock-0.json",
+      "label": "ScheduleBlock",
+      "type": "orm_model",
+      "layer": "data_access",
+      "has_violations": false
+    },
+    {
+      "id": "schema:model:Session:0",
+      "file": "schema-model-Session-0.json",
+      "label": "Session",
+      "type": "orm_model",
+      "layer": "data_access",
+      "has_violations": false
+    },
+    {
+      "id": "schema:model:Student:0",
+      "file": "schema-model-Student-0.json",
+      "label": "Student",
+      "type": "orm_model",
+      "layer": "data_access",
+      "has_violations": false
+    },
+    {
+      "id": "schema:model:StudentPreferences:0",
+      "file": "schema-model-StudentPreferences-0.json",
+      "label": "StudentPreferences",
+      "type": "orm_model",
+      "layer": "data_access",
+      "has_violations": false
+    },
+    {
+      "id": "schema:model:StudentTool:0",
+      "file": "schema-model-StudentTool-0.json",
+      "label": "StudentTool",
+      "type": "orm_model",
+      "layer": "data_access",
+      "has_violations": false
+    },
+    {
+      "id": "schema:model:Task:0",
+      "file": "schema-model-Task-0.json",
+      "label": "Task",
+      "type": "orm_model",
+      "layer": "data_access",
+      "has_violations": false
+    },
+    {
+      "id": "schema:model:Tool:0",
+      "file": "schema-model-Tool-0.json",
+      "label": "Tool",
+      "type": "orm_model",
+      "layer": "data_access",
+      "has_violations": false
+    },
+    {
+      "id": "schema:model:ToolSuggestion:0",
+      "file": "schema-model-ToolSuggestion-0.json",
+      "label": "ToolSuggestion",
+      "type": "orm_model",
+      "layer": "data_access",
+      "has_violations": false
+    },
+    {
+      "id": "schema:model:User:0",
+      "file": "schema-model-User-0.json",
+      "label": "User",
+      "type": "orm_model",
+      "layer": "data_access",
+      "has_violations": false
+    },
+    {
+      "id": "schema:model:VerificationToken:0",
+      "file": "schema-model-VerificationToken-0.json",
+      "label": "VerificationToken",
+      "type": "orm_model",
+      "layer": "data_access",
+      "has_violations": false
+    },
+    {
+      "id": "SecurityEditor:SecurityEditor:8",
+      "file": "SecurityEditor-SecurityEditor-8.json",
+      "label": "SecurityEditor",
+      "type": "pii_handling",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "sendEmail:sendAccessApprovedEmail:17",
+      "file": "sendEmail-sendAccessApprovedEmail-17.json",
+      "label": "sendAccessApprovedEmail",
+      "type": "pii_handling",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "sendEmail:sendWelcomeEmail:8",
+      "file": "sendEmail-sendWelcomeEmail-8.json",
+      "label": "sendWelcomeEmail",
+      "type": "generic_function",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "shared:formatTime:4",
+      "file": "shared-formatTime-4.json",
+      "label": "formatTime",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "shared:getDayName:18",
+      "file": "shared-getDayName-18.json",
+      "label": "getDayName",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "shared:getShortDayName:25",
+      "file": "shared-getShortDayName-25.json",
+      "label": "getShortDayName",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "shared:getStartOfWeek:32",
+      "file": "shared-getStartOfWeek-32.json",
+      "label": "getStartOfWeek",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "SpeechToTextArea:SpeechToTextArea:33",
+      "file": "SpeechToTextArea-SpeechToTextArea-33.json",
+      "label": "SpeechToTextArea",
+      "type": "auth_gate",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "SpeechToTextArea:SpeechToTextAreaRef:28",
+      "file": "SpeechToTextArea-SpeechToTextAreaRef-28.json",
+      "label": "SpeechToTextAreaRef",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "storage:uploadFile:11",
+      "file": "storage-uploadFile-11.json",
+      "label": "uploadFile",
+      "type": "generic_function",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "studentRouter:studentRouter:8",
+      "file": "studentRouter-studentRouter-8.json",
+      "label": "studentRouter",
+      "type": "trpc_router",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "TaskCard:TaskCard:24",
+      "file": "TaskCard-TaskCard-24.json",
+      "label": "TaskCard",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "TaskChat:TaskChat:17",
+      "file": "TaskChat-TaskChat-17.json",
+      "label": "TaskChat",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "TaskCompletion:TaskCompletion:16",
+      "file": "TaskCompletion-TaskCompletion-16.json",
+      "label": "TaskCompletion",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "TaskList:TaskList:8",
+      "file": "TaskList-TaskList-8.json",
+      "label": "TaskList",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "taskRouter:taskRouter:7",
+      "file": "taskRouter-taskRouter-7.json",
+      "label": "taskRouter",
+      "type": "trpc_router",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "TasksButton:TasksButton:6",
+      "file": "TasksButton-TasksButton-6.json",
+      "label": "TasksButton",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "ThemeAwareToast:ThemeAwareToast:6",
+      "file": "ThemeAwareToast-ThemeAwareToast-6.json",
+      "label": "ThemeAwareToast",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "ThemeProvider:ThemeProvider:14",
+      "file": "ThemeProvider-ThemeProvider-14.json",
+      "label": "ThemeProvider",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "TimeBlockEditor:TimeBlockEditor:33",
+      "file": "TimeBlockEditor-TimeBlockEditor-33.json",
+      "label": "TimeBlockEditor",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "timezone:createDateAtTimeInTimezone:352",
+      "file": "timezone-createDateAtTimeInTimezone-352.json",
+      "label": "createDateAtTimeInTimezone",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "timezone:formatDateInTimezone:180",
+      "file": "timezone-formatDateInTimezone-180.json",
+      "label": "formatDateInTimezone",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "timezone:getDateEndInTimezone:169",
+      "file": "timezone-getDateEndInTimezone-169.json",
+      "label": "getDateEndInTimezone",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "timezone:getDateStartInTimezone:95",
+      "file": "timezone-getDateStartInTimezone-95.json",
+      "label": "getDateStartInTimezone",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "timezone:getTodayEndInTimezone:79",
+      "file": "timezone-getTodayEndInTimezone-79.json",
+      "label": "getTodayEndInTimezone",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "timezone:getTodayStartInTimezone:27",
+      "file": "timezone-getTodayStartInTimezone-27.json",
+      "label": "getTodayStartInTimezone",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "timezone:getUserTimezone:10",
+      "file": "timezone-getUserTimezone-10.json",
+      "label": "getUserTimezone",
+      "type": "auth_gate",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "timezone:isTodayInTimezone:194",
+      "file": "timezone-isTodayInTimezone-194.json",
+      "label": "isTodayInTimezone",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "timezone:parseAIDateInTimezone:220",
+      "file": "timezone-parseAIDateInTimezone-220.json",
+      "label": "parseAIDateInTimezone",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "TodayStats:TodayStats:8",
+      "file": "TodayStats-TodayStats-8.json",
+      "label": "TodayStats",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "toolDatabase:getAllTools:41",
+      "file": "toolDatabase-getAllTools-41.json",
+      "label": "getAllTools",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "toolDatabase:getBudgetFriendlyTools:139",
+      "file": "toolDatabase-getBudgetFriendlyTools-139.json",
+      "label": "getBudgetFriendlyTools",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "toolDatabase:getFreeTools:130",
+      "file": "toolDatabase-getFreeTools-130.json",
+      "label": "getFreeTools",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "toolDatabase:getToolById:48",
+      "file": "toolDatabase-getToolById-48.json",
+      "label": "getToolById",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "toolDatabase:getToolsByCategory:103",
+      "file": "toolDatabase-getToolsByCategory-103.json",
+      "label": "getToolsByCategory",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "toolDatabase:getToolsByLearningCurve:123",
+      "file": "toolDatabase-getToolsByLearningCurve-123.json",
+      "label": "getToolsByLearningCurve",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "toolDatabase:getToolsForTaskType:110",
+      "file": "toolDatabase-getToolsForTaskType-110.json",
+      "label": "getToolsForTaskType",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "toolDatabase:searchTools:55",
+      "file": "toolDatabase-searchTools-55.json",
+      "label": "searchTools",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "toolDatabase:Tool:10",
+      "file": "toolDatabase-Tool-10.json",
+      "label": "Tool",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "toolDatabase:ToolSearchQuery:30",
+      "file": "toolDatabase-ToolSearchQuery-30.json",
+      "label": "ToolSearchQuery",
+      "type": "utility",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "toolOptimization:Feature:12",
+      "file": "toolOptimization-Feature-12.json",
+      "label": "Feature",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "toolOptimization:ToolOptimizationResult:19",
+      "file": "toolOptimization-ToolOptimizationResult-19.json",
+      "label": "ToolOptimizationResult",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "toolOptimization:toolOptimizationService:242",
+      "file": "toolOptimization-toolOptimizationService-242.json",
+      "label": "toolOptimizationService",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "toolOptimization:ToolOptimizationService:27",
+      "file": "toolOptimization-ToolOptimizationService-27.json",
+      "label": "ToolOptimizationService",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "toolRecommendation:InefficiencyDetection:22",
+      "file": "toolRecommendation-InefficiencyDetection-22.json",
+      "label": "InefficiencyDetection",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "toolRecommendation:ToolRecommendation:12",
+      "file": "toolRecommendation-ToolRecommendation-12.json",
+      "label": "ToolRecommendation",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "ToolRecommendation:ToolRecommendation:21",
+      "file": "ToolRecommendation-ToolRecommendation-21.json",
+      "label": "ToolRecommendation",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "toolRecommendation:toolRecommendationService:362",
+      "file": "toolRecommendation-toolRecommendationService-362.json",
+      "label": "toolRecommendationService",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "toolRecommendation:ToolRecommendationService:37",
+      "file": "toolRecommendation-ToolRecommendationService-37.json",
+      "label": "ToolRecommendationService",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "toolRecommendation:ToolSearchQuery:29",
+      "file": "toolRecommendation-ToolSearchQuery-29.json",
+      "label": "ToolSearchQuery",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "toolRouter:toolRouter:13",
+      "file": "toolRouter-toolRouter-13.json",
+      "label": "toolRouter",
+      "type": "trpc_router",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "ToolsPreferenceEditor:ToolsPreferenceEditor:10",
+      "file": "ToolsPreferenceEditor-ToolsPreferenceEditor-10.json",
+      "label": "ToolsPreferenceEditor",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "ToolsSection:ToolsSection:8",
+      "file": "ToolsSection-ToolsSection-8.json",
+      "label": "ToolsSection",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "trpc:adminProcedure:118",
+      "file": "trpc-adminProcedure-118.json",
+      "label": "adminProcedure",
+      "type": "auth_gate",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "trpc:createCallerFactory:62",
+      "file": "trpc-createCallerFactory-62.json",
+      "label": "createCallerFactory",
+      "type": "trpc_infrastructure",
+      "layer": "infrastructure",
+      "has_violations": false
+    },
+    {
+      "id": "trpc:createTRPCContext:27",
+      "file": "trpc-createTRPCContext-27.json",
+      "label": "createTRPCContext",
+      "type": "trpc_infrastructure",
+      "layer": "infrastructure",
+      "has_violations": false
+    },
+    {
+      "id": "trpc:createTRPCRouter:76",
+      "file": "trpc-createTRPCRouter-76.json",
+      "label": "createTRPCRouter",
+      "type": "trpc_infrastructure",
+      "layer": "infrastructure",
+      "has_violations": false
+    },
+    {
+      "id": "trpc:protectedProcedure:95",
+      "file": "trpc-protectedProcedure-95.json",
+      "label": "protectedProcedure",
+      "type": "protected_procedure",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "trpc:publicProcedure:85",
+      "file": "trpc-publicProcedure-85.json",
+      "label": "publicProcedure",
+      "type": "public_procedure",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "types:ClassScheduleData:47",
+      "file": "types-ClassScheduleData-47.json",
+      "label": "ClassScheduleData",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "types:ConversationMode:103",
+      "file": "types-ConversationMode-103.json",
+      "label": "ConversationMode",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "types:DiscoveryQuestion:76",
+      "file": "types-DiscoveryQuestion-76.json",
+      "label": "DiscoveryQuestion",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "types:DraftTask:85",
+      "file": "types-DraftTask-85.json",
+      "label": "DraftTask",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "types:MeetingTime:41",
+      "file": "types-MeetingTime-41.json",
+      "label": "MeetingTime",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "types:Message:7",
+      "file": "types-Message-7.json",
+      "label": "Message",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "types:MessageArray:13",
+      "file": "types-MessageArray-13.json",
+      "label": "MessageArray",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "types:MessageRole:5",
+      "file": "types-MessageRole-5.json",
+      "label": "MessageRole",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "types:NotificationSettings:19",
+      "file": "types-NotificationSettings-19.json",
+      "label": "NotificationSettings",
+      "type": "pii_handling",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "types:OnboardingData:172",
+      "file": "types-OnboardingData-172.json",
+      "label": "OnboardingData",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "types:PlanningSessionState:96",
+      "file": "types-PlanningSessionState-96.json",
+      "label": "PlanningSessionState",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "types:RescheduleOptions:158",
+      "file": "types-RescheduleOptions-158.json",
+      "label": "RescheduleOptions",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "types:ScheduleBlockData:131",
+      "file": "types-ScheduleBlockData-131.json",
+      "label": "ScheduleBlockData",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "types:ScheduleSuggestion:152",
+      "file": "types-ScheduleSuggestion-152.json",
+      "label": "ScheduleSuggestion",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "types:SchedulingContext:143",
+      "file": "types-SchedulingContext-143.json",
+      "label": "SchedulingContext",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "types:StudentContext:111",
+      "file": "types-StudentContext-111.json",
+      "label": "StudentContext",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "types:StudentPreferences:26",
+      "file": "types-StudentPreferences-26.json",
+      "label": "StudentPreferences",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "types:TaskContext:67",
+      "file": "types-TaskContext-67.json",
+      "label": "TaskContext",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "types:TaskSummary:61",
+      "file": "types-TaskSummary-61.json",
+      "label": "TaskSummary",
+      "type": "type_definition",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "utils:cn:4",
+      "file": "utils-cn-4.json",
+      "label": "cn",
+      "type": "generic_function",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "VoiceInput:VoiceInput:13",
+      "file": "VoiceInput-VoiceInput-13.json",
+      "label": "VoiceInput",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "webSearch:searchBestPractices:92",
+      "file": "webSearch-searchBestPractices-92.json",
+      "label": "searchBestPractices",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "webSearch:SearchProvider:17",
+      "file": "webSearch-SearchProvider-17.json",
+      "label": "SearchProvider",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "webSearch:searchStudyMethod:81",
+      "file": "webSearch-searchStudyMethod-81.json",
+      "label": "searchStudyMethod",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "webSearch:searchToolFeature:102",
+      "file": "webSearch-searchToolFeature-102.json",
+      "label": "searchToolFeature",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "webSearch:searchToolOptimization:70",
+      "file": "webSearch-searchToolOptimization-70.json",
+      "label": "searchToolOptimization",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "webSearch:searchWeb:22",
+      "file": "webSearch-searchWeb-22.json",
+      "label": "searchWeb",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "webSearch:WebSearchResult:11",
+      "file": "webSearch-WebSearchResult-11.json",
+      "label": "WebSearchResult",
+      "type": "ai_service",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "WeekCalendar:WeekCalendar:22",
+      "file": "WeekCalendar-WeekCalendar-22.json",
+      "label": "WeekCalendar",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    },
+    {
+      "id": "WelcomeEmail:WelcomeEmail:7",
+      "file": "WelcomeEmail-WelcomeEmail-7.json",
+      "label": "WelcomeEmail",
+      "type": "generic_function",
+      "layer": "business_logic",
+      "has_violations": false
+    },
+    {
+      "id": "WelcomeStep:WelcomeStep:9",
+      "file": "WelcomeStep-WelcomeStep-9.json",
+      "label": "WelcomeStep",
+      "type": "react_component",
+      "layer": "presentation",
+      "has_violations": false
+    }
+  ]
+}

@@ -1,9 +1,27 @@
 {
   "id": "root:appRouter:15",
   "label": "appRouter",
-  "file": "C:/Users/drlee/College_organizer/src/lib/api/root.ts",
+  "file": {
+    "path": "D:\\drlee\\College_organizer\\src\\lib\\api\\root.ts",
+    "filename": "root.ts",
+    "relative_path": "src/lib/api/root.ts"
+  },
   "type": "trpc_router",
   "layer": "business_logic",
+  "auth": {
+    "required": false,
+    "type": "unknown",
+    "method": "unknown",
+    "inference_source": "none",
+    "confidence": 0.95,
+    "authoring_mode": "inferred"
+  },
+  "elements": [],
+  "risk": {
+    "rate_limited": false,
+    "input_validated": false,
+    "error_handling": "absent"
+  },
   "has_auth_gate": false,
   "has_pii": false,
   "procedures": {
@@ -25,6 +43,9 @@
     "authRouter:authRouter:7"
   ],
   "constraint_check": {},
+  "violations": {
+    "active": []
+  },
   "adjacent": [
     {
       "id": "trpc:createCallerFactory:62",
@@ -41,8 +62,8 @@
     "source": "pre_idd",
     "confidence": 0.95,
     "design_ref": null,
-    "first_scanned": "2026-04-01",
-    "last_confirmed": "2026-04-01"
+    "first_scanned": "2026-04-08",
+    "last_confirmed": "2026-04-08"
   },
   "decisions": {
     "api": "tRPC procedures"

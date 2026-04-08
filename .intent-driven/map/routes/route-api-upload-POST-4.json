@@ -1,0 +1,59 @@
+{
+  "id": "route:api-upload:POST:4",
+  "label": "POST",
+  "screen_group": null,
+  "nodeKind": "api_handler",
+  "nodeSubtype": "route_handler",
+  "file": {
+    "path": "D:\\drlee\\College_organizer\\src\\app\\api\\upload\\route.ts",
+    "filename": "route.ts",
+    "relative_path": "src/app/api/upload/route.ts"
+  },
+  "route": {
+    "path": "/api/upload",
+    "method": "POST",
+    "isDynamic": false,
+    "dynamicParams": [],
+    "isApiRoute": false
+  },
+  "auth": {
+    "required": false,
+    "type": "public",
+    "method": "none",
+    "inference_source": "none",
+    "confidence": 0.6,
+    "authoring_mode": "inferred"
+  },
+  "risk": {
+    "rate_limited": false,
+    "input_validated": false,
+    "error_handling": "explicit"
+  },
+  "elements": [
+    {
+      "id": "el::error_boundary::try_catch",
+      "label": "Error handled",
+      "type": "error_boundary",
+      "confidence": 0.8
+    }
+  ],
+  "violations": {
+    "active": []
+  },
+  "patterns": [
+    "api_route_handler",
+    "error_boundary"
+  ],
+  "has_pii": false,
+  "layer": "api",
+  "provenance": {
+    "source": "pre_idd",
+    "confidence": 0.97,
+    "design_ref": null,
+    "first_scanned": "2026-04-08",
+    "last_confirmed": "2026-04-08"
+  },
+  "domains": [
+    "api"
+  ]
+}

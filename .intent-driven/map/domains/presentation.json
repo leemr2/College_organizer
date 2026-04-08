@@ -26,47 +26,47 @@
       "label": "AdminPage",
       "type": "app_router_page",
       "size": "small",
-      "ref": "nodes/page-AdminPage-8.json"
+      "ref": "routes/page-AdminPage-8.json"
     },
     {
       "id": "page:ErrorContent:8",
       "label": "ErrorContent",
       "type": "app_router_page",
       "size": "small",
-      "ref": "nodes/page-ErrorContent-8.json"
+      "ref": "routes/page-ErrorContent-8.json"
     },
     {
       "id": "page:ErrorPage:47",
       "label": "ErrorPage",
       "type": "app_router_page",
-      "ref": "nodes/page-ErrorPage-47.json"
+      "ref": "routes/page-ErrorPage-47.json"
     },
     {
       "id": "page:SignInContent:11",
       "label": "SignInContent",
       "type": "app_router_page",
       "size": "medium",
-      "ref": "nodes/page-SignInContent-11.json"
+      "ref": "routes/page-SignInContent-11.json"
     },
     {
       "id": "page:SignIn:342",
       "label": "SignIn",
       "type": "app_router_page",
-      "ref": "nodes/page-SignIn-342.json"
+      "ref": "routes/page-SignIn-342.json"
     },
     {
       "id": "page:SignOut:8",
       "label": "SignOut",
       "type": "app_router_page",
       "size": "small",
-      "ref": "nodes/page-SignOut-8.json"
+      "ref": "routes/page-SignOut-8.json"
     },
     {
       "id": "page:VerifyRequest:7",
       "label": "VerifyRequest",
       "type": "app_router_page",
       "size": "small",
-      "ref": "nodes/page-VerifyRequest-7.json"
+      "ref": "routes/page-VerifyRequest-7.json"
     },
     {
       "id": "page:dynamic:7",
@@ -79,7 +79,7 @@
       "label": "ChatPage",
       "type": "app_router_page",
       "size": "small",
-      "ref": "nodes/page-ChatPage-9.json"
+      "ref": "routes/page-ChatPage-9.json"
     },
     {
       "id": "page:dynamic:13",
@@ -92,7 +92,7 @@
       "label": "DashboardPage",
       "type": "app_router_page",
       "size": "medium",
-      "ref": "nodes/page-DashboardPage-15.json"
+      "ref": "routes/page-DashboardPage-15.json"
     },
     {
       "id": "layout:metadata:10",
@@ -117,7 +117,7 @@
       "id": "page:OnboardingPage:8",
       "label": "OnboardingPage",
       "type": "app_router_page",
-      "ref": "nodes/page-OnboardingPage-8.json"
+      "ref": "routes/page-OnboardingPage-8.json"
     },
     {
       "id": "page:dynamic:8",
@@ -143,7 +143,7 @@
       "label": "ProfilePage",
       "type": "app_router_page",
       "size": "small",
-      "ref": "nodes/page-ProfilePage-10.json"
+      "ref": "routes/page-ProfilePage-10.json"
     },
     {
       "id": "page:dynamic:7",
@@ -156,7 +156,7 @@
       "label": "TasksPage",
       "type": "app_router_page",
       "size": "small",
-      "ref": "nodes/page-TasksPage-9.json"
+      "ref": "routes/page-TasksPage-9.json"
     },
     {
       "id": "AdminDashboard:AdminDashboard:20",

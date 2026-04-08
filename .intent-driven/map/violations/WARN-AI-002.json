@@ -1,5 +1,6 @@
 {
   "id": "WARN-AI-002",
+  "headline": false,
   "rule": "Raw API key access — use a config module to centralize secret management",
   "severity": "warning",
   "category": "security",

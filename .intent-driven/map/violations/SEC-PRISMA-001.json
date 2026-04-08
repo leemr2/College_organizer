@@ -1,5 +1,6 @@
 {
   "id": "SEC-PRISMA-001",
+  "headline": true,
   "rule": "Prisma mutation accessRequest.update is reachable without an auth check.",
   "severity": "critical",
   "category": "security",

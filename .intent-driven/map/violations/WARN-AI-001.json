@@ -1,5 +1,6 @@
 {
   "id": "WARN-AI-001",
+  "headline": false,
   "rule": "AI input passed to provider without validation",
   "severity": "warning",
   "category": "security",

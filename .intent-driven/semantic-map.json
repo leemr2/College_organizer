@@ -1,6 +1,6 @@
 {
   "schema_version": "1.1",
-  "generated_at": "2026-04-08T03:08:30.510Z",
+  "generated_at": "2026-04-08T04:41:02.809Z",
   "project": {
     "name": "College_organizer",
     "root": "D:\\drlee\\College_organizer",
@@ -14268,7 +14268,7 @@
   },
   "routeMap": {
     "meta": {
-      "scannedAt": "2026-04-08T03:08:29.981Z",
+      "scannedAt": "2026-04-08T04:41:02.506Z",
       "routingMode": "app",
       "repoRoot": "D:\\drlee\\College_organizer",
       "totalRoutes": 14,
@@ -14892,6 +14892,7 @@
         "triggerElement": "el::route::index::page::link::get-started",
         "linkType": "Link",
         "isConditional": true,
+        "condition": "if !session?.user",
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14903,6 +14904,7 @@
         "triggerElement": null,
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !student || !student.onboardingComplete",
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14914,6 +14916,7 @@
         "triggerElement": null,
         "linkType": "redirect",
         "isConditional": false,
+        "condition": null,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14925,6 +14928,7 @@
         "triggerElement": null,
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !session?.user",
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14936,6 +14940,7 @@
         "triggerElement": null,
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !session.user.isAdmin && session.user.role !== \"admin\"",
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14947,6 +14952,7 @@
         "triggerElement": null,
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !session?.user",
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14958,6 +14964,7 @@
         "triggerElement": null,
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !student",
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14969,6 +14976,7 @@
         "triggerElement": null,
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !student.onboardingComplete",
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14980,6 +14988,7 @@
         "triggerElement": null,
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !session?.user",
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -14991,6 +15000,7 @@
         "triggerElement": null,
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !student",
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -15002,6 +15012,7 @@
         "triggerElement": null,
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !student.onboardingComplete",
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -15013,6 +15024,7 @@
         "triggerElement": null,
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !session?.user",
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -15024,6 +15036,7 @@
         "triggerElement": null,
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if student?.onboardingComplete",
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -15035,6 +15048,7 @@
         "triggerElement": null,
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !session?.user",
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -15046,6 +15060,7 @@
         "triggerElement": null,
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !student",
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -15057,6 +15072,7 @@
         "triggerElement": null,
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !student.onboardingComplete",
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -15068,6 +15084,7 @@
         "triggerElement": null,
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !session?.user",
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -15079,6 +15096,7 @@
         "triggerElement": null,
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !student",
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -15090,6 +15108,7 @@
         "triggerElement": null,
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !student.onboardingComplete",
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -15101,6 +15120,7 @@
         "triggerElement": "el::route::auth::error::page::link::back",
         "linkType": "Link",
         "isConditional": false,
+        "condition": null,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -15112,6 +15132,7 @@
         "triggerElement": "el::route::auth::error::page::link::try-again",
         "linkType": "Link",
         "isConditional": false,
+        "condition": null,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -15123,6 +15144,7 @@
         "triggerElement": "el::route::auth::signin::page::link::back",
         "linkType": "Link",
         "isConditional": false,
+        "condition": null,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -15134,6 +15156,7 @@
         "triggerElement": "el::route::auth::signin::page::link::profile-settings",
         "linkType": "Link",
         "isConditional": true,
+        "condition": "shouldShowEmailLink && userStatus?.exists && !userStatus?.hasPassword",
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -15145,6 +15168,7 @@
         "triggerElement": "el::route::auth::signin::page::function::handlesubmit-L99",
         "linkType": "Link",
         "isConditional": false,
+        "condition": null,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -15156,6 +15180,7 @@
         "triggerElement": "el::route::auth::signin::page::function::handlesubmit-L99",
         "linkType": "router.push",
         "isConditional": true,
+        "condition": "if result?.error",
         "authoring_mode": "inferred",
         "confidence": 0.95,
         "low_confidence": false
@@ -15167,6 +15192,7 @@
         "triggerElement": "el::route::auth::signout::page::link::back",
         "linkType": "Link",
         "isConditional": false,
+        "condition": null,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -15178,6 +15204,7 @@
         "triggerElement": "el::route::auth::signout::page::link::cancel",
         "linkType": "Link",
         "isConditional": false,
+        "condition": null,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -15189,6 +15216,7 @@
         "triggerElement": "el::route::auth::verify::page::link::back",
         "linkType": "Link",
         "isConditional": false,
+        "condition": null,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -15200,6 +15228,7 @@
         "triggerElement": "el::route::auth::verify::page::link::try-signing-in-again",
         "linkType": "Link",
         "isConditional": false,
+        "condition": null,
         "authoring_mode": "inferred",
         "confidence": 1,
         "low_confidence": false
@@ -15249,7 +15278,7 @@
         "title": "Orphaned route",
         "detail": "/admin has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /admin, or remove the route if no longer needed.",
-        "detectedAt": "2026-04-08T03:08:29.982Z"
+        "detectedAt": "2026-04-08T04:41:02.506Z"
       },
       {
         "id": "finding::NAV-001::tasks",
@@ -15262,7 +15291,7 @@
         "title": "Orphaned route",
         "detail": "/tasks has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /tasks, or remove the route if no longer needed.",
-        "detectedAt": "2026-04-08T03:08:29.982Z"
+        "detectedAt": "2026-04-08T04:41:02.506Z"
       },
       {
         "id": "finding::NAV-001::auth-error",
@@ -15275,7 +15304,7 @@
         "title": "Orphaned route",
         "detail": "/auth/error has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /auth/error, or remove the route if no longer needed.",
-        "detectedAt": "2026-04-08T03:08:29.982Z"
+        "detectedAt": "2026-04-08T04:41:02.506Z"
       },
       {
         "id": "finding::NAV-001::auth-signout",
@@ -15288,7 +15317,7 @@
         "title": "Orphaned route",
         "detail": "/auth/signout has no inbound edges. Nothing in the app navigates to this page.",
         "suggestedFix": "Add a navigation element pointing to /auth/signout, or remove the route if no longer needed.",
-        "detectedAt": "2026-04-08T03:08:29.982Z"
+        "detectedAt": "2026-04-08T04:41:02.506Z"
       },
       {
         "id": "finding::NAV-004::admin",
@@ -15301,7 +15330,7 @@
         "title": "Unreachable route",
         "detail": "/admin cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-04-08T03:08:29.982Z"
+        "detectedAt": "2026-04-08T04:41:02.506Z"
       },
       {
         "id": "finding::NAV-004::tasks",
@@ -15314,7 +15343,7 @@
         "title": "Unreachable route",
         "detail": "/tasks cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-04-08T03:08:29.982Z"
+        "detectedAt": "2026-04-08T04:41:02.506Z"
       },
       {
         "id": "finding::NAV-004::auth-error",
@@ -15327,7 +15356,7 @@
         "title": "Unreachable route",
         "detail": "/auth/error cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-04-08T03:08:29.982Z"
+        "detectedAt": "2026-04-08T04:41:02.506Z"
       },
       {
         "id": "finding::NAV-004::auth-signout",
@@ -15340,7 +15369,7 @@
         "title": "Unreachable route",
         "detail": "/auth/signout cannot be reached from the entry point (/).",
         "suggestedFix": "Add navigation from the entry point or another reachable route to this page.",
-        "detectedAt": "2026-04-08T03:08:29.982Z"
+        "detectedAt": "2026-04-08T04:41:02.506Z"
       }
     ],
     "findingSummary": {
@@ -15357,6 +15386,7 @@
         "target": "page:DashboardPage:15",
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !session.user.isAdmin && session.user.role !== \"admin\"",
         "semantic": "unknown",
         "edge_confidence": 1,
         "triggerElement": null,
@@ -15374,6 +15404,7 @@
         "target": "page:SignIn:342",
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !session?.user",
         "semantic": "auth_redirect",
         "edge_confidence": 1,
         "triggerElement": null,
@@ -15391,6 +15422,7 @@
         "target": "page:OnboardingPage:8",
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !student",
         "semantic": "onboarding_redirect",
         "edge_confidence": 1,
         "triggerElement": null,
@@ -15408,6 +15440,7 @@
         "target": "page:OnboardingPage:8",
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !student.onboardingComplete",
         "semantic": "onboarding_redirect",
         "edge_confidence": 1,
         "triggerElement": null,
@@ -15425,6 +15458,7 @@
         "target": "page:SignIn:342",
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !session?.user",
         "semantic": "auth_redirect",
         "edge_confidence": 1,
         "triggerElement": null,
@@ -15442,6 +15476,7 @@
         "target": "page:OnboardingPage:8",
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !student",
         "semantic": "onboarding_redirect",
         "edge_confidence": 1,
         "triggerElement": null,
@@ -15459,6 +15494,7 @@
         "target": "page:OnboardingPage:8",
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !student.onboardingComplete",
         "semantic": "onboarding_redirect",
         "edge_confidence": 1,
         "triggerElement": null,
@@ -15476,6 +15512,7 @@
         "target": "page:SignIn:342",
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !session?.user",
         "semantic": "auth_redirect",
         "edge_confidence": 1,
         "triggerElement": null,
@@ -15488,11 +15525,12 @@
         }
       },
       {
-        "id": "edge:page-ErrorPage-47:page-Page-10:Link:001",
+        "id": "edge:page-ErrorPage-47:page-Page-10:link:001",
         "source": "page:ErrorPage:47",
         "target": "page:Page:10",
-        "linkType": "Link",
+        "linkType": "link",
         "isConditional": false,
+        "condition": null,
         "semantic": "navigation",
         "edge_confidence": 1,
         "triggerElement": "el::route::auth::error::page::link::back",
@@ -15505,11 +15543,12 @@
         }
       },
       {
-        "id": "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
+        "id": "edge:page-ErrorPage-47:page-SignIn-342:link:001",
         "source": "page:ErrorPage:47",
         "target": "page:SignIn:342",
-        "linkType": "Link",
+        "linkType": "link",
         "isConditional": false,
+        "condition": null,
         "semantic": "navigation",
         "edge_confidence": 1,
         "triggerElement": "el::route::auth::error::page::link::try-again",
@@ -15527,6 +15566,7 @@
         "target": "page:ChatPage:9",
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if student?.onboardingComplete",
         "semantic": "unknown",
         "edge_confidence": 1,
         "triggerElement": null,
@@ -15544,6 +15584,7 @@
         "target": "page:SignIn:342",
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !session?.user",
         "semantic": "auth_redirect",
         "edge_confidence": 1,
         "triggerElement": null,
@@ -15561,6 +15602,7 @@
         "target": "page:DashboardPage:15",
         "linkType": "redirect",
         "isConditional": false,
+        "condition": null,
         "semantic": "unknown",
         "edge_confidence": 1,
         "triggerElement": null,
@@ -15578,6 +15620,7 @@
         "target": "page:OnboardingPage:8",
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !student || !student.onboardingComplete",
         "semantic": "onboarding_redirect",
         "edge_confidence": 1,
         "triggerElement": null,
@@ -15590,11 +15633,12 @@
         }
       },
       {
-        "id": "edge:page-Page-10:page-SignIn-342:Link:001",
+        "id": "edge:page-Page-10:page-SignIn-342:link:001",
         "source": "page:Page:10",
         "target": "page:SignIn:342",
-        "linkType": "Link",
+        "linkType": "link",
         "isConditional": true,
+        "condition": "if !session?.user",
         "semantic": "navigation",
         "edge_confidence": 1,
         "triggerElement": "el::route::index::page::link::get-started",
@@ -15612,6 +15656,7 @@
         "target": "page:OnboardingPage:8",
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !student",
         "semantic": "onboarding_redirect",
         "edge_confidence": 1,
         "triggerElement": null,
@@ -15629,6 +15674,7 @@
         "target": "page:OnboardingPage:8",
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !student.onboardingComplete",
         "semantic": "onboarding_redirect",
         "edge_confidence": 1,
         "triggerElement": null,
@@ -15646,6 +15692,7 @@
         "target": "page:SignIn:342",
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !session?.user",
         "semantic": "auth_redirect",
         "edge_confidence": 1,
         "triggerElement": null,
@@ -15658,11 +15705,12 @@
         }
       },
       {
-        "id": "edge:page-SignIn-342:page-Page-10:Link:001",
+        "id": "edge:page-SignIn-342:page-Page-10:link:001",
         "source": "page:SignIn:342",
         "target": "page:Page:10",
-        "linkType": "Link",
+        "linkType": "link",
         "isConditional": false,
+        "condition": null,
         "semantic": "navigation",
         "edge_confidence": 1,
         "triggerElement": "el::route::auth::signin::page::link::back",
@@ -15675,11 +15723,12 @@
         }
       },
       {
-        "id": "edge:page-SignIn-342:page-ProfilePage-10:Link:001",
+        "id": "edge:page-SignIn-342:page-ProfilePage-10:link:001",
         "source": "page:SignIn:342",
         "target": "page:ProfilePage:10",
-        "linkType": "Link",
+        "linkType": "link",
         "isConditional": true,
+        "condition": "shouldShowEmailLink && userStatus?.exists && !userStatus?.hasPassword",
         "semantic": "navigation",
         "edge_confidence": 1,
         "triggerElement": "el::route::auth::signin::page::link::profile-settings",
@@ -15692,11 +15741,12 @@
         }
       },
       {
-        "id": "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
+        "id": "edge:page-SignIn-342:page-VerifyRequest-7:link:001",
         "source": "page:SignIn:342",
         "target": "page:VerifyRequest:7",
-        "linkType": "Link",
+        "linkType": "link",
         "isConditional": false,
+        "condition": null,
         "semantic": "navigation",
         "edge_confidence": 1,
         "triggerElement": "el::route::auth::signin::page::function::handlesubmit-L99",
@@ -15714,6 +15764,7 @@
         "target": "page:VerifyRequest:7",
         "linkType": "router.push",
         "isConditional": true,
+        "condition": "if result?.error",
         "semantic": "unknown",
         "edge_confidence": 0.95,
         "triggerElement": "el::route::auth::signin::page::function::handlesubmit-L99",
@@ -15726,11 +15777,12 @@
         }
       },
       {
-        "id": "edge:page-SignOut-8:page-Page-10:Link:001",
+        "id": "edge:page-SignOut-8:page-Page-10:link:001",
         "source": "page:SignOut:8",
         "target": "page:Page:10",
-        "linkType": "Link",
+        "linkType": "link",
         "isConditional": false,
+        "condition": null,
         "semantic": "navigation",
         "edge_confidence": 1,
         "triggerElement": "el::route::auth::signout::page::link::back",
@@ -15743,11 +15795,12 @@
         }
       },
       {
-        "id": "edge:page-SignOut-8:page-Page-10:Link:002",
+        "id": "edge:page-SignOut-8:page-Page-10:link:002",
         "source": "page:SignOut:8",
         "target": "page:Page:10",
-        "linkType": "Link",
+        "linkType": "link",
         "isConditional": false,
+        "condition": null,
         "semantic": "navigation",
         "edge_confidence": 1,
         "triggerElement": "el::route::auth::signout::page::link::cancel",
@@ -15765,6 +15818,7 @@
         "target": "page:OnboardingPage:8",
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !student",
         "semantic": "onboarding_redirect",
         "edge_confidence": 1,
         "triggerElement": null,
@@ -15782,6 +15836,7 @@
         "target": "page:OnboardingPage:8",
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !student.onboardingComplete",
         "semantic": "onboarding_redirect",
         "edge_confidence": 1,
         "triggerElement": null,
@@ -15799,6 +15854,7 @@
         "target": "page:SignIn:342",
         "linkType": "redirect",
         "isConditional": true,
+        "condition": "if !session?.user",
         "semantic": "auth_redirect",
         "edge_confidence": 1,
         "triggerElement": null,
@@ -15811,11 +15867,12 @@
         }
       },
       {
-        "id": "edge:page-VerifyRequest-7:page-Page-10:Link:001",
+        "id": "edge:page-VerifyRequest-7:page-Page-10:link:001",
         "source": "page:VerifyRequest:7",
         "target": "page:Page:10",
-        "linkType": "Link",
+        "linkType": "link",
         "isConditional": false,
+        "condition": null,
         "semantic": "navigation",
         "edge_confidence": 1,
         "triggerElement": "el::route::auth::verify::page::link::back",
@@ -15828,11 +15885,12 @@
         }
       },
       {
-        "id": "edge:page-VerifyRequest-7:page-SignIn-342:Link:001",
+        "id": "edge:page-VerifyRequest-7:page-SignIn-342:link:001",
         "source": "page:VerifyRequest:7",
         "target": "page:SignIn:342",
-        "linkType": "Link",
+        "linkType": "link",
         "isConditional": false,
+        "condition": null,
         "semantic": "navigation",
         "edge_confidence": 1,
         "triggerElement": "el::route::auth::verify::page::link::try-signing-in-again",
@@ -15883,9 +15941,9 @@
           "page:ChatPage:9"
         ],
         "edges": [
-          "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
-          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
-          "edge:page-VerifyRequest-7:page-Page-10:Link:001",
+          "edge:page-ErrorPage-47:page-SignIn-342:link:001",
+          "edge:page-SignIn-342:page-VerifyRequest-7:link:001",
+          "edge:page-VerifyRequest-7:page-Page-10:link:001",
           "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
           "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
         ],
@@ -15913,8 +15971,8 @@
           "page:ChatPage:9"
         ],
         "edges": [
-          "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
-          "edge:page-SignIn-342:page-Page-10:Link:001",
+          "edge:page-ErrorPage-47:page-SignIn-342:link:001",
+          "edge:page-SignIn-342:page-Page-10:link:001",
           "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
           "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
         ],
@@ -15942,8 +16000,8 @@
           "page:ChatPage:9"
         ],
         "edges": [
-          "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
-          "edge:page-SignIn-342:page-ProfilePage-10:Link:001",
+          "edge:page-ErrorPage-47:page-SignIn-342:link:001",
+          "edge:page-SignIn-342:page-ProfilePage-10:link:001",
           "edge:page-ProfilePage-10:page-OnboardingPage-8:redirect:001",
           "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
         ],
@@ -15972,9 +16030,9 @@
           "page:ChatPage:9"
         ],
         "edges": [
-          "edge:page-ErrorPage-47:page-Page-10:Link:001",
-          "edge:page-Page-10:page-SignIn-342:Link:001",
-          "edge:page-SignIn-342:page-ProfilePage-10:Link:001",
+          "edge:page-ErrorPage-47:page-Page-10:link:001",
+          "edge:page-Page-10:page-SignIn-342:link:001",
+          "edge:page-SignIn-342:page-ProfilePage-10:link:001",
           "edge:page-ProfilePage-10:page-OnboardingPage-8:redirect:001",
           "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
         ],
@@ -16001,7 +16059,7 @@
           "page:ChatPage:9"
         ],
         "edges": [
-          "edge:page-ErrorPage-47:page-Page-10:Link:001",
+          "edge:page-ErrorPage-47:page-Page-10:link:001",
           "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
           "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
         ],
@@ -16029,9 +16087,9 @@
           "page:DashboardPage:15"
         ],
         "edges": [
-          "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
-          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
-          "edge:page-VerifyRequest-7:page-Page-10:Link:001",
+          "edge:page-ErrorPage-47:page-SignIn-342:link:001",
+          "edge:page-SignIn-342:page-VerifyRequest-7:link:001",
+          "edge:page-VerifyRequest-7:page-Page-10:link:001",
           "edge:page-Page-10:page-DashboardPage-15:redirect:001"
         ],
         "path_confidence": 1,
@@ -16057,8 +16115,8 @@
           "page:DashboardPage:15"
         ],
         "edges": [
-          "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
-          "edge:page-SignIn-342:page-Page-10:Link:001",
+          "edge:page-ErrorPage-47:page-SignIn-342:link:001",
+          "edge:page-SignIn-342:page-Page-10:link:001",
           "edge:page-Page-10:page-DashboardPage-15:redirect:001"
         ],
         "path_confidence": 1,
@@ -16083,7 +16141,7 @@
           "page:DashboardPage:15"
         ],
         "edges": [
-          "edge:page-ErrorPage-47:page-Page-10:Link:001",
+          "edge:page-ErrorPage-47:page-Page-10:link:001",
           "edge:page-Page-10:page-DashboardPage-15:redirect:001"
         ],
         "path_confidence": 1,
@@ -16109,9 +16167,9 @@
           "page:Page:10"
         ],
         "edges": [
-          "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
-          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
-          "edge:page-VerifyRequest-7:page-Page-10:Link:001"
+          "edge:page-ErrorPage-47:page-SignIn-342:link:001",
+          "edge:page-SignIn-342:page-VerifyRequest-7:link:001",
+          "edge:page-VerifyRequest-7:page-Page-10:link:001"
         ],
         "path_confidence": 1,
         "has_cycle": true,
@@ -16135,8 +16193,8 @@
           "page:Page:10"
         ],
         "edges": [
-          "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
-          "edge:page-SignIn-342:page-Page-10:Link:001"
+          "edge:page-ErrorPage-47:page-SignIn-342:link:001",
+          "edge:page-SignIn-342:page-Page-10:link:001"
         ],
         "path_confidence": 1,
         "has_cycle": true,
@@ -16160,8 +16218,8 @@
           "page:SignIn:342"
         ],
         "edges": [
-          "edge:page-ErrorPage-47:page-Page-10:Link:001",
-          "edge:page-Page-10:page-SignIn-342:Link:001"
+          "edge:page-ErrorPage-47:page-Page-10:link:001",
+          "edge:page-Page-10:page-SignIn-342:link:001"
         ],
         "path_confidence": 0.95,
         "has_cycle": true,
@@ -16185,8 +16243,8 @@
           "page:VerifyRequest:7"
         ],
         "edges": [
-          "edge:page-ErrorPage-47:page-SignIn-342:Link:001",
-          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001"
+          "edge:page-ErrorPage-47:page-SignIn-342:link:001",
+          "edge:page-SignIn-342:page-VerifyRequest-7:link:001"
         ],
         "path_confidence": 1,
         "has_cycle": true,
@@ -16211,9 +16269,9 @@
           "page:VerifyRequest:7"
         ],
         "edges": [
-          "edge:page-ErrorPage-47:page-Page-10:Link:001",
-          "edge:page-Page-10:page-SignIn-342:Link:001",
-          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001"
+          "edge:page-ErrorPage-47:page-Page-10:link:001",
+          "edge:page-Page-10:page-SignIn-342:link:001",
+          "edge:page-SignIn-342:page-VerifyRequest-7:link:001"
         ],
         "path_confidence": 0.95,
         "has_cycle": true,
@@ -16262,8 +16320,8 @@
           "page:ChatPage:9"
         ],
         "edges": [
-          "edge:page-Page-10:page-SignIn-342:Link:001",
-          "edge:page-SignIn-342:page-ProfilePage-10:Link:001",
+          "edge:page-Page-10:page-SignIn-342:link:001",
+          "edge:page-SignIn-342:page-ProfilePage-10:link:001",
           "edge:page-ProfilePage-10:page-OnboardingPage-8:redirect:001",
           "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
         ],
@@ -16336,7 +16394,7 @@
           "page:SignIn:342"
         ],
         "edges": [
-          "edge:page-Page-10:page-SignIn-342:Link:001"
+          "edge:page-Page-10:page-SignIn-342:link:001"
         ],
         "path_confidence": 0.95,
         "has_cycle": true,
@@ -16360,8 +16418,8 @@
           "page:VerifyRequest:7"
         ],
         "edges": [
-          "edge:page-Page-10:page-SignIn-342:Link:001",
-          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001"
+          "edge:page-Page-10:page-SignIn-342:link:001",
+          "edge:page-SignIn-342:page-VerifyRequest-7:link:001"
         ],
         "path_confidence": 0.95,
         "has_cycle": true,
@@ -16387,8 +16445,8 @@
           "page:ChatPage:9"
         ],
         "edges": [
-          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
-          "edge:page-VerifyRequest-7:page-Page-10:Link:001",
+          "edge:page-SignIn-342:page-VerifyRequest-7:link:001",
+          "edge:page-VerifyRequest-7:page-Page-10:link:001",
           "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
           "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
         ],
@@ -16415,7 +16473,7 @@
           "page:ChatPage:9"
         ],
         "edges": [
-          "edge:page-SignIn-342:page-Page-10:Link:001",
+          "edge:page-SignIn-342:page-Page-10:link:001",
           "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
           "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
         ],
@@ -16442,7 +16500,7 @@
           "page:ChatPage:9"
         ],
         "edges": [
-          "edge:page-SignIn-342:page-ProfilePage-10:Link:001",
+          "edge:page-SignIn-342:page-ProfilePage-10:link:001",
           "edge:page-ProfilePage-10:page-OnboardingPage-8:redirect:001",
           "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
         ],
@@ -16469,8 +16527,8 @@
           "page:DashboardPage:15"
         ],
         "edges": [
-          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
-          "edge:page-VerifyRequest-7:page-Page-10:Link:001",
+          "edge:page-SignIn-342:page-VerifyRequest-7:link:001",
+          "edge:page-VerifyRequest-7:page-Page-10:link:001",
           "edge:page-Page-10:page-DashboardPage-15:redirect:001"
         ],
         "path_confidence": 1,
@@ -16495,7 +16553,7 @@
           "page:DashboardPage:15"
         ],
         "edges": [
-          "edge:page-SignIn-342:page-Page-10:Link:001",
+          "edge:page-SignIn-342:page-Page-10:link:001",
           "edge:page-Page-10:page-DashboardPage-15:redirect:001"
         ],
         "path_confidence": 1,
@@ -16520,8 +16578,8 @@
           "page:Page:10"
         ],
         "edges": [
-          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001",
-          "edge:page-VerifyRequest-7:page-Page-10:Link:001"
+          "edge:page-SignIn-342:page-VerifyRequest-7:link:001",
+          "edge:page-VerifyRequest-7:page-Page-10:link:001"
         ],
         "path_confidence": 1,
         "has_cycle": true,
@@ -16544,7 +16602,7 @@
           "page:Page:10"
         ],
         "edges": [
-          "edge:page-SignIn-342:page-Page-10:Link:001"
+          "edge:page-SignIn-342:page-Page-10:link:001"
         ],
         "path_confidence": 1,
         "has_cycle": true,
@@ -16567,7 +16625,7 @@
           "page:VerifyRequest:7"
         ],
         "edges": [
-          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001"
+          "edge:page-SignIn-342:page-VerifyRequest-7:link:001"
         ],
         "path_confidence": 1,
         "has_cycle": true,
@@ -16594,9 +16652,9 @@
           "page:ChatPage:9"
         ],
         "edges": [
-          "edge:page-SignOut-8:page-Page-10:Link:001",
-          "edge:page-Page-10:page-SignIn-342:Link:001",
-          "edge:page-SignIn-342:page-ProfilePage-10:Link:001",
+          "edge:page-SignOut-8:page-Page-10:link:001",
+          "edge:page-Page-10:page-SignIn-342:link:001",
+          "edge:page-SignIn-342:page-ProfilePage-10:link:001",
           "edge:page-ProfilePage-10:page-OnboardingPage-8:redirect:001",
           "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
         ],
@@ -16623,7 +16681,7 @@
           "page:ChatPage:9"
         ],
         "edges": [
-          "edge:page-SignOut-8:page-Page-10:Link:001",
+          "edge:page-SignOut-8:page-Page-10:link:001",
           "edge:page-Page-10:page-OnboardingPage-8:redirect:001",
           "edge:page-OnboardingPage-8:page-ChatPage-9:redirect:001"
         ],
@@ -16649,7 +16707,7 @@
           "page:DashboardPage:15"
         ],
         "edges": [
-          "edge:page-SignOut-8:page-Page-10:Link:001",
+          "edge:page-SignOut-8:page-Page-10:link:001",
           "edge:page-Page-10:page-DashboardPage-15:redirect:001"
         ],
         "path_confidence": 1,
@@ -16674,8 +16732,8 @@
           "page:SignIn:342"
         ],
         "edges": [
-          "edge:page-SignOut-8:page-Page-10:Link:001",
-          "edge:page-Page-10:page-SignIn-342:Link:001"
+          "edge:page-SignOut-8:page-Page-10:link:001",
+          "edge:page-Page-10:page-SignIn-342:link:001"
         ],
         "path_confidence": 0.95,
         "has_cycle": true,
@@ -16700,9 +16758,9 @@
           "page:VerifyRequest:7"
         ],
         "edges": [
-          "edge:page-SignOut-8:page-Page-10:Link:001",
-          "edge:page-Page-10:page-SignIn-342:Link:001",
-          "edge:page-SignIn-342:page-VerifyRequest-7:Link:001"
+          "edge:page-SignOut-8:page-Page-10:link:001",
+          "edge:page-Page-10:page-SignIn-342:link:001",
+          "edge:page-SignIn-342:page-VerifyRequest-7:link:001"
         ],
         "path_confidence": 0.95,
         "has_cycle": true,
@@ -16805,5 +16863,9 @@
     "dead_ends": 0,
     "logic_traps": 6,
     "unreachable_nodes": 0
+  },
+  "scan_meta": {
+    "scan_timestamp": "2026-04-08T04:41:02.809Z",
+    "scan_duration_ms": 408
   }
 }

@@ -1,0 +1,51 @@
+{
+  "id": "scheduleRouter:scheduleRouter:8",
+  "label": "scheduleRouter",
+  "screen_group": null,
+  "nodeKind": "trpc_router",
+  "nodeSubtype": "procedure",
+  "file": {
+    "path": "D:\\drlee\\College_organizer\\src\\lib\\api\\routers\\scheduleRouter.ts",
+    "filename": "scheduleRouter.ts",
+    "relative_path": "src/lib/api/routers/scheduleRouter.ts"
+  },
+  "route": {
+    "path": null,
+    "method": null,
+    "isDynamic": false,
+    "dynamicParams": [],
+    "isApiRoute": false
+  },
+  "auth": {
+    "required": true,
+    "type": "unknown",
+    "method": "protectedProcedure",
+    "inference_source": "none",
+    "confidence": 0.95,
+    "authoring_mode": "inferred"
+  },
+  "risk": {
+    "rate_limited": false,
+    "input_validated": false,
+    "error_handling": "absent"
+  },
+  "elements": [],
+  "violations": {
+    "active": []
+  },
+  "patterns": [
+    "trpc_router"
+  ],
+  "has_pii": false,
+  "layer": "api",
+  "provenance": {
+    "source": "pre_idd",
+    "confidence": 0.95,
+    "design_ref": null,
+    "first_scanned": "2026-04-08",
+    "last_confirmed": "2026-04-08"
+  },
+  "domains": [
+    "api"
+  ]
+}

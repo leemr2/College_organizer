@@ -18,20 +18,20 @@
       "label": "POST",
       "type": "api_route_handler",
       "size": "medium",
-      "ref": "nodes/route-api-transcribe-POST-8.json"
+      "ref": "routes/route-api-transcribe-POST-8.json"
     },
     {
       "id": "route:handler:19",
       "label": "handler",
       "type": "api_route_handler",
       "violation": "SEC-PRISMA-001",
-      "ref": "nodes/route-handler-19.json"
+      "ref": "routes/route-handler-19.json"
     },
     {
       "id": "route:api-upload:POST:4",
       "label": "POST",
       "type": "api_route_handler",
-      "ref": "nodes/route-api-upload-POST-4.json"
+      "ref": "routes/route-api-upload-POST-4.json"
     },
     {
       "id": "root:appRouter:15",
@@ -45,49 +45,49 @@
       "type": "trpc_router",
       "size": "medium",
       "violation": "SEC-PRISMA-001",
-      "ref": "nodes/adminRouter-adminRouter-8.json"
+      "ref": "routes/adminRouter-adminRouter-8.json"
     },
     {
       "id": "authRouter:authRouter:7",
       "label": "authRouter",
       "type": "trpc_router",
       "size": "medium",
-      "ref": "nodes/authRouter-authRouter-7.json"
+      "ref": "routes/authRouter-authRouter-7.json"
     },
     {
       "id": "chatRouter:chatRouter:405",
       "label": "chatRouter",
       "type": "trpc_router",
       "size": "medium",
-      "ref": "nodes/chatRouter-chatRouter-405.json"
+      "ref": "routes/chatRouter-chatRouter-405.json"
     },
     {
       "id": "scheduleRouter:scheduleRouter:8",
       "label": "scheduleRouter",
       "type": "trpc_router",
       "size": "medium",
-      "ref": "nodes/scheduleRouter-scheduleRouter-8.json"
+      "ref": "routes/scheduleRouter-scheduleRouter-8.json"
     },
     {
       "id": "studentRouter:studentRouter:8",
       "label": "studentRouter",
       "type": "trpc_router",
       "size": "medium",
-      "ref": "nodes/studentRouter-studentRouter-8.json"
+      "ref": "routes/studentRouter-studentRouter-8.json"
     },
     {
       "id": "taskRouter:taskRouter:7",
       "label": "taskRouter",
       "type": "trpc_router",
       "size": "medium",
-      "ref": "nodes/taskRouter-taskRouter-7.json"
+      "ref": "routes/taskRouter-taskRouter-7.json"
     },
     {
       "id": "toolRouter:toolRouter:13",
       "label": "toolRouter",
       "type": "trpc_router",
       "size": "medium",
-      "ref": "nodes/toolRouter-toolRouter-13.json"
+      "ref": "routes/toolRouter-toolRouter-13.json"
     },
     {
       "id": "trpc:publicProcedure:85",

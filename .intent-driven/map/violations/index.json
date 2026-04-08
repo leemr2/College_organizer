@@ -1,29 +1,58 @@
 {
-  "schema_version": "1.1",
-  "total_rules": 4,
+  "total": 4,
+  "headline_count": 1,
+  "by_severity": {
+    "critical": 2,
+    "warning": 2
+  },
+  "by_band": {
+    "high": 1,
+    "medium": 1,
+    "low": 2
+  },
   "violations": [
     {
-      "rule_id": "SEC-002",
-      "file": "SEC-002.json",
+      "id": "SEC-002",
+      "ref": "violations/SEC-002.json",
       "severity": "critical",
+      "category": "security",
+      "headline": false,
+      "confidence": 0.72,
+      "confidence_band": "medium",
+      "unconditional": false,
       "affected_node_count": 1
     },
     {
-      "rule_id": "SEC-PRISMA-001",
-      "file": "SEC-PRISMA-001.json",
+      "id": "SEC-PRISMA-001",
+      "ref": "violations/SEC-PRISMA-001.json",
       "severity": "critical",
+      "category": "security",
+      "headline": true,
+      "confidence": 1,
+      "confidence_band": "high",
+      "unconditional": false,
       "affected_node_count": 2
     },
     {
-      "rule_id": "WARN-AI-001",
-      "file": "WARN-AI-001.json",
+      "id": "WARN-AI-001",
+      "ref": "violations/WARN-AI-001.json",
       "severity": "warning",
+      "category": "security",
+      "headline": false,
+      "confidence": 0.4,
+      "confidence_band": "low",
+      "unconditional": false,
       "affected_node_count": 2
     },
     {
-      "rule_id": "WARN-AI-002",
-      "file": "WARN-AI-002.json",
+      "id": "WARN-AI-002",
+      "ref": "violations/WARN-AI-002.json",
       "severity": "warning",
+      "category": "security",
+      "headline": false,
+      "confidence": 0.4,
+      "confidence_band": "low",
+      "unconditional": false,
       "affected_node_count": 1
     }
   ]

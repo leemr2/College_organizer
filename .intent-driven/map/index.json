@@ -1,46 +1,123 @@
 {
-  "schema_version": "2.3",
+  "schema_version": "3.0",
   "project": {
     "name": "College_organizer",
     "stack": "security,+inngest,+nextjs,+ai_client,+trpc,+prisma,+storybook",
+    "framework": "nextjs",
+    "app_root": null,
     "file_count": 111,
     "node_count": 217,
-    "architecture": {
-      "auth_strategy": {
-        "method": "nextauth",
-        "confidence": 0.9500000000000001,
-        "session_type": "database",
-        "protected_route_count": 7,
-        "public_route_count": 6,
-        "unclassified_route_count": 1
+    "scan_timestamp": "2026-04-08T04:41:02.809Z",
+    "scan_duration_ms": 408
+  },
+  "architecture": {
+    "auth_strategy": {
+      "method": "nextauth",
+      "confidence": 0.9500000000000001,
+      "session_type": "database",
+      "protected_route_count": 7,
+      "public_route_count": 6,
+      "unclassified_route_count": 1
+    },
+    "rate_limiting": {
+      "present": false,
+      "coverage": "none",
+      "protected_endpoints": 0
+    },
+    "error_handling": {
+      "strategy": "inconsistent"
+    },
+    "data_access": {
+      "orm": "prisma",
+      "database": "unknown",
+      "access_pattern": "layered",
+      "direct_access_violations": 0
+    },
+    "api_pattern": {
+      "type": "mixed",
+      "router_count": 11,
+      "unprotected_mutation_count": 2
+    },
+    "ai_integration": {
+      "present": true,
+      "providers": [
+        "@anthropic-ai/sdk",
+        "@google/generative-ai",
+        "openai"
+      ],
+      "input_validation": "present"
+    }
+  },
+  "quality": {
+    "headline_count": 1,
+    "total_violations": 5,
+    "by_category": {
+      "security": {
+        "total": 5,
+        "headline": 1,
+        "by_severity": {
+          "critical": 2,
+          "warning": 3,
+          "info": 0
+        }
       },
-      "rate_limiting": {
-        "present": false,
-        "coverage": "none",
-        "protected_endpoints": 0
+      "data_integrity": {
+        "total": 0,
+        "headline": 0,
+        "by_severity": {
+          "critical": 0,
+          "warning": 0,
+          "info": 0
+        }
       },
-      "error_handling": {
-        "strategy": "inconsistent"
+      "architecture": {
+        "total": 0,
+        "headline": 0,
+        "by_severity": {
+          "critical": 0,
+          "warning": 0,
+          "info": 0
+        }
+      }
+    },
+    "by_band": {
+      "high": 1,
+      "medium": 4,
+      "low": 0
+    },
+    "unconditional_count": 0,
+    "violation_index": {
+      "WARN-AI-001": {
+        "severity": "warning",
+        "category": "security",
+        "headline": false,
+        "confidence": 0.4,
+        "confidence_band": "low",
+        "ref": "violations/WARN-AI-001.json"
       },
-      "data_access": {
-        "orm": "prisma",
-        "database": "unknown",
-        "access_pattern": "layered",
-        "direct_access_violations": 0
+      "WARN-AI-002": {
+        "severity": "warning",
+        "category": "security",
+        "headline": false,
+        "confidence": 0.4,
+        "confidence_band": "low",
+        "ref": "violations/WARN-AI-002.json"
       },
-      "api_pattern": {
-        "type": "mixed",
-        "router_count": 11,
-        "unprotected_mutation_count": 2
+      "SEC-002": {
+        "severity": "critical",
+        "category": "security",
+        "headline": false,
+        "confidence": 0.72,
+        "confidence_band": "medium",
+        "ref": "violations/SEC-002.json"
       },
-      "ai_integration": {
-        "present": true,
-        "providers": [
-          "@anthropic-ai/sdk",
-          "@google/generative-ai",
-          "openai"
-        ],
-        "input_validation": "present"
+      "SEC-PRISMA-001": {
+        "severity": "critical",
+        "category": "security",
+        "headline": true,
+        "confidence": 1,
+        "confidence_band": "high",
+        "ref": "violations/SEC-PRISMA-001.json"
       }
     }
   },
@@ -69,28 +146,6 @@
       "value": "adminProcedure for elevated access",
       "scope": "admin domain",
       "override": "explicit only"
-    }
-  },
-  "violations": {
-    "total": 5,
-    "critical": 2,
-    "violation_index": {
-      "WARN-AI-001": {
-        "severity": "warning",
-        "ref": "violations/WARN-AI-001.json"
-      },
-      "WARN-AI-002": {
-        "severity": "warning",
-        "ref": "violations/WARN-AI-002.json"
-      },
-      "SEC-002": {
-        "severity": "critical",
-        "ref": "violations/SEC-002.json"
-      },
-      "SEC-PRISMA-001": {
-        "severity": "critical",
-        "ref": "violations/SEC-PRISMA-001.json"
-      }
     }
   },
   "constraint_templates": {
@@ -179,7 +234,8 @@
   },
   "ai_context": {
     "summary": "TypeScript codebase with 212 semantic nodes across 8 domain(s): Presentation, API Routes, Authentication, Data Access, Infrastructure, Business Logic, Type Contracts, Miscellaneous. Frameworks detected: security, inngest, nextjs, ai_client, trpc, prisma, storybook. 2 critical constraint violation(s) require attention.",
-    "token_estimate": 210
+    "token_estimate": 210,
+    "plain_language_summary": "A web app with 14 routes and 217 code units. Authentication uses nextauth. 1 headline quality finding."
   },
   "flows": {
     "total_paths": 37,

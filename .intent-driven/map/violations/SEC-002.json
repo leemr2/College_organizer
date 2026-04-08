@@ -1,5 +1,6 @@
 {
   "id": "SEC-002",
+  "headline": false,
   "rule": "\"adminRouter\" imports publicProcedure and is a tRPC router — use protectedProcedure for all mutations to prevent unauthorized access.",
   "severity": "critical",
   "category": "security",

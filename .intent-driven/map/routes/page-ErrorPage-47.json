@@ -1,0 +1,51 @@
+{
+  "id": "page:ErrorPage:47",
+  "label": "ErrorPage",
+  "screen_group": null,
+  "nodeKind": "page",
+  "nodeSubtype": "page",
+  "file": {
+    "path": "D:\\drlee\\College_organizer\\src\\app\\auth\\error\\page.tsx",
+    "filename": "page.tsx",
+    "relative_path": "src/app/auth/error/page.tsx"
+  },
+  "route": {
+    "path": "/auth/error",
+    "method": null,
+    "isDynamic": false,
+    "dynamicParams": [],
+    "isApiRoute": false
+  },
+  "auth": {
+    "required": false,
+    "type": "public",
+    "method": "none",
+    "inference_source": "auth_page_pattern",
+    "confidence": 0.95,
+    "authoring_mode": "inferred"
+  },
+  "risk": {
+    "rate_limited": false,
+    "input_validated": false,
+    "error_handling": "absent"
+  },
+  "elements": [],
+  "violations": {
+    "active": []
+  },
+  "patterns": [
+    "app_router_page"
+  ],
+  "has_pii": false,
+  "layer": "presentation",
+  "provenance": {
+    "source": "pre_idd",
+    "confidence": 0.98,
+    "design_ref": null,
+    "first_scanned": "2026-04-08",
+    "last_confirmed": "2026-04-08"
+  },
+  "domains": [
+    "presentation"
+  ]
+}

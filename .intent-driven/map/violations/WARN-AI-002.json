@@ -1,7 +1,6 @@
 {
   "id": "WARN-AI-002",
   "headline": false,
-  "rule": "Raw API key access — use a config module to centralize secret management",
   "severity": "warning",
   "category": "security",
   "confidence": 0.4,
@@ -11,8 +10,7 @@
     "technical": "Raw API key access — use a config module to centralize secret management",
     "plain_language_single": "An API key in {label} is accessed directly from code rather than from a secure configuration. This increases the risk of accidental exposure.",
     "plain_language_multi": "API keys are accessed directly from code in {N} places rather than from secure configuration.",
-    "short_label": "API key at risk",
-    "template_variant": "single"
+    "short_label": "API key at risk"
   },
   "education": {
     "why_it_matters": "API keys accessed directly in code (rather than through secure configuration) are easier to accidentally expose in error logs, version control, or shared environments.",
@@ -33,10 +31,5 @@
     }
   ],
   "remediation": "Move API keys to a config module or environment abstraction; avoid process.env in provider call sites.",
-  "referenced_by_templates": [],
-  "first_detected": "2026-04-08",
-  "confidence_signals": [
-    "base score for WARN-AI-002: 0.40",
-    "route auth: no matching route (neutral)"
-  ]
+  "first_detected": "2026-04-09"
 }

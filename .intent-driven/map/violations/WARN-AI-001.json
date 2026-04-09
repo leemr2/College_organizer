@@ -1,7 +1,6 @@
 {
   "id": "WARN-AI-001",
   "headline": false,
-  "rule": "AI input passed to provider without validation",
   "severity": "warning",
   "category": "security",
   "confidence": 0.4,
@@ -11,8 +10,7 @@
     "technical": "AI input passed to provider without validation",
     "plain_language_single": "Content from your users is sent directly to the AI in {label} without being checked first. Crafted inputs could manipulate the AI's behavior.",
     "plain_language_multi": "User content is sent directly to the AI without being checked first in {N} places. Crafted inputs could manipulate the AI's behavior.",
-    "short_label": "AI prompt not validated",
-    "template_variant": "multi"
+    "short_label": "AI prompt not validated"
   },
   "education": {
     "why_it_matters": "AI models process exactly what they're given. If user input goes directly to the AI without being checked, users can craft messages that make the AI behave in unintended ways.",
@@ -41,10 +39,5 @@
     }
   ],
   "remediation": "Add input validation (e.g. Zod schema.parse) before calling the AI provider.",
-  "referenced_by_templates": [],
-  "first_detected": "2026-04-08",
-  "confidence_signals": [
-    "base score for WARN-AI-001: 0.40",
-    "route auth: no matching route (neutral)"
-  ]
+  "first_detected": "2026-04-09"
 }

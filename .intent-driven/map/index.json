@@ -7,8 +7,8 @@
     "app_root": null,
     "file_count": 111,
     "node_count": 217,
-    "scan_timestamp": "2026-04-08T12:59:53.802Z",
-    "scan_duration_ms": 698
+    "scan_timestamp": "2026-04-09T01:59:21.263Z",
+    "scan_duration_ms": 392
   },
   "architecture": {
     "auth_strategy": {
@@ -148,17 +148,6 @@
       "override": "explicit only"
     }
   },
-  "constraint_templates": {
-    "new_mutation": [
-      "SEC-002: must use protectedProcedure unless explicitly justified"
-    ],
-    "new_pii_access": [
-      "SEC-001: auth gate required upstream"
-    ],
-    "new_ai_procedure": [
-      "SEC-003: rate limiting required for AI-touching mutations"
-    ]
-  },
   "domains": [
     {
       "id": "presentation",
@@ -223,15 +212,6 @@
       "ref": "domains/misc.json"
     }
   ],
-  "task_context": {
-    "before_any_task": [
-      "State intersection with each active violation before writing any plan",
-      "If this task creates new mutations, apply SEC-002 check to them",
-      "If this task creates new AI-touching procedures, apply SEC-003"
-    ],
-    "violation_posture": "acknowledge",
-    "scope_boundary": "domains listed in this index only — justify any addition"
-  },
   "ai_context": {
     "summary": "TypeScript codebase with 212 semantic nodes across 8 domain(s): Presentation, API Routes, Authentication, Data Access, Infrastructure, Business Logic, Type Contracts, Miscellaneous. Frameworks detected: security, inngest, nextjs, ai_client, trpc, prisma, storybook. 2 critical constraint violation(s) require attention.",
     "token_estimate": 210,

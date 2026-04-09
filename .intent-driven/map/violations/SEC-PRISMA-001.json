@@ -1,7 +1,6 @@
 {
   "id": "SEC-PRISMA-001",
   "headline": true,
-  "rule": "Prisma mutation accessRequest.update is reachable without an auth check.",
   "severity": "critical",
   "category": "security",
   "confidence": 1,
@@ -11,8 +10,7 @@
     "technical": "Prisma mutation accessRequest.update is reachable without an auth check.",
     "plain_language_single": "Changes to your data in {label} can be made without verifying who the user is.",
     "plain_language_multi": "Changes to your data can be made in {N} places without verifying who the user is.",
-    "short_label": "Unverified data changes",
-    "template_variant": "multi"
+    "short_label": "Unverified data changes"
   },
   "education": {
     "why_it_matters": "Your database is where everything important is stored. Writes to it should only happen after the app has confirmed who's making the request.",
@@ -41,13 +39,5 @@
     }
   ],
   "remediation": "Add getServerSession(), auth.check(), or similar before calling the mutation from the server action or API route.",
-  "referenced_by_templates": [],
-  "first_detected": "2026-04-08",
-  "confidence_signals": [
-    "base score for SEC-PRISMA-001: 0.65",
-    "route auth: no matching route (neutral)",
-    "node subtype: admin_action, rule SEC-PRISMA-001 (+40%)",
-    "path pattern: admin route (+20%)",
-    "headline band (≥0.8)"
-  ]
+  "first_detected": "2026-04-09"
 }

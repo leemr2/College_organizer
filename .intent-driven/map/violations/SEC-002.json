@@ -1,7 +1,6 @@
 {
   "id": "SEC-002",
   "headline": false,
-  "rule": "\"adminRouter\" imports publicProcedure and is a tRPC router — use protectedProcedure for all mutations to prevent unauthorized access.",
   "severity": "critical",
   "category": "security",
   "confidence": 0.72,
@@ -11,8 +10,7 @@
     "technical": "\"adminRouter\" imports publicProcedure and is a tRPC router — use protectedProcedure for all mutations to prevent unauthorized access.",
     "plain_language_single": "{label} has no login requirement. Anyone who knows the address could access it.",
     "plain_language_multi": "{N} parts of your app have no login requirement. Anyone who knows the address could access them.",
-    "short_label": "Unprotected access",
-    "template_variant": "single"
+    "short_label": "Unprotected access"
   },
   "education": {
     "why_it_matters": "Login requirements are your app's first line of defense. Without them on sensitive areas, anyone can access functionality intended only for you or your team.",
@@ -33,13 +31,5 @@
     }
   ],
   "remediation": "Replace publicProcedure with protectedProcedure, or add explicit authorization logic.",
-  "referenced_by_templates": [
-    "new_mutation"
-  ],
-  "first_detected": "2026-04-08",
-  "confidence_signals": [
-    "base score for SEC-002: 0.60",
-    "route auth: no matching route (neutral)",
-    "path pattern: admin route (+20%)"
-  ]
+  "first_detected": "2026-04-09"
 }
